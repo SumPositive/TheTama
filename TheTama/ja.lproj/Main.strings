@@ -1,0 +1,42 @@
+
+/* Class = "UILabel"; text = "Volume level  100%"; ObjectID = "1Fe-f6-o3R"; */
+"1Fe-f6-o3R.text" = "音量";
+
+/* Class = "UIButton"; normalTitle = "Max"; ObjectID = "7V5-j1-uSD"; */
+"7V5-j1-uSD.normalTitle" = "最大";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Bip-6l-CJZ"; */
+"Bip-6l-CJZ.text" = "Title";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "Crf-Ke-Grw"; */
+"Crf-Ke-Grw.text" = "Subtitle";
+
+/* Class = "UILabel"; text = "Loaded by SecondViewController"; ObjectID = "NDk-cv-Gan"; */
+"NDk-cv-Gan.text" = "Loaded by SecondViewController";
+
+/* Class = "UIButton"; normalTitle = "Min"; ObjectID = "Nzx-lC-JdI"; */
+"Nzx-lC-JdI.normalTitle" = "最小";
+
+/* Class = "UILabel"; text = "Battery level  100%"; ObjectID = "Sdu-qm-h6Q"; */
+"Sdu-qm-h6Q.text" = "バッテリー残量";
+
+/* Class = "UITabBarItem"; title = "Viewer"; ObjectID = "XoG-mc-g16"; */
+"XoG-mc-g16.title" = "表示";
+
+/* Class = "UITabBarItem"; title = "Setting"; ObjectID = "acW-dT-cKf"; */
+"acW-dT-cKf.title" = "設定";
+
+/* Class = "UIButton"; normalTitle = "Capture"; ObjectID = "amV-LN-SeJ"; */
+"amV-LN-SeJ.normalTitle" = "撮影";
+
+/* Class = "UITabBarItem"; title = "Capture"; ObjectID = "cPa-gy-q4n"; */
+"cPa-gy-q4n.title" = "撮影";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "d2b-0X-SvZ"; */
+"d2b-0X-SvZ.text" = "Subtitle";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "wcP-Be-tSg"; */
+"wcP-Be-tSg.text" = "Title";
+
+/* Class = "UILabel"; text = "Second View"; ObjectID = "zEq-FU-wV5"; */
+"zEq-FU-wV5.text" = "Second View";

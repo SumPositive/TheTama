@@ -1,0 +1,42 @@
+
+/* Class = "UILabel"; text = "Volume level  100%"; ObjectID = "1Fe-f6-o3R"; */
+"1Fe-f6-o3R.text" = "Volume level";
+
+/* Class = "UIButton"; normalTitle = "Max"; ObjectID = "7V5-j1-uSD"; */
+"7V5-j1-uSD.normalTitle" = "Max";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Bip-6l-CJZ"; */
+"Bip-6l-CJZ.text" = "Title";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "Crf-Ke-Grw"; */
+"Crf-Ke-Grw.text" = "Subtitle";
+
+/* Class = "UILabel"; text = "Loaded by SecondViewController"; ObjectID = "NDk-cv-Gan"; */
+"NDk-cv-Gan.text" = "Loaded by SecondViewController";
+
+/* Class = "UIButton"; normalTitle = "Min"; ObjectID = "Nzx-lC-JdI"; */
+"Nzx-lC-JdI.normalTitle" = "Min";
+
+/* Class = "UILabel"; text = "Battery level  100%"; ObjectID = "Sdu-qm-h6Q"; */
+"Sdu-qm-h6Q.text" = "Battery level";
+
+/* Class = "UITabBarItem"; title = "Viewer"; ObjectID = "XoG-mc-g16"; */
+"XoG-mc-g16.title" = "Viewer";
+
+/* Class = "UITabBarItem"; title = "Setting"; ObjectID = "acW-dT-cKf"; */
+"acW-dT-cKf.title" = "Setting";
+
+/* Class = "UIButton"; normalTitle = "Capture"; ObjectID = "amV-LN-SeJ"; */
+"amV-LN-SeJ.normalTitle" = "Capture";
+
+/* Class = "UITabBarItem"; title = "Capture"; ObjectID = "cPa-gy-q4n"; */
+"cPa-gy-q4n.title" = "Capture";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "d2b-0X-SvZ"; */
+"d2b-0X-SvZ.text" = "Subtitle";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "wcP-Be-tSg"; */
+"wcP-Be-tSg.text" = "Title";
+
+/* Class = "UILabel"; text = "Second View"; ObjectID = "zEq-FU-wV5"; */
+"zEq-FU-wV5.text" = "Second View";
