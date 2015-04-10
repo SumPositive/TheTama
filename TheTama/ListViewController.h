@@ -1,5 +1,5 @@
 //
-//  SettingViewController.h
+//  ListViewController.h
 //  TheTama
 //
 //  Created by masa on 2015/04/07.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingViewController : UIViewController
+@interface ListViewController : UIViewController
 
 @end

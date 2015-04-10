@@ -1,15 +1,20 @@
 //
-//  SettingViewController.m
+//  ListViewController.m
 //  TheTama
 //
 //  Created by masa on 2015/04/07.
 //  Copyright (c) 2015年 Azukid. All rights reserved.
 //
 
+#import "SVProgressHUD.h"
+
 #import "TheTama-Swift.h"
-#import "SettingViewController.h"
+#import "ListViewController.h"
 #import "PtpConnection.h"
 #import "PtpLogging.h"
+#import "PtpObject.h"
+#import "TableCell.h"
+
 
 
 inline static void dispatch_async_main(dispatch_block_t block)
@@ -17,29 +22,19 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	dispatch_async(dispatch_get_main_queue(), block);
 }
 
-@interface SettingViewController () <PtpIpEventListener>
+@interface ListViewController () <PtpIpEventListener, UITableViewDelegate, UITableViewDataSource>
 {
 	DataObject * mData;
 }
-
 @property (nonatomic, strong) IBOutlet UILabel * batteryLabel;
 @property (nonatomic, strong) IBOutlet UIProgressView * batteryProgress;
-
-@property (nonatomic, strong) IBOutlet UILabel  * volumeLabel;
-@property (nonatomic, strong) IBOutlet UISlider * volumeSlider;
-@property (nonatomic, strong) IBOutlet UIButton * volumeMute;
-@property (nonatomic, strong) IBOutlet UIButton * volumeMax;
-
-@property (nonatomic, strong) IBOutlet UIImageView * imageView;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView * indicator;
 @property (nonatomic, strong) IBOutlet UIButton * captureButton;
-
+@property (nonatomic, strong) IBOutlet UITableView * contentsView;
 @end
 
 
-@implementation SettingViewController
-
-
+@implementation ListViewController
 
 #pragma mark - PtpIpEventListener delegates.
 
@@ -58,18 +53,26 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			NSLog(@"Object added Event(0x%04x) - 0x%08x", code, param1);
 			
 			[mData.ptpConnection operateSession:^(PtpIpSession *session) {
-				// サムネイル表示
-				UIImage * thumb = [self imageThumbnail:param1 session:session];
+				[mData.tamaObjects addObject:[self loadObject:param1 session:session]];
+				NSIndexPath* pos = [NSIndexPath indexPathForRow:mData.tamaObjects.count-1 inSection:1];
 				dispatch_async_main(^{
-					self.imageView.image = thumb;
-					// Get Battery level.
-					mData.batteryLevel = [session getBatteryLevel];
-					[self viewRefresh];
+					[_contentsView beginUpdates];
+					[_contentsView insertRowsAtIndexPaths:@[pos]
+										 withRowAnimation:UITableViewRowAnimationRight];
+					[_contentsView endUpdates];
 				});
+				// Get Battery level.
+				mData.batteryLevel = [session getBatteryLevel];
+				[self viewRefresh];
 			}];
 		}
 			break;
 	}
+	dispatch_async_main(^{
+		[self.indicator stopAnimating];
+		//[SVProgressHUD dismiss];
+		
+	});
 }
 
 -(void)ptpip_socketError:(int)err
@@ -104,10 +107,76 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		NSLog(@"socket error(0x%X,closed=%@).\n--- %@", err, closed? @"YES": @"NO", desc);
 		if (closed) {
 			//[_connectButton setTitle:@"Connect" forState:UIControlStateNormal];
-			//[mData.tamaObjects removeAllObjects];
-			//[_contentsView reloadData];
+			[mData.tamaObjects removeAllObjects];
+			[_contentsView reloadData];
 		}
 	});
+}
+
+
+#pragma mark - UI events.
+
+#pragma mark - UI events.
+
+- (IBAction)onBackTouchUpIn:(id)sender
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)onCaptureTouchDown:(id)sender
+{
+	// シャッターボタンを押したとき撮影
+	if (mData.captureTouchDown) {
+		[self capture];
+	}
+}
+
+- (IBAction)onCaptureTouchUpInside:(id)sender
+{
+	// シャッターボタンを離したとき撮影
+	if (!mData.captureTouchDown) {
+		[self capture];
+	}
+}
+
+- (void)capture
+{
+	_captureButton.enabled = NO;
+	[self.indicator startAnimating];
+	//[SVProgressHUD show];
+	
+	[mData.ptpConnection operateSession:^(PtpIpSession *session)
+	 {
+		 // シャッターの音量
+		 // Set Volume level.
+		 [session setAudioVolume: mData.volumeLevel];
+		 
+		 // This block is running at PtpConnection#gcd thread.
+		 BOOL rtn = [session initiateCapture];
+		 NSLog(@"execShutter[rtn:%d]", rtn);
+		 
+		 //--> ptpip_eventReceived:
+
+		 _captureButton.enabled = YES;
+	 }];
+}
+
+- (void)viewRefresh
+{
+	// バッテリー残量
+	self.batteryLabel.text = [NSString stringWithFormat:@"%ld%%", mData.batteryLevel];
+	float ff = (float)mData.batteryLevel / 100.0;
+	if (ff < 0.2) {
+		self.batteryProgress.progressTintColor = [UIColor redColor];
+	}
+	else if (ff < 0.5) {
+		self.batteryProgress.progressTintColor = [UIColor yellowColor];
+	}
+	else {
+		self.batteryProgress.progressTintColor = [UIColor blueColor];
+	}
+	self.batteryProgress.progress = ff;
+	
 }
 
 
@@ -117,7 +186,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 {
 	_captureButton.enabled = NO;
 	[self.indicator startAnimating];
-	
+	//[SVProgressHUD show];
+
 	//[self appendLog:[NSString stringWithFormat:@"connecting %@...", _ipField.text]];
 	
 	// Setup `target IP`(camera IP).
@@ -134,7 +204,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			NSLog(@"connected.");
 			
 			// Start enum objects.
-			//[self enumObjects];
+			[self enumObjects];
 			
 			_captureButton.enabled = YES;
 			
@@ -170,6 +240,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		}
 		dispatch_async_main(^{
 			[self.indicator stopAnimating];
+			//[SVProgressHUD dismiss];
+
 		});
 	}];
 }
@@ -177,11 +249,11 @@ inline static void dispatch_async_main(dispatch_block_t block)
 //- (void)disconnect
 //{
 //	NSLog(@"disconnecting...");
-//
+//	
 //	[mData.ptpConnection close:^{
 //		// "CloseSession" and "Close" completion callback.
 //		// This block is running at PtpConnection#gcd thread.
-//
+//		
 //		dispatch_async_main(^{
 //			NSLog(@"disconnected.");
 //			//[self.connectButton setTitle:@"Connect" forState:UIControlStateNormal];
@@ -190,52 +262,52 @@ inline static void dispatch_async_main(dispatch_block_t block)
 //	}];
 //}
 
-//- (void)enumObjects
-//{
-//	assert([mData.ptpConnection connected]);
-//	assert(mData.tamaObjects != nil);
-//	
-//	[self.indicator startAnimating];
-//	[mData.tamaObjects removeAllObjects];
-//	
-//	[mData.ptpConnection operateSession:^(PtpIpSession *session) {
-//		// This block is running at PtpConnection#gcd thread.
-//		
-//		// Setting the RICOH THETA's clock.
-//		// 'setDateTime' convert from specified date/time to local-time, and send to RICOH THETA.
-//		// RICOH THETA work with local-time, without timezone.
-//		[session setDateTime:[NSDate dateWithTimeIntervalSinceNow:0]];
-//		
-//		// Get storage information.
-//		mData.storageInfo = [session getStorageInfo];
-//		
-//		// Get Battery level.
-//		mData.batteryLevel = [session getBatteryLevel];
-//		
-//		// Set Volume level.
-//		[session setAudioVolume: mData.volumeLevel];
-//		
-//		
-//		// Get object handles for primary images.
-//		NSArray* objectHandles = [session getObjectHandles];
-//		dispatch_async_main(^{
-//			NSLog(@"getObjectHandles() recevied %zd handles.", objectHandles.count);
-//		});
-//		
-//		// Get object informations and thumbnail images for each primary images.
-//		for (NSNumber* it in objectHandles) {
-//			uint32_t objectHandle = (uint32_t)it.integerValue;
-//			[mData.tamaObjects addObject:[self loadObject:objectHandle session:session]];
-//		}
-//		dispatch_async_main(^{
-//			[_contentsView reloadData];
-//			[self viewRefresh];
-//			[self.indicator stopAnimating];
-//		});
-//	}];
-//}
+- (void)enumObjects
+{
+	assert([mData.ptpConnection connected]);
+	assert(mData.tamaObjects != nil);
 
-- (UIImage *)imageThumbnail:(uint32_t)objectHandle session:(PtpIpSession*)session
+	[self.indicator startAnimating];
+	[mData.tamaObjects removeAllObjects];
+	
+	[mData.ptpConnection operateSession:^(PtpIpSession *session) {
+		// This block is running at PtpConnection#gcd thread.
+		
+		// Setting the RICOH THETA's clock.
+		// 'setDateTime' convert from specified date/time to local-time, and send to RICOH THETA.
+		// RICOH THETA work with local-time, without timezone.
+		[session setDateTime:[NSDate dateWithTimeIntervalSinceNow:0]];
+		
+		// Get storage information.
+		mData.storageInfo = [session getStorageInfo];
+		
+		// Get Battery level.
+		mData.batteryLevel = [session getBatteryLevel];
+		
+		// Set Volume level.
+		[session setAudioVolume: mData.volumeLevel];
+
+		
+		// Get object handles for primary images.
+		NSArray* objectHandles = [session getObjectHandles];
+		dispatch_async_main(^{
+			NSLog(@"getObjectHandles() recevied %zd handles.", objectHandles.count);
+		});
+		
+		// Get object informations and thumbnail images for each primary images.
+		for (NSNumber* it in objectHandles) {
+			uint32_t objectHandle = (uint32_t)it.integerValue;
+			[mData.tamaObjects addObject:[self loadObject:objectHandle session:session]];
+		}
+		dispatch_async_main(^{
+			[_contentsView reloadData];
+			[self viewRefresh];
+			[self.indicator stopAnimating];
+		});
+	}];
+}
+
+- (PtpObject*)loadObject:(uint32_t)objectHandle session:(PtpIpSession*)session
 {
 	// This method MUST be running at PtpConnection#gcd thread.
 	
@@ -266,7 +338,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 								return YES;
 							}];
 		if (!result) {
-			NSLog(@"getThumb(0x%08x) failed.", objectHandle);
+			dispatch_async_main(^{
+				NSLog(@"getThumb(0x%08x) failed.", objectHandle);
+			});
 			thumb = [UIImage imageNamed:@"nothumb.png"];
 		} else {
 			thumb = [UIImage imageWithData:thumbData];
@@ -274,100 +348,57 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	} else {
 		thumb = [UIImage imageNamed:@"nothumb.png"];
 	}
-	return thumb;
+	return [[PtpObject alloc] initWithObjectInfo:objectInfo thumbnail:thumb];
 }
 
 
-#pragma mark - UI events.
 
-- (IBAction)volumeSliderChanged:(UISlider*)sender
+
+#pragma mark - UITableViewDataSource delegates.
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	mData.volumeLevel = sender.value;
-	[self volumeShow];
-}
-- (void)volumeShow
-{
-	self.volumeLabel.text = [NSString stringWithFormat:@"%ld%%", mData.volumeLevel];
-	
-	self.volumeMute.enabled = YES;
-	self.volumeMax.enabled = YES;
-	
-	if (mData.volumeLevel <= 0) {
-		self.volumeMute.enabled = NO;
-		self.volumeSlider.value = 0;
-		//self.volumeLabel.text = self.volumeMute.titleLabel.text;
-	}
-	else if (100 <= mData.volumeLevel) {
-		self.volumeMax.enabled = NO;
-		self.volumeSlider.value = 100;
-		//self.volumeLabel.text = self.volumeMax.titleLabel.text;
-	}
-	else {
-		self.volumeSlider.value = mData.volumeLevel;
-	}
+	return 2;
 }
 
-- (IBAction)onCaptureTouchDown:(id)sender
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	// シャッターボタンを押したとき撮影
-	if (mData.captureTouchDown) {
-		[self capture];
+	if (section==0) {
+		return [mData.ptpConnection connected] ? 1: 0;
 	}
+	return mData.tamaObjects.count;
 }
 
-- (IBAction)onCaptureTouchUpInside:(id)sender
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-	// シャッターボタンを離したとき撮影
-	if (!mData.captureTouchDown) {
-		[self capture];
+	TableCell* cell;
+	
+	if (indexPath.section==0) {
+		cell = [tableView dequeueReusableCellWithIdentifier:@"cameraInfo"];
+		cell.textLabel.text = [NSString stringWithFormat:@"%d[shots] %lld/%lld[MB] free",
+							   mData.storageInfo.free_space_in_images,
+							   mData.storageInfo.free_space_in_bytes/1000/1000,
+							   mData.storageInfo.max_capacity/1000/1000];
+		cell.detailTextLabel.text = [NSString stringWithFormat:@"BATT %zd %%", mData.batteryLevel];
+	} else {
+		// NSDateFormatter to display photographing date.
+		// You MUST specify `[df setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]`
+		// to display photographing date('PtpIpObjectInfo#capture_date') in the local time.
+		// As a result, 'PtpIpObjectInfo#capture_date' and 'kCGImagePropertyExifDateTimeOriginal' will match.
+		NSDateFormatter* df = [[NSDateFormatter alloc] init];
+		[df setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+		[df setDateStyle:NSDateFormatterShortStyle];
+		[df setTimeStyle:NSDateFormatterMediumStyle];
+		
+		PtpObject* obj = [mData.tamaObjects objectAtIndex:indexPath.row];
+		cell = [tableView dequeueReusableCellWithIdentifier:@"customCell"];
+		cell.textLabel.text = [df stringFromDate:obj.objectInfo.capture_date];
+		cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", obj.objectInfo.filename];
+		cell.imageView.image = obj.thumbnail;
+		cell.objectIndex = (uint32_t)indexPath.row;
 	}
+	return cell;
 }
-
-- (void)capture
-{
-	[self.indicator startAnimating];
-	self.captureButton.enabled = NO;
-	self.imageView.image = nil;
-	
-	[mData.ptpConnection operateSession:^(PtpIpSession *session){
-		 // シャッターの音量
-		 // Set Volume level.
-		 [session setAudioVolume: mData.volumeLevel];
-		 
-		 // This block is running at PtpConnection#gcd thread.
-		 BOOL rtn = [session initiateCapture];
-		 NSLog(@"execShutter[rtn:%d]", rtn);
-		 
-		dispatch_async_main(^{
-			self.captureButton.enabled = YES;
-		});
-	 }];
-}
-
-- (void)viewRefresh
-{
-	// 音量
-	[self volumeShow];
-	
-	// バッテリー残量
-	self.batteryLabel.text = [NSString stringWithFormat:@"%ld%%", mData.batteryLevel];
-	float ff = (float)mData.batteryLevel / 100.0;
-	if (ff < 0.2) {
-		self.batteryProgress.progressTintColor = [UIColor redColor];
-	}
-	else if (ff < 0.5) {
-		self.batteryProgress.progressTintColor = [UIColor yellowColor];
-	}
-	else {
-		self.batteryProgress.progressTintColor = [UIColor blueColor];
-	}
-	self.batteryProgress.progress = ff;
-	
-	
-	
-	[self.indicator stopAnimating];
-}
-
 
 #pragma mark - Life cycle.
 
@@ -378,6 +409,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	AppDelegate * app = [UIApplication sharedApplication].delegate;
 	mData = [app getDataObject];
 	assert(mData != nil);
+
+	_contentsView.dataSource = self;
 	
 	// Ready to PTP/IP.
 	if (mData.ptpConnection==nil) {
@@ -386,16 +419,21 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
 	[mData.ptpConnection setEventListener:self];
 	
+	if (mData.tamaObjects==nil) {
+		mData.tamaObjects = [NSMutableArray new];
+	}
+	
 	//  通知受信の設定
 	NSNotificationCenter*   nc = [NSNotificationCenter defaultCenter];
 	//[nc addObserver:self selector:@selector(applicationDidEnterBackground) name:@"applicationDidEnterBackground" object:nil];
 	[nc addObserver:self selector:@selector(applicationWillEnterForeground) name:@"applicationWillEnterForeground" object:nil];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-
+	
 	self.batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 5.0f ); // 横方向に1倍、縦方向に3倍して表示する
 	[self viewRefresh];
 }
@@ -416,9 +454,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)applicationWillEnterForeground
 {
 	NSLog(@"applicationWillEnterForeground");
-	
+
 	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
-	
+
 	if ([mData.ptpConnection connected]) {
 		_captureButton.enabled = YES;
 	} else {
@@ -426,5 +464,6 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		[self connect];
 	}
 }
+
 
 @end

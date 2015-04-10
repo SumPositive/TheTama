@@ -14,6 +14,16 @@
 
 @implementation ViewerViewController
 
+
+#pragma mark - UI events.
+
+- (IBAction)onBackTouchUpIn:(id)sender
+{
+	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

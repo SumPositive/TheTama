@@ -12,31 +12,8 @@
 		44A67B8A1AD39CF4002A826C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44A67B891AD39CF4002A826C /* Images.xcassets */; };
 		44A67B8D1AD39CF5002A826C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A67B8B1AD39CF5002A826C /* LaunchScreen.xib */; };
 		44A67B991AD39CF5002A826C /* TheTamaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A67B981AD39CF5002A826C /* TheTamaTests.swift */; };
-		44A67C121AD3B5E0002A826C /* PtpConnection.html in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BB61AD3B5DF002A826C /* PtpConnection.html */; };
-		44A67C131AD3B5E0002A826C /* PtpIpDeviceInfo.html in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BB71AD3B5DF002A826C /* PtpIpDeviceInfo.html */; };
-		44A67C141AD3B5E0002A826C /* PtpIpDevicePropDesc.html in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BB81AD3B5DF002A826C /* PtpIpDevicePropDesc.html */; };
-		44A67C151AD3B5E0002A826C /* PtpIpInitiator.html in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BB91AD3B5DF002A826C /* PtpIpInitiator.html */; };
-		44A67C161AD3B5E0002A826C /* PtpIpObjectInfo.html in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BBA1AD3B5DF002A826C /* PtpIpObjectInfo.html */; };
-		44A67C171AD3B5E0002A826C /* PtpIpSession.html in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BBB1AD3B5DF002A826C /* PtpIpSession.html */; };
-		44A67C181AD3B5E0002A826C /* PtpIpStorageInfo.html in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BBC1AD3B5DF002A826C /* PtpIpStorageInfo.html */; };
-		44A67C191AD3B5E0002A826C /* PtpOperation.html in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BBD1AD3B5DF002A826C /* PtpOperation.html */; };
-		44A67C1A1AD3B5E0002A826C /* RicohEXIF.html in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BBE1AD3B5DF002A826C /* RicohEXIF.html */; };
-		44A67C1B1AD3B5E0002A826C /* kDatatype.html in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BC01AD3B5DF002A826C /* kDatatype.html */; };
-		44A67C1C1AD3B5E0002A826C /* kFormFlag.html in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BC11AD3B5DF002A826C /* kFormFlag.html */; };
-		44A67C1D1AD3B5E0002A826C /* kGetSet.html in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BC21AD3B5DF002A826C /* kGetSet.html */; };
-		44A67C1E1AD3B5E0002A826C /* styles.css in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BC41AD3B5DF002A826C /* styles.css */; };
-		44A67C1F1AD3B5E0002A826C /* stylesPrint.css in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BC51AD3B5DF002A826C /* stylesPrint.css */; };
-		44A67C201AD3B5E0002A826C /* hierarchy.html in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BC61AD3B5DF002A826C /* hierarchy.html */; };
-		44A67C211AD3B5E0002A826C /* button_bar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BC81AD3B5DF002A826C /* button_bar_background.png */; };
-		44A67C221AD3B5E0002A826C /* disclosure.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BC91AD3B5DF002A826C /* disclosure.png */; };
-		44A67C231AD3B5E0002A826C /* disclosure_open.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BCA1AD3B5DF002A826C /* disclosure_open.png */; };
-		44A67C241AD3B5E0002A826C /* library_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BCB1AD3B5DF002A826C /* library_background.png */; };
-		44A67C251AD3B5E0002A826C /* title_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BCC1AD3B5DF002A826C /* title_background.png */; };
-		44A67C261AD3B5E0002A826C /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BCD1AD3B5DF002A826C /* index.html */; };
-		44A67C271AD3B5E0002A826C /* PtpIpEventListener.html in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BCF1AD3B5DF002A826C /* PtpIpEventListener.html */; };
 		44A67C281AD3B5E0002A826C /* ExifRawData.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44A67BD21AD3B5E0002A826C /* ExifRawData.mm */; };
 		44A67C291AD3B5E0002A826C /* ExifTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A67BD41AD3B5E0002A826C /* ExifTags.m */; };
-		44A67C2A1AD3B5E0002A826C /* README in Resources */ = {isa = PBXBuildFile; fileRef = 44A67BD51AD3B5E0002A826C /* README */; };
 		44A67C2B1AD3B5E0002A826C /* RicohEXIF.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44A67BD71AD3B5E0002A826C /* RicohEXIF.mm */; };
 		44A67C2C1AD3B5E0002A826C /* LibLogging.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44A67BDB1AD3B5E0002A826C /* LibLogging.mm */; };
 		44A67C2D1AD3B5E0002A826C /* logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44A67BDC1AD3B5E0002A826C /* logger.cpp */; };
@@ -60,11 +37,9 @@
 		44A67C3F1AD3B5E0002A826C /* PtpIpSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44A67C031AD3B5E0002A826C /* PtpIpSession.mm */; };
 		44A67C401AD3B5E0002A826C /* PtpIpStorageInfo.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44A67C051AD3B5E0002A826C /* PtpIpStorageInfo.mm */; };
 		44A67C411AD3B5E0002A826C /* variant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44A67C061AD3B5E0002A826C /* variant.cpp */; };
-		44A67C421AD3B5E0002A826C /* README in Resources */ = {isa = PBXBuildFile; fileRef = 44A67C081AD3B5E0002A826C /* README */; };
 		44A67C431AD3B5E0002A826C /* PtpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A67C0C1AD3B5E0002A826C /* PtpConnection.m */; };
 		44A67C441AD3B5E0002A826C /* PtpLogging.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44A67C0E1AD3B5E0002A826C /* PtpLogging.mm */; };
 		44A67C451AD3B5E0002A826C /* PtpOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A67C101AD3B5E0002A826C /* PtpOperator.m */; };
-		44A67C461AD3B5E0002A826C /* README in Resources */ = {isa = PBXBuildFile; fileRef = 44A67C111AD3B5E0002A826C /* README */; };
 		44A67C4B1AD3BA9D002A826C /* PtpObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A67C491AD3BA9D002A826C /* PtpObject.m */; };
 		44A67C4D1AD3BCD5002A826C /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44A67C4C1AD3BCD5002A826C /* OpenGLES.framework */; };
 		44A67C4F1AD3BCDE002A826C /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44A67C4E1AD3BCDE002A826C /* GLKit.framework */; };
@@ -77,8 +52,10 @@
 		44A67C5F1AD3E305002A826C /* ViewerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A67C5E1AD3E305002A826C /* ViewerViewController.m */; };
 		44A67C611AD433F9002A826C /* DataObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A67C601AD433F9002A826C /* DataObject.swift */; };
 		44A67C641AD4A1B9002A826C /* TableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A67C631AD4A1B8002A826C /* TableCell.m */; };
-		44A67C6B1AD5AA1A002A826C /* CaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A67C691AD5AA1A002A826C /* CaptureViewController.m */; };
-		44B4EA621AD3E26900DE5C7E /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B4EA611AD3E26900DE5C7E /* SettingViewController.m */; };
+		44A67C6B1AD5AA1A002A826C /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A67C691AD5AA1A002A826C /* ListViewController.m */; };
+		44B4EA621AD3E26900DE5C7E /* CaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B4EA611AD3E26900DE5C7E /* CaptureViewController.m */; };
+		44CD6DF31AD81B760001F5B3 /* ConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CD6DF11AD81B760001F5B3 /* ConnectViewController.m */; };
+		C013159E2F6CA5269C077B97 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F72BE7B8DB0524CD2C36F399 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,33 +79,10 @@
 		44A67B971AD39CF5002A826C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		44A67B981AD39CF5002A826C /* TheTamaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheTamaTests.swift; sourceTree = "<group>"; };
 		44A67BAE1AD3B27B002A826C /* TheTama-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TheTama-Bridging-Header.h"; sourceTree = "<group>"; };
-		44A67BB61AD3B5DF002A826C /* PtpConnection.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = PtpConnection.html; sourceTree = "<group>"; };
-		44A67BB71AD3B5DF002A826C /* PtpIpDeviceInfo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = PtpIpDeviceInfo.html; sourceTree = "<group>"; };
-		44A67BB81AD3B5DF002A826C /* PtpIpDevicePropDesc.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = PtpIpDevicePropDesc.html; sourceTree = "<group>"; };
-		44A67BB91AD3B5DF002A826C /* PtpIpInitiator.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = PtpIpInitiator.html; sourceTree = "<group>"; };
-		44A67BBA1AD3B5DF002A826C /* PtpIpObjectInfo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = PtpIpObjectInfo.html; sourceTree = "<group>"; };
-		44A67BBB1AD3B5DF002A826C /* PtpIpSession.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = PtpIpSession.html; sourceTree = "<group>"; };
-		44A67BBC1AD3B5DF002A826C /* PtpIpStorageInfo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = PtpIpStorageInfo.html; sourceTree = "<group>"; };
-		44A67BBD1AD3B5DF002A826C /* PtpOperation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = PtpOperation.html; sourceTree = "<group>"; };
-		44A67BBE1AD3B5DF002A826C /* RicohEXIF.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = RicohEXIF.html; sourceTree = "<group>"; };
-		44A67BC01AD3B5DF002A826C /* kDatatype.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = kDatatype.html; sourceTree = "<group>"; };
-		44A67BC11AD3B5DF002A826C /* kFormFlag.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = kFormFlag.html; sourceTree = "<group>"; };
-		44A67BC21AD3B5DF002A826C /* kGetSet.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = kGetSet.html; sourceTree = "<group>"; };
-		44A67BC41AD3B5DF002A826C /* styles.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = styles.css; sourceTree = "<group>"; };
-		44A67BC51AD3B5DF002A826C /* stylesPrint.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = stylesPrint.css; sourceTree = "<group>"; };
-		44A67BC61AD3B5DF002A826C /* hierarchy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = hierarchy.html; sourceTree = "<group>"; };
-		44A67BC81AD3B5DF002A826C /* button_bar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_bar_background.png; sourceTree = "<group>"; };
-		44A67BC91AD3B5DF002A826C /* disclosure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disclosure.png; sourceTree = "<group>"; };
-		44A67BCA1AD3B5DF002A826C /* disclosure_open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = disclosure_open.png; sourceTree = "<group>"; };
-		44A67BCB1AD3B5DF002A826C /* library_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = library_background.png; sourceTree = "<group>"; };
-		44A67BCC1AD3B5DF002A826C /* title_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_background.png; sourceTree = "<group>"; };
-		44A67BCD1AD3B5DF002A826C /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
-		44A67BCF1AD3B5DF002A826C /* PtpIpEventListener.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = PtpIpEventListener.html; sourceTree = "<group>"; };
 		44A67BD11AD3B5DF002A826C /* ExifRawData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExifRawData.h; sourceTree = "<group>"; };
 		44A67BD21AD3B5E0002A826C /* ExifRawData.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ExifRawData.mm; sourceTree = "<group>"; };
 		44A67BD31AD3B5E0002A826C /* ExifTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExifTags.h; sourceTree = "<group>"; };
 		44A67BD41AD3B5E0002A826C /* ExifTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExifTags.m; sourceTree = "<group>"; };
-		44A67BD51AD3B5E0002A826C /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		44A67BD61AD3B5E0002A826C /* RicohEXIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RicohEXIF.h; sourceTree = "<group>"; };
 		44A67BD71AD3B5E0002A826C /* RicohEXIF.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RicohEXIF.mm; sourceTree = "<group>"; };
 		44A67BDA1AD3B5E0002A826C /* LibLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibLogging.h; sourceTree = "<group>"; };
@@ -203,10 +157,15 @@
 		44A67C651AD52F25002A826C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		44A67C661AD52F25002A826C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		44A67C681AD52F50002A826C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		44A67C691AD5AA1A002A826C /* CaptureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureViewController.m; sourceTree = "<group>"; };
-		44A67C6A1AD5AA1A002A826C /* CaptureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureViewController.h; sourceTree = "<group>"; };
-		44B4EA601AD3E26900DE5C7E /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
-		44B4EA611AD3E26900DE5C7E /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		44A67C691AD5AA1A002A826C /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
+		44A67C6A1AD5AA1A002A826C /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
+		44B4EA601AD3E26900DE5C7E /* CaptureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureViewController.h; sourceTree = "<group>"; };
+		44B4EA611AD3E26900DE5C7E /* CaptureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureViewController.m; sourceTree = "<group>"; };
+		44CD6DF11AD81B760001F5B3 /* ConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectViewController.m; sourceTree = "<group>"; };
+		44CD6DF21AD81B760001F5B3 /* ConnectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectViewController.h; sourceTree = "<group>"; };
+		B9AD8F4C9E07E5512CAFF712 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		D281DCA70D60157B97683C9B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		F72BE7B8DB0524CD2C36F399 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +181,7 @@
 				44A67C511AD3BCE9002A826C /* Accelerate.framework in Frameworks */,
 				44A67C4F1AD3BCDE002A826C /* GLKit.framework in Frameworks */,
 				44A67C4D1AD3BCD5002A826C /* OpenGLES.framework in Frameworks */,
+				C013159E2F6CA5269C077B97 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +195,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1533ABB6AB8FEBD349877283 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D281DCA70D60157B97683C9B /* Pods.debug.xcconfig */,
+				B9AD8F4C9E07E5512CAFF712 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		44A67B721AD39CF4002A826C = {
 			isa = PBXGroup;
 			children = (
@@ -242,6 +211,8 @@
 				44A67B7D1AD39CF4002A826C /* TheTama */,
 				44A67B951AD39CF5002A826C /* TheTamaTests */,
 				44A67B7C1AD39CF4002A826C /* Products */,
+				1533ABB6AB8FEBD349877283 /* Pods */,
+				6929937500D07EF05976D9BE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -268,12 +239,14 @@
 				44A67B8B1AD39CF5002A826C /* LaunchScreen.xib */,
 				44A67B7E1AD39CF4002A826C /* Supporting Files */,
 				44A67BAE1AD3B27B002A826C /* TheTama-Bridging-Header.h */,
-				44A67C691AD5AA1A002A826C /* CaptureViewController.m */,
-				44A67C6A1AD5AA1A002A826C /* CaptureViewController.h */,
+				44CD6DF21AD81B760001F5B3 /* ConnectViewController.h */,
+				44CD6DF11AD81B760001F5B3 /* ConnectViewController.m */,
+				44B4EA601AD3E26900DE5C7E /* CaptureViewController.h */,
+				44B4EA611AD3E26900DE5C7E /* CaptureViewController.m */,
+				44A67C6A1AD5AA1A002A826C /* ListViewController.h */,
+				44A67C691AD5AA1A002A826C /* ListViewController.m */,
 				44A67C5D1AD3E305002A826C /* ViewerViewController.h */,
 				44A67C5E1AD3E305002A826C /* ViewerViewController.m */,
-				44B4EA601AD3E26900DE5C7E /* SettingViewController.h */,
-				44B4EA611AD3E26900DE5C7E /* SettingViewController.m */,
 			);
 			path = TheTama;
 			sourceTree = "<group>";
@@ -306,82 +279,12 @@
 		44A67BB31AD3B5DF002A826C /* ricoh-libs */ = {
 			isa = PBXGroup;
 			children = (
-				44A67BB41AD3B5DF002A826C /* doc */,
 				44A67BD01AD3B5DF002A826C /* lib-r-exif */,
 				44A67BD81AD3B5E0002A826C /* lib-ricoh-theta */,
 				44A67C091AD3B5E0002A826C /* lib-ricoh-theta_serializer */,
 			);
 			name = "ricoh-libs";
 			path = TheTama/lib;
-			sourceTree = "<group>";
-		};
-		44A67BB41AD3B5DF002A826C /* doc */ = {
-			isa = PBXGroup;
-			children = (
-				44A67BB51AD3B5DF002A826C /* Classes */,
-				44A67BBF1AD3B5DF002A826C /* Constants */,
-				44A67BC31AD3B5DF002A826C /* css */,
-				44A67BC61AD3B5DF002A826C /* hierarchy.html */,
-				44A67BC71AD3B5DF002A826C /* img */,
-				44A67BCD1AD3B5DF002A826C /* index.html */,
-				44A67BCE1AD3B5DF002A826C /* Protocols */,
-			);
-			path = doc;
-			sourceTree = "<group>";
-		};
-		44A67BB51AD3B5DF002A826C /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				44A67BB61AD3B5DF002A826C /* PtpConnection.html */,
-				44A67BB71AD3B5DF002A826C /* PtpIpDeviceInfo.html */,
-				44A67BB81AD3B5DF002A826C /* PtpIpDevicePropDesc.html */,
-				44A67BB91AD3B5DF002A826C /* PtpIpInitiator.html */,
-				44A67BBA1AD3B5DF002A826C /* PtpIpObjectInfo.html */,
-				44A67BBB1AD3B5DF002A826C /* PtpIpSession.html */,
-				44A67BBC1AD3B5DF002A826C /* PtpIpStorageInfo.html */,
-				44A67BBD1AD3B5DF002A826C /* PtpOperation.html */,
-				44A67BBE1AD3B5DF002A826C /* RicohEXIF.html */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		44A67BBF1AD3B5DF002A826C /* Constants */ = {
-			isa = PBXGroup;
-			children = (
-				44A67BC01AD3B5DF002A826C /* kDatatype.html */,
-				44A67BC11AD3B5DF002A826C /* kFormFlag.html */,
-				44A67BC21AD3B5DF002A826C /* kGetSet.html */,
-			);
-			path = Constants;
-			sourceTree = "<group>";
-		};
-		44A67BC31AD3B5DF002A826C /* css */ = {
-			isa = PBXGroup;
-			children = (
-				44A67BC41AD3B5DF002A826C /* styles.css */,
-				44A67BC51AD3B5DF002A826C /* stylesPrint.css */,
-			);
-			path = css;
-			sourceTree = "<group>";
-		};
-		44A67BC71AD3B5DF002A826C /* img */ = {
-			isa = PBXGroup;
-			children = (
-				44A67BC81AD3B5DF002A826C /* button_bar_background.png */,
-				44A67BC91AD3B5DF002A826C /* disclosure.png */,
-				44A67BCA1AD3B5DF002A826C /* disclosure_open.png */,
-				44A67BCB1AD3B5DF002A826C /* library_background.png */,
-				44A67BCC1AD3B5DF002A826C /* title_background.png */,
-			);
-			path = img;
-			sourceTree = "<group>";
-		};
-		44A67BCE1AD3B5DF002A826C /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				44A67BCF1AD3B5DF002A826C /* PtpIpEventListener.html */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		44A67BD01AD3B5DF002A826C /* lib-r-exif */ = {
@@ -391,7 +294,6 @@
 				44A67BD21AD3B5E0002A826C /* ExifRawData.mm */,
 				44A67BD31AD3B5E0002A826C /* ExifTags.h */,
 				44A67BD41AD3B5E0002A826C /* ExifTags.m */,
-				44A67BD51AD3B5E0002A826C /* README */,
 				44A67BD61AD3B5E0002A826C /* RicohEXIF.h */,
 				44A67BD71AD3B5E0002A826C /* RicohEXIF.mm */,
 			);
@@ -498,6 +400,14 @@
 			name = libs;
 			sourceTree = "<group>";
 		};
+		6929937500D07EF05976D9BE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F72BE7B8DB0524CD2C36F399 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -505,10 +415,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 44A67B9C1AD39CF5002A826C /* Build configuration list for PBXNativeTarget "TheTama" */;
 			buildPhases = (
+				09E887D0953C4BEC936EECA3 /* Check Pods Manifest.lock */,
 				44A67B771AD39CF4002A826C /* Sources */,
 				44A67B781AD39CF4002A826C /* Frameworks */,
 				44A67B791AD39CF4002A826C /* Resources */,
 				44A67BA21AD39E28002A826C /* AZ Add Build Number */,
+				15A2B762CADA9ED7642EBA6F /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -580,34 +492,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44A67C2A1AD3B5E0002A826C /* README in Resources */,
 				44A67B881AD39CF4002A826C /* Main.storyboard in Resources */,
-				44A67C131AD3B5E0002A826C /* PtpIpDeviceInfo.html in Resources */,
-				44A67C271AD3B5E0002A826C /* PtpIpEventListener.html in Resources */,
-				44A67C251AD3B5E0002A826C /* title_background.png in Resources */,
-				44A67C141AD3B5E0002A826C /* PtpIpDevicePropDesc.html in Resources */,
-				44A67C1B1AD3B5E0002A826C /* kDatatype.html in Resources */,
-				44A67C211AD3B5E0002A826C /* button_bar_background.png in Resources */,
-				44A67C1D1AD3B5E0002A826C /* kGetSet.html in Resources */,
-				44A67C421AD3B5E0002A826C /* README in Resources */,
-				44A67C1E1AD3B5E0002A826C /* styles.css in Resources */,
-				44A67C171AD3B5E0002A826C /* PtpIpSession.html in Resources */,
-				44A67C121AD3B5E0002A826C /* PtpConnection.html in Resources */,
 				44A67B8D1AD39CF5002A826C /* LaunchScreen.xib in Resources */,
-				44A67C221AD3B5E0002A826C /* disclosure.png in Resources */,
-				44A67C241AD3B5E0002A826C /* library_background.png in Resources */,
-				44A67C1A1AD3B5E0002A826C /* RicohEXIF.html in Resources */,
-				44A67C151AD3B5E0002A826C /* PtpIpInitiator.html in Resources */,
 				44A67B8A1AD39CF4002A826C /* Images.xcassets in Resources */,
-				44A67C181AD3B5E0002A826C /* PtpIpStorageInfo.html in Resources */,
-				44A67C461AD3B5E0002A826C /* README in Resources */,
-				44A67C191AD3B5E0002A826C /* PtpOperation.html in Resources */,
-				44A67C1C1AD3B5E0002A826C /* kFormFlag.html in Resources */,
-				44A67C1F1AD3B5E0002A826C /* stylesPrint.css in Resources */,
-				44A67C201AD3B5E0002A826C /* hierarchy.html in Resources */,
-				44A67C261AD3B5E0002A826C /* index.html in Resources */,
-				44A67C231AD3B5E0002A826C /* disclosure_open.png in Resources */,
-				44A67C161AD3B5E0002A826C /* PtpIpObjectInfo.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,6 +508,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		09E887D0953C4BEC936EECA3 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		15A2B762CADA9ED7642EBA6F /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		44A67BA21AD39E28002A826C /* AZ Add Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -652,11 +569,11 @@
 				44A67C3C1AD3B5E0002A826C /* PtpIpObjectContainer.mm in Sources */,
 				44A67C451AD3B5E0002A826C /* PtpOperator.m in Sources */,
 				44A67C281AD3B5E0002A826C /* ExifRawData.mm in Sources */,
-				44B4EA621AD3E26900DE5C7E /* SettingViewController.m in Sources */,
+				44B4EA621AD3E26900DE5C7E /* CaptureViewController.m in Sources */,
 				44A67C3D1AD3B5E0002A826C /* PtpIpObjectInfo.mm in Sources */,
 				44A67C431AD3B5E0002A826C /* PtpConnection.m in Sources */,
 				44A67C4B1AD3BA9D002A826C /* PtpObject.m in Sources */,
-				44A67C6B1AD5AA1A002A826C /* CaptureViewController.m in Sources */,
+				44A67C6B1AD5AA1A002A826C /* ListViewController.m in Sources */,
 				44A67C381AD3B5E0002A826C /* ptpip_packets_impl.cpp in Sources */,
 				44A67C3E1AD3B5E0002A826C /* PtpIpSession+dcf.mm in Sources */,
 				44A67C321AD3B5E0002A826C /* exceptions.cpp in Sources */,
@@ -674,6 +591,7 @@
 				44A67B811AD39CF4002A826C /* AppDelegate.swift in Sources */,
 				44A67C301AD3B5E0002A826C /* bufferedsock.cpp in Sources */,
 				44A67C2B1AD3B5E0002A826C /* RicohEXIF.mm in Sources */,
+				44CD6DF31AD81B760001F5B3 /* ConnectViewController.m in Sources */,
 				44A67C341AD3B5E0002A826C /* ptp_packets.cpp in Sources */,
 				44A67C411AD3B5E0002A826C /* variant.cpp in Sources */,
 				44A67C5F1AD3E305002A826C /* ViewerViewController.m in Sources */,
@@ -801,6 +719,7 @@
 		};
 		44A67B9D1AD39CF5002A826C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D281DCA70D60157B97683C9B /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -817,6 +736,7 @@
 		};
 		44A67B9E1AD39CF5002A826C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9AD8F4C9E07E5512CAFF712 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

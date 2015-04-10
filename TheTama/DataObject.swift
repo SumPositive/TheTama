@@ -14,11 +14,14 @@ class DataObject: NSObject {
 	var storageInfo: PtpIpStorageInfo?
 	var deviceInfo: PtpIpDeviceInfo?
 
-	var tamaObjects: NSMutableArray?
 	var batteryLevel:UInt = 0
 	var volumeLevel = 100
 	
 	var captureTouchDown = false;
+	
+	var tamaObjects: NSMutableArray?
+	var tamaObjectHandle = 0
+	
 	
 	override init() {
 
