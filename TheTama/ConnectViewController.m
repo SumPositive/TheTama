@@ -122,16 +122,14 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			// "Connect" is failed.
 			// "-(void)ptpip_socketError:(int)err" will run later than here.
 			NSLog(@"connect failed.");
-			
-			self.buSetting.enabled = YES;
-			self.buRetry.enabled = YES;
-			
 			// Retry after 5sec.
 			
 			
 		}
 		dispatch_async_main(^{
 			[SVProgressHUD dismiss];
+			self.buSetting.enabled = YES;
+			self.buRetry.enabled = YES;
 		});
 	}];
 }

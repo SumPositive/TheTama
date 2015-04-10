@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>2ABB37F5-3FF2-413A-914E-3D7A866EC4C9</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TheTama</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>9F43D5BD6B26E22D6505165256D27CC82C2D3BB3</key>
+		<string>https://bitbucket.org/azukid/thetama.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>TheTama.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>9F43D5BD6B26E22D6505165256D27CC82C2D3BB3</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://bitbucket.org/azukid/thetama.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>9F43D5BD6B26E22D6505165256D27CC82C2D3BB3</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9F43D5BD6B26E22D6505165256D27CC82C2D3BB3</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TheTama</string>
+		</dict>
+	</array>
+</dict>
+</plist>
