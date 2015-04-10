@@ -1,0 +1,81 @@
+
+/* Class = "UILabel"; text = "音量"; ObjectID = "0to-Ib-YKk"; */
+"0to-Ib-YKk.text" = "音量";
+
+/* Class = "UILabel"; text = "100%"; ObjectID = "1Fe-f6-o3R"; */
+"1Fe-f6-o3R.text" = "100%";
+
+/* Class = "UILabel"; text = "1. THETA の電源を入れて Wi-Fiを有効にしてください。"; ObjectID = "4up-KM-NcS"; */
+"4up-KM-NcS.text" = "1. THETA の電源を入れて Wi-Fiを有効にしてください。";
+
+/* Class = "UIButton"; normalTitle = "最大"; ObjectID = "7V5-j1-uSD"; */
+"7V5-j1-uSD.normalTitle" = "最大";
+
+/* Class = "UIButton"; normalTitle = "List >"; ObjectID = "8rv-c1-QTt"; */
+"8rv-c1-QTt.normalTitle" = "List >";
+
+/* Class = "UIButton"; normalTitle = "設定 > Wi-Fi選択"; ObjectID = "9SY-9f-djn"; */
+"9SY-9f-djn.normalTitle" = "設定 > Wi-Fi選択";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Bip-6l-CJZ"; */
+"Bip-6l-CJZ.text" = "Title";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "Crf-Ke-Grw"; */
+"Crf-Ke-Grw.text" = "Subtitle";
+
+/* Class = "UILabel"; text = "3. 再接続を試みてください。"; ObjectID = "FHC-Zl-C3L"; */
+"FHC-Zl-C3L.text" = "3. 再接続を試みてください。";
+
+/* Class = "UILabel"; text = "2. iPhone の設定より Wi-Fi選択を確認してください。"; ObjectID = "J2X-hu-HVe"; */
+"J2X-hu-HVe.text" = "2. iPhone の設定より Wi-Fi選択を確認してください。";
+
+/* Class = "UILabel"; text = "Loaded by SecondViewController"; ObjectID = "NDk-cv-Gan"; */
+"NDk-cv-Gan.text" = "Loaded by SecondViewController";
+
+/* Class = "UIButton"; normalTitle = "最小"; ObjectID = "Nzx-lC-JdI"; */
+"Nzx-lC-JdI.normalTitle" = "最小";
+
+/* Class = "UILabel"; text = "バッテリー残量"; ObjectID = "OsV-r8-Col"; */
+"OsV-r8-Col.text" = "バッテリー残量";
+
+/* Class = "UILabel"; text = "バッテリー残量"; ObjectID = "Sdu-qm-h6Q"; */
+"Sdu-qm-h6Q.text" = "バッテリー残量";
+
+/* Class = "UITabBarItem"; title = "表示"; ObjectID = "XoG-mc-g16"; */
+"XoG-mc-g16.title" = "表示";
+
+/* Class = "UITabBarItem"; title = "設定"; ObjectID = "acW-dT-cKf"; */
+"acW-dT-cKf.title" = "設定";
+
+/* Class = "UIButton"; normalTitle = "撮影"; ObjectID = "amV-LN-SeJ"; */
+"amV-LN-SeJ.normalTitle" = "撮影";
+
+/* Class = "UILabel"; text = "100%"; ObjectID = "cCL-P9-1Yo"; */
+"cCL-P9-1Yo.text" = "100%";
+
+/* Class = "UITabBarItem"; title = "撮影"; ObjectID = "cPa-gy-q4n"; */
+"cPa-gy-q4n.title" = "撮影";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "d2b-0X-SvZ"; */
+"d2b-0X-SvZ.text" = "Subtitle";
+
+/* Class = "UILabel"; text = "100%"; ObjectID = "dae-7j-zwQ"; */
+"dae-7j-zwQ.text" = "100%";
+
+/* Class = "UIButton"; normalTitle = "< Back"; ObjectID = "iGr-3C-pXN"; */
+"iGr-3C-pXN.normalTitle" = "< Back";
+
+/* Class = "UIButton"; normalTitle = "< Disconnect"; ObjectID = "ibd-ZR-3uc"; */
+"ibd-ZR-3uc.normalTitle" = "< Disconnect";
+
+/* Class = "UIButton"; normalTitle = "< Back"; ObjectID = "jIt-bB-sH1"; */
+"jIt-bB-sH1.normalTitle" = "< Back";
+
+/* Class = "UIButton"; normalTitle = "再接続"; ObjectID = "wMo-PD-zzK"; */
+"wMo-PD-zzK.normalTitle" = "再接続";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "wcP-Be-tSg"; */
+"wcP-Be-tSg.text" = "Title";
+
+/* Class = "UILabel"; text = "Second View"; ObjectID = "zEq-FU-wV5"; */
+"zEq-FU-wV5.text" = "Second View";
