@@ -8,6 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "SVProgressHUD.h"
+#import "Azukid.h"
 
 #import "TheTama-Swift.h"
 #import "CaptureViewController.h"
@@ -50,17 +51,18 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 -(void)ptpip_eventReceived:(int)code :(uint32_t)param1 :(uint32_t)param2 :(uint32_t)param3
 {
+	LOG_FUNC
 	// PTP/IP-Event callback.
 	// This method is running at PtpConnection#gcd thread.
 	switch (code) {
 		default:
-			NSLog(@"Event(0x%04x) received", code);
+			LOG(@"Event(0x%04x) received", code);
 			break;
 			
 		case PTPIP_OBJECT_ADDED:
 		{
 			// It will be receive when the camera has taken a new photo.
-			NSLog(@"Object added Event(0x%04x) - 0x%08x", code, param1);
+			LOG(@"Object added Event(0x%04x) - 0x%08x", code, param1);
 			
 			[mData.ptpConnection operateSession:^(PtpIpSession *session) {
 				// サムネイル表示
@@ -110,7 +112,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	
 	dispatch_async_main(^{
 		[SVProgressHUD showWithStatus:@"THETA\nDisconnect." maskType:SVProgressHUDMaskTypeGradient];
-		NSLog(@"socket error(0x%X,closed=%@).\n--- %@", err, closed? @"YES": @"NO", desc);
+		LOG(@"socket error(0x%X,closed=%@).\n--- %@", err, closed? @"YES": @"NO", desc);
 		[self disconnect];
 		[SVProgressHUD dismiss];
 		// Back Model Connect View
@@ -123,6 +125,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 - (void)connect
 {
+	LOG_FUNC
+	
 	_captureButton.enabled = NO;
 	//[self.indicator startAnimating];
 	//[SVProgressHUD show];
@@ -141,7 +145,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		
 		if (connected) {
 			// "Connect" is succeeded.
-			NSLog(@"connected.");
+			LOG(@"connected.");
 			
 			dispatch_async_main(^{
 				self.captureButton.enabled = YES;
@@ -150,7 +154,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		} else {
 			// "Connect" is failed.
 			// "-(void)ptpip_socketError:(int)err" will run later than here.
-			NSLog(@"connect failed.");
+			LOG(@"connect failed.");
 			
 			dispatch_async_main(^{
 				// Back Model Connect View
@@ -166,16 +170,17 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 - (void)disconnect
 {
-	NSLog(@"disconnecting...");
+	LOG_FUNC
+	[SVProgressHUD showWithStatus:@"THETA\nDisconnecting..." maskType:SVProgressHUDMaskTypeGradient];
 
 	[mData.ptpConnection close:^{
 		// "CloseSession" and "Close" completion callback.
 		// This block is running at PtpConnection#gcd thread.
 
 		dispatch_async_main(^{
-			NSLog(@"disconnected.");
-			//[self.connectButton setTitle:@"Connect" forState:UIControlStateNormal];
-			//[mData.tamaObjects removeAllObjects];
+			LOG(@"disconnected.");
+			[SVProgressHUD dismiss];
+			[self dismissViewControllerAnimated:YES completion:nil];
 		});
 	}];
 }
@@ -227,6 +232,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 - (UIImage *)imageThumbnail:(uint32_t)objectHandle session:(PtpIpSession*)session
 {
+	LOG_FUNC
 	// This method MUST be running at PtpConnection#gcd thread.
 	//mData.tamaObjectHandle = objectHandle;
 	mData.tamaObject = nil;
@@ -236,7 +242,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	PtpIpObjectInfo* objectInfo = [session getObjectInfo:objectHandle];
 	if (!objectInfo) {
 		dispatch_async_main(^{
-			NSLog(@"getObjectInfo(0x%08x) failed.", objectHandle);
+			LOG(@"getObjectInfo(0x%08x) failed.", objectHandle);
 		});
 		//mData.tamaObjectHandle = 0;
 		return nil;
@@ -249,7 +255,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		BOOL result = [session getThumb:objectHandle
 							onStartData:^(NSUInteger totalLength) {
 								// Callback before thumb-data reception.
-								NSLog(@"getThumb(0x%08x) will received %zd bytes.", objectHandle, totalLength);
+								LOG(@"getThumb(0x%08x) will received %zd bytes.", objectHandle, totalLength);
 								
 							} onChunkReceived:^BOOL(NSData *data) {
 								// Callback for each chunks.
@@ -259,14 +265,14 @@ inline static void dispatch_async_main(dispatch_block_t block)
 								return YES;
 							}];
 		if (!result) {
-			NSLog(@"getThumb(0x%08x) failed.", objectHandle);
+			LOG(@"getThumb(0x%08x) failed.", objectHandle);
 			thumb = [UIImage imageNamed:@"thumb_nothing"];
 		} else {
 			// OK
 			thumb = [UIImage imageWithData:thumbData];
 			//set mData
 			mData.tamaObject = [[PtpObject alloc] initWithObjectInfo:objectInfo thumbnail:thumb];
-			[mData.tamaObjects addObject:mData.tamaObject];
+			[mData.tamaObjects addObject: [mData.tamaObject copy]];
 		}
 	} else {
 		thumb = [UIImage imageNamed:@"thumb_nothing"];
@@ -336,7 +342,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		 
 		 // This block is running at PtpConnection#gcd thread.
 		 BOOL rtn = [session initiateCapture];
-		 NSLog(@"execShutter[rtn:%d]", rtn);
+		 LOG(@"execShutter[rtn:%d]", rtn);
 		 
 		dispatch_async_main(^{
 			self.captureButton.enabled = YES;
@@ -379,9 +385,15 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	}
 }
 
+- (IBAction)onDisconnectTouchUpIn:(id)sender
+{
+	// Disconnect > を押したとき
+	[self disconnect];
+}
+
 - (IBAction)onListTouchUpIn:(id)sender
 {
-	// サList > を押したとき
+	// List > を押したとき
 	if (0 < mData.tamaObjects.count) {
 		// Goto Model Viewer View
 		[self performSegueWithIdentifier:@"segList" sender:self];
@@ -394,15 +406,16 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	LOG_FUNC
 	
 	AppDelegate * app = [UIApplication sharedApplication].delegate;
 	mData = [app getDataObject];
 	assert(mData != nil);
 	
 	// Ready to PTP/IP.
-	if (mData.ptpConnection==nil) {
-		mData.ptpConnection = [[PtpConnection alloc] init];
-	}
+//	if (mData.ptpConnection==nil) {
+//		mData.ptpConnection = [[PtpConnection alloc] init];
+//	}
 	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
 	[mData.ptpConnection setEventListener:self];
 	
@@ -426,6 +439,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
+	LOG_FUNC
 	
 	[self applicationWillEnterForeground];
 }
@@ -438,7 +452,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 //2回目以降のフォアグラウンド実行になった際に呼び出される(Backgroundにアプリがある場合)
 - (void)applicationWillEnterForeground
 {
-	NSLog(@"applicationWillEnterForeground");
+	LOG_FUNC
 	
 	// サムネイル画像クリア
 	//self.ivThumbnail.image = nil;

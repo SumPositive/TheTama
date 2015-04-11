@@ -8,6 +8,7 @@
 
 #import "SVProgressHUD.h"
 #import <iAd/iAd.h>
+#import "Azukid.h"
 
 #import "TheTama-Swift.h"
 #import "ConnectViewController.h"
@@ -41,11 +42,12 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 -(void)ptpip_eventReceived:(int)code :(uint32_t)param1 :(uint32_t)param2 :(uint32_t)param3
 {
+	LOG_FUNC
 	// PTP/IP-Event callback.
 	// This method is running at PtpConnection#gcd thread.
 	switch (code) {
 		default:
-			NSLog(@"Event(0x%04x) received", code);
+			LOG(@"Event(0x%04x) received", code);
 			break;
 			
 	}
@@ -57,6 +59,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 -(void)ptpip_socketError:(int)err
 {
+	LOG_FUNC
 	// socket error callback.
 	// This method is running at PtpConnection#gcd thread.
 	
@@ -85,11 +88,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	
 	dispatch_async_main(^{
 		[SVProgressHUD showWithStatus:@"THETA\nDisconnect." maskType:SVProgressHUDMaskTypeGradient];
-		NSLog(@"socket error(0x%X,closed=%@).\n--- %@", err, closed? @"YES": @"NO", desc);
+		LOG(@"socket error(0x%X,closed=%@).\n--- %@", err, closed? @"YES": @"NO", desc);
 		[self disconnect];
 		[SVProgressHUD dismiss];
-		// Back Model Connect View
-		[self dismissViewControllerAnimated:YES completion:nil];
 	});
 }
 
@@ -98,6 +99,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 - (void)connect
 {
+	LOG_FUNC
 	[SVProgressHUD showWithStatus:@"THETA\nConnecting..." maskType:SVProgressHUDMaskTypeGradient];
 
 	self.buSetting.enabled = NO;
@@ -114,7 +116,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		
 		if (connected) {
 			// "Connect" is succeeded.
-			NSLog(@"connected.");
+			LOG(@"connected.");
 			
 			// Goto Model Capture View
 			[self performSegueWithIdentifier:@"segCapture" sender:self];
@@ -122,7 +124,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		} else {
 			// "Connect" is failed.
 			// "-(void)ptpip_socketError:(int)err" will run later than here.
-			NSLog(@"connect failed.");
+			LOG(@"connect failed.");
 			// Retry after 5sec.
 			
 			
@@ -137,14 +139,14 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 - (void)disconnect
 {
-	NSLog(@"disconnecting...");
+	LOG_FUNC
 	
 	[mData.ptpConnection close:^{
 		// "CloseSession" and "Close" completion callback.
 		// This block is running at PtpConnection#gcd thread.
 		
 		dispatch_async_main(^{
-			NSLog(@"disconnected.");
+			LOG(@"disconnected.");
 			//[self.connectButton setTitle:@"Connect" forState:UIControlStateNormal];
 			//[mData.tamaObjects removeAllObjects];
 		});
@@ -156,6 +158,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 - (IBAction)onSettingTouchUpIn:(id)sender
 {
+	LOG_FUNC
 	// 設定画面へのURLスキーム
 	NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
 	[[UIApplication sharedApplication] openURL:url];
@@ -163,6 +166,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 - (IBAction)onRetryTouchUpIn:(id)sender
 {
+	LOG_FUNC
 	[self connect];
 }
 
@@ -172,15 +176,16 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+	LOG_FUNC
 	
 	AppDelegate * app = [UIApplication sharedApplication].delegate;
 	mData = [app getDataObject];
 	assert(mData != nil);
 	
 	// Ready to PTP/IP.
-	if (mData.ptpConnection==nil) {
-		mData.ptpConnection = [[PtpConnection alloc] init];
-	}
+//	if (mData.ptpConnection==nil) {
+//		mData.ptpConnection = [[PtpConnection alloc] init];
+//	}
 	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
 	[mData.ptpConnection setEventListener:self];
 	
@@ -202,6 +207,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
+	LOG_FUNC
 	
 	[self applicationWillEnterForeground];
 }
@@ -214,8 +220,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 //2回目以降のフォアグラウンド実行になった際に呼び出される(Backgroundにアプリがある場合)
 - (void)applicationWillEnterForeground
 {
-	NSLog(@"applicationWillEnterForeground");
-	
+	LOG_FUNC
 	[self connect];
 }
 

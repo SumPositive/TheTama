@@ -14,6 +14,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "SVProgressHUD.h"
+#import "Azukid.h"
 
 #import "TheTama-Swift.h"
 #import "ViewerViewController.h"

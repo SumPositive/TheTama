@@ -10,7 +10,7 @@ import UIKit
 
 class DataObject: NSObject {
 	
-	var ptpConnection: PtpConnection?
+	var ptpConnection = PtpConnection()
 	var storageInfo: PtpIpStorageInfo?
 	var deviceInfo: PtpIpDeviceInfo?
 
@@ -19,14 +19,13 @@ class DataObject: NSObject {
 	
 	var captureTouchDown = false;
 	
-	var tamaObjects: NSMutableArray?
-	//var tamaObjectHandle = 0
+	var tamaObjects = NSMutableArray()
 	var tamaObject: PtpObject?
 	
 	
 	
 	override init() {
-
+		
 	}
 
 }

@@ -175,6 +175,7 @@
 		44CD6DFF1AD8C2960001F5B3 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = "../../RICOH_THETA_SDK_for_iOS.0.3.0/ricoh-theta-sample-for-ios/ricoh-theta-sample-for-ios/Constants.h"; sourceTree = "<group>"; };
 		44CD6E001AD8C2960001F5B3 /* UVSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UVSphere.h; path = "../../RICOH_THETA_SDK_for_iOS.0.3.0/ricoh-theta-sample-for-ios/ricoh-theta-sample-for-ios/UVSphere.h"; sourceTree = "<group>"; };
 		44CD6E031AD916580001F5B3 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		44CD6E051AD94E440001F5B3 /* Azukid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Azukid.h; sourceTree = "<group>"; };
 		B9AD8F4C9E07E5512CAFF712 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D281DCA70D60157B97683C9B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F72BE7B8DB0524CD2C36F399 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -242,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				44CD6E021AD8C2AD0001F5B3 /* ricoh */,
+				44CD6E051AD94E440001F5B3 /* Azukid.h */,
 				44A67C621AD4A1B8002A826C /* TableCell.h */,
 				44A67C631AD4A1B8002A826C /* TableCell.m */,
 				44A67C4A1AD3BA9D002A826C /* PtpObject.h */,
