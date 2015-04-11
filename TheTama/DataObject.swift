@@ -20,7 +20,9 @@ class DataObject: NSObject {
 	var captureTouchDown = false;
 	
 	var tamaObjects: NSMutableArray?
-	var tamaObjectHandle = 0
+	//var tamaObjectHandle = 0
+	var tamaObject: PtpObject?
+	
 	
 	
 	override init() {

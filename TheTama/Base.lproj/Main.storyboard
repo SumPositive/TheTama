@@ -463,18 +463,40 @@
                                     <action selector="onBackTouchUpIn:" destination="oZz-Nm-eTZ" eventType="touchUpInside" id="6X0-Ds-Xru"/>
                                 </connections>
                             </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MXN-cK-mD3">
+                                <rect key="frame" x="175" y="299" width="250" height="2"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="WHf-mn-OcD"/>
+                                </constraints>
+                            </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QxI-Ge-OpR">
+                                <rect key="frame" x="152" y="24" width="442" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="iGr-3C-pXN" firstAttribute="leading" secondItem="oh3-8t-1TR" secondAttribute="leadingMargin" constant="20" id="61J-i7-gBD"/>
                             <constraint firstItem="EEa-2q-U6N" firstAttribute="top" secondItem="iGr-3C-pXN" secondAttribute="bottom" id="6yX-tA-Z94"/>
+                            <constraint firstItem="QxI-Ge-OpR" firstAttribute="baseline" secondItem="iGr-3C-pXN" secondAttribute="baseline" id="Bhv-le-E8P"/>
+                            <constraint firstAttribute="centerX" secondItem="MXN-cK-mD3" secondAttribute="centerX" id="Y7Y-QR-wGT"/>
+                            <constraint firstItem="QxI-Ge-OpR" firstAttribute="trailing" secondItem="oh3-8t-1TR" secondAttribute="trailingMargin" constant="10" id="Z9p-r8-gt5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="EEa-2q-U6N" secondAttribute="trailing" id="kvB-AF-hJO"/>
+                            <constraint firstItem="QxI-Ge-OpR" firstAttribute="leading" secondItem="iGr-3C-pXN" secondAttribute="trailing" constant="50" id="qBB-wZ-wVp"/>
                             <constraint firstItem="EEa-2q-U6N" firstAttribute="leading" secondItem="oh3-8t-1TR" secondAttribute="leadingMargin" id="rnF-ys-FES"/>
                             <constraint firstItem="iGr-3C-pXN" firstAttribute="top" secondItem="RzW-NR-xbd" secondAttribute="bottom" id="sUK-b1-cHS"/>
                             <constraint firstAttribute="bottomMargin" secondItem="EEa-2q-U6N" secondAttribute="bottom" id="xOT-ma-9ht"/>
+                            <constraint firstAttribute="centerY" secondItem="MXN-cK-mD3" secondAttribute="centerY" id="zpN-ub-4hl"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Viewer" image="first" id="XoG-mc-g16"/>
+                    <connections>
+                        <outlet property="imageView" destination="EEa-2q-U6N" id="IwL-nR-FVY"/>
+                        <outlet property="lbTitle" destination="QxI-Ge-OpR" id="2gU-xS-eD4"/>
+                        <outlet property="progressView" destination="MXN-cK-mD3" id="Hui-Zb-pYm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="slj-kv-JJy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -7,14 +7,13 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
-
 #import "SVProgressHUD.h"
 
 #import "TheTama-Swift.h"
 #import "CaptureViewController.h"
 #import "PtpConnection.h"
 #import "PtpLogging.h"
-
+#import "PtpObject.h"
 
 
 inline static void dispatch_async_main(dispatch_block_t block)
@@ -235,7 +234,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (UIImage *)imageThumbnail:(uint32_t)objectHandle session:(PtpIpSession*)session
 {
 	// This method MUST be running at PtpConnection#gcd thread.
-	mData.tamaObjectHandle = objectHandle;
+	//mData.tamaObjectHandle = objectHandle;
+	mData.tamaObject = nil;
 	
 	// Get object informations.
 	// It containes filename, capture-date and etc.
@@ -244,7 +244,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		dispatch_async_main(^{
 			NSLog(@"getObjectInfo(0x%08x) failed.", objectHandle);
 		});
-		mData.tamaObjectHandle = 0;
+		//mData.tamaObjectHandle = 0;
 		return nil;
 	}
 	
@@ -267,14 +267,17 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		if (!result) {
 			NSLog(@"getThumb(0x%08x) failed.", objectHandle);
 			thumb = [UIImage imageNamed:@"nothumb.png"];
-			mData.tamaObjectHandle = 0;
+			//mData.tamaObjectHandle = 0;
 		} else {
 			thumb = [UIImage imageWithData:thumbData];
 		}
 	} else {
 		thumb = [UIImage imageNamed:@"nothumb.png"];
-		mData.tamaObjectHandle = 0;
+		//mData.tamaObjectHandle = 0;
 	}
+	
+	mData.tamaObject = [[PtpObject alloc] initWithObjectInfo:objectInfo thumbnail:thumb];
+	
 	return thumb;
 }
 
@@ -288,7 +291,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 }
 - (void)volumeShow
 {
-	self.volumeLabel.text = [NSString stringWithFormat:@"%ld%%", mData.volumeLevel];
+	self.volumeLabel.text = [NSString stringWithFormat:@"%ld%%", (long)mData.volumeLevel];
 	
 	self.volumeMute.enabled = YES;
 	self.volumeMax.enabled = YES;
@@ -354,7 +357,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	[self volumeShow];
 	
 	// バッテリー残量
-	self.batteryLabel.text = [NSString stringWithFormat:@"%ld%%", mData.batteryLevel];
+	self.batteryLabel.text = [NSString stringWithFormat:@"%ld%%", (unsigned long)mData.batteryLevel];
 	float ff = (float)mData.batteryLevel / 100.0;
 	if (ff < 0.2) {
 		self.batteryProgress.progressTintColor = [UIColor redColor];
@@ -377,7 +380,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (IBAction)onThumbnailTouchUpIn:(id)sender
 {
 	// サムネイル画像を押したとき
-	if (0 < mData.tamaObjectHandle) {
+	if (mData.tamaObject != nil) {
 		// Goto Model Viewer View
 		[self performSegueWithIdentifier:@"segViewer" sender:self];
 	}
@@ -438,7 +441,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	
 	// サムネイル画像クリア
 	self.ivThumbnail.image = nil;
-	mData.tamaObjectHandle = 0;
+	mData.tamaObject = nil;
 	
 	// コネクト
 	[self connect];
