@@ -71,6 +71,16 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	dispatch_async(dispatch_get_main_queue(), ^{
 		_progressView.progress = 0.0;
 		_progressView.hidden = NO;
+	
+		NSDateFormatter* df = [[NSDateFormatter alloc] init];
+		[df setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+		[df setDateStyle:NSDateFormatterShortStyle];
+		[df setTimeStyle:NSDateFormatterMediumStyle];
+		
+		self.lbTitle.text = [df stringFromDate:_ptpObject.objectInfo.capture_date];
+
+		//cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", obj.objectInfo.filename];
+
 	});
 	
 	[ptpConnection operateSession:^(PtpIpSession *session) {
@@ -81,8 +91,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		__block float total = 0.0;
 		
 		// Get primary image that was resized to 2048x1024.
-		imageWidth = 2048;
-		imageHeight = 1024;
+		imageWidth = 512; //2048;
+		imageHeight = 256; //1024;
 		BOOL result = [session getResizedImageObject:objectHandle
 											   width:imageWidth
 											  height:imageHeight

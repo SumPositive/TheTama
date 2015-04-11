@@ -17,7 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
-		
+		// 初起動したとき
+		// mData 復帰
+		let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as! Array<String>
+		let filePath = paths[0].stringByAppendingPathComponent("mData.TheTama")
+		dataObject = NSKeyedUnarchiver.unarchiveObjectWithFile(filePath) as? DataObject
+		if dataObject == nil {
+			println("ERROR! mData load");
+		}
 		return true
 	}
 
@@ -29,10 +36,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func applicationDidEnterBackground(application: UIApplication) {
 		// Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
 		// If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+		// バックグランドになるとき
+		// mData 保存
+		if dataObject != nil {
+			//パスの取得
+			let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as! Array<String>
+			//保存するファイルの名前
+			let filePath = paths[0].stringByAppendingPathComponent("mData.TheTama")
+			//アーカイブして保存する
+			let successful = NSKeyedArchiver.archiveRootObject(dataObject!, toFile: filePath)
+			if !successful {
+				println("ERROR! mData save");
+			}
+		}
 	}
 
 	func applicationWillEnterForeground(application: UIApplication) {
-		// Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+		// バックグランドから復帰するとき
 		NSNotificationCenter.defaultCenter().postNotificationName("applicationWillEnterForeground", object: nil)
 	}
 
@@ -48,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func getDataObject() -> DataObject? {
 		if dataObject == nil {
-			dataObject = DataObject.alloc()
+			dataObject = DataObject()
 		}
 		return dataObject
 	}

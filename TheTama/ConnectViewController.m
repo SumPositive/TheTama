@@ -109,6 +109,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	// Product default is "192.168.1.1".
 	[mData.ptpConnection setTargetIp: @"192.168.1.1"]; // _ipField.text];
 	
+	assert(mData.ptpConnection);
 	// Connect to target.
 	[mData.ptpConnection connect:^(BOOL connected) {
 		// "Connect" and "OpenSession" completion callback.
@@ -181,13 +182,13 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	AppDelegate * app = [UIApplication sharedApplication].delegate;
 	mData = [app getDataObject];
 	assert(mData != nil);
+	assert(mData.ptpConnection != nil);
 	
 	// Ready to PTP/IP.
 //	if (mData.ptpConnection==nil) {
 //		mData.ptpConnection = [[PtpConnection alloc] init];
 //	}
 	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
-	[mData.ptpConnection setEventListener:self];
 	
 	// iAd
 	self.canDisplayBannerAds = YES;
@@ -202,6 +203,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 {
 	[super viewWillAppear:animated];
 
+	// PtpIpEventListener delegates.
+	[mData.ptpConnection setEventListener:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated

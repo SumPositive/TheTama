@@ -184,9 +184,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onCaptureTouchDown:" destination="8rJ-Kc-sve" eventType="touchDown" id="UMg-nL-kQB"/>
                                     <action selector="onCaptureTouchDown:" destination="9pv-A4-QxB" eventType="touchDown" id="wQy-gj-K51"/>
-                                    <action selector="onCaptureTouchUpInside:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="4gD-fC-xgF"/>
                                     <action selector="onCaptureTouchUpInside:" destination="9pv-A4-QxB" eventType="touchUpInside" id="XZS-Xm-vfK"/>
                                 </connections>
                             </button>
@@ -401,9 +399,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Capture" image="second" id="cPa-gy-q4n"/>
                     <connections>
-                        <outlet property="captureButton" destination="amV-LN-SeJ" id="jgI-IH-Y0Q"/>
                         <outlet property="contentsView" destination="FAo-Aa-zGa" id="Wez-fc-Xa8"/>
-                        <outlet property="indicator" destination="GNg-W2-Uwq" id="aYd-gd-cJ0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
@@ -483,6 +479,6 @@
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cqb-mb-0Gj"/>
+        <segue reference="L4O-h9-Ets"/>
     </inferredMetricsTieBreakers>
 </document>

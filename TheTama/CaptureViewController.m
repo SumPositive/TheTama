@@ -271,8 +271,11 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			// OK
 			thumb = [UIImage imageWithData:thumbData];
 			//set mData
-			mData.tamaObject = [[PtpObject alloc] initWithObjectInfo:objectInfo thumbnail:thumb];
-			[mData.tamaObjects addObject: [mData.tamaObject copy]];
+			PtpObject * tamaObj = [[PtpObject alloc] initWithObjectInfo:objectInfo thumbnail:thumb];
+			assert(tamaObj);
+			[mData.tamaObjects addObject:tamaObj];
+			mData.tamaObject = tamaObj;
+			LOG(@"mData.tamaObjects.count=%ld", mData.tamaObjects.count);
 		}
 	} else {
 		thumb = [UIImage imageNamed:@"thumb_nothing"];
@@ -417,7 +420,6 @@ inline static void dispatch_async_main(dispatch_block_t block)
 //		mData.ptpConnection = [[PtpConnection alloc] init];
 //	}
 	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
-	[mData.ptpConnection setEventListener:self];
 	
 	//  通知受信の設定
 	NSNotificationCenter*   nc = [NSNotificationCenter defaultCenter];
@@ -428,6 +430,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+
+	// PtpIpEventListener delegates.
+	[mData.ptpConnection setEventListener:self];
 
 	// Thumbnailコーナを丸くする
 	[[self.ivThumbnail layer] setCornerRadius:20.0];
