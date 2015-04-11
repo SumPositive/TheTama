@@ -192,10 +192,10 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	[super viewWillAppear:animated];
 	
 	// Thumbnailコーナを丸くする
-//	[[self.ivThumbnail layer] setCornerRadius:20.0];
-//	[self.ivThumbnail setClipsToBounds:YES];
-//
-//	self.batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 5.0f ); // 横方向に1倍、縦方向に3倍して表示する
+	[[self.imageView layer] setCornerRadius:20.0];
+	[self.imageView setClipsToBounds:YES];
+
+	self.progressView.transform = CGAffineTransformMakeScale( 1.0f, 3.0f ); // 横方向に1倍、縦方向に3倍して表示する
 //	[self viewRefresh];
 }
 

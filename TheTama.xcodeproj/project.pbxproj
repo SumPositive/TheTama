@@ -58,6 +58,7 @@
 		44CD6DFC1AD8B4DB0001F5B3 /* GLRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CD6DF81AD8B4DB0001F5B3 /* GLRenderView.m */; };
 		44CD6DFD1AD8B4DB0001F5B3 /* glkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CD6DF91AD8B4DB0001F5B3 /* glkViewController.m */; };
 		44CD6E011AD8C2960001F5B3 /* UVSphere.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CD6DFE1AD8C2960001F5B3 /* UVSphere.m */; };
+		44CD6E041AD916580001F5B3 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44CD6E031AD916580001F5B3 /* iAd.framework */; };
 		C013159E2F6CA5269C077B97 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F72BE7B8DB0524CD2C36F399 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -173,6 +174,7 @@
 		44CD6DFE1AD8C2960001F5B3 /* UVSphere.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UVSphere.m; path = "../../RICOH_THETA_SDK_for_iOS.0.3.0/ricoh-theta-sample-for-ios/ricoh-theta-sample-for-ios/UVSphere.m"; sourceTree = "<group>"; };
 		44CD6DFF1AD8C2960001F5B3 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = "../../RICOH_THETA_SDK_for_iOS.0.3.0/ricoh-theta-sample-for-ios/ricoh-theta-sample-for-ios/Constants.h"; sourceTree = "<group>"; };
 		44CD6E001AD8C2960001F5B3 /* UVSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UVSphere.h; path = "../../RICOH_THETA_SDK_for_iOS.0.3.0/ricoh-theta-sample-for-ios/ricoh-theta-sample-for-ios/UVSphere.h"; sourceTree = "<group>"; };
+		44CD6E031AD916580001F5B3 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		B9AD8F4C9E07E5512CAFF712 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D281DCA70D60157B97683C9B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F72BE7B8DB0524CD2C36F399 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,6 +185,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44CD6E041AD916580001F5B3 /* iAd.framework in Frameworks */,
 				44A67C5B1AD3BD3F002A826C /* libiconv.dylib in Frameworks */,
 				44A67C591AD3BD29002A826C /* UIKit.framework in Frameworks */,
 				44A67C571AD3BD1F002A826C /* ImageIO.framework in Frameworks */,
@@ -420,6 +423,7 @@
 		6929937500D07EF05976D9BE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				44CD6E031AD916580001F5B3 /* iAd.framework */,
 				44A67C5A1AD3BD3F002A826C /* libiconv.dylib */,
 				44A67C581AD3BD29002A826C /* UIKit.framework */,
 				44A67C561AD3BD1F002A826C /* ImageIO.framework */,

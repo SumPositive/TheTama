@@ -109,18 +109,12 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	}
 	
 	dispatch_async_main(^{
+		[SVProgressHUD showWithStatus:@"THETA\nDisconnect." maskType:SVProgressHUDMaskTypeGradient];
 		NSLog(@"socket error(0x%X,closed=%@).\n--- %@", err, closed? @"YES": @"NO", desc);
-//		if (closed) {
-//			//[_connectButton setTitle:@"Connect" forState:UIControlStateNormal];
-//			//[mData.tamaObjects removeAllObjects];
-//			//[_contentsView reloadData];
-//		}
+		[self disconnect];
+		[SVProgressHUD dismiss];
 		// Back Model Connect View
 		[self dismissViewControllerAnimated:YES completion:nil];
-	});
-	
-	dispatch_async_main(^{
-		[SVProgressHUD dismiss];
 	});
 }
 
@@ -170,21 +164,21 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	}];
 }
 
-//- (void)disconnect
-//{
-//	NSLog(@"disconnecting...");
-//
-//	[mData.ptpConnection close:^{
-//		// "CloseSession" and "Close" completion callback.
-//		// This block is running at PtpConnection#gcd thread.
-//
-//		dispatch_async_main(^{
-//			NSLog(@"disconnected.");
-//			//[self.connectButton setTitle:@"Connect" forState:UIControlStateNormal];
-//			[mData.tamaObjects removeAllObjects];
-//		});
-//	}];
-//}
+- (void)disconnect
+{
+	NSLog(@"disconnecting...");
+
+	[mData.ptpConnection close:^{
+		// "CloseSession" and "Close" completion callback.
+		// This block is running at PtpConnection#gcd thread.
+
+		dispatch_async_main(^{
+			NSLog(@"disconnected.");
+			//[self.connectButton setTitle:@"Connect" forState:UIControlStateNormal];
+			//[mData.tamaObjects removeAllObjects];
+		});
+	}];
+}
 
 //- (void)enumObjects
 //{
@@ -266,18 +260,17 @@ inline static void dispatch_async_main(dispatch_block_t block)
 							}];
 		if (!result) {
 			NSLog(@"getThumb(0x%08x) failed.", objectHandle);
-			thumb = [UIImage imageNamed:@"nothumb.png"];
-			//mData.tamaObjectHandle = 0;
+			thumb = [UIImage imageNamed:@"thumb_nothing"];
 		} else {
+			// OK
 			thumb = [UIImage imageWithData:thumbData];
+			//set mData
+			mData.tamaObject = [[PtpObject alloc] initWithObjectInfo:objectInfo thumbnail:thumb];
+			[mData.tamaObjects addObject:mData.tamaObject];
 		}
 	} else {
-		thumb = [UIImage imageNamed:@"nothumb.png"];
-		//mData.tamaObjectHandle = 0;
+		thumb = [UIImage imageNamed:@"thumb_nothing"];
 	}
-	
-	mData.tamaObject = [[PtpObject alloc] initWithObjectInfo:objectInfo thumbnail:thumb];
-	
 	return thumb;
 }
 
@@ -386,6 +379,15 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	}
 }
 
+- (IBAction)onListTouchUpIn:(id)sender
+{
+	// サList > を押したとき
+	if (0 < mData.tamaObjects.count) {
+		// Goto Model Viewer View
+		[self performSegueWithIdentifier:@"segList" sender:self];
+	}
+}
+
 
 #pragma mark - Life cycle.
 
@@ -419,7 +421,6 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	[self.ivThumbnail setClipsToBounds:YES];
 	
 	self.batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 5.0f ); // 横方向に1倍、縦方向に3倍して表示する
-	[self viewRefresh];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -440,11 +441,24 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	NSLog(@"applicationWillEnterForeground");
 	
 	// サムネイル画像クリア
-	self.ivThumbnail.image = nil;
-	mData.tamaObject = nil;
+	//self.ivThumbnail.image = nil;
+	//mData.tamaObject = nil;
 	
 	// コネクト
-	[self connect];
+	if ([mData.ptpConnection connected]) {
+		[mData.ptpConnection operateSession:^(PtpIpSession *session) {
+			// Get Volume level.
+			mData.volumeLevel = [session getAudioVolume];
+			// Get Battery level.
+			mData.batteryLevel = [session getBatteryLevel];
+
+			[self viewRefresh];
+		}];
+	}
+	else {
+		//[self connect];
+		[self dismissViewControllerAnimated:YES completion:nil];
+	}
 }
 
 @end

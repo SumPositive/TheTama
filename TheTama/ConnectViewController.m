@@ -7,6 +7,7 @@
 //
 
 #import "SVProgressHUD.h"
+#import <iAd/iAd.h>
 
 #import "TheTama-Swift.h"
 #import "ConnectViewController.h"
@@ -83,12 +84,12 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	}
 	
 	dispatch_async_main(^{
+		[SVProgressHUD showWithStatus:@"THETA\nDisconnect." maskType:SVProgressHUDMaskTypeGradient];
 		NSLog(@"socket error(0x%X,closed=%@).\n--- %@", err, closed? @"YES": @"NO", desc);
-		if (closed) {
-			//[_connectButton setTitle:@"Connect" forState:UIControlStateNormal];
-			//[mData.tamaObjects removeAllObjects];
-			//[_contentsView reloadData];
-		}
+		[self disconnect];
+		[SVProgressHUD dismiss];
+		// Back Model Connect View
+		[self dismissViewControllerAnimated:YES completion:nil];
 	});
 }
 
@@ -134,6 +135,22 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	}];
 }
 
+- (void)disconnect
+{
+	NSLog(@"disconnecting...");
+	
+	[mData.ptpConnection close:^{
+		// "CloseSession" and "Close" completion callback.
+		// This block is running at PtpConnection#gcd thread.
+		
+		dispatch_async_main(^{
+			NSLog(@"disconnected.");
+			//[self.connectButton setTitle:@"Connect" forState:UIControlStateNormal];
+			//[mData.tamaObjects removeAllObjects];
+		});
+	}];
+}
+
 
 #pragma mark - UI events.
 
@@ -166,6 +183,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	}
 	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
 	[mData.ptpConnection setEventListener:self];
+	
+	// iAd
+	self.canDisplayBannerAds = YES;
 	
 	//  通知受信の設定
 	NSNotificationCenter*   nc = [NSNotificationCenter defaultCenter];

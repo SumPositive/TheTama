@@ -64,6 +64,9 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fO0-1Z-2V9">
+                                <rect key="frame" x="16" y="568" width="480" height="32"/>
+                            </adBannerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -72,13 +75,16 @@
                             <constraint firstItem="J2X-hu-HVe" firstAttribute="leading" secondItem="Q0l-7w-Dop" secondAttribute="leadingMargin" constant="20" id="5P0-27-eZn"/>
                             <constraint firstItem="4up-KM-NcS" firstAttribute="leading" secondItem="Q0l-7w-Dop" secondAttribute="leadingMargin" constant="20" id="5hC-6T-Bka"/>
                             <constraint firstAttribute="trailingMargin" secondItem="J2X-hu-HVe" secondAttribute="trailing" constant="20" id="7yV-4U-yBW"/>
+                            <constraint firstItem="7ZZ-or-TIH" firstAttribute="top" secondItem="fO0-1Z-2V9" secondAttribute="bottom" id="BM9-eP-cdG"/>
                             <constraint firstItem="J2X-hu-HVe" firstAttribute="top" secondItem="4up-KM-NcS" secondAttribute="bottom" constant="40" id="EJx-dJ-D4k"/>
                             <constraint firstItem="FHC-Zl-C3L" firstAttribute="top" secondItem="9SY-9f-djn" secondAttribute="bottom" constant="20" id="MJL-1Q-QvD"/>
                             <constraint firstItem="wMo-PD-zzK" firstAttribute="top" secondItem="FHC-Zl-C3L" secondAttribute="bottom" constant="3" id="MfN-ki-gfZ"/>
                             <constraint firstAttribute="centerX" secondItem="9SY-9f-djn" secondAttribute="centerX" id="Rbp-Eg-Jc6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fO0-1Z-2V9" secondAttribute="trailing" id="Yos-mh-JsD"/>
                             <constraint firstItem="FHC-Zl-C3L" firstAttribute="leading" secondItem="Q0l-7w-Dop" secondAttribute="leadingMargin" constant="20" id="aio-CW-alE"/>
                             <constraint firstAttribute="trailingMargin" secondItem="4up-KM-NcS" secondAttribute="trailing" constant="20" id="g6v-QI-s7c"/>
                             <constraint firstItem="9SY-9f-djn" firstAttribute="top" secondItem="J2X-hu-HVe" secondAttribute="bottom" constant="3" id="gsw-Cy-zxD"/>
+                            <constraint firstItem="fO0-1Z-2V9" firstAttribute="leading" secondItem="Q0l-7w-Dop" secondAttribute="leadingMargin" id="iMA-ao-O88"/>
                             <constraint firstAttribute="centerX" secondItem="FHC-Zl-C3L" secondAttribute="centerX" id="m3l-qU-wel"/>
                             <constraint firstAttribute="centerY" secondItem="9SY-9f-djn" secondAttribute="centerY" id="uFG-lg-wd0"/>
                             <constraint firstAttribute="centerX" secondItem="wMo-PD-zzK" secondAttribute="centerX" id="yaa-VX-VnM"/>
@@ -363,31 +369,6 @@
                                 <rect key="frame" x="282" y="282" width="37" height="37"/>
                                 <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Battery level" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sdu-qm-h6Q">
-                                <rect key="frame" x="304" y="25" width="160" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="160" id="ZRB-8C-BVp"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dae-7j-zwQ">
-                                <rect key="frame" x="464" y="25" width="100" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="crP-iZ-ghx"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sAQ-Sz-ND0">
-                                <rect key="frame" x="304" y="51" width="260" height="2"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="260" id="LBW-Jz-lLh"/>
-                                </constraints>
-                                <color key="progressTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </progressView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jIt-bB-sH1">
                                 <rect key="frame" x="36" y="20" width="66" height="30"/>
                                 <constraints>
@@ -403,30 +384,22 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Sdu-qm-h6Q" firstAttribute="baseline" secondItem="dae-7j-zwQ" secondAttribute="baseline" id="5fY-rb-tyf"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FAo-Aa-zGa" secondAttribute="trailing" id="63c-mO-Pby"/>
-                            <constraint firstItem="dae-7j-zwQ" firstAttribute="trailing" secondItem="sAQ-Sz-ND0" secondAttribute="trailing" id="Bhg-oO-6Bk"/>
                             <constraint firstItem="NDk-cv-Gan" firstAttribute="top" secondItem="zEq-FU-wV5" secondAttribute="bottom" constant="8" symbolic="YES" id="Day-4N-Vmt"/>
                             <constraint firstItem="NDk-cv-Gan" firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="JgO-Fn-dHn"/>
                             <constraint firstItem="FAo-Aa-zGa" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="MFd-g2-99t"/>
                             <constraint firstItem="jIt-bB-sH1" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" id="S9O-8n-fNG"/>
-                            <constraint firstItem="Sdu-qm-h6Q" firstAttribute="top" secondItem="QS5-Rx-YEW" secondAttribute="topMargin" constant="25" id="X4x-Q8-I9C"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="sAQ-Sz-ND0" secondAttribute="trailing" constant="20" id="dl8-ka-IGq"/>
                             <constraint firstAttribute="centerY" secondItem="GNg-W2-Uwq" secondAttribute="centerY" id="fYf-Q4-7un"/>
                             <constraint firstItem="jIt-bB-sH1" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" constant="20" id="fg5-fQ-cnr"/>
                             <constraint firstAttribute="centerX" secondItem="GNg-W2-Uwq" secondAttribute="centerX" id="frZ-h0-rFb"/>
-                            <constraint firstItem="Sdu-qm-h6Q" firstAttribute="leading" secondItem="sAQ-Sz-ND0" secondAttribute="leading" id="gbo-Ol-oP6"/>
                             <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="FAo-Aa-zGa" secondAttribute="bottom" constant="107" id="kQI-pL-beX"/>
                             <constraint firstItem="FAo-Aa-zGa" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="60" id="odD-XD-YYG"/>
                             <constraint firstAttribute="centerX" secondItem="zEq-FU-wV5" secondAttribute="centerX" id="qqM-NS-xev"/>
                             <constraint firstAttribute="centerY" secondItem="zEq-FU-wV5" secondAttribute="centerY" id="qzY-Ky-pLD"/>
-                            <constraint firstItem="sAQ-Sz-ND0" firstAttribute="top" secondItem="Sdu-qm-h6Q" secondAttribute="bottom" constant="5" id="rjJ-za-QDe"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Capture" image="second" id="cPa-gy-q4n"/>
                     <connections>
-                        <outlet property="batteryLabel" destination="dae-7j-zwQ" id="HXx-za-gBn"/>
-                        <outlet property="batteryProgress" destination="sAQ-Sz-ND0" id="gnP-Hj-VU5"/>
                         <outlet property="captureButton" destination="amV-LN-SeJ" id="jgI-IH-Y0Q"/>
                         <outlet property="contentsView" destination="FAo-Aa-zGa" id="Wez-fc-Xa8"/>
                         <outlet property="indicator" destination="GNg-W2-Uwq" id="aYd-gd-cJ0"/>
