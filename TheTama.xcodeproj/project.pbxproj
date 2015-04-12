@@ -51,7 +51,7 @@
 		44A67C5B1AD3BD3F002A826C /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 44A67C5A1AD3BD3F002A826C /* libiconv.dylib */; };
 		44A67C5F1AD3E305002A826C /* ViewerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A67C5E1AD3E305002A826C /* ViewerViewController.m */; };
 		44A67C611AD433F9002A826C /* DataObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A67C601AD433F9002A826C /* DataObject.swift */; };
-		44A67C641AD4A1B9002A826C /* TableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A67C631AD4A1B8002A826C /* TableCell.m */; };
+		44A67C641AD4A1B9002A826C /* TableCellTama.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A67C631AD4A1B8002A826C /* TableCellTama.m */; };
 		44A67C6B1AD5AA1A002A826C /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A67C691AD5AA1A002A826C /* ListViewController.m */; };
 		44B4EA621AD3E26900DE5C7E /* CaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B4EA611AD3E26900DE5C7E /* CaptureViewController.m */; };
 		44CD6DF31AD81B760001F5B3 /* ConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CD6DF11AD81B760001F5B3 /* ConnectViewController.m */; };
@@ -156,8 +156,8 @@
 		44A67C5D1AD3E305002A826C /* ViewerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewerViewController.h; sourceTree = "<group>"; };
 		44A67C5E1AD3E305002A826C /* ViewerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewerViewController.m; sourceTree = "<group>"; };
 		44A67C601AD433F9002A826C /* DataObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataObject.swift; sourceTree = "<group>"; };
-		44A67C621AD4A1B8002A826C /* TableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableCell.h; sourceTree = "<group>"; };
-		44A67C631AD4A1B8002A826C /* TableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableCell.m; sourceTree = "<group>"; };
+		44A67C621AD4A1B8002A826C /* TableCellTama.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableCellTama.h; sourceTree = "<group>"; };
+		44A67C631AD4A1B8002A826C /* TableCellTama.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableCellTama.m; sourceTree = "<group>"; };
 		44A67C661AD52F25002A826C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		44A67C691AD5AA1A002A826C /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
 		44A67C6A1AD5AA1A002A826C /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
@@ -244,8 +244,6 @@
 			children = (
 				44CD6E021AD8C2AD0001F5B3 /* ricoh */,
 				44CD6E051AD94E440001F5B3 /* Azukid.h */,
-				44A67C621AD4A1B8002A826C /* TableCell.h */,
-				44A67C631AD4A1B8002A826C /* TableCell.m */,
 				44A67C4A1AD3BA9D002A826C /* PtpObject.h */,
 				44A67C491AD3BA9D002A826C /* PtpObject.m */,
 				44A67C601AD433F9002A826C /* DataObject.swift */,
@@ -261,6 +259,8 @@
 				44B4EA611AD3E26900DE5C7E /* CaptureViewController.m */,
 				44A67C6A1AD5AA1A002A826C /* ListViewController.h */,
 				44A67C691AD5AA1A002A826C /* ListViewController.m */,
+				44A67C621AD4A1B8002A826C /* TableCellTama.h */,
+				44A67C631AD4A1B8002A826C /* TableCellTama.m */,
 				44A67C5D1AD3E305002A826C /* ViewerViewController.h */,
 				44A67C5E1AD3E305002A826C /* ViewerViewController.m */,
 			);
@@ -610,7 +610,7 @@
 				44A67C321AD3B5E0002A826C /* exceptions.cpp in Sources */,
 				44CD6E011AD8C2960001F5B3 /* UVSphere.m in Sources */,
 				44A67C331AD3B5E0002A826C /* int128_t.cpp in Sources */,
-				44A67C641AD4A1B9002A826C /* TableCell.m in Sources */,
+				44A67C641AD4A1B9002A826C /* TableCellTama.m in Sources */,
 				44A67C611AD433F9002A826C /* DataObject.swift in Sources */,
 				44A67C441AD3B5E0002A826C /* PtpLogging.mm in Sources */,
 				44A67C351AD3B5E0002A826C /* ptpip.cpp in Sources */,

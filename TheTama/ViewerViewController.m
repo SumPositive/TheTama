@@ -91,8 +91,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		__block float total = 0.0;
 		
 		// Get primary image that was resized to 2048x1024.
-		imageWidth = 512; //2048;
-		imageHeight = 256; //1024;
+		imageWidth = 2048;
+		imageHeight = 1024;
 		BOOL result = [session getResizedImageObject:objectHandle
 											   width:imageWidth
 											  height:imageHeight
@@ -202,8 +202,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 {
 	[super viewWillAppear:animated];
 	
-	// Thumbnailコーナを丸くする
-	[[self.imageView layer] setCornerRadius:20.0];
+	// コーナを丸くする
+	[[self.imageView layer] setCornerRadius:40.0];
 	[self.imageView setClipsToBounds:YES];
 
 	self.progressView.transform = CGAffineTransformMakeScale( 1.0f, 3.0f ); // 横方向に1倍、縦方向に3倍して表示する

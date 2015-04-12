@@ -14,7 +14,7 @@
 #import "PtpConnection.h"
 #import "PtpLogging.h"
 #import "PtpObject.h"
-#import "TableCell.h"
+#import "TableCellTama.h"
 
 #import "ViewerViewController.h"
 
@@ -29,7 +29,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	DataObject * mData;
 	PtpIpStorageInfo * mStorageInfo;
 }
-@property (nonatomic, strong) IBOutlet UITableView * contentsView;
+@property (nonatomic, strong) IBOutlet UITableView * tableView;
 @end
 
 
@@ -97,18 +97,102 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)onReloadTouchUpIn:(id)sender
+{
+	[self reloadTamaObjects];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
 {
 	id dvc = [segue destinationViewController];
 	if ([dvc isKindOfClass:[ViewerViewController class]]) {
 		//ViewerViewController* dest = (ViewerViewController*)dvc;
-		TableCell* cell = (TableCell*)sender;
+		TableCellTama* cell = (TableCellTama*)sender;
 		mData.tamaObject = [mData.tamaObjects objectAtIndex:cell.objectIndex];
 	}
 }
 
 
 #pragma mark - PTP/IP Operations.
+
+- (void)reloadTamaObjects
+
+{
+	[SVProgressHUD showWithStatus:@"Reloading..." maskType:SVProgressHUDMaskTypeGradient];
+
+	[mData.tamaObjects removeAllObjects];
+	
+//	[mData.ptpConnection getDeviceInfo:^(const PtpIpDeviceInfo* info) {
+//		// "GetDeviceInfo" completion callback.
+//		// This block is running at PtpConnection#gcd thread.
+//		LOG(@"DeviceInfo:%@", info);
+//	}];
+	
+	[mData.ptpConnection operateSession:^(PtpIpSession *session) {
+		// This block is running at PtpConnection#gcd thread.
+		
+		// Setting the RICOH THETA's clock.
+		// 'setDateTime' convert from specified date/time to local-time, and send to RICOH THETA.
+		// RICOH THETA work with local-time, without timezone.
+		[session setDateTime:[NSDate dateWithTimeIntervalSinceNow:0]];
+		
+		// Get object handles for primary images.
+		NSArray* objectHandles = [session getObjectHandles];
+		LOG(@"getObjectHandles() recevied %zd handles.", objectHandles.count);
+		
+		// Get object informations and thumbnail images for each primary images.
+		for (NSNumber* it in objectHandles) {
+			uint32_t objectHandle = (uint32_t)it.integerValue;
+			[mData.tamaObjects addObject:[self loadObject:objectHandle session:session]];
+		}
+		dispatch_async_main(^{
+			[self.tableView reloadData];
+			[self bottomTableView:self.tableView animated:NO];
+			[SVProgressHUD dismiss];
+		});
+	}];
+}
+
+- (PtpObject*)loadObject:(uint32_t)objectHandle session:(PtpIpSession*)session
+{
+	// This method MUST be running at PtpConnection#gcd thread.
+	
+	// Get object informations.
+	// It containes filename, capture-date and etc.
+	PtpIpObjectInfo* objectInfo = [session getObjectInfo:objectHandle];
+	if (!objectInfo) {
+		LOG(@"getObjectInfo(0x%08x) failed.", objectHandle);
+		return nil;
+	}
+	
+	UIImage* thumb;
+	if (objectInfo.object_format==PTPIP_FORMAT_JPEG) {
+		// Get thumbnail image.
+		NSMutableData* thumbData = [NSMutableData data];
+		BOOL result = [session getThumb:objectHandle
+							onStartData:^(NSUInteger totalLength) {
+								// Callback before thumb-data reception.
+								LOG(@"getThumb(0x%08x) will received %zd bytes.", objectHandle, totalLength);
+								
+							} onChunkReceived:^BOOL(NSData *data) {
+								// Callback for each chunks.
+								[thumbData appendData:data];
+								
+								// Continue to receive.
+								return YES;
+							}];
+		if (!result) {
+			LOG(@"getThumb(0x%08x) failed.", objectHandle);
+			thumb = [UIImage imageNamed:@"TheTama-NG"];
+		} else {
+			thumb = [UIImage imageWithData:thumbData];
+		}
+	} else {
+		thumb = [UIImage imageNamed:@"TheTama-NG"];
+	}
+	return [[PtpObject alloc] initWithObjectInfo:objectInfo thumbnail:thumb];
+}
+
 
 
 #pragma mark - UITableViewDataSource delegates.
@@ -125,7 +209,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-	TableCell* cell;
+	TableCellTama* cell;
 	
 //	if (indexPath.section==0) {
 //		cell = [tableView dequeueReusableCellWithIdentifier:@"cameraInfo"];
@@ -147,17 +231,30 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	
 	PtpObject* obj = [mData.tamaObjects objectAtIndex:indexPath.row];
 	assert(obj);
-	cell = [tableView dequeueReusableCellWithIdentifier:@"customCell"];
+	cell = [tableView dequeueReusableCellWithIdentifier:@"cellTama"];
 	cell.textLabel.text = [df stringFromDate:obj.objectInfo.capture_date];
 	cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", obj.objectInfo.filename];
 	cell.imageView.image = obj.thumbnail;
 	cell.objectIndex = (uint32_t)indexPath.row;
 	// cell.imageViewのコーナを丸くする
-	[[cell.imageView layer] setCornerRadius:20.0];
+	[[cell.imageView layer] setCornerRadius:12.0];
 	[cell.imageView setClipsToBounds:YES];
 
 	return cell;
 }
+
+/// 最終行を表示する
+- (void)bottomTableView:(UITableView *)tableView animated:(BOOL)animated
+{
+	long section = [tableView numberOfSections] - 1;
+	long row = [tableView numberOfRowsInSection:section] - 1;
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:section];
+	[tableView scrollToRowAtIndexPath:indexPath
+					  atScrollPosition:UITableViewScrollPositionBottom
+							  animated:animated];
+}
+
+
 
 #pragma mark - Life cycle.
 
@@ -170,7 +267,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	assert(mData != nil);
 
 	// UITableView
-	self.contentsView.dataSource = self;
+	self.tableView.dataSource = self;
 	
 	//  通知受信の設定
 	NSNotificationCenter*   nc = [NSNotificationCenter defaultCenter];
@@ -193,8 +290,14 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
-	
-	[self.contentsView reloadData];
+
+	if (0 < mData.tamaObjects.count) {
+		[self.tableView reloadData];
+		[self bottomTableView:self.tableView animated:NO];
+	}
+	else {
+		[self reloadTamaObjects];
+	}
 }
 
 - (void)didReceiveMemoryWarning

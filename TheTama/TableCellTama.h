@@ -4,7 +4,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TableCell : UITableViewCell
+@interface TableCellTama : UITableViewCell
 
 @property (nonatomic) uint32_t objectIndex;
 

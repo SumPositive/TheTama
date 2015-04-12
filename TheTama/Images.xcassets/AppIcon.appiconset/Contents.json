@@ -1,9 +1,8 @@
 {
   "images" : [
     {
-      "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "TheTama058.png",
+      "size" : "29x29",
       "scale" : "2x"
     },
     {
@@ -22,9 +21,8 @@
       "scale" : "3x"
     },
     {
+      "idiom" : "iphone",
       "size" : "60x60",
-      "idiom" : "iphone",
-      "filename" : "TheTama120.png",
       "scale" : "2x"
     },
     {

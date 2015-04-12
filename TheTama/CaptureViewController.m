@@ -25,7 +25,15 @@ inline static void dispatch_async_main(dispatch_block_t block)
 @interface CaptureViewController () <PtpIpEventListener>
 {
 	DataObject * mData;
+	NSUInteger mShutterSpeed;
+	NSInteger mFilmIso;
+	NSInteger mWhiteBalance;
 }
+
+@property (nonatomic, strong) IBOutlet UISegmentedControl * sgShutter1;
+@property (nonatomic, strong) IBOutlet UISegmentedControl * sgShutter2;
+@property (nonatomic, strong) IBOutlet UISegmentedControl * sgIso;
+@property (nonatomic, strong) IBOutlet UISegmentedControl * sgMode;
 
 @property (nonatomic, strong) IBOutlet UILabel * batteryLabel;
 @property (nonatomic, strong) IBOutlet UIProgressView * batteryProgress;
@@ -266,7 +274,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 							}];
 		if (!result) {
 			LOG(@"getThumb(0x%08x) failed.", objectHandle);
-			thumb = [UIImage imageNamed:@"thumb_nothing"];
+			thumb = [UIImage imageNamed:@"TheTama-NG"];
 		} else {
 			// OK
 			thumb = [UIImage imageWithData:thumbData];
@@ -278,7 +286,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			LOG(@"mData.tamaObjects.count=%ld", mData.tamaObjects.count);
 		}
 	} else {
-		thumb = [UIImage imageNamed:@"thumb_nothing"];
+		thumb = [UIImage imageNamed:@"TheTama-NG"];
 	}
 	return thumb;
 }
@@ -339,10 +347,41 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	self.ivThumbnail.image = nil;
 	
 	[mData.ptpConnection operateSession:^(PtpIpSession *session){
-		 // シャッターの音量
-		 // Set Volume level.
-		 [session setAudioVolume: mData.volumeLevel];
-		 
+
+		// シャッタースピード
+		//     AUTO(0),
+		//     1/8000, 1/6400, 1/5000, 1/4000, 1/3200,
+		//     1/2500, 1/2000, 1/1600, 1/1250, 1/1000,
+		//     1/800, 1/640, 1/500, 1/400, 1/320,
+		//     1/250, 1/200, 1/160, 1/125, 1/100,
+		//     1/80, 1/60, 1/50, 1/40, 1/30,
+		//     1/25, 1/15, 1/13, 1/10, 10/75
+		// [session setShutterSpeed: PtpIpRationalMake(1,400)]; // 1/400sec
+		[session setShutterSpeed: PtpIpRationalMake(mShutterSpeed==0?0:1, mShutterSpeed)];
+		
+		// 露出補正値
+		//     2000, 1700, 1300, 1000, 700, 300,
+		//     0, -300, -700, -1000, -1300, -1700, -2000
+		//[session setExposureBiasCompensation: 300]; // +1/3EV
+		
+		// ISO感度
+		//     100, 125, 160, 200, 250, 320, 400, 500, 640,
+		//     800, 1000, 1250, 1600,
+		//     AUTOMATIC(0xFFFF)
+		// [session setExposureIndex: 100]; // ISO100
+		[session setExposureIndex: mFilmIso];
+
+		// ホワイトバランス
+		//     AUTOMATIC, DAYLIGHT(屋外), SHADE(日陰), CLOUDY(曇天),
+		//     TUNGSTEN1(白熱灯1),  TUNGSTEN2(白熱灯2),
+		//     FLUORESCENT1(蛍光灯1(昼光色)), FLUORESCENT2(蛍光灯2(昼白色)),
+		//     FLUORESCENT3(蛍光灯3(白色)), FLUORESCENT4(蛍光灯4(電球色))
+		// [session setWhiteBalance: PTPIP_WHITE_BALANCE_DAYLIGHT]; // 屋外
+		[session setWhiteBalance: mWhiteBalance];
+
+		// set シャッターの音量
+		[session setAudioVolume: mData.volumeLevel];
+		
 		 // This block is running at PtpConnection#gcd thread.
 		 BOOL rtn = [session initiateCapture];
 		 LOG(@"execShutter[rtn:%d]", rtn);
@@ -358,13 +397,13 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	// 音量
 	[self volumeShow];
 	
-	// バッテリー残量
+	// 充電レベル   FULL(100), HALF(67), NEAR_END(33), END(0)
 	self.batteryLabel.text = [NSString stringWithFormat:@"%ld%%", (unsigned long)mData.batteryLevel];
 	float ff = (float)mData.batteryLevel / 100.0;
-	if (ff < 0.2) {
+	if (ff < 0.33) {
 		self.batteryProgress.progressTintColor = [UIColor redColor];
 	}
-	else if (ff < 0.5) {
+	else if (ff < 0.67) {
 		self.batteryProgress.progressTintColor = [UIColor yellowColor];
 	}
 	else {
@@ -397,10 +436,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (IBAction)onListTouchUpIn:(id)sender
 {
 	// List > を押したとき
-	if (0 < mData.tamaObjects.count) {
-		// Goto Model Viewer View
-		[self performSegueWithIdentifier:@"segList" sender:self];
-	}
+	// Goto Model Viewer View
+	[self performSegueWithIdentifier:@"segList" sender:self];
 }
 
 
@@ -416,10 +453,14 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	assert(mData != nil);
 	
 	// Ready to PTP/IP.
-//	if (mData.ptpConnection==nil) {
-//		mData.ptpConnection = [[PtpConnection alloc] init];
-//	}
 	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
+	// PtpIpEventListener delegates.
+	[mData.ptpConnection setEventListener:self];
+	
+	//
+	mShutterSpeed = 0;  //AUTO(0)
+	mFilmIso = 0xFFFF;  //AUTOMATIC(0xFFFF)
+	mWhiteBalance = PTPIP_WHITE_BALANCE_AUTOMATIC;
 	
 	//  通知受信の設定
 	NSNotificationCenter*   nc = [NSNotificationCenter defaultCenter];
@@ -431,14 +472,11 @@ inline static void dispatch_async_main(dispatch_block_t block)
 {
 	[super viewWillAppear:animated];
 
-	// PtpIpEventListener delegates.
-	[mData.ptpConnection setEventListener:self];
-
 	// Thumbnailコーナを丸くする
 	[[self.ivThumbnail layer] setCornerRadius:20.0];
 	[self.ivThumbnail setClipsToBounds:YES];
 	
-	self.batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 5.0f ); // 横方向に1倍、縦方向に3倍して表示する
+	self.batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 3.0f ); // 横方向に1倍、縦方向に3倍して表示する
 }
 
 - (void)viewDidAppear:(BOOL)animated

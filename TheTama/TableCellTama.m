@@ -2,9 +2,9 @@
  * Copyright Ricoh Company, Ltd. All rights reserved.
  */
 
-#import "TableCell.h"
+#import "TableCellTama.h"
 
-@implementation TableCell
+@implementation TableCellTama
 
 @synthesize objectIndex = _objectIndex;
 
