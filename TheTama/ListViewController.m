@@ -118,6 +118,11 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)reloadTamaObjects
 
 {
+	LOG_FUNC
+#if DEBUG_NO_DEVICE_TEST
+	return;
+#endif
+	
 	[SVProgressHUD showWithStatus:@"Reloading..." maskType:SVProgressHUDMaskTypeGradient];
 
 	[mData.tamaObjects removeAllObjects];
@@ -266,6 +271,18 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	mData = [app getDataObject];
 	assert(mData != nil);
 
+#if DEBUG_NO_DEVICE_TEST
+#else
+	// Ready to PTP/IP.
+	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
+	// PtpIpEventListener delegates.
+	[mData.ptpConnection setEventListener:self];
+
+	[mData.ptpConnection operateSession:^(PtpIpSession *session) {
+		mStorageInfo = [session getStorageInfo];
+	}];
+#endif
+
 	// UITableView
 	self.tableView.dataSource = self;
 	
@@ -277,14 +294,6 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-
-	// PtpIpEventListener delegates.
-	[mData.ptpConnection setEventListener:self];
-
-	[mData.ptpConnection operateSession:^(PtpIpSession *session) {
-		// Get Volume level.
-		mStorageInfo = [session getStorageInfo];
-	}];
 }
 
 - (void)viewDidAppear:(BOOL)animated

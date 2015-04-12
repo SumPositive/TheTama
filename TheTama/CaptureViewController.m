@@ -422,7 +422,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 {
 	// サムネイル画像を押したとき
 	if (mData.tamaObject != nil) {
-		// Goto Model Viewer View
+		// Goto Viewer View
 		[self performSegueWithIdentifier:@"segViewer" sender:self];
 	}
 }
@@ -452,10 +452,13 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	mData = [app getDataObject];
 	assert(mData != nil);
 	
+#if DEBUG_NO_DEVICE_TEST
+#else
 	// Ready to PTP/IP.
 	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
 	// PtpIpEventListener delegates.
 	[mData.ptpConnection setEventListener:self];
+#endif
 	
 	//
 	mShutterSpeed = 0;  //AUTO(0)
@@ -501,6 +504,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	//self.ivThumbnail.image = nil;
 	//mData.tamaObject = nil;
 	
+#if DEBUG_NO_DEVICE_TEST
+	//
+#else
 	// コネクト
 	if ([mData.ptpConnection connected]) {
 		[mData.ptpConnection operateSession:^(PtpIpSession *session) {
@@ -508,7 +514,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			mData.volumeLevel = [session getAudioVolume];
 			// Get Battery level.
 			mData.batteryLevel = [session getBatteryLevel];
-
+			
 			[self viewRefresh];
 		}];
 	}
@@ -516,6 +522,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		//[self connect];
 		[self dismissViewControllerAnimated:YES completion:nil];
 	}
+#endif
 }
 
 @end

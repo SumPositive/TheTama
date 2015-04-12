@@ -417,12 +417,12 @@
             _makernoteAddress = _baseAddress + value;
             _makernoteLength = length;
 #ifdef LOG_VERBOSE
-            if(IS_VERBOSE) {
-                count--;
-                LOG_VERBOSE("-- others --");
-                [self findTag:&count targetCode:-1 entryType:&entryType length:&length value:&value];
-                LOG_VERBOSE("------------");
-            }
+//            if(IS_VERBOSE) {
+//                count--;
+//                LOG_VERBOSE("-- others --");
+//                [self findTag:&count targetCode:-1 entryType:&entryType length:&length value:&value];
+//                LOG_VERBOSE("------------");
+//            }
 #endif
             _cursor = _makernoteAddress;
             return YES;

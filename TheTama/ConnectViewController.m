@@ -119,7 +119,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			// "Connect" is succeeded.
 			LOG(@"connected.");
 			
-			// Goto Model Capture View
+			// Goto Capture View
 			[self performSegueWithIdentifier:@"segCapture" sender:self];
 			
 		} else {
@@ -127,8 +127,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			// "-(void)ptpip_socketError:(int)err" will run later than here.
 			LOG(@"connect failed.");
 			// Retry after 5sec.
-			
-			
+#if DEBUG_NO_DEVICE_TEST
+			[self performSegueWithIdentifier:@"segCapture" sender:self];
+#endif
 		}
 		dispatch_async_main(^{
 			[SVProgressHUD dismiss];
@@ -184,11 +185,13 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	assert(mData != nil);
 	assert(mData.ptpConnection != nil);
 	
+#if DEBUG_NO_DEVICE_TEST
+#else
 	// Ready to PTP/IP.
-//	if (mData.ptpConnection==nil) {
-//		mData.ptpConnection = [[PtpConnection alloc] init];
-//	}
 	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
+	// PtpIpEventListener delegates.
+	[mData.ptpConnection setEventListener:self];
+#endif
 	
 	// iAd
 	self.canDisplayBannerAds = YES;
@@ -202,9 +205,6 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-
-	// PtpIpEventListener delegates.
-	[mData.ptpConnection setEventListener:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated

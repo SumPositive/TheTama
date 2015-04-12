@@ -22,10 +22,10 @@
 #import "GLRenderView.h"
 
 
-inline static void dispatch_async_main(dispatch_block_t block)
-{
-	dispatch_async(dispatch_get_main_queue(), block);
-}
+//inline static void dispatch_async_main(dispatch_block_t block)
+//{
+//	dispatch_async(dispatch_get_main_queue(), block);
+//}
 
 @interface ViewerViewController ()
 {
@@ -67,6 +67,11 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 - (void)getObject:(PtpConnection *)ptpConnection ptpObject:(PtpObject *)ptpObject
 {
+	LOG_FUNC
+#if DEBUG_NO_DEVICE_TEST
+	return;
+#endif
+
 	_ptpObject = ptpObject;
 	dispatch_async(dispatch_get_main_queue(), ^{
 		_progressView.progress = 0.0;
