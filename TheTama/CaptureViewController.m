@@ -515,7 +515,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			// Get Battery level.
 			mData.batteryLevel = [session getBatteryLevel];
 			
-			[self viewRefresh];
+			dispatch_async_main(^{
+				[self viewRefresh];
+			});
 		}];
 	}
 	else {

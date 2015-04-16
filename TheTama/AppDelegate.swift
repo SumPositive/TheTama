@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import WatchKit
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -65,6 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 	
 	
+	// MARK: - Shared Data
 
 	func getDataObject() -> DataObject? {
 		if dataObject == nil {
@@ -74,5 +77,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 
 
+	// MARK: - WatchKit I/O
+
+	func application(application: UIApplication,
+		handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]?,
+		reply: (([NSObject : AnyObject]!) -> Void)!) {
+
+			if let command:String = userInfo?["command"] as? String {
+				println("command=" + command)
+				switch command {
+				case "isConnect":	// THETA Wi-Fi接続状態
+					if (dataObject?.ptpConnection.connected != nil) {
+						reply(["result": true])
+					} else {
+						reply(["result": false])
+					}
+					return
+
+				case "capture":		// キャプチャ実行、サムネイルを送る
+					
+					reply(["result": true])
+					reply(["thumbnail": dataObject!.tamaObject!.thumbnail])
+					return
+					
+				default:
+					break
+				}
+			}
+			reply([:])
+	}
+
 }
+
+
+
 

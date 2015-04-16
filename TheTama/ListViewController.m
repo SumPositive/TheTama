@@ -148,7 +148,10 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		// Get object informations and thumbnail images for each primary images.
 		for (NSNumber* it in objectHandles) {
 			uint32_t objectHandle = (uint32_t)it.integerValue;
-			[mData.tamaObjects addObject:[self loadObject:objectHandle session:session]];
+			PtpObject * obj = [self loadObject:objectHandle session:session];
+			if (obj != nil) {
+				[mData.tamaObjects addObject:obj];
+			}
 		}
 		dispatch_async_main(^{
 			[self.tableView reloadData];
@@ -178,22 +181,21 @@ inline static void dispatch_async_main(dispatch_block_t block)
 							onStartData:^(NSUInteger totalLength) {
 								// Callback before thumb-data reception.
 								LOG(@"getThumb(0x%08x) will received %zd bytes.", objectHandle, totalLength);
-								
-							} onChunkReceived:^BOOL(NSData *data) {
+							}
+							onChunkReceived:^BOOL(NSData *data) {
 								// Callback for each chunks.
 								[thumbData appendData:data];
-								
 								// Continue to receive.
 								return YES;
 							}];
 		if (!result) {
 			LOG(@"getThumb(0x%08x) failed.", objectHandle);
-			thumb = [UIImage imageNamed:@"TheTama-NG"];
+			thumb = nil; //[UIImage imageNamed:@"TheTama-NG"];
 		} else {
 			thumb = [UIImage imageWithData:thumbData];
 		}
 	} else {
-		thumb = [UIImage imageNamed:@"TheTama-NG"];
+		thumb = nil; //[UIImage imageNamed:@"TheTama-NG"];
 	}
 	return [[PtpObject alloc] initWithObjectInfo:objectInfo thumbnail:thumb];
 }
