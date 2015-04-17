@@ -39,16 +39,10 @@
 	float _yaw;
 	float _roll;
 	float _pitch;
-//	UIView *_configView;
-//	UIButton *_configButton1;
-//	UIButton *_configButton2;
-//	UIButton *_configButton3;
 }
 @property (nonatomic, strong) IBOutlet UIImageView* imageView;
 @property (nonatomic, strong) IBOutlet UILabel * lbTitle;
 @property (nonatomic, strong) IBOutlet UIProgressView* progressView;
-//@property (nonatomic, strong) IBOutlet UIButton *closeButton;
-//@property (nonatomic, strong) IBOutlet UIButton *configButton;
 @end
 
 
@@ -68,14 +62,14 @@
 - (void)getObject:(PtpConnection *)ptpConnection ptpObject:(PtpObject *)ptpObject
 {
 	LOG_FUNC
-#if DEBUG_NO_DEVICE_TEST
+#if TARGET_IPHONE_SIMULATOR
 	return;
 #endif
 
 	_ptpObject = ptpObject;
 	dispatch_async(dispatch_get_main_queue(), ^{
-		_progressView.progress = 0.0;
-		_progressView.hidden = NO;
+		self.progressView.progress = 0.0;
+		self.progressView.hidden = NO;
 	
 		NSDateFormatter* df = [[NSDateFormatter alloc] init];
 		[df setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
@@ -112,16 +106,16 @@
 											 
 											 // Update progress.
 											 dispatch_async(dispatch_get_main_queue(), ^{
-												 _progressView.progress = (float)imageData.length / total;
+												 self.progressView.progress = (float)imageData.length / total;
 											 });
 											 
 											 // Continue to receive.
 											 return YES;
 										 }];
-		_progressView.progress = 1.0;
+		self.progressView.progress = 1.0;
 		if (!result) {
 			dispatch_async(dispatch_get_main_queue(), ^{
-				_progressView.hidden = YES;
+				self.progressView.hidden = YES;
 			});
 			return;
 		}
@@ -153,7 +147,7 @@
 		}
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
-			_progressView.hidden = YES;
+			self.progressView.hidden = YES;
 			//[self appendLog:tiltInfo];
 			NSLog(@"tiltInfo: %@", tiltInfo);
 			[self startGLK];
@@ -212,19 +206,20 @@
 	[self.imageView setClipsToBounds:YES];
 
 	self.progressView.transform = CGAffineTransformMakeScale( 1.0f, 3.0f ); // 横方向に1倍、縦方向に3倍して表示する
-//	[self viewRefresh];
+	self.progressView.progress = 0.0;
+	//	[self viewRefresh];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
 	
-	if (mData.ptpConnection==nil || mData.tamaObject==nil) {
+	if (mData.ptpConnection==nil || mData.tamaViewer==nil) {
 		[self dismissViewControllerAnimated:YES completion:nil];
 		return;
 	}
 	
-	[self getObject:mData.ptpConnection ptpObject:mData.tamaObject];
+	[self getObject:mData.ptpConnection ptpObject:mData.tamaViewer];
 
 	
 //	[self applicationWillEnterForeground];

@@ -8,7 +8,12 @@
 #ifndef Azukid_h
 #define Azukid_h
 
-#define DEBUG_NO_DEVICE_TEST  1    // 0 or 1
+#include "TargetConditionals.h"
+#if TARGET_IPHONE_SIMULATOR
+// シミュレーター上でのみ実行される処理
+#else
+// 実機でのみ実行される処理
+#endif
 
 
 #ifdef DEBUG

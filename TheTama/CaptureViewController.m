@@ -33,19 +33,14 @@ inline static void dispatch_async_main(dispatch_block_t block)
 @property (nonatomic, strong) IBOutlet UISegmentedControl * sgShutter1;
 @property (nonatomic, strong) IBOutlet UISegmentedControl * sgShutter2;
 @property (nonatomic, strong) IBOutlet UISegmentedControl * sgIso;
-@property (nonatomic, strong) IBOutlet UISegmentedControl * sgMode;
+@property (nonatomic, strong) IBOutlet UISegmentedControl * sgWhite1;
+@property (nonatomic, strong) IBOutlet UISegmentedControl * sgWhite2;
 
 @property (nonatomic, strong) IBOutlet UILabel * batteryLabel;
 @property (nonatomic, strong) IBOutlet UIProgressView * batteryProgress;
-
 @property (nonatomic, strong) IBOutlet UILabel  * volumeLabel;
 @property (nonatomic, strong) IBOutlet UISlider * volumeSlider;
-@property (nonatomic, strong) IBOutlet UIButton * volumeMute;
-@property (nonatomic, strong) IBOutlet UIButton * volumeMax;
-
 @property (nonatomic, strong) IBOutlet UIImageView * ivThumbnail;
-//@property (nonatomic, strong) IBOutlet UIButton * buThumbnail;
-
 @property (nonatomic, strong) IBOutlet UIButton * captureButton;
 
 @end
@@ -119,7 +114,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	}
 	
 	dispatch_async_main(^{
-		[SVProgressHUD showWithStatus:@"THETA\nDisconnect." maskType:SVProgressHUDMaskTypeGradient];
+		[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Disconnect", nil)
+							 maskType:SVProgressHUDMaskTypeGradient];
 		LOG(@"socket error(0x%X,closed=%@).\n--- %@", err, closed? @"YES": @"NO", desc);
 		[self disconnect];
 		[SVProgressHUD dismiss];
@@ -138,7 +134,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	_captureButton.enabled = NO;
 	//[self.indicator startAnimating];
 	//[SVProgressHUD show];
-	[SVProgressHUD showWithStatus:@"THETA\nConnecting..." maskType:SVProgressHUDMaskTypeGradient];
+	[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Connecting", nil)
+						 maskType:SVProgressHUDMaskTypeGradient];
 	
 	//[self appendLog:[NSString stringWithFormat:@"connecting %@...", _ipField.text]];
 	
@@ -179,7 +176,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)disconnect
 {
 	LOG_FUNC
-	[SVProgressHUD showWithStatus:@"THETA\nDisconnecting..." maskType:SVProgressHUDMaskTypeGradient];
+	[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Disconnecting",nil)
+						 maskType:SVProgressHUDMaskTypeGradient];
 
 	[mData.ptpConnection close:^{
 		// "CloseSession" and "Close" completion callback.
@@ -243,7 +241,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	LOG_FUNC
 	// This method MUST be running at PtpConnection#gcd thread.
 	//mData.tamaObjectHandle = objectHandle;
-	mData.tamaObject = nil;
+	mData.tamaCapture = nil;
 	
 	// Get object informations.
 	// It containes filename, capture-date and etc.
@@ -282,7 +280,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			PtpObject * tamaObj = [[PtpObject alloc] initWithObjectInfo:objectInfo thumbnail:thumb];
 			assert(tamaObj);
 			[mData.tamaObjects addObject:tamaObj];
-			mData.tamaObject = tamaObj;
+			mData.tamaCapture = tamaObj;
 			LOG(@"mData.tamaObjects.count=%ld", mData.tamaObjects.count);
 		}
 	} else {
@@ -301,24 +299,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 }
 - (void)volumeShow
 {
+	self.volumeSlider.value = mData.volumeLevel;
 	self.volumeLabel.text = [NSString stringWithFormat:@"%ld%%", (long)mData.volumeLevel];
-	
-	self.volumeMute.enabled = YES;
-	self.volumeMax.enabled = YES;
-	
-	if (mData.volumeLevel <= 0) {
-		self.volumeMute.enabled = NO;
-		self.volumeSlider.value = 0;
-		//self.volumeLabel.text = self.volumeMute.titleLabel.text;
-	}
-	else if (100 <= mData.volumeLevel) {
-		self.volumeMax.enabled = NO;
-		self.volumeSlider.value = 100;
-		//self.volumeLabel.text = self.volumeMax.titleLabel.text;
-	}
-	else {
-		self.volumeSlider.value = mData.volumeLevel;
-	}
 }
 
 - (IBAction)onCaptureTouchDown:(id)sender
@@ -341,7 +323,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 {
 	//[self.indicator startAnimating];
 	//[SVProgressHUD show];
-	[SVProgressHUD showWithStatus:@"Capture..." maskType:SVProgressHUDMaskTypeGradient];
+	[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Capture",nil)
+						 maskType:SVProgressHUDMaskTypeGradient];
 
 	self.captureButton.enabled = NO;
 	self.ivThumbnail.image = nil;
@@ -357,12 +340,13 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		//     1/80, 1/60, 1/50, 1/40, 1/30,
 		//     1/25, 1/15, 1/13, 1/10, 10/75
 		// [session setShutterSpeed: PtpIpRationalMake(1,400)]; // 1/400sec
-		[session setShutterSpeed: PtpIpRationalMake(mShutterSpeed==0?0:1, mShutterSpeed)];
-		
-		// 露出補正値
-		//     2000, 1700, 1300, 1000, 700, 300,
-		//     0, -300, -700, -1000, -1300, -1700, -2000
-		//[session setExposureBiasCompensation: 300]; // +1/3EV
+		if (mShutterSpeed < 7) {
+			[session setShutterSpeed: PtpIpRationalMake(0,0)]; // Auto
+		} else if (mShutterSpeed < 10) {
+			[session setShutterSpeed: PtpIpRationalMake(10,75)]; // 10/75 = 1/7.5
+		} else {
+			[session setShutterSpeed: PtpIpRationalMake(1,mShutterSpeed)];
+		}
 		
 		// ISO感度
 		//     100, 125, 160, 200, 250, 320, 400, 500, 640,
@@ -379,6 +363,12 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		// [session setWhiteBalance: PTPIP_WHITE_BALANCE_DAYLIGHT]; // 屋外
 		[session setWhiteBalance: mWhiteBalance];
 
+		// 露出補正値
+		//     2000, 1700, 1300, 1000, 700, 300,
+		//     0, -300, -700, -1000, -1300, -1700, -2000
+		//[session setExposureBiasCompensation: 300]; // +1/3EV
+		[session setExposureBiasCompensation: 0];
+		
 		// set シャッターの音量
 		[session setAudioVolume: mData.volumeLevel];
 		
@@ -421,8 +411,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (IBAction)onThumbnailTouchUpIn:(id)sender
 {
 	// サムネイル画像を押したとき
-	if (mData.tamaObject != nil) {
+	if (mData.tamaCapture != nil) {
 		// Goto Viewer View
+		mData.tamaViewer = mData.tamaCapture;
 		[self performSegueWithIdentifier:@"segViewer" sender:self];
 	}
 }
@@ -440,6 +431,186 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	[self performSegueWithIdentifier:@"segList" sender:self];
 }
 
+// シャッタースピード
+//     AUTO(0),
+//     1/8000, 1/6400, 1/5000, 1/4000, 1/3200,
+//     1/2500, 1/2000, 1/1600, 1/1250, 1/1000,
+//     1/800, 1/640, 1/500, 1/400, 1/320,
+//     1/250, 1/200, 1/160, 1/125, 1/100,
+//     1/80, 1/60, 1/50, 1/40, 1/30,
+//     1/25, 1/15, 1/13, 1/10, 10/75
+- (IBAction)sgShutter1Changed:(UISegmentedControl*)sender
+{
+	self.sgShutter2.selectedSegmentIndex = UISegmentedControlNoSegment; //クリア
+	switch (sender.selectedSegmentIndex) {
+		case 0: // Auto
+			mShutterSpeed = 0;
+			break;
+		case 1: // 1/7.5
+			mShutterSpeed = 7;
+			break;
+		case 2: // 1/15
+			mShutterSpeed = 15;
+			break;
+		case 3: // 1/30
+			mShutterSpeed = 30;
+			break;
+		case 4: // 1/60
+			mShutterSpeed = 60;
+			break;
+		case 5: // 1/125
+			mShutterSpeed = 125;
+			break;
+			
+		default:
+			mShutterSpeed = 0;
+			return;
+	}
+//	// ISO感度をAutoにする
+//	mFilmIso = 0xFFFF;
+//	self.sgIso.selectedSegmentIndex = 0; //Auto
+}
+
+- (IBAction)sgShutter2Changed:(UISegmentedControl*)sender
+{
+	self.sgShutter1.selectedSegmentIndex = UISegmentedControlNoSegment; //クリア
+	switch (sender.selectedSegmentIndex) {
+		case 0: // 1/250
+			mShutterSpeed = 250;
+			break;
+		case 1: // 1/500
+			mShutterSpeed = 500;
+			break;
+		case 2: // 1/1000
+			mShutterSpeed = 1000;
+			break;
+		case 3: // 1/2000
+			mShutterSpeed = 2000;
+			break;
+		case 4: // 1/4000
+			mShutterSpeed = 4000;
+			break;
+		case 5: // 1/8000
+			mShutterSpeed = 8000;
+			break;
+			
+		default:
+			mShutterSpeed = 0;
+			return;
+	}
+//	// ISO感度をAutoにする
+//	mFilmIso = 0xFFFF;
+//	self.sgIso.selectedSegmentIndex = 0; //Auto
+}
+
+// ISO感度
+//     100, 125, 160, 200, 250, 320, 400, 500, 640,
+//     800, 1000, 1250, 1600,
+//     AUTOMATIC(0xFFFF)
+- (IBAction)sgIsoChanged:(UISegmentedControl*)sender
+{
+	switch (sender.selectedSegmentIndex) {
+		case 0: // Auto
+			mFilmIso = 0xFFFF;
+			break;
+		case 1: // 100
+			mFilmIso = 100;
+			break;
+		case 2: // 200
+			mFilmIso = 200;
+			break;
+		case 3: // 400
+			mFilmIso = 400;
+			break;
+		case 4: // 800
+			mFilmIso = 800;
+			break;
+		case 5: // 1600
+			mFilmIso = 1600;
+			break;
+			
+		default:
+			mFilmIso = 0xFFFF;
+			return;
+	}
+//	// シャッタースピードをAutoにする
+//	mShutterSpeed = 0;
+//	self.sgShutter1.selectedSegmentIndex = 0; //Auto
+//	self.sgShutter2.selectedSegmentIndex = UISegmentedControlNoSegment; //クリア
+}
+
+// ホワイトバランス
+//     AUTOMATIC, DAYLIGHT(屋外), SHADE(日陰), CLOUDY(曇天),
+//     TUNGSTEN1(白熱灯1),  TUNGSTEN2(白熱灯2),
+//     FLUORESCENT1(蛍光灯1(昼光色)), FLUORESCENT2(蛍光灯2(昼白色)),
+//     FLUORESCENT3(蛍光灯3(白色)), FLUORESCENT4(蛍光灯4(電球色))
+//// DevceProp: WHITE_BALANCE
+//PTPIP_WHITE_BALANCE_MANUAL      = 0x0001,
+//PTPIP_WHITE_BALANCE_AUTOMATIC   = 0x0002,
+//PTPIP_WHITE_BALANCE_ONE_PUSH_AUTOMATIC  = 0x0003,
+//PTPIP_WHITE_BALANCE_DAYLIGHT    = 0x0004,
+//PTPIP_WHITE_BALANCE_TUNGSTEN1   = 0x0006,
+//PTPIP_WHITE_BALANCE_FLASH       = 0x0007,
+//PTPIP_WHITE_BALANCE_SHADE       = 0x8001,
+//PTPIP_WHITE_BALANCE_CLOUDY      = 0x8002,
+//PTPIP_WHITE_BALANCE_FLUORESCENT1 = 0x8003,
+//PTPIP_WHITE_BALANCE_FLUORESCENT2 = 0x8004,
+//PTPIP_WHITE_BALANCE_FLUORESCENT3 = 0x8005,
+//PTPIP_WHITE_BALANCE_FLUORESCENT4 = 0x8006,
+//PTPIP_WHITE_BALANCE_TUNGSTEN2   = 0x8020,
+- (IBAction)sgWhite1Changed:(UISegmentedControl*)sender
+{
+	self.sgWhite2.selectedSegmentIndex = UISegmentedControlNoSegment; //クリア
+	switch (sender.selectedSegmentIndex) {
+		case 0: // Auto
+			mWhiteBalance = PTPIP_WHITE_BALANCE_AUTOMATIC;
+			break;
+		case 1: // 屋外
+			mWhiteBalance = PTPIP_WHITE_BALANCE_DAYLIGHT;
+			break;
+		case 2: // 日陰
+			mWhiteBalance = PTPIP_WHITE_BALANCE_SHADE;
+			break;
+		case 3: // 曇天
+			mWhiteBalance = PTPIP_WHITE_BALANCE_CLOUDY;
+			break;
+		case 4: // 白熱灯1
+			mWhiteBalance = PTPIP_WHITE_BALANCE_TUNGSTEN1;
+			break;
+		case 5: // 白熱灯2
+			mWhiteBalance = PTPIP_WHITE_BALANCE_TUNGSTEN2;
+			break;
+			
+		default:
+			mWhiteBalance = PTPIP_WHITE_BALANCE_AUTOMATIC;
+			break;
+	}
+}
+
+- (IBAction)sgWhite2Changed:(UISegmentedControl*)sender
+{
+	self.sgWhite1.selectedSegmentIndex = UISegmentedControlNoSegment; //クリア
+	switch (sender.selectedSegmentIndex) {
+		case 0: // 蛍光灯1(昼光色)
+			mWhiteBalance = PTPIP_WHITE_BALANCE_FLUORESCENT1;
+			break;
+		case 1: // 蛍光灯2(昼白色)
+			mWhiteBalance = PTPIP_WHITE_BALANCE_FLUORESCENT2;
+			break;
+		case 2: // 蛍光灯3(白色)
+			mWhiteBalance = PTPIP_WHITE_BALANCE_FLUORESCENT3;
+			break;
+		case 3: // 蛍光灯4(電球色)
+			mWhiteBalance = PTPIP_WHITE_BALANCE_FLUORESCENT4;
+			break;
+			
+		default:
+			mWhiteBalance = PTPIP_WHITE_BALANCE_AUTOMATIC;
+			break;
+	}
+}
+
+
 
 #pragma mark - Life cycle.
 
@@ -451,14 +622,6 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	AppDelegate * app = [UIApplication sharedApplication].delegate;
 	mData = [app getDataObject];
 	assert(mData != nil);
-	
-#if DEBUG_NO_DEVICE_TEST
-#else
-	// Ready to PTP/IP.
-	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
-	// PtpIpEventListener delegates.
-	[mData.ptpConnection setEventListener:self];
-#endif
 	
 	//
 	mShutterSpeed = 0;  //AUTO(0)
@@ -475,11 +638,25 @@ inline static void dispatch_async_main(dispatch_block_t block)
 {
 	[super viewWillAppear:animated];
 
+#if TARGET_IPHONE_SIMULATOR
+#else
+	// Ready to PTP/IP.
+	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
+	// PtpIpEventListener delegates.
+	[mData.ptpConnection setEventListener:self]; //画面遷移の都度、デリゲート指定必須
+#endif
+
 	// Thumbnailコーナを丸くする
 	[[self.ivThumbnail layer] setCornerRadius:20.0];
 	[self.ivThumbnail setClipsToBounds:YES];
 	
 	self.batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 3.0f ); // 横方向に1倍、縦方向に3倍して表示する
+
+	self.sgShutter1.selectedSegmentIndex = 0;
+	self.sgShutter2.selectedSegmentIndex = UISegmentedControlNoSegment;
+	self.sgIso.selectedSegmentIndex = 0;
+	self.sgWhite1.selectedSegmentIndex = 0;
+	self.sgWhite2.selectedSegmentIndex = UISegmentedControlNoSegment;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -504,8 +681,10 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	//self.ivThumbnail.image = nil;
 	//mData.tamaObject = nil;
 	
-#if DEBUG_NO_DEVICE_TEST
+#if TARGET_IPHONE_SIMULATOR
 	//
+	mData.batteryLevel = mData.volumeLevel; // TEST Dummy.
+	[self viewRefresh];
 #else
 	// コネクト
 	if ([mData.ptpConnection connected]) {

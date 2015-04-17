@@ -87,7 +87,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	}
 	
 	dispatch_async_main(^{
-		[SVProgressHUD showWithStatus:@"THETA\nDisconnect." maskType:SVProgressHUDMaskTypeGradient];
+		[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Disconnect",nil)
+							 maskType:SVProgressHUDMaskTypeGradient];
 		LOG(@"socket error(0x%X,closed=%@).\n--- %@", err, closed? @"YES": @"NO", desc);
 		[self disconnect];
 		[SVProgressHUD dismiss];
@@ -100,7 +101,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)connect
 {
 	LOG_FUNC
-	[SVProgressHUD showWithStatus:@"THETA\nConnecting..." maskType:SVProgressHUDMaskTypeGradient];
+	[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Connecting",nil)
+						 maskType:SVProgressHUDMaskTypeGradient];
 
 	self.buSetting.enabled = NO;
 	self.buRetry.enabled = NO;
@@ -127,7 +129,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			// "-(void)ptpip_socketError:(int)err" will run later than here.
 			LOG(@"connect failed.");
 			// Retry after 5sec.
-#if DEBUG_NO_DEVICE_TEST
+#if TARGET_IPHONE_SIMULATOR
 			[self performSegueWithIdentifier:@"segCapture" sender:self];
 #endif
 		}
@@ -185,14 +187,6 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	assert(mData != nil);
 	assert(mData.ptpConnection != nil);
 	
-#if DEBUG_NO_DEVICE_TEST
-#else
-	// Ready to PTP/IP.
-	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
-	// PtpIpEventListener delegates.
-	[mData.ptpConnection setEventListener:self];
-#endif
-	
 	// iAd
 	self.canDisplayBannerAds = YES;
 	
@@ -205,6 +199,13 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+#if TARGET_IPHONE_SIMULATOR
+#else
+	// Ready to PTP/IP.
+	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
+	// PtpIpEventListener delegates.
+	[mData.ptpConnection setEventListener:self]; //画面遷移の都度、デリゲート指定必須
+#endif
 }
 
 - (void)viewDidAppear:(BOOL)animated

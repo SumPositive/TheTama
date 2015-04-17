@@ -16,6 +16,8 @@
 		44170C681ADF7B21006E1C4B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44170C671ADF7B21006E1C4B /* Images.xcassets */; };
 		44170C6B1ADF7B32006E1C4B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44170C691ADF7B32006E1C4B /* Interface.storyboard */; };
 		44170C6D1ADF7B40006E1C4B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44170C6C1ADF7B40006E1C4B /* Info.plist */; };
+		44170C711AE13B47006E1C4B /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44CD6E031AD916580001F5B3 /* iAd.framework */; };
+		44170C7F1AE16A99006E1C4B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44170C811AE16A99006E1C4B /* Localizable.strings */; };
 		44907B3E1ADCCE870053294A /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44907B3C1ADCCDF20053294A /* WatchKit.framework */; };
 		44A67B811AD39CF4002A826C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A67B801AD39CF4002A826C /* AppDelegate.swift */; };
 		44A67B881AD39CF4002A826C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44A67B861AD39CF4002A826C /* Main.storyboard */; };
@@ -68,7 +70,6 @@
 		44CD6DFC1AD8B4DB0001F5B3 /* GLRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CD6DF81AD8B4DB0001F5B3 /* GLRenderView.m */; };
 		44CD6DFD1AD8B4DB0001F5B3 /* glkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CD6DF91AD8B4DB0001F5B3 /* glkViewController.m */; };
 		44CD6E011AD8C2960001F5B3 /* UVSphere.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CD6DFE1AD8C2960001F5B3 /* UVSphere.m */; };
-		44CD6E041AD916580001F5B3 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44CD6E031AD916580001F5B3 /* iAd.framework */; };
 		C013159E2F6CA5269C077B97 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F72BE7B8DB0524CD2C36F399 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -122,6 +123,9 @@
 		44170C671ADF7B21006E1C4B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		44170C6A1ADF7B32006E1C4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		44170C6C1ADF7B40006E1C4B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		44170C7C1AE15F03006E1C4B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		44170C801AE16A99006E1C4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		44170C821AE16A9C006E1C4B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		44907B3C1ADCCDF20053294A /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
 		44A67B7B1AD39CF4002A826C /* TheTama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheTama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44A67B7F1AD39CF4002A826C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -215,8 +219,6 @@
 		44B4EA611AD3E26900DE5C7E /* CaptureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureViewController.m; sourceTree = "<group>"; };
 		44CD6DF11AD81B760001F5B3 /* ConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectViewController.m; sourceTree = "<group>"; };
 		44CD6DF21AD81B760001F5B3 /* ConnectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectViewController.h; sourceTree = "<group>"; };
-		44CD6DF51AD8454F0001F5B3 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
-		44CD6DF71AD8459D0001F5B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		44CD6DF81AD8B4DB0001F5B3 /* GLRenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GLRenderView.m; path = "../../RICOH_THETA_SDK_for_iOS.0.3.0/ricoh-theta-sample-for-ios/ricoh-theta-sample-for-ios/GLRenderView.m"; sourceTree = "<group>"; };
 		44CD6DF91AD8B4DB0001F5B3 /* glkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = glkViewController.m; path = "../../RICOH_THETA_SDK_for_iOS.0.3.0/ricoh-theta-sample-for-ios/ricoh-theta-sample-for-ios/glkViewController.m"; sourceTree = "<group>"; };
 		44CD6DFA1AD8B4DB0001F5B3 /* glkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glkViewController.h; path = "../../RICOH_THETA_SDK_for_iOS.0.3.0/ricoh-theta-sample-for-ios/ricoh-theta-sample-for-ios/glkViewController.h"; sourceTree = "<group>"; };
@@ -243,8 +245,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44170C711AE13B47006E1C4B /* iAd.framework in Frameworks */,
 				44907B3E1ADCCE870053294A /* WatchKit.framework in Frameworks */,
-				44CD6E041AD916580001F5B3 /* iAd.framework in Frameworks */,
 				44A67C5B1AD3BD3F002A826C /* libiconv.dylib in Frameworks */,
 				44A67C591AD3BD29002A826C /* UIKit.framework in Frameworks */,
 				44A67C571AD3BD1F002A826C /* ImageIO.framework in Frameworks */,
@@ -349,6 +351,7 @@
 				44A67C491AD3BA9D002A826C /* PtpObject.m */,
 				44A67C601AD433F9002A826C /* DataObject.swift */,
 				44A67B801AD39CF4002A826C /* AppDelegate.swift */,
+				44170C811AE16A99006E1C4B /* Localizable.strings */,
 				44A67B861AD39CF4002A826C /* Main.storyboard */,
 				44A67B891AD39CF4002A826C /* Images.xcassets */,
 				44A67B8B1AD39CF5002A826C /* LaunchScreen.xib */,
@@ -636,6 +639,11 @@
 					44A67B7A1AD39CF4002A826C = {
 						CreatedOnToolsVersion = 6.2;
 						DevelopmentTeam = 5C2UYK6F45;
+						SystemCapabilities = {
+							com.apple.WAC = {
+								enabled = 0;
+							};
+						};
 					};
 					44A67B911AD39CF5002A826C = {
 						CreatedOnToolsVersion = 6.2;
@@ -650,6 +658,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = 44A67B721AD39CF4002A826C;
 			productRefGroup = 44A67B7C1AD39CF4002A826C /* Products */;
@@ -689,6 +698,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44A67B881AD39CF4002A826C /* Main.storyboard in Resources */,
+				44170C7F1AE16A99006E1C4B /* Localizable.strings in Resources */,
 				44A67B8D1AD39CF5002A826C /* LaunchScreen.xib in Resources */,
 				44A67B8A1AD39CF4002A826C /* Images.xcassets in Resources */,
 			);
@@ -830,12 +840,20 @@
 			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
+		44170C811AE16A99006E1C4B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				44170C801AE16A99006E1C4B /* Base */,
+				44170C821AE16A9C006E1C4B /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		44A67B861AD39CF4002A826C /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				44A67B871AD39CF4002A826C /* Base */,
-				44CD6DF51AD8454F0001F5B3 /* ja */,
-				44CD6DF71AD8459D0001F5B3 /* en */,
+				44170C7C1AE15F03006E1C4B /* ja */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1007,10 +1025,12 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = TheTama/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TheTama/TheTama-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VALID_ARCHS = "arm64 armv7s armv7";
@@ -1025,10 +1045,12 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = TheTama/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TheTama/TheTama-Bridging-Header.h";
 				VALID_ARCHS = "arm64 armv7s armv7";
 			};

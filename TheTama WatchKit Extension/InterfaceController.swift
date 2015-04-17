@@ -37,10 +37,13 @@ class InterfaceController: WKInterfaceController {
 		//Send count to parent application
 		let userInfo = ["command" : "isConnect"]
 		WKInterfaceController.openParentApplication(userInfo) { (reply, error) -> Void in
-			if reply["result"] as! Bool {
-				// Connect
-				self.button.setEnabled(true)
-				self.label.setHidden(true)
+			if reply != nil {
+				NSLog("reply=%@", reply["result"] as! Bool)
+				if reply["result"] as! Bool {
+					// Connect
+					self.button.setEnabled(true)
+					self.label.setHidden(true)
+				}
 			}
 		}
 	}
@@ -54,22 +57,27 @@ class InterfaceController: WKInterfaceController {
 	
 	@IBAction func buttonTouchUp() {
 		// Waiting.
-		button.setEnabled(false)
-		label.setHidden(false)
+		self.button.setEnabled(false)
+		self.label.setHidden(false)
 
 		//Send count to parent application
 		let userInfo = ["command" : "capture"]
 		WKInterfaceController.openParentApplication(userInfo) { (reply, error) -> Void in
-			if reply["result"] as! Bool {
-				// OK
-				
-				// Thumbnail
-				if let thumb = reply["thumbnail"] as? UIImage {
+			if reply != nil {
+				NSLog("reply=%@", reply["result"] as! Bool)
+				if reply["result"] as! Bool {
+					// OK
+					
+					// Thumbnail
+					if let thumb = reply["thumbnail"] as? UIImage {
+						
+					}
+					
 					
 				}
-				
-				
 			}
+			self.button.setEnabled(true)
+			self.label.setHidden(true)
 		}
 	}
 	

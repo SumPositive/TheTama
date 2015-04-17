@@ -1,15 +1,15 @@
 
-/* Class = "UILabel"; text = "Volume level"; ObjectID = "0to-Ib-YKk"; */
-"0to-Ib-YKk.text" = "Volume level";
+/* Class = "UILabel"; text = "Sound"; ObjectID = "0to-Ib-YKk"; */
+"0to-Ib-YKk.text" = "Sound";
 
 /* Class = "UILabel"; text = "100%"; ObjectID = "1Fe-f6-o3R"; */
 "1Fe-f6-o3R.text" = "100%";
 
+/* Class = "UILabel"; text = "Shutter speed"; ObjectID = "2dL-rA-zia"; */
+"2dL-rA-zia.text" = "Shutter speed";
+
 /* Class = "UILabel"; text = "1. Please enable THETA of power and Wi-Fi. "; ObjectID = "4up-KM-NcS"; */
 "4up-KM-NcS.text" = "1. Please enable THETA of power and Wi-Fi. ";
-
-/* Class = "UIButton"; normalTitle = "Max"; ObjectID = "7V5-j1-uSD"; */
-"7V5-j1-uSD.normalTitle" = "Max";
 
 /* Class = "UIButton"; normalTitle = "List >"; ObjectID = "8rv-c1-QTt"; */
 "8rv-c1-QTt.normalTitle" = "List >";
@@ -17,38 +17,89 @@
 /* Class = "UIButton"; normalTitle = "Wi-Fi Setting >"; ObjectID = "9SY-9f-djn"; */
 "9SY-9f-djn.normalTitle" = "Wi-Fi Setting >";
 
-/* Class = "UILabel"; text = "Title"; ObjectID = "Bip-6l-CJZ"; */
-"Bip-6l-CJZ.text" = "Title";
-
 /* Class = "UILabel"; text = "Subtitle"; ObjectID = "Crf-Ke-Grw"; */
 "Crf-Ke-Grw.text" = "Subtitle";
 
 /* Class = "UILabel"; text = "3. Please retry the connection."; ObjectID = "FHC-Zl-C3L"; */
 "FHC-Zl-C3L.text" = "3. Please retry the connection.";
 
+/* Class = "UISegmentedControl"; Hlq-pg-6W6.segmentTitles[0] = "Auto"; ObjectID = "Hlq-pg-6W6"; */
+"Hlq-pg-6W6.segmentTitles[0]" = "Auto";
+
+/* Class = "UISegmentedControl"; Hlq-pg-6W6.segmentTitles[1] = "Day"; ObjectID = "Hlq-pg-6W6"; */
+"Hlq-pg-6W6.segmentTitles[1]" = "Day";
+
+/* Class = "UISegmentedControl"; Hlq-pg-6W6.segmentTitles[2] = "Sha"; ObjectID = "Hlq-pg-6W6"; */
+"Hlq-pg-6W6.segmentTitles[2]" = "Sha";
+
+/* Class = "UISegmentedControl"; Hlq-pg-6W6.segmentTitles[3] = "Clo"; ObjectID = "Hlq-pg-6W6"; */
+"Hlq-pg-6W6.segmentTitles[3]" = "Clo";
+
+/* Class = "UISegmentedControl"; Hlq-pg-6W6.segmentTitles[4] = "Tun1"; ObjectID = "Hlq-pg-6W6"; */
+"Hlq-pg-6W6.segmentTitles[4]" = "Tun1";
+
+/* Class = "UISegmentedControl"; Hlq-pg-6W6.segmentTitles[5] = "Tun2"; ObjectID = "Hlq-pg-6W6"; */
+"Hlq-pg-6W6.segmentTitles[5]" = "Tun2";
+
 /* Class = "UILabel"; text = "2. Please check the Wi-Fi setting of iPhone."; ObjectID = "J2X-hu-HVe"; */
 "J2X-hu-HVe.text" = "2. Please check the Wi-Fi setting of iPhone.";
+
+/* Class = "UISegmentedControl"; N0p-S0-cPg.segmentTitles[0] = "Auto"; ObjectID = "N0p-S0-cPg"; */
+"N0p-S0-cPg.segmentTitles[0]" = "Auto";
+
+/* Class = "UISegmentedControl"; N0p-S0-cPg.segmentTitles[1] = "1/7.5"; ObjectID = "N0p-S0-cPg"; */
+"N0p-S0-cPg.segmentTitles[1]" = "1/7.5";
+
+/* Class = "UISegmentedControl"; N0p-S0-cPg.segmentTitles[2] = "1/15"; ObjectID = "N0p-S0-cPg"; */
+"N0p-S0-cPg.segmentTitles[2]" = "1/15";
+
+/* Class = "UISegmentedControl"; N0p-S0-cPg.segmentTitles[3] = "1/30"; ObjectID = "N0p-S0-cPg"; */
+"N0p-S0-cPg.segmentTitles[3]" = "1/30";
+
+/* Class = "UISegmentedControl"; N0p-S0-cPg.segmentTitles[4] = "1/60"; ObjectID = "N0p-S0-cPg"; */
+"N0p-S0-cPg.segmentTitles[4]" = "1/60";
+
+/* Class = "UISegmentedControl"; N0p-S0-cPg.segmentTitles[5] = "1/125"; ObjectID = "N0p-S0-cPg"; */
+"N0p-S0-cPg.segmentTitles[5]" = "1/125";
 
 /* Class = "UILabel"; text = "Loaded by SecondViewController"; ObjectID = "NDk-cv-Gan"; */
 "NDk-cv-Gan.text" = "Loaded by SecondViewController";
 
-/* Class = "UIButton"; normalTitle = "Min"; ObjectID = "Nzx-lC-JdI"; */
-"Nzx-lC-JdI.normalTitle" = "Min";
+/* Class = "UISegmentedControl"; O1E-UO-Gvo.segmentTitles[0] = "1/250"; ObjectID = "O1E-UO-Gvo"; */
+"O1E-UO-Gvo.segmentTitles[0]" = "1/250";
 
-/* Class = "UILabel"; text = "Battery level"; ObjectID = "OsV-r8-Col"; */
-"OsV-r8-Col.text" = "Battery level";
+/* Class = "UISegmentedControl"; O1E-UO-Gvo.segmentTitles[1] = "1/500"; ObjectID = "O1E-UO-Gvo"; */
+"O1E-UO-Gvo.segmentTitles[1]" = "1/500";
 
-/* Class = "UILabel"; text = "Battery level"; ObjectID = "Sdu-qm-h6Q"; */
-"Sdu-qm-h6Q.text" = "Battery level";
+/* Class = "UISegmentedControl"; O1E-UO-Gvo.segmentTitles[2] = "/1000"; ObjectID = "O1E-UO-Gvo"; */
+"O1E-UO-Gvo.segmentTitles[2]" = "/1000";
+
+/* Class = "UISegmentedControl"; O1E-UO-Gvo.segmentTitles[3] = "/2000"; ObjectID = "O1E-UO-Gvo"; */
+"O1E-UO-Gvo.segmentTitles[3]" = "/2000";
+
+/* Class = "UISegmentedControl"; O1E-UO-Gvo.segmentTitles[4] = "/4000"; ObjectID = "O1E-UO-Gvo"; */
+"O1E-UO-Gvo.segmentTitles[4]" = "/4000";
+
+/* Class = "UISegmentedControl"; O1E-UO-Gvo.segmentTitles[5] = "/8000"; ObjectID = "O1E-UO-Gvo"; */
+"O1E-UO-Gvo.segmentTitles[5]" = "/8000";
+
+/* Class = "UILabel"; text = "Battery"; ObjectID = "OsV-r8-Col"; */
+"OsV-r8-Col.text" = "Battery";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "QxI-Ge-OpR"; */
+"QxI-Ge-OpR.text" = "Label";
 
 /* Class = "UITabBarItem"; title = "Viewer"; ObjectID = "XoG-mc-g16"; */
 "XoG-mc-g16.title" = "Viewer";
 
+/* Class = "UILabel"; text = "White balance"; ObjectID = "YE5-mr-vMa"; */
+"YE5-mr-vMa.text" = "White balance";
+
+/* Class = "UIButton"; normalTitle = "Reload"; ObjectID = "ZEZ-9X-3Dk"; */
+"ZEZ-9X-3Dk.normalTitle" = "Reload";
+
 /* Class = "UITabBarItem"; title = "Setting"; ObjectID = "acW-dT-cKf"; */
 "acW-dT-cKf.title" = "Setting";
-
-/* Class = "UIButton"; normalTitle = "Capture"; ObjectID = "amV-LN-SeJ"; */
-"amV-LN-SeJ.normalTitle" = "Capture";
 
 /* Class = "UILabel"; text = "100%"; ObjectID = "cCL-P9-1Yo"; */
 "cCL-P9-1Yo.text" = "100%";
@@ -56,20 +107,44 @@
 /* Class = "UITabBarItem"; title = "Capture"; ObjectID = "cPa-gy-q4n"; */
 "cPa-gy-q4n.title" = "Capture";
 
-/* Class = "UILabel"; text = "Subtitle"; ObjectID = "d2b-0X-SvZ"; */
-"d2b-0X-SvZ.text" = "Subtitle";
+/* Class = "UISegmentedControl"; fMv-7Y-UgM.segmentTitles[0] = "6500K"; ObjectID = "fMv-7Y-UgM"; */
+"fMv-7Y-UgM.segmentTitles[0]" = "6500K";
 
-/* Class = "UILabel"; text = "100%"; ObjectID = "dae-7j-zwQ"; */
-"dae-7j-zwQ.text" = "100%";
+/* Class = "UISegmentedControl"; fMv-7Y-UgM.segmentTitles[1] = "5000K"; ObjectID = "fMv-7Y-UgM"; */
+"fMv-7Y-UgM.segmentTitles[1]" = "5000K";
 
-/* Class = "UIButton"; normalTitle = "< Back"; ObjectID = "iGr-3C-pXN"; */
-"iGr-3C-pXN.normalTitle" = "< Back";
+/* Class = "UISegmentedControl"; fMv-7Y-UgM.segmentTitles[2] = "4200K"; ObjectID = "fMv-7Y-UgM"; */
+"fMv-7Y-UgM.segmentTitles[2]" = "4200K";
 
-/* Class = "UIButton"; normalTitle = "< Disconnect"; ObjectID = "ibd-ZR-3uc"; */
-"ibd-ZR-3uc.normalTitle" = "< Disconnect";
+/* Class = "UISegmentedControl"; fMv-7Y-UgM.segmentTitles[3] = "3000K"; ObjectID = "fMv-7Y-UgM"; */
+"fMv-7Y-UgM.segmentTitles[3]" = "3000K";
 
-/* Class = "UIButton"; normalTitle = "< Back"; ObjectID = "jIt-bB-sH1"; */
-"jIt-bB-sH1.normalTitle" = "< Back";
+/* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "iGr-3C-pXN"; */
+"iGr-3C-pXN.normalTitle" = "BACK";
+
+/* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "jIt-bB-sH1"; */
+"jIt-bB-sH1.normalTitle" = "BACK";
+
+/* Class = "UILabel"; text = "ISO"; ObjectID = "ovH-bF-oPl"; */
+"ovH-bF-oPl.text" = "ISO";
+
+/* Class = "UISegmentedControl"; siJ-Aa-jjP.segmentTitles[0] = "Auto"; ObjectID = "siJ-Aa-jjP"; */
+"siJ-Aa-jjP.segmentTitles[0]" = "Auto";
+
+/* Class = "UISegmentedControl"; siJ-Aa-jjP.segmentTitles[1] = "x100"; ObjectID = "siJ-Aa-jjP"; */
+"siJ-Aa-jjP.segmentTitles[1]" = "x100";
+
+/* Class = "UISegmentedControl"; siJ-Aa-jjP.segmentTitles[2] = "x200"; ObjectID = "siJ-Aa-jjP"; */
+"siJ-Aa-jjP.segmentTitles[2]" = "x200";
+
+/* Class = "UISegmentedControl"; siJ-Aa-jjP.segmentTitles[3] = "x400"; ObjectID = "siJ-Aa-jjP"; */
+"siJ-Aa-jjP.segmentTitles[3]" = "x400";
+
+/* Class = "UISegmentedControl"; siJ-Aa-jjP.segmentTitles[4] = "x800"; ObjectID = "siJ-Aa-jjP"; */
+"siJ-Aa-jjP.segmentTitles[4]" = "x800";
+
+/* Class = "UISegmentedControl"; siJ-Aa-jjP.segmentTitles[5] = "1600"; ObjectID = "siJ-Aa-jjP"; */
+"siJ-Aa-jjP.segmentTitles[5]" = "1600";
 
 /* Class = "UIButton"; normalTitle = "Retry connection >"; ObjectID = "wMo-PD-zzK"; */
 "wMo-PD-zzK.normalTitle" = "Retry connection >";

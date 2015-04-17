@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings (Base)
+  TheTama
+
+  Created by masa on 2015/04/18.
+  Copyright (c) 2015年 Azukid. All rights reserved.
+*/
+
+//  NSLocalizedString(@"Lz.Connecting",nil)
+
+"Lz.Reloading" = "Reloading...";
+"Lz.Disconnect" = "THETA\nDisconnect.";
+"Lz.Connecting" = "THETA\nConnecting...";
+"Lz.Disconnecting" = "THETA\nDisconnecting...";
+"Lz.Capture" = "Capture...";

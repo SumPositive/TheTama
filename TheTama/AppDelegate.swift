@@ -97,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				case "capture":		// キャプチャ実行、サムネイルを送る
 					
 					reply(["result": true])
-					reply(["thumbnail": dataObject!.tamaObject!.thumbnail])
+					reply(["thumbnail": dataObject!.tamaCapture!.thumbnail])
 					return
 					
 				default:

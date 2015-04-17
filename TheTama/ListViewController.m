@@ -28,6 +28,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 {
 	DataObject * mData;
 	PtpIpStorageInfo * mStorageInfo;
+	BOOL mTableBottom;
 }
 @property (nonatomic, strong) IBOutlet UITableView * tableView;
 @end
@@ -108,7 +109,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	if ([dvc isKindOfClass:[ViewerViewController class]]) {
 		//ViewerViewController* dest = (ViewerViewController*)dvc;
 		TableCellTama* cell = (TableCellTama*)sender;
-		mData.tamaObject = [mData.tamaObjects objectAtIndex:cell.objectIndex];
+		mData.tamaViewer = [mData.tamaObjects objectAtIndex:cell.objectIndex];
 	}
 }
 
@@ -119,11 +120,12 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 {
 	LOG_FUNC
-#if DEBUG_NO_DEVICE_TEST
+#if TARGET_IPHONE_SIMULATOR
 	return;
 #endif
 	
-	[SVProgressHUD showWithStatus:@"Reloading..." maskType:SVProgressHUDMaskTypeGradient];
+	[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Reloading", nil) //再読込...
+						 maskType:SVProgressHUDMaskTypeGradient];
 
 	[mData.tamaObjects removeAllObjects];
 	
@@ -155,7 +157,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		}
 		dispatch_async_main(^{
 			[self.tableView reloadData];
-			[self bottomTableView:self.tableView animated:NO];
+			[self bottomTableView:self.tableView animated:NO]; //最終行へ
+			mTableBottom = YES;
 			[SVProgressHUD dismiss];
 		});
 	}];
@@ -273,20 +276,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	mData = [app getDataObject];
 	assert(mData != nil);
 
-#if DEBUG_NO_DEVICE_TEST
-#else
-	// Ready to PTP/IP.
-	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
-	// PtpIpEventListener delegates.
-	[mData.ptpConnection setEventListener:self];
-
-	[mData.ptpConnection operateSession:^(PtpIpSession *session) {
-		mStorageInfo = [session getStorageInfo];
-	}];
-#endif
-
 	// UITableView
 	self.tableView.dataSource = self;
+	mTableBottom = NO;
 	
 	//  通知受信の設定
 	NSNotificationCenter*   nc = [NSNotificationCenter defaultCenter];
@@ -296,6 +288,17 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+#if TARGET_IPHONE_SIMULATOR
+#else
+	// Ready to PTP/IP.
+	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
+	// PtpIpEventListener delegates.
+	[mData.ptpConnection setEventListener:self]; //画面遷移の都度、デリゲート指定必須
+	
+	[mData.ptpConnection operateSession:^(PtpIpSession *session) {
+		mStorageInfo = [session getStorageInfo];
+	}];
+#endif
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -304,7 +307,10 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 	if (0 < mData.tamaObjects.count) {
 		[self.tableView reloadData];
-		[self bottomTableView:self.tableView animated:NO];
+		if (mTableBottom==NO) {
+			[self bottomTableView:self.tableView animated:NO];
+			mTableBottom = YES;
+		}
 	}
 	else {
 		[self reloadTamaObjects];

@@ -21,7 +21,8 @@ class DataObject: NSObject, NSCoding {
 	// Object
 	var ptpConnection: PtpConnection
 	var tamaObjects: NSMutableArray		// 全写真情報を保持
-	var tamaObject: PtpObject?			// 撮影直後または選択中の写真情報
+	var tamaCapture: PtpObject?			// 撮影直後または選択中の写真情報
+	var tamaViewer: PtpObject?			// 3D-Viewerで表示する写真情報
 	
 	
 	override init() {
@@ -44,8 +45,8 @@ class DataObject: NSObject, NSCoding {
 		
 		// Object
 		//aCoder.encodeObject(self.ptpConnection,		forKey:"ptpConnection")
-		aCoder.encodeObject(self.tamaObjects,		forKey:"tamaObjects")
-		aCoder.encodeObject(self.tamaObject,		forKey:"tamaObject")
+		//aCoder.encodeObject(self.tamaObjects,		forKey:"tamaObjects")
+		//aCoder.encodeObject(self.tamaCapture,		forKey:"tamaCapture")
 	}
 	
 	required init(coder aDecoder: NSCoder) {
@@ -59,8 +60,9 @@ class DataObject: NSObject, NSCoding {
 		
 		// Object
 		self.ptpConnection		= PtpConnection()  // 毎回クリア
-		self.tamaObjects		= aDecoder.decodeObjectForKey("tamaObjects") as! NSMutableArray
-		self.tamaObject			= aDecoder.decodeObjectForKey("tamaObject") as? PtpObject
+		self.tamaObjects		= NSMutableArray()
+		//self.tamaObjects		= aDecoder.decodeObjectForKey("tamaObjects") as! NSMutableArray
+		//self.tamaCapture			= aDecoder.decodeObjectForKey("tamaCapture") as? PtpObject
 	}
 
 }
