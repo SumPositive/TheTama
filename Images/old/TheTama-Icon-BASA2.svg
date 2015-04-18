@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1024"
+   height="1024"
+   viewBox="0 0 1024 1024"
+   id="svg3420"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="TheTama-Icon-BASA.svg"
+   inkscape:export-filename="/Users/masa/Code2015/THETA/TheTama/Images/TheTama-Icon-1024.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs3422" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ececec"
+     bordercolor="#666666"
+     borderopacity="1"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.5"
+     inkscape:cx="-62"
+     inkscape:cy="517"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1722"
+     inkscape:window-height="1022"
+     inkscape:window-x="70"
+     inkscape:window-y="41"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata3425">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-28.362143)">
+    <ellipse
+       style="fill:none;stroke:#97504d;stroke-width:38.11756134;stroke-miterlimit:2;stroke-dasharray:none;stroke-opacity:1"
+       id="path3436"
+       cx="512.12659"
+       cy="542.55695"
+       rx="348.06778"
+       ry="332.13602" />
+    <ellipse
+       cy="538.36212"
+       cx="511"
+       id="circle4246"
+       style="fill:#97504d;fill-opacity:1;stroke:none;stroke-width:14.75142288;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       rx="99.624298"
+       ry="272.6243" />
+  </g>
+</svg>
