@@ -80,7 +80,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		}
 			break;
 	}
+	
 	dispatch_async_main(^{
+		self.captureButton.enabled = YES;
 		[SVProgressHUD dismiss];
 	});
 }
@@ -113,128 +115,23 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		desc = [NSString stringWithUTF8String:strerror(err)];
 	}
 	
-	dispatch_async_main(^{
-		[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Disconnect", nil)
-							 maskType:SVProgressHUDMaskTypeGradient];
-		LOG(@"socket error(0x%X,closed=%@).\n--- %@", err, closed? @"YES": @"NO", desc);
-		[self disconnect];
-		[SVProgressHUD dismiss];
-		// Back Model Connect View
-		[self dismissViewControllerAnimated:YES completion:nil];
-	});
+	LOG(@"socket error(0x%X,closed=%@).\n--- %@", err, closed? @"YES": @"NO", desc);
+	if (closed) {
+		[mData.ptpConnection setEventListener:nil];
+		
+		dispatch_async_main(^{
+			[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Disconnect", nil)
+								 maskType:SVProgressHUDMaskTypeGradient];
+			//[self disconnect];
+			[SVProgressHUD dismiss];
+			// Back Model Connect View
+			[self dismissViewControllerAnimated:YES completion:nil];
+		});
+	}
 }
 
 
 #pragma mark - PTP/IP Operations.
-
-- (void)connect
-{
-	LOG_FUNC
-	
-	_captureButton.enabled = NO;
-	//[self.indicator startAnimating];
-	//[SVProgressHUD show];
-	[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Connecting", nil)
-						 maskType:SVProgressHUDMaskTypeGradient];
-	
-	//[self appendLog:[NSString stringWithFormat:@"connecting %@...", _ipField.text]];
-	
-	// Setup `target IP`(camera IP).
-	// Product default is "192.168.1.1".
-	[mData.ptpConnection setTargetIp: @"192.168.1.1"]; // _ipField.text];
-	
-	// Connect to target.
-	[mData.ptpConnection connect:^(BOOL connected) {
-		// "Connect" and "OpenSession" completion callback.
-		// This block is running at PtpConnection#gcd thread.
-		
-		if (connected) {
-			// "Connect" is succeeded.
-			LOG(@"connected.");
-			
-			dispatch_async_main(^{
-				self.captureButton.enabled = YES;
-			});
-			
-		} else {
-			// "Connect" is failed.
-			// "-(void)ptpip_socketError:(int)err" will run later than here.
-			LOG(@"connect failed.");
-			
-			dispatch_async_main(^{
-				// Back Model Connect View
-				[self dismissViewControllerAnimated:YES completion:nil];
-			});
-			
-		}
-		dispatch_async_main(^{
-			[SVProgressHUD dismiss];
-		});
-	}];
-}
-
-- (void)disconnect
-{
-	LOG_FUNC
-	[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Disconnecting",nil)
-						 maskType:SVProgressHUDMaskTypeGradient];
-
-	[mData.ptpConnection close:^{
-		// "CloseSession" and "Close" completion callback.
-		// This block is running at PtpConnection#gcd thread.
-
-		dispatch_async_main(^{
-			LOG(@"disconnected.");
-			[SVProgressHUD dismiss];
-			[self dismissViewControllerAnimated:YES completion:nil];
-		});
-	}];
-}
-
-//- (void)enumObjects
-//{
-//	assert([mData.ptpConnection connected]);
-//	assert(mData.tamaObjects != nil);
-//	
-//	[self.indicator startAnimating];
-//	[mData.tamaObjects removeAllObjects];
-//	
-//	[mData.ptpConnection operateSession:^(PtpIpSession *session) {
-//		// This block is running at PtpConnection#gcd thread.
-//		
-//		// Setting the RICOH THETA's clock.
-//		// 'setDateTime' convert from specified date/time to local-time, and send to RICOH THETA.
-//		// RICOH THETA work with local-time, without timezone.
-//		[session setDateTime:[NSDate dateWithTimeIntervalSinceNow:0]];
-//		
-//		// Get storage information.
-//		mData.storageInfo = [session getStorageInfo];
-//		
-//		// Get Battery level.
-//		mData.batteryLevel = [session getBatteryLevel];
-//		
-//		// Set Volume level.
-//		[session setAudioVolume: mData.volumeLevel];
-//		
-//		
-//		// Get object handles for primary images.
-//		NSArray* objectHandles = [session getObjectHandles];
-//		dispatch_async_main(^{
-//			NSLog(@"getObjectHandles() recevied %zd handles.", objectHandles.count);
-//		});
-//		
-//		// Get object informations and thumbnail images for each primary images.
-//		for (NSNumber* it in objectHandles) {
-//			uint32_t objectHandle = (uint32_t)it.integerValue;
-//			[mData.tamaObjects addObject:[self loadObject:objectHandle session:session]];
-//		}
-//		dispatch_async_main(^{
-//			[_contentsView reloadData];
-//			[self viewRefresh];
-//			[self.indicator stopAnimating];
-//		});
-//	}];
-//}
 
 - (UIImage *)imageThumbnail:(uint32_t)objectHandle session:(PtpIpSession*)session
 {
@@ -272,7 +169,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 							}];
 		if (!result) {
 			LOG(@"getThumb(0x%08x) failed.", objectHandle);
-			thumb = [UIImage imageNamed:@"TheTama-NG"];
+			thumb = [UIImage imageNamed:@"TheTama-Tran-NG.svg"];
 		} else {
 			// OK
 			thumb = [UIImage imageWithData:thumbData];
@@ -281,10 +178,10 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			assert(tamaObj);
 			[mData.tamaObjects addObject:tamaObj];
 			mData.tamaCapture = tamaObj;
-			LOG(@"mData.tamaObjects.count=%ld", mData.tamaObjects.count);
+			LOG(@"mData.tamaObjects.count=%ld", (unsigned long)mData.tamaObjects.count);
 		}
 	} else {
-		thumb = [UIImage imageNamed:@"TheTama-NG"];
+		thumb = [UIImage imageNamed:@"TheTama-Tran-NG.svg"];
 	}
 	return thumb;
 }
@@ -375,10 +272,6 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		 // This block is running at PtpConnection#gcd thread.
 		 BOOL rtn = [session initiateCapture];
 		 LOG(@"execShutter[rtn:%d]", rtn);
-		 
-		dispatch_async_main(^{
-			self.captureButton.enabled = YES;
-		});
 	 }];
 }
 
@@ -416,12 +309,6 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		mData.tamaViewer = mData.tamaCapture;
 		[self performSegueWithIdentifier:@"segViewer" sender:self];
 	}
-}
-
-- (IBAction)onDisconnectTouchUpIn:(id)sender
-{
-	// Disconnect > を押したとき
-	[self disconnect];
 }
 
 - (IBAction)onListTouchUpIn:(id)sender
@@ -638,14 +525,6 @@ inline static void dispatch_async_main(dispatch_block_t block)
 {
 	[super viewWillAppear:animated];
 
-#if TARGET_IPHONE_SIMULATOR
-#else
-	// Ready to PTP/IP.
-	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
-	// PtpIpEventListener delegates.
-	[mData.ptpConnection setEventListener:self]; //画面遷移の都度、デリゲート指定必須
-#endif
-
 	// Thumbnailコーナを丸くする
 	[[self.ivThumbnail layer] setCornerRadius:20.0];
 	[self.ivThumbnail setClipsToBounds:YES];
@@ -657,14 +536,14 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	self.sgIso.selectedSegmentIndex = 0;
 	self.sgWhite1.selectedSegmentIndex = 0;
 	self.sgWhite2.selectedSegmentIndex = UISegmentedControlNoSegment;
+	
+	[self applicationWillEnterForeground];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
 	LOG_FUNC
-	
-	[self applicationWillEnterForeground];
 }
 
 - (void)didReceiveMemoryWarning
@@ -677,33 +556,35 @@ inline static void dispatch_async_main(dispatch_block_t block)
 {
 	LOG_FUNC
 	
-	// サムネイル画像クリア
-	//self.ivThumbnail.image = nil;
-	//mData.tamaObject = nil;
-	
 #if TARGET_IPHONE_SIMULATOR
-	//
 	mData.batteryLevel = mData.volumeLevel; // TEST Dummy.
 	[self viewRefresh];
 #else
-	// コネクト
-	if ([mData.ptpConnection connected]) {
+	// コネクト・チェック
+	LOG(@"mData.ptpConnection.connected=%d", mData.ptpConnection.connected);
+	if (mData.connected) {
+		// Ready to PTP/IP.
+		[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
+		// PtpIpEventListener delegates.
+		[mData.ptpConnection setEventListener:self]; //画面遷移の都度、デリゲート指定必須
+		
 		[mData.ptpConnection operateSession:^(PtpIpSession *session) {
-			// Get Volume level.
+			// Get
 			mData.volumeLevel = [session getAudioVolume];
-			// Get Battery level.
 			mData.batteryLevel = [session getBatteryLevel];
-			
+
 			dispatch_async_main(^{
 				[self viewRefresh];
 			});
 		}];
 	}
 	else {
-		//[self connect];
+		// ConnectView
 		[self dismissViewControllerAnimated:YES completion:nil];
+		return;
 	}
 #endif
+
 }
 
 @end

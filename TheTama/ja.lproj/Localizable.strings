@@ -8,7 +8,7 @@
 
 //  NSLocalizedString(@"Lz.Connecting",nil)
 
-"Lz.Reloading" = "再読込中...";
+"Lz.Reloading" = "読込中...";
 "Lz.Disconnect" = "THETA\n未接続";
 "Lz.Connecting" = "THETA\n接続中...";
 "Lz.Disconnecting" = "THETA\n切断中...";

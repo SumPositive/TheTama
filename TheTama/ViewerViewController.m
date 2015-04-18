@@ -195,6 +195,12 @@
 	AppDelegate * app = [UIApplication sharedApplication].delegate;
 	mData = [app getDataObject];
 	assert(mData != nil);
+	
+	//  通知受信の設定
+	NSNotificationCenter*   nc = [NSNotificationCenter defaultCenter];
+	[nc addObserver:self selector:@selector(applicationWillEnterForeground) name:@"applicationWillEnterForeground" object:nil];
+	[nc addObserver:self selector:@selector(applicationDidEnterBackground) name:@"applicationDidEnterBackground" object:nil];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -214,7 +220,7 @@
 {
 	[super viewDidAppear:animated];
 	
-	if (mData.ptpConnection==nil || mData.tamaViewer==nil) {
+	if (!mData.connected || mData.tamaViewer==nil) {
 		[self dismissViewControllerAnimated:YES completion:nil];
 		return;
 	}
@@ -232,15 +238,20 @@
 	self.imageView.image = nil;
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+//2回目以降のフォアグラウンド実行になった際に呼び出される (Background --> Foreground)
+- (void)applicationWillEnterForeground
+{
+	LOG_FUNC
+	[self onBackTouchUpIn:nil];
 }
-*/
+
+//バックグランド実行になった際に呼び出される（Foreground --> Background)
+- (void)applicationDidEnterBackground
+{
+	LOG_FUNC
+	[self onBackTouchUpIn:nil];
+}
 
 @end
 

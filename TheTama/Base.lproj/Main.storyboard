@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="FbR-7Y-txa">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="FbR-7Y-txa">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -21,29 +21,15 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. Please retry the connection." lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FHC-Zl-C3L">
                                 <rect key="frame" x="36" y="335" width="528" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. Please enable THETA of power and Wi-Fi. " lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4up-KM-NcS">
                                 <rect key="frame" x="36" y="200" width="528" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9SY-9f-djn">
-                                <rect key="frame" x="225" y="285" width="150" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="KlK-jV-a1H"/>
-                                    <constraint firstAttribute="height" constant="30" id="v1b-PB-2Vh"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Wi-Fi Setting &gt;">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onSettingTouchUpIn:" destination="FbR-7Y-txa" eventType="touchUpInside" id="0r6-Tw-O9r"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wMo-PD-zzK">
                                 <rect key="frame" x="223" y="359" width="155" height="30"/>
                                 <constraints>
@@ -51,7 +37,7 @@
                                     <constraint firstAttribute="width" constant="155" id="wqe-72-L9q"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Retry connection &gt;">
+                                <state key="normal" title="Reconnect">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -61,19 +47,33 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. Please check the Wi-Fi setting of iPhone." lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J2X-hu-HVe">
                                 <rect key="frame" x="36" y="261" width="528" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="fO0-1Z-2V9">
+                            <adBannerView opaque="NO" clipsSubviews="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="fO0-1Z-2V9">
                                 <rect key="frame" x="140" y="550" width="320" height="50"/>
                             </adBannerView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TheTama" translatesAutoresizingMaskIntoConstraints="NO" id="GQ5-xL-T9p">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TheTama-Tran-BASA.svg" translatesAutoresizingMaskIntoConstraints="NO" id="GQ5-xL-T9p">
                                 <rect key="frame" x="260" y="100" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="HOR-vY-dnB"/>
                                     <constraint firstAttribute="height" constant="80" id="nMe-bT-EmE"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9SY-9f-djn">
+                                <rect key="frame" x="224" y="285" width="153" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="153" id="KlK-jV-a1H"/>
+                                    <constraint firstAttribute="height" constant="30" id="v1b-PB-2Vh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="To setting screen">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onSettingTouchUpIn:" destination="FbR-7Y-txa" eventType="touchUpInside" id="0r6-Tw-O9r"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -170,8 +170,8 @@
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="siJ-Aa-jjP">
-                                <rect key="frame" x="26" y="114" width="362" height="29"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="siJ-Aa-jjP">
+                                <rect key="frame" x="26" y="114" width="362" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="V1i-6D-VGm"/>
                                 </constraints>
@@ -188,14 +188,14 @@
                                     <action selector="sgIsoChanged:" destination="9pv-A4-QxB" eventType="valueChanged" id="1Zi-4w-WUP"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="White balance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YE5-mr-vMa">
-                                <rect key="frame" x="26" y="145" width="80" height="15"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="White balance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YE5-mr-vMa">
+                                <rect key="frame" x="26" y="146" width="80" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="Hlq-pg-6W6">
-                                <rect key="frame" x="26" y="160" width="362" height="30"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="Hlq-pg-6W6">
+                                <rect key="frame" x="26" y="161" width="362" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="xm9-vt-rdo"/>
                                 </constraints>
@@ -212,8 +212,8 @@
                                     <action selector="sgWhite1Changed:" destination="9pv-A4-QxB" eventType="valueChanged" id="nL5-QY-JLw"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="fMv-7Y-UgM">
-                                <rect key="frame" x="26" y="192" width="362" height="30"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="fMv-7Y-UgM">
+                                <rect key="frame" x="26" y="193" width="362" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="PAX-ed-YUR"/>
                                 </constraints>
@@ -228,14 +228,14 @@
                                     <action selector="sgWhite2Changed:" destination="9pv-A4-QxB" eventType="valueChanged" id="53g-TJ-JkU"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Sound" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0to-Ib-YKk">
-                                <rect key="frame" x="26" y="242" width="45" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sound" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0to-Ib-YKk">
+                                <rect key="frame" x="26" y="243" width="45" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="SkV-3b-KLZ">
-                                <rect key="frame" x="74" y="236" width="265" height="31"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="SkV-3b-KLZ">
+                                <rect key="frame" x="74" y="237" width="265" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="m6u-gr-aeT"/>
                                 </constraints>
@@ -243,24 +243,24 @@
                                     <action selector="volumeSliderChanged:" destination="9pv-A4-QxB" eventType="valueChanged" id="wRl-ZW-LyD"/>
                                 </connections>
                             </slider>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="100%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Fe-f6-o3R">
-                                <rect key="frame" x="342" y="241" width="46" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Fe-f6-o3R">
+                                <rect key="frame" x="342" y="242" width="46" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NP8-mx-ndQ">
-                                <rect key="frame" x="16" y="271" width="382" height="335"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NP8-mx-ndQ">
+                                <rect key="frame" x="16" y="272" width="382" height="334"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="44X-5k-tvG" userLabel="ivThumbnail">
-                                        <rect key="frame" x="0.0" y="73" width="382" height="191"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="44X-5k-tvG" userLabel="ivThumbnail">
+                                        <rect key="frame" x="0.0" y="72" width="382" height="191"/>
                                         <color key="backgroundColor" red="0.59215686270000001" green="0.31372549020000001" blue="0.30196078430000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="44X-5k-tvG" secondAttribute="height" multiplier="2:1" id="PXY-t6-Epu"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleAspectFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAI-8c-kSr" userLabel="buThumbnail">
-                                        <rect key="frame" x="0.0" y="0.0" width="382" height="335"/>
+                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAI-8c-kSr" userLabel="buThumbnail">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="334"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                         <state key="normal">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -330,10 +330,11 @@
                                     <constraint firstAttribute="height" constant="88" id="bLA-y1-ahl"/>
                                     <constraint firstAttribute="height" constant="88" id="fQU-l9-eoP"/>
                                 </constraints>
-                                <state key="normal" image="TheTama">
+                                <state key="normal" image="TheTama-Tran-BASA.svg">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="TheTama-capture"/>
+                                <state key="disabled" image="TheTama-Tran-Capture.svg"/>
+                                <state key="highlighted" image="TheTama-Tran-Capture.svg"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="bLA-y1-ahl"/>
@@ -409,7 +410,6 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Setting" image="first" id="acW-dT-cKf"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="batteryLabel" destination="cCL-P9-1Yo" id="5vE-dy-itA"/>
@@ -556,7 +556,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QxI-Ge-OpR">
                                 <rect key="frame" x="26" y="20" width="362" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iGr-3C-pXN">
@@ -584,7 +584,6 @@
                             <constraint firstAttribute="centerY" secondItem="MXN-cK-mD3" secondAttribute="centerY" id="zpN-ub-4hl"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Viewer" image="first" id="XoG-mc-g16"/>
                     <connections>
                         <outlet property="imageView" destination="EEa-2q-U6N" id="IwL-nR-FVY"/>
                         <outlet property="lbTitle" destination="QxI-Ge-OpR" id="2gU-xS-eD4"/>
@@ -597,9 +596,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="TheTama" width="820" height="820"/>
-        <image name="TheTama-capture" width="820" height="820"/>
-        <image name="first" width="30" height="30"/>
+        <image name="TheTama-Tran-BASA.svg" width="820" height="820"/>
+        <image name="TheTama-Tran-Capture.svg" width="820" height="820"/>
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>

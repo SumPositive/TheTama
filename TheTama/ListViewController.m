@@ -193,12 +193,12 @@ inline static void dispatch_async_main(dispatch_block_t block)
 							}];
 		if (!result) {
 			LOG(@"getThumb(0x%08x) failed.", objectHandle);
-			thumb = nil; //[UIImage imageNamed:@"TheTama-NG"];
+			thumb = nil; //[UIImage imageNamed:@"TheTama-Tran-NG.svg"];
 		} else {
 			thumb = [UIImage imageWithData:thumbData];
 		}
 	} else {
-		thumb = nil; //[UIImage imageNamed:@"TheTama-NG"];
+		thumb = nil; //[UIImage imageNamed:@"TheTama-Tran-NG.svg"];
 	}
 	return [[PtpObject alloc] initWithObjectInfo:objectInfo thumbnail:thumb];
 }
@@ -283,6 +283,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	//  通知受信の設定
 	NSNotificationCenter*   nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(applicationWillEnterForeground) name:@"applicationWillEnterForeground" object:nil];
+	[nc addObserver:self selector:@selector(applicationDidEnterBackground) name:@"applicationDidEnterBackground" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -290,14 +291,23 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	[super viewWillAppear:animated];
 #if TARGET_IPHONE_SIMULATOR
 #else
-	// Ready to PTP/IP.
-	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
-	// PtpIpEventListener delegates.
-	[mData.ptpConnection setEventListener:self]; //画面遷移の都度、デリゲート指定必須
-	
-	[mData.ptpConnection operateSession:^(PtpIpSession *session) {
-		mStorageInfo = [session getStorageInfo];
-	}];
+	// コネクト・チェック
+	if (mData.connected) {
+		// Ready to PTP/IP.
+		[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
+		// PtpIpEventListener delegates.
+		[mData.ptpConnection setEventListener:self]; //画面遷移の都度、デリゲート指定必須
+		
+		[mData.ptpConnection operateSession:^(PtpIpSession *session) {
+			// Get
+			mStorageInfo = [session getStorageInfo];
+			mData.volumeLevel = [session getAudioVolume];
+			mData.batteryLevel = [session getBatteryLevel];
+		}];
+	}
+	else {
+		[self onBackTouchUpIn:nil];
+	}
 #endif
 }
 
@@ -322,11 +332,17 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	[super didReceiveMemoryWarning];
 }
 
-//2回目以降のフォアグラウンド実行になった際に呼び出される(Backgroundにアプリがある場合)
+//2回目以降のフォアグラウンド実行になった際に呼び出される (Background --> Foreground)
 - (void)applicationWillEnterForeground
 {
-	NSLog(@"applicationWillEnterForeground");
-	
+	LOG_FUNC
+	[self onBackTouchUpIn:nil];
+}
+
+//バックグランド実行になった際に呼び出される（Foreground --> Background)
+- (void)applicationDidEnterBackground
+{
+	LOG_FUNC
 	[self onBackTouchUpIn:nil];
 }
 

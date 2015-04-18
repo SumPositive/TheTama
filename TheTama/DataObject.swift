@@ -12,6 +12,7 @@ class DataObject: NSObject, NSCoding {
 	
 	// BOOL
 	var captureTouchDown = false;
+	var connected = false;
 	
 	// Integer
 	var dataVersion = 1			// 読込時にチェックして構造変更に対応できるようにするため

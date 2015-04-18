@@ -15,7 +15,6 @@
 		44170C5A1ADF797B006E1C4B /* TheTama WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 44170C3D1ADF797A006E1C4B /* TheTama WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		44170C681ADF7B21006E1C4B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44170C671ADF7B21006E1C4B /* Images.xcassets */; };
 		44170C6B1ADF7B32006E1C4B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44170C691ADF7B32006E1C4B /* Interface.storyboard */; };
-		44170C6D1ADF7B40006E1C4B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44170C6C1ADF7B40006E1C4B /* Info.plist */; };
 		44170C711AE13B47006E1C4B /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44CD6E031AD916580001F5B3 /* iAd.framework */; };
 		44170C7F1AE16A99006E1C4B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44170C811AE16A99006E1C4B /* Localizable.strings */; };
 		44907B3E1ADCCE870053294A /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44907B3C1ADCCDF20053294A /* WatchKit.framework */; };
@@ -625,7 +624,7 @@
 		44A67B731AD39CF4002A826C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0620;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = Azukid;
 				TargetAttributes = {
 					44170C3C1ADF797A006E1C4B = {
@@ -689,7 +688,6 @@
 			files = (
 				44170C681ADF7B21006E1C4B /* Images.xcassets in Resources */,
 				44170C6B1ADF7B32006E1C4B /* Interface.storyboard in Resources */,
-				44170C6D1ADF7B40006E1C4B /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1100,6 +1098,7 @@
 				44170C5D1ADF797B006E1C4B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		44170C5E1ADF797B006E1C4B /* Build configuration list for PBXNativeTarget "TheTama WatchKit Extension" */ = {
 			isa = XCConfigurationList;
@@ -1108,6 +1107,7 @@
 				44170C601ADF797B006E1C4B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		44A67B761AD39CF4002A826C /* Build configuration list for PBXProject "TheTama" */ = {
 			isa = XCConfigurationList;

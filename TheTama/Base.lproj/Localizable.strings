@@ -8,7 +8,7 @@
 
 //  NSLocalizedString(@"Lz.Connecting",nil)
 
-"Lz.Reloading" = "Reloading...";
+"Lz.Reloading" = "Loading...";
 "Lz.Disconnect" = "THETA\nDisconnect.";
 "Lz.Connecting" = "THETA\nConnecting...";
 "Lz.Disconnecting" = "THETA\nDisconnecting...";

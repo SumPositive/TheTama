@@ -86,13 +86,17 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		desc = [NSString stringWithUTF8String:strerror(err)];
 	}
 	
-	dispatch_async_main(^{
-		[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Disconnect",nil)
-							 maskType:SVProgressHUDMaskTypeGradient];
-		LOG(@"socket error(0x%X,closed=%@).\n--- %@", err, closed? @"YES": @"NO", desc);
-		[self disconnect];
-		[SVProgressHUD dismiss];
-	});
+	LOG(@"socket error(0x%X,closed=%@).\n--- %@", err, closed? @"YES": @"NO", desc);
+	if (closed) {
+		[mData.ptpConnection setEventListener:nil];
+		
+		dispatch_async_main(^{
+			[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Disconnect", nil)
+								 maskType:SVProgressHUDMaskTypeGradient];
+			[self disconnect];
+			[SVProgressHUD dismiss];
+		});
+	}
 }
 
 
@@ -119,14 +123,16 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		
 		if (connected) {
 			// "Connect" is succeeded.
+			mData.connected = true;
 			LOG(@"connected.");
+			LOG(@"  mData.ptpConnection.connected=%d", mData.ptpConnection.connected);
 			
 			// Goto Capture View
 			[self performSegueWithIdentifier:@"segCapture" sender:self];
 			
 		} else {
 			// "Connect" is failed.
-			// "-(void)ptpip_socketError:(int)err" will run later than here.
+			mData.connected = false;
 			LOG(@"connect failed.");
 			// Retry after 5sec.
 #if TARGET_IPHONE_SIMULATOR
@@ -189,30 +195,21 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	
 	// iAd
 	self.canDisplayBannerAds = YES;
-	
+
 	//  通知受信の設定
 	NSNotificationCenter*   nc = [NSNotificationCenter defaultCenter];
-	//[nc addObserver:self selector:@selector(applicationDidEnterBackground) name:@"applicationDidEnterBackground" object:nil];
 	[nc addObserver:self selector:@selector(applicationWillEnterForeground) name:@"applicationWillEnterForeground" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-#if TARGET_IPHONE_SIMULATOR
-#else
-	// Ready to PTP/IP.
-	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
-	// PtpIpEventListener delegates.
-	[mData.ptpConnection setEventListener:self]; //画面遷移の都度、デリゲート指定必須
-#endif
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
 	LOG_FUNC
-	
 	[self applicationWillEnterForeground];
 }
 
@@ -225,6 +222,16 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)applicationWillEnterForeground
 {
 	LOG_FUNC
+#if TARGET_IPHONE_SIMULATOR
+#else
+	// Refresh
+	//mData.ptpConnection = nil;
+	//mData.ptpConnection = [[PtpConnection alloc] init];
+	// Ready to PTP/IP.
+	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
+	// PtpIpEventListener delegates.
+	[mData.ptpConnection setEventListener:self]; //画面遷移の都度、デリゲート指定必須
+#endif
 	[self connect];
 }
 

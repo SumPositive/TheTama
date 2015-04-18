@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ApG-76-fjX">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ApG-76-fjX">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
@@ -10,7 +10,7 @@
             <objects>
                 <controller id="ApG-76-fjX" userLabel="Capture" customClass="InterfaceController" customModule="TheTama_WatchKit_Extension">
                     <items>
-                        <button alignment="center" verticalAlignment="center" backgroundImage="TheTama-icon-180" id="LUM-Yj-563">
+                        <button alignment="center" verticalAlignment="center" backgroundImage="TheTama-Tran-BASA.svg" id="LUM-Yj-563">
                             <connections>
                                 <action selector="buttonTouchUp" destination="ApG-76-fjX" id="hBD-If-WlT"/>
                             </connections>
@@ -33,7 +33,7 @@ Disconnect</string>
             <objects>
                 <controller id="e4P-LU-R6P" userLabel="Thumbnail" customClass="InterfaceController" customModule="TheTama_WatchKit_Extension">
                     <items>
-                        <imageView width="1" height="1" alignment="center" verticalAlignment="center" image="TheTama-NG" contentMode="scaleAspectFit" id="ez7-Uz-ZUi"/>
+                        <imageView width="1" height="1" alignment="center" verticalAlignment="center" image="TheTama-Tran-NG.svg" contentMode="scaleAspectFit" id="ez7-Uz-ZUi"/>
                     </items>
                 </controller>
             </objects>
