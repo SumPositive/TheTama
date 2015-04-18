@@ -50,9 +50,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <adBannerView opaque="NO" clipsSubviews="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="fO0-1Z-2V9">
-                                <rect key="frame" x="140" y="550" width="320" height="50"/>
-                            </adBannerView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TheTama-Tran-BASA.svg" translatesAutoresizingMaskIntoConstraints="NO" id="GQ5-xL-T9p">
                                 <rect key="frame" x="260" y="100" width="80" height="80"/>
                                 <constraints>
@@ -74,6 +71,9 @@
                                     <action selector="onSettingTouchUpIn:" destination="FbR-7Y-txa" eventType="touchUpInside" id="0r6-Tw-O9r"/>
                                 </connections>
                             </button>
+                            <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="Dt6-O2-fsC">
+                                <rect key="frame" x="140" y="550" width="320" height="50"/>
+                            </adBannerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -81,8 +81,10 @@
                             <constraint firstAttribute="trailingMargin" secondItem="FHC-Zl-C3L" secondAttribute="trailing" constant="20" id="2cT-jO-Vwy"/>
                             <constraint firstItem="J2X-hu-HVe" firstAttribute="leading" secondItem="Q0l-7w-Dop" secondAttribute="leadingMargin" constant="20" id="5P0-27-eZn"/>
                             <constraint firstItem="4up-KM-NcS" firstAttribute="leading" secondItem="Q0l-7w-Dop" secondAttribute="leadingMargin" constant="20" id="5hC-6T-Bka"/>
+                            <constraint firstItem="7ZZ-or-TIH" firstAttribute="top" secondItem="Dt6-O2-fsC" secondAttribute="bottom" id="5x0-Zl-OZl"/>
                             <constraint firstAttribute="trailingMargin" secondItem="J2X-hu-HVe" secondAttribute="trailing" constant="20" id="7yV-4U-yBW"/>
                             <constraint firstItem="J2X-hu-HVe" firstAttribute="top" secondItem="4up-KM-NcS" secondAttribute="bottom" constant="40" id="EJx-dJ-D4k"/>
+                            <constraint firstAttribute="centerX" secondItem="Dt6-O2-fsC" secondAttribute="centerX" id="Fdy-OW-0Jx"/>
                             <constraint firstItem="FHC-Zl-C3L" firstAttribute="top" secondItem="9SY-9f-djn" secondAttribute="bottom" constant="20" id="MJL-1Q-QvD"/>
                             <constraint firstItem="wMo-PD-zzK" firstAttribute="top" secondItem="FHC-Zl-C3L" secondAttribute="bottom" constant="3" id="MfN-ki-gfZ"/>
                             <constraint firstAttribute="centerX" secondItem="GQ5-xL-T9p" secondAttribute="centerX" id="Mru-mu-tqf"/>
@@ -91,9 +93,7 @@
                             <constraint firstItem="FHC-Zl-C3L" firstAttribute="leading" secondItem="Q0l-7w-Dop" secondAttribute="leadingMargin" constant="20" id="aio-CW-alE"/>
                             <constraint firstAttribute="trailingMargin" secondItem="4up-KM-NcS" secondAttribute="trailing" constant="20" id="g6v-QI-s7c"/>
                             <constraint firstItem="9SY-9f-djn" firstAttribute="top" secondItem="J2X-hu-HVe" secondAttribute="bottom" constant="3" id="gsw-Cy-zxD"/>
-                            <constraint firstAttribute="centerX" secondItem="fO0-1Z-2V9" secondAttribute="centerX" id="ioA-bO-90T"/>
                             <constraint firstAttribute="centerX" secondItem="FHC-Zl-C3L" secondAttribute="centerX" id="m3l-qU-wel"/>
-                            <constraint firstItem="fO0-1Z-2V9" firstAttribute="bottom" secondItem="7ZZ-or-TIH" secondAttribute="top" id="u77-pH-jYr"/>
                             <constraint firstAttribute="centerY" secondItem="9SY-9f-djn" secondAttribute="centerY" id="uFG-lg-wd0"/>
                             <constraint firstAttribute="centerX" secondItem="wMo-PD-zzK" secondAttribute="centerX" id="yaa-VX-VnM"/>
                             <constraint firstAttribute="centerX" secondItem="J2X-hu-HVe" secondAttribute="centerX" id="zzX-iT-A7x"/>
@@ -102,6 +102,7 @@
                     <connections>
                         <outlet property="buRetry" destination="wMo-PD-zzK" id="jMF-x5-EwZ"/>
                         <outlet property="buSetting" destination="9SY-9f-djn" id="GrG-LZ-iHK"/>
+                        <outlet property="iAd" destination="Dt6-O2-fsC" id="7NK-lW-Hh6"/>
                         <outlet property="lbConnect" destination="J2X-hu-HVe" id="SLC-0a-1yf"/>
                         <segue destination="9pv-A4-QxB" kind="show" identifier="segCapture" id="Z8r-kB-Bi6"/>
                     </connections>

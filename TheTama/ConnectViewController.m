@@ -27,9 +27,10 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	DataObject * mData;
 }
 
-@property (nonatomic, strong) IBOutlet UILabel * lbConnect;
-@property (nonatomic, strong) IBOutlet UIButton * buSetting;
-@property (nonatomic, strong) IBOutlet UIButton * buRetry;
+@property (nonatomic, weak) IBOutlet UILabel * lbConnect;
+@property (nonatomic, weak) IBOutlet UIButton * buSetting;
+@property (nonatomic, weak) IBOutlet UIButton * buRetry;
+@property (nonatomic, weak) IBOutlet ADBannerView * iAd;
 
 @end
 
@@ -181,6 +182,25 @@ inline static void dispatch_async_main(dispatch_block_t block)
 }
 
 
+//#pragma mark - iAd delegate
+//
+////iAd取得成功
+//- (void)bannerViewDidLoadAd:(ADBannerView *)banner
+//{
+//	NSLog(@"iAd取得成功");
+//	self.iAd.hidden = NO;
+//	self.canDisplayBannerAds = NO;
+//}
+//
+////iAd取得失敗
+//- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+//{
+//	NSLog(@"iAd取得失敗");
+//	self.iAd.hidden = YES;
+//	self.canDisplayBannerAds = YES;
+//}
+
+
 #pragma mark - Life cycle.
 
 - (void)viewDidLoad
@@ -192,9 +212,16 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	mData = [app getDataObject];
 	assert(mData != nil);
 	assert(mData.ptpConnection != nil);
-	
+
 	// iAd
+#if TARGET_IPHONE_SIMULATOR
+	self.canDisplayBannerAds = NO;
+	self.iAd.delegate = nil;
+#else
 	self.canDisplayBannerAds = YES;
+	[UIViewController prepareInterstitialAds];
+	self.interstitialPresentationPolicy = ADInterstitialPresentationPolicyAutomatic;
+#endif
 
 	//  通知受信の設定
 	NSNotificationCenter*   nc = [NSNotificationCenter defaultCenter];

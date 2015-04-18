@@ -69,7 +69,7 @@ class InterfaceController: WKInterfaceController {
 					NSLog("reply=%@", reply["result"] as! Bool)
 					if reply["result"] as! Bool {
 						// Thumbnail
-						if let thumbData = reply["thumbnail"] as? NSData {
+						if let thumbData = reply["thumbData"] as? NSData {
 							self.buttonEnable(thumbData) // To Thumbnail Mode
 						}
 					}

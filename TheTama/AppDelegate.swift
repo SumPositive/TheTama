@@ -88,23 +88,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				println("command=" + command)
 				switch command {
 				case "isConnect":	// THETA Wi-Fi接続状態
-					reply(["result":true])
+//					reply(["result":true])
+//					return
+
+					if (dataObject != nil && dataObject?.connected==true) {
+						reply(["result":true])
+					} else {
+						reply(["result":false])
+					}
 					return
 
-//					if (dataObject != nil && dataObject?.connected==true) {
-//						reply(["result":true])
-//					} else {
-//						reply(["result":false])
-//					}
-//					return
-
 				case "capture":		// キャプチャ実行、サムネイルを送る
-					let image:UIImage? = UIImage(named:"TheTama-Tran-NG.svg")
-					let thum:NSData? = UIImagePNGRepresentation(image)
-					reply(["result":true, "thumbnail":thum!])
+//					let image:UIImage? = UIImage(named:"TheTama-Tran-NG.svg")
+					let image:UIImage? = dataObject!.tamaCapture!.thumbnail
 
-//					reply(["result":true, "thumbnail":dataObject!.tamaCapture!.thumbnail])
-//					return
+					let thum:NSData? = UIImagePNGRepresentation(image)
+					reply(["result":true, "thumbData":thum!])
+					return
 					
 				default:
 					break

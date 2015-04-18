@@ -148,11 +148,17 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		LOG(@"getObjectHandles() recevied %zd handles.", objectHandles.count);
 		
 		// Get object informations and thumbnail images for each primary images.
+		NSInteger cnt = objectHandles.count - 20;
+
 		for (NSNumber* it in objectHandles) {
-			uint32_t objectHandle = (uint32_t)it.integerValue;
-			PtpObject * obj = [self loadObject:objectHandle session:session];
-			if (obj != nil) {
-				[mData.tamaObjects addObject:obj];
+			if (0 < cnt) {
+				cnt--;
+			} else {
+				uint32_t objectHandle = (uint32_t)it.integerValue;
+				PtpObject * obj = [self loadObject:objectHandle session:session];
+				if (obj != nil) {
+					[mData.tamaObjects addObject:obj];
+				}
 			}
 		}
 		dispatch_async_main(^{
