@@ -12,10 +12,11 @@ import Foundation
 
 class InterfaceController: WKInterfaceController {
 
-	var count = 0
 	@IBOutlet weak var button: WKInterfaceButton!
-	@IBOutlet weak var label: WKInterfaceLabel!
+	//@IBOutlet weak var label: WKInterfaceLabel!
 
+	var mButtonCapture:Bool = true
+	
 	
 	override func awakeWithContext(context: AnyObject?) {
 		super.awakeWithContext(context)
@@ -31,8 +32,8 @@ class InterfaceController: WKInterfaceController {
 		NSLog("%@ %@", self, __FUNCTION__)
 
 		// Disconnect
-		button.setEnabled(false)
-		label.setHidden(false)
+		self.buttonDisable()
+		//self.label.setHidden(false)
 
 		//Send count to parent application
 		let userInfo = ["command" : "isConnect"]
@@ -41,8 +42,8 @@ class InterfaceController: WKInterfaceController {
 				NSLog("reply=%@", reply["result"] as! Bool)
 				if reply["result"] as! Bool {
 					// Connect
-					self.button.setEnabled(true)
-					self.label.setHidden(true)
+					self.buttonEnable(nil)
+					//self.label.setHidden(true)
 				}
 			}
 		}
@@ -57,36 +58,48 @@ class InterfaceController: WKInterfaceController {
 	
 	@IBAction func buttonTouchUp() {
 		// Waiting.
-		self.button.setEnabled(false)
-		self.label.setHidden(false)
-
-		//Send count to parent application
-		let userInfo = ["command" : "capture"]
-		WKInterfaceController.openParentApplication(userInfo) { (reply, error) -> Void in
-			if reply != nil {
-				NSLog("reply=%@", reply["result"] as! Bool)
-				if reply["result"] as! Bool {
-					// OK
-					
-					// Thumbnail
-					if let thumb = reply["thumbnail"] as? UIImage {
-						
+		self.buttonDisable()
+		
+		if mButtonCapture {
+			// Capture Mode
+			//Send count to parent application
+			let userInfo = ["command" : "capture"]
+			WKInterfaceController.openParentApplication(userInfo) { (reply, error) -> Void in
+				if reply != nil {
+					NSLog("reply=%@", reply["result"] as! Bool)
+					if reply["result"] as! Bool {
+						// Thumbnail
+						if let thumbData = reply["thumbnail"] as? NSData {
+							self.buttonEnable(thumbData) // To Thumbnail Mode
+						}
 					}
-					
-					
 				}
 			}
-			self.button.setEnabled(true)
-			self.label.setHidden(true)
+		} else {
+			// Thumbnail Mode
+			self.buttonEnable(nil) // To Capture Mode
 		}
 	}
+
 	
-	@IBAction func sendCounter() {
-		//Send count to parent application
-		println("Watch \(self.count)")
-		WKInterfaceController.openParentApplication(["countValue": "\(self.count)"],
-			reply: {replyInfo, error in
-				println(replyInfo["fromApp"])
-		})
+	func buttonDisable() {
+		self.button.setBackgroundImageNamed("TheTama-Tran-Capture.svg")
+		self.button.setEnabled(false)
+		//self.label.setHidden(false)
+	}
+
+	func buttonEnable(imageData: NSData?) {
+		if imageData != nil {
+			self.button.setBackgroundImageData(imageData)
+			mButtonCapture = false
+		} else {
+			self.button.setBackgroundImageNamed("TheTama-Tran-BASA.svg")
+			mButtonCapture = true
+		}
+		self.button.setEnabled(true)
 	}
 }
+
+
+
+

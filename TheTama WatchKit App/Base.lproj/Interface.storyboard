@@ -12,32 +12,16 @@
                     <items>
                         <button alignment="center" verticalAlignment="center" backgroundImage="TheTama-Tran-BASA.svg" id="LUM-Yj-563">
                             <connections>
-                                <action selector="buttonTouchUp" destination="ApG-76-fjX" id="hBD-If-WlT"/>
+                                <action selector="buttonTouchUp" destination="ApG-76-fjX" id="ATU-g2-cNG"/>
                             </connections>
                         </button>
-                        <label alignment="center" verticalAlignment="center" textAlignment="center" numberOfLines="2" id="AcS-3B-Thi">
-                            <string key="text">Wi-Fi
-Disconnect</string>
-                        </label>
                     </items>
                     <connections>
                         <outlet property="button" destination="LUM-Yj-563" id="UTn-9f-lcG"/>
-                        <outlet property="label" destination="AcS-3B-Thi" id="qnf-wL-Igg"/>
                     </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="235" y="347"/>
-        </scene>
-        <!--Thumbnail-->
-        <scene sceneID="fWI-Mo-hfW">
-            <objects>
-                <controller id="e4P-LU-R6P" userLabel="Thumbnail" customClass="InterfaceController" customModule="TheTama_WatchKit_Extension">
-                    <items>
-                        <imageView width="1" height="1" alignment="center" verticalAlignment="center" image="TheTama-Tran-NG.svg" contentMode="scaleAspectFit" id="ez7-Uz-ZUi"/>
-                    </items>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="534" y="347"/>
         </scene>
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">
