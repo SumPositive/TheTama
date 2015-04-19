@@ -31,11 +31,11 @@
 {
 	DataObject * mData;
 
-	PtpObject* _ptpObject;
-	NSMutableData *_imageData;
+	PtpObject * mPtpObject;
+	NSMutableData * mImageData;
 	int imageWidth;
 	int imageHeight;
-	GlkViewController *glkViewController;
+	GlkViewController * glkViewController;
 	float _yaw;
 	float _roll;
 	float _pitch;
@@ -66,7 +66,8 @@
 	return;
 #endif
 
-	_ptpObject = ptpObject;
+	mPtpObject = ptpObject;
+
 	dispatch_async(dispatch_get_main_queue(), ^{
 		self.progressView.progress = 0.0;
 		self.progressView.hidden = NO;
@@ -76,7 +77,7 @@
 		[df setDateStyle:NSDateFormatterShortStyle];
 		[df setTimeStyle:NSDateFormatterMediumStyle];
 		
-		self.lbTitle.text = [df stringFromDate:_ptpObject.objectInfo.capture_date];
+		self.lbTitle.text = [df stringFromDate:mPtpObject.objectInfo.capture_date];
 
 		//cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", obj.objectInfo.filename];
 
@@ -86,7 +87,7 @@
 		// This block is running at PtpConnection#gcd thread.
 		
 		NSMutableData* imageData = [NSMutableData data];
-		uint32_t objectHandle = (uint32_t)_ptpObject.objectInfo.object_handle;
+		uint32_t objectHandle = (uint32_t)mPtpObject.objectInfo.object_handle;
 		__block float total = 0.0;
 		
 		// Get primary image that was resized to 2048x1024.
@@ -119,7 +120,7 @@
 			});
 			return;
 		}
-		_imageData = imageData;
+		mImageData = imageData;
 		
 		// Parse EXIF data, it contains the data to correct the tilt.
 		RicohEXIF* exif = [[RicohEXIF alloc] initWithNSData:imageData];
@@ -160,11 +161,11 @@
 
 - (void)startGLK
 {
-	glkViewController = [[GlkViewController alloc] init:_imageView.frame image:_imageData width:imageWidth height:imageHeight yaw:_yaw roll:_roll pitch:_pitch];
+	glkViewController = [[GlkViewController alloc] init:_imageView.frame image:mImageData width:imageWidth height:imageHeight yaw:_yaw roll:_roll pitch:_pitch];
 	glkViewController.view.frame = _imageView.frame;
  
 	
-	NSLog(@"startGLK imageData: %@", [[NSString alloc] initWithData:_imageData encoding:NSUTF8StringEncoding]);
+	NSLog(@"startGLK imageData: %@", [[NSString alloc] initWithData:mImageData encoding:NSUTF8StringEncoding]);
 	NSLog(@"startGLK: frame %f %f %f %f", _imageView.frame.origin.x, _imageView.frame.origin.y, _imageView.frame.size.width, _imageView.frame.size.height);
 	
 	[self.view addSubview:glkViewController.view];

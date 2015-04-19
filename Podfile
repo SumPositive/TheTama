@@ -1,14 +1,17 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 
+pod 'SVProgressHUD'
+pod 'BDToastAlert'	#トーストメッセージ
+pod 'RMStore', '~> 0.7'		#アプリ内課金　https://github.com/robotmedia/RMStore
+
+
 # pod 'AFNetworking', '~> 2.0'
 # pod 'BlocksKit'
-pod 'SVProgressHUD'
-pod 'EGOTableViewPullRefresh'
+# pod 'EGOTableViewPullRefresh' 標準UIRefreshControlを使用
 # pod 'Facebook-iOS-SDK'
 # pod 'CocoaLumberjack'
 # pod 'UICKeyChainStore'
-
 # pod 'GoogleAnalytics-iOS-SDK',  '~> 3.0'
 # pod 'TestFlightSDK', '~> 3.0'
 # pod 'CocoaHTTPServer'

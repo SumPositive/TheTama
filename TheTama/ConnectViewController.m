@@ -231,6 +231,11 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+	
+	if (mData.option1payed) {
+		self.canDisplayBannerAds = NO;
+		self.iAd.delegate = nil;
+	}
 }
 
 - (void)viewDidAppear:(BOOL)animated

@@ -13,3 +13,8 @@
 "Lz.Connecting" = "THETA\nConnecting...";
 "Lz.Disconnecting" = "THETA\nDisconnecting...";
 "Lz.Capture" = "Capture...";
+"Lz.PrivilegeNextLoad" = "(Benefits pack)";
+"Lz.NextLoad" = "Continue to load...";
+"Lz.PrivilegeVolumeZero" = "(Benefits pack)";
+
+

@@ -29,6 +29,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	DataObject * mData;
 	PtpIpStorageInfo * mStorageInfo;
 	BOOL mTableBottom;
+	UIRefreshControl * mRefreshControl;
 }
 @property (nonatomic, strong) IBOutlet UITableView * tableView;
 @end
@@ -148,7 +149,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		LOG(@"getObjectHandles() recevied %zd handles.", objectHandles.count);
 		
 		// Get object informations and thumbnail images for each primary images.
-		NSInteger cnt = objectHandles.count - 20;
+		NSInteger cnt = objectHandles.count - LIST_CHUNK_FIRST;
 
 		for (NSNumber* it in objectHandles) {
 			if (0 < cnt) {
@@ -290,6 +291,41 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	NSNotificationCenter*   nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(applicationWillEnterForeground) name:@"applicationWillEnterForeground" object:nil];
 	[nc addObserver:self selector:@selector(applicationDidEnterBackground) name:@"applicationDidEnterBackground" object:nil];
+
+
+	// viewDidLoadなどで下記コードにて初期化し、viewDidUnloadでreleaseしてください.
+	mRefreshControl = [[UIRefreshControl alloc] init];
+	[mRefreshControl addTarget:self
+					   action:@selector(tableRefresh:)
+			 forControlEvents:UIControlEventValueChanged];
+	[mRefreshControl setTintColor:[UIColor blueColor]];
+	
+	
+	// self.refreshControl にセットする前に行うこと！
+	NSString * zRefreshTitle;
+	if (mData.option1payed) {
+		zRefreshTitle = NSLocalizedString(@"Lz.NextLoad",nil);
+	} else {
+		zRefreshTitle = NSLocalizedString(@"Lz.PrivilegeNextLoad",nil);
+	}
+	mRefreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:zRefreshTitle attributes:nil];
+	
+	//self.refreshControl = mRefreshControl;		//UITableViewControllerの場合
+	[self.tableView addSubview:mRefreshControl];	//UITableViewの場合
+}
+
+- (void)tableRefresh:(id)sender
+{
+	NSLog(@"tableRefresh!");
+	if (mData.option1payed) {
+		[mRefreshControl beginRefreshing];
+		
+		// ここにリフレッシュ時の処理を記述.
+		[self reloadTamaObjects];
+		
+	}
+	// 更新終了時などに呼び出します.
+	[mRefreshControl endRefreshing];
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -10,21 +10,34 @@ import UIKit
 
 class DataObject: NSObject, NSCoding {
 	
+	//--------------------------非保存、初期化される
 	// BOOL
-	var captureTouchDown = false;
 	var connected = false;
-	
+
 	// Integer
-	var dataVersion = 1			// 読込時にチェックして構造変更に対応できるようにするため
 	var batteryLevel = 0
-	var volumeLevel = 100
-	
+
 	// Object
 	var ptpConnection: PtpConnection
 	var tamaObjects: NSMutableArray		// 全写真情報を保持
 	var tamaCapture: PtpObject?			// 撮影直後または選択中の写真情報
 	var tamaViewer: PtpObject?			// 3D-Viewerで表示する写真情報
 	
+	
+	//--------------------------永続化
+	// BOOL
+	var captureTouchDown = false;
+	var option1payed = false;		//１課金済み　特典パック
+	var option2payed = false;		//２課金済み
+	var option3payed = false;		//３課金済み
+	
+	// Integer
+	var dataVersion = 1			// 読込時にチェックして構造変更に対応できるようにするため
+	var volumeLevel = 100
+
+	// Object
+
+
 	
 	override init() {
 		// Initial
@@ -38,32 +51,32 @@ class DataObject: NSObject, NSCoding {
 		
 		// BOOL
 		aCoder.encodeBool(self.captureTouchDown,	forKey: "captureTouchDown")
+		aCoder.encodeBool(self.option1payed,		forKey: "option1payed")
+		aCoder.encodeBool(self.option2payed,		forKey: "option2payed")
+		aCoder.encodeBool(self.option3payed,		forKey: "option3payed")
 		
 		// Integer
 		aCoder.encodeInteger(self.dataVersion,		forKey: "dataVersion")
-		aCoder.encodeInteger(self.batteryLevel,		forKey: "batteryLevel")
 		aCoder.encodeInteger(self.volumeLevel,		forKey: "volumeLevel")
 		
 		// Object
-		//aCoder.encodeObject(self.ptpConnection,		forKey:"ptpConnection")
-		//aCoder.encodeObject(self.tamaObjects,		forKey:"tamaObjects")
-		//aCoder.encodeObject(self.tamaCapture,		forKey:"tamaCapture")
+
 	}
 	
 	required init(coder aDecoder: NSCoder) {
 		// BOOL
 		self.captureTouchDown	= aDecoder.decodeBoolForKey("captureTouchDown")
+		self.option1payed		= aDecoder.decodeBoolForKey("option1payed")
+		self.option2payed		= aDecoder.decodeBoolForKey("option2payed")
+		self.option3payed		= aDecoder.decodeBoolForKey("option3payed")
 		
 		// Integer
 		self.dataVersion		= aDecoder.decodeIntegerForKey("dataVersion")
-		self.batteryLevel		= aDecoder.decodeIntegerForKey("batteryLevel")
 		self.volumeLevel		= aDecoder.decodeIntegerForKey("volumeLevel")
 		
 		// Object
-		self.ptpConnection		= PtpConnection()  // 毎回クリア
-		self.tamaObjects		= NSMutableArray()
-		//self.tamaObjects		= aDecoder.decodeObjectForKey("tamaObjects") as! NSMutableArray
-		//self.tamaCapture			= aDecoder.decodeObjectForKey("tamaCapture") as? PtpObject
+		self.ptpConnection		= PtpConnection()	//非保存、初期化
+		self.tamaObjects		= NSMutableArray()	//非保存、初期化
 	}
 
 }

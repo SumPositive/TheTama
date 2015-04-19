@@ -15,6 +15,7 @@
 #import "PtpConnection.h"
 #import "PtpLogging.h"
 #import "PtpObject.h"
+#import "BDToastAlert.h"
 
 
 inline static void dispatch_async_main(dispatch_block_t block)
@@ -116,7 +117,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	}
 	
 	LOG(@"socket error(0x%X,closed=%@).\n--- %@", err, closed? @"YES": @"NO", desc);
-	if (closed) {
+	//if (closed) {
 		[mData.ptpConnection setEventListener:nil];
 		
 		dispatch_async_main(^{
@@ -127,7 +128,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			// Back Model Connect View
 			[self dismissViewControllerAnimated:YES completion:nil];
 		});
-	}
+	//}
 }
 
 
@@ -191,6 +192,11 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 - (IBAction)volumeSliderChanged:(UISlider*)sender
 {
+	if (!mData.option1payed && sender.value < 1) {
+		BDToastAlert *toast = [BDToastAlert sharedInstance];
+		[toast showToastWithText:NSLocalizedString(@"Lz.PrivilegeVolumeZero",nil) onViewController:self];
+		sender.value = 1;
+	}
 	mData.volumeLevel = sender.value;
 	[self volumeShow];
 }
@@ -272,6 +278,12 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		 // This block is running at PtpConnection#gcd thread.
 		 BOOL rtn = [session initiateCapture];
 		 LOG(@"execShutter[rtn:%d]", rtn);
+		
+		if (rtn != 1) {
+			dispatch_async_main(^{
+				[self dismissViewControllerAnimated:YES completion:nil];
+			});
+		}
 	 }];
 }
 
@@ -570,7 +582,6 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		
 		[mData.ptpConnection operateSession:^(PtpIpSession *session) {
 			// Get
-			mData.volumeLevel = [session getAudioVolume];
 			mData.batteryLevel = [session getBatteryLevel];
 
 			dispatch_async_main(^{

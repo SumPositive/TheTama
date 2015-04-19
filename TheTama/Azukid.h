@@ -8,6 +8,12 @@
 #ifndef Azukid_h
 #define Azukid_h
 
+// TheTama Original Define.
+#define LIST_CHUNK_FIRST	7		// ListViewTableでTHETAから１度に読み込む画像数
+#define LIST_CHUNK_NEXT		15		// ListViewTableでTHETAから１度に読み込む画像数
+
+
+
 #include "TargetConditionals.h"
 #if TARGET_IPHONE_SIMULATOR
 // シミュレーター上でのみ実行される処理
