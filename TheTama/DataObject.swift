@@ -13,11 +13,6 @@ class DataObject: NSObject, NSCoding {
 	// BOOL
 	var captureTouchDown = false;
 	var connected = false;
-	var option1Pay = false;		// 内部課金１済み
-	var option2Pay = false;		// 内部課金２済み
-	var option3Pay = false;		// 内部課金３済み
-	var option4Pay = false;		// 内部課金４済み
-	var option5Pay = false;		// 内部課金５済み
 	
 	// Integer
 	var dataVersion = 1			// 読込時にチェックして構造変更に対応できるようにするため
