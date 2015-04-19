@@ -16,10 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var window: UIWindow?
 	var dataObject: DataObject?
 	
-
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
 		// 初起動したとき
+		
 		// mData 復帰
 		let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as! Array<String>
 		let filePath = paths[0].stringByAppendingPathComponent("mData.TheTama")
@@ -27,9 +27,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		if dataObject == nil {
 			println("ERROR! mData load");
 		}
+		
+		// option1payed
+		if dataObject?.option1payed == false {
+			let ud = NSUserDefaults.standardUserDefaults()
+			dataObject?.option1payed = ud.boolForKey("option1payed")
+		}
+
 		return true
 	}
-
+	
 	func applicationWillResignActive(application: UIApplication) {
 		// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
 		// Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

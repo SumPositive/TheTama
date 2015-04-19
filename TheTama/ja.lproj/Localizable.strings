@@ -13,7 +13,20 @@
 "Lz.Connecting" = "THETA\n接続中...";
 "Lz.Disconnecting" = "THETA\n切断中...";
 "Lz.Capture" = "撮影・記録中...";
-"Lz.PrivilegeNextLoad" = "＄ここで課金画面を出す＄";
+"Lz.PrivilegeNextLoad" = "（応援よろしくお願いします）";
 "Lz.NextLoad" = "さらに読み込みます...";
 "Lz.PrivilegeVolumeZero" = "＄ここで課金画面を出す＄";
+
+// In-App Purchase
+"Lz.PurchaseLimit" = "販売中止されています。";
+"Lz.ItemIdInvalid" = "販売中止されています。\n商品IDが無効です。";
+"Lz.PurchaseProcess" = "購入処理中...";
+"Lz.PurchaseSuccessful" = "購入が成功しました。";
+"Lz.CouldNotBuy" = "購入できませんでした。";
+"Lz.RestoreFailed" = "リストア失敗";
+"Lz.RestoreCompleted" = "リストア成功";
+"Lz.PurchaseAlertTitle" = "応援よろしくお願いします";
+"Lz.PurchaseAlertMessage" = "お礼に特典パックをプレゼント";
+"Lz.PurchaseAlertBuLeft" = "まだ試す";
+"Lz.PurchaseAlertBuRight" = "応援する";
 

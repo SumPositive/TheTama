@@ -13,8 +13,21 @@
 "Lz.Connecting" = "THETA\nConnecting...";
 "Lz.Disconnecting" = "THETA\nDisconnecting...";
 "Lz.Capture" = "Capture...";
-"Lz.PrivilegeNextLoad" = "$ In-App Purchase View $";
+"Lz.PrivilegeNextLoad" = "(Thank you for your support.)";
 "Lz.NextLoad" = "Continue to load...";
 "Lz.PrivilegeVolumeZero" = "$ In-App Purchase View $";
+
+// In-App Purchase
+"Lz.PurchaseLimit" = "Has been discontinued.";
+"Lz.ItemIdInvalid" = "Has been discontinued.\nItem ID is invalid.";
+"Lz.PurchaseProcess" = "During purchase process ...";
+"Lz.PurchaseSuccessful" = "Purchase was successful.";
+"Lz.CouldNotBuy" = "Could not buy.";
+"Lz.RestoreFailed" = "Restore failed.";
+"Lz.RestoreCompleted" = "Restore completed.";
+"Lz.PurchaseAlertTitle" = "Thank you for your support.";
+"Lz.PurchaseAlertMessage" = "I will present the benefits pack.";
+"Lz.PurchaseAlertBuLeft" = "Still try";
+"Lz.PurchaseAlertBuRight" = "Cheer";
 
 

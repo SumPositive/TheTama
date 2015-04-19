@@ -2,9 +2,12 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 
 pod 'SVProgressHUD'
-pod 'BDToastAlert'	#トーストメッセージ
-pod 'RMStore', '~> 0.7'		#アプリ内課金　https://github.com/robotmedia/RMStore
+pod 'MRProgress'	#http://dev.classmethod.jp/smartphone/iphone/sp17-ios-introduce-library-for-ios7/
 
+pod 'BDToastAlert'	#トーストメッセージ
+
+# pod 'SIAlertView'
+# pod 'RMStore', '~> 0.7'		#アプリ内課金　https://github.com/robotmedia/RMStore
 
 # pod 'AFNetworking', '~> 2.0'
 # pod 'BlocksKit'

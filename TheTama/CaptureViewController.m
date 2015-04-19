@@ -7,6 +7,7 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import <StoreKit/StoreKit.h>
 #import "SVProgressHUD.h"
 #import "Azukid.h"
 
@@ -18,12 +19,13 @@
 #import "BDToastAlert.h"
 
 
+
 inline static void dispatch_async_main(dispatch_block_t block)
 {
 	dispatch_async(dispatch_get_main_queue(), block);
 }
 
-@interface CaptureViewController () <PtpIpEventListener>
+@interface CaptureViewController () <PtpIpEventListener, SKProductsRequestDelegate, SKPaymentTransactionObserver>
 {
 	DataObject * mData;
 	NSUInteger mShutterSpeed;
@@ -193,9 +195,28 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (IBAction)volumeSliderChanged:(UISlider*)sender
 {
 	if (!mData.option1payed && sender.value < 1) {
-		BDToastAlert *toast = [BDToastAlert sharedInstance];
-		[toast showToastWithText:NSLocalizedString(@"Lz.PrivilegeVolumeZero",nil) onViewController:self];
+		//BDToastAlert *toast = [BDToastAlert sharedInstance];
+		//[toast showToastWithText:NSLocalizedString(@"Lz.PrivilegeVolumeZero",nil) onViewController:self];
 		sender.value = 1;
+
+		UIAlertController *alertController = [UIAlertController
+											  alertControllerWithTitle:NSLocalizedString(@"Lz.PurchaseAlertTitle",nil)
+											  message:NSLocalizedString(@"Lz.PurchaseAlertMessage",nil)
+											  preferredStyle:UIAlertControllerStyleAlert];
+		// addActionした順に左から右にボタンが配置されます
+		[alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Lz.PurchaseAlertBuLeft",nil)
+						style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+		{
+			// ボタンが押された時の処理
+			//[self otherButtonPushed];
+		}]];
+		[alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Lz.PurchaseAlertBuRight",nil)
+						style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+		{
+			// ボタンが押された時の処理
+			[self checkInAppPurchase];
+		}]];
+		[self presentViewController:alertController animated:YES completion:nil];
 	}
 	mData.volumeLevel = sender.value;
 	[self volumeShow];
@@ -510,6 +531,129 @@ inline static void dispatch_async_main(dispatch_block_t block)
 }
 
 
+#pragma mark - In-App Purchase.
+
+// 課金イベントにアプリ内課金が使えるかチェック
+- (BOOL)checkInAppPurchase
+{
+	if (![SKPaymentQueue canMakePayments]) {
+		// 購入が制限されています
+		BDToastAlert *toast = [BDToastAlert sharedInstance];
+		[toast showToastWithText:NSLocalizedString(@"Lz.PurchaseLimit",nil) onViewController:self];
+		return NO;
+	}
+	
+	// OK
+	[self startInAppPurchase];
+	
+	
+	return YES;
+}
+
+// アイテム情報の取得と購入開始の処理
+- (void)startInAppPurchase
+{
+	// com.companyname.application.productidは、「1-1. iTunes ConnectでManage In-App Purchasesの追加」で作成したProduct IDを設定します。
+	NSSet *set = [NSSet setWithObjects:@"com.azukid.TheTama.BenefitsPackage", nil];
+	SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:set];
+	productsRequest.delegate = self;
+	[productsRequest start];
+}
+
+#pragma mark SKProductsRequestDelegate
+- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
+	// 無効なアイテムがないかチェック
+	if ([response.invalidProductIdentifiers count] > 0) {
+		// アイテムIDが不正です
+		BDToastAlert *toast = [BDToastAlert sharedInstance];
+		[toast showToastWithText:NSLocalizedString(@"Lz.ItemIdInvalid",nil) onViewController:self];
+		return;
+	}
+	// 購入処理開始(「iTunes Storeにサインイン」ポップアップが表示)
+	[[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+	for (SKProduct *product in response.products) {
+		SKPayment *payment = [SKPayment paymentWithProduct:product];
+		[[SKPaymentQueue defaultQueue] addPayment:payment];
+	}
+}
+
+#pragma mark SKPaymentTransactionObserver
+// App Storeがトランザクションを処理するのを待機し、購入が成功した場合アイテム購入の処理を行う
+- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
+{
+	BDToastAlert *toast = [BDToastAlert sharedInstance];
+
+	for (SKPaymentTransaction *transaction in transactions) {
+		switch (transaction.transactionState) {
+			case SKPaymentTransactionStatePurchasing:
+				// NSLog(@"購入処理中");
+				// インジケータなど回して頑張ってる感を出す。
+				[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.PurchaseProcess", nil)
+									 maskType:SVProgressHUDMaskTypeGradient];
+				break;
+			case SKPaymentTransactionStatePurchased:
+			{
+				// NSLog(@"購入成功");
+				[toast showToastWithText:NSLocalizedString(@"Lz.PurchaseSuccessful",nil) onViewController:self];
+				// アイテム購入した処理（アップグレード版の機能制限解除処理等）
+				mData.option1payed = YES;
+				// 購入の持続的な記録
+				NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+				[defaults setObject:[NSNumber numberWithBool:YES] forKey:@"option1payed"];
+				// finish
+				[queue finishTransaction:transaction];
+			} break;
+			case SKPaymentTransactionStateFailed:
+			{
+				NSLog(@"購入失敗: %@, %@", transaction.transactionIdentifier, transaction.error);
+				// 失敗のアラート表示等
+				NSString * zz = [NSString stringWithFormat:@"%@\n\n%@\n%@", NSLocalizedString(@"Lz.CouldNotBuy",nil),
+								 transaction.transactionIdentifier, transaction.error];
+				[toast showToastWithText:zz onViewController:self];
+			} break;
+			case SKPaymentTransactionStateRestored:
+			{
+				// リストア処理
+				NSLog(@"以前に購入した機能を復元");
+				mData.option1payed = YES;
+				// 購入の持続的な記録
+				NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+				[defaults setObject:[NSNumber numberWithBool:YES] forKey:@"option1payed"];
+				// finish
+				[queue finishTransaction:transaction];
+				// アイテム購入した処理（アップグレード版の機能制限解除処理等）
+			} break;
+			default:
+				[queue finishTransaction:transaction];
+				break;
+		}
+	}
+}
+
+// リストア処理結果
+- (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error
+{
+	NSLog(@"リストア失敗:%@", error);
+	// 失敗のアラート表示等
+	BDToastAlert *toast = [BDToastAlert sharedInstance];
+	NSString * zz = [NSString stringWithFormat:@"%@\n\n%@", NSLocalizedString(@"Lz.RestoreFailed",nil), error.description];
+	[toast showToastWithText:zz onViewController:self];
+}
+
+- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
+{
+	NSLog(@"全てのリストア完了");
+	// 完了のアラート表示等
+	BDToastAlert *toast = [BDToastAlert sharedInstance];
+	[toast showToastWithText:NSLocalizedString(@"Lz.RestoreCompleted",nil) onViewController:self];
+}
+
+#pragma mark SKPaymentQueue
+- (void)paymentQueue:(SKPaymentQueue *)queue removedTransactions:(NSArray *)transactions
+{
+	[[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
+}
+
 
 #pragma mark - Life cycle.
 
@@ -531,6 +675,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	NSNotificationCenter*   nc = [NSNotificationCenter defaultCenter];
 	//[nc addObserver:self selector:@selector(applicationDidEnterBackground) name:@"applicationDidEnterBackground" object:nil];
 	[nc addObserver:self selector:@selector(applicationWillEnterForeground) name:@"applicationWillEnterForeground" object:nil];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -562,6 +707,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 {
 	[super didReceiveMemoryWarning];
 }
+
+
 
 //2回目以降のフォアグラウンド実行になった際に呼び出される(Backgroundにアプリがある場合)
 - (void)applicationWillEnterForeground
