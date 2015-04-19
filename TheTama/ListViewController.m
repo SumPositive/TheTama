@@ -17,6 +17,7 @@
 #import "TableCellTama.h"
 
 #import "ViewerViewController.h"
+#import "EGORefreshTableHeaderView.h"
 
 
 inline static void dispatch_async_main(dispatch_block_t block)
@@ -24,11 +25,15 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	dispatch_async(dispatch_get_main_queue(), block);
 }
 
-@interface ListViewController () <PtpIpEventListener, UITableViewDelegate, UITableViewDataSource>
+@interface ListViewController () <PtpIpEventListener, UITableViewDelegate, UITableViewDataSource, EGORefreshTableHeaderDelegate>
 {
 	DataObject * mData;
 	PtpIpStorageInfo * mStorageInfo;
 	BOOL mTableBottom;
+
+	EGORefreshTableHeaderView * mRefreshHeaderView;
+	BOOL mReloading;
+	//NSString * _cell_string;	// Cellの文字列、更新時に変更
 }
 @property (nonatomic, strong) IBOutlet UITableView * tableView;
 @end
@@ -98,10 +103,10 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)onReloadTouchUpIn:(id)sender
-{
-	[self reloadTamaObjects];
-}
+//- (IBAction)onReloadTouchUpIn:(id)sender
+//{
+//	[self reloadTamaObjects];
+//}
 
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
 {
@@ -271,6 +276,79 @@ inline static void dispatch_async_main(dispatch_block_t block)
 }
 
 
+//#pragma mark Data Source Loading / Reloading Methods
+//
+//- (void)reloadTableViewDataSource{
+//	
+//	//  should be calling your tableviews data source model to reload
+//	//  put here just for demo
+//	_reloading = YES;
+//	
+//	
+//	[self onReloadTouchUpIn:nil];
+//}
+//
+//- (void)doneLoadingTableViewData
+//{	// 更新終了をライブラリに通知
+//	_reloading = NO;
+//	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+//}
+
+#pragma mark UIScrollViewDelegate Methods
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+	[mRefreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+	[mRefreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+}
+
+#pragma mark EGORefreshTableHeaderDelegate Methods
+
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view
+{	// テーブルを下に引っ張って離せば、ここが呼ばれる
+	mReloading = YES;
+	// 非同期処理
+	NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+	[queue addOperationWithBlock:^{
+		// 更新処理など重い処理を書く
+
+		if (mData.option1Pay) {
+			[self reloadTamaObjects];
+		}
+		else {
+			
+		}
+
+		
+//		// 今回は3秒待ち、_cell_stringをUpdateに変更
+//		[NSThread sleepForTimeInterval:3];
+
+		//_cell_string = @"Update";
+		[self.tableView reloadData];
+		
+		// メインスレッドで更新完了処理
+		[[NSOperationQueue mainQueue] addOperationWithBlock:^{
+			// 更新終了をライブラリに通知
+			mReloading = NO;
+			[mRefreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+		}];
+	}];
+}
+
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view
+{	// 更新状態を返す
+	return mReloading; // should return if data source model is reloading
+}
+
+- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view
+{	// 最終更新日表示する日付を返す
+	return [NSDate date]; // should return date data source was last changed
+}
+
+
 
 #pragma mark - Life cycle.
 
@@ -290,6 +368,21 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	NSNotificationCenter*   nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(applicationWillEnterForeground) name:@"applicationWillEnterForeground" object:nil];
 	[nc addObserver:self selector:@selector(applicationDidEnterBackground) name:@"applicationDidEnterBackground" object:nil];
+
+	// View が潜り込むのを防止
+	self.edgesForExtendedLayout = UIRectEdgeNone;
+	// EGOTableViewPullRefresh
+	if (mRefreshHeaderView == nil) {
+		EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc]
+										   initWithFrame:CGRectMake(0.0f, 0.0f - self.tableView.bounds.size.height,
+																	self.view.frame.size.width, self.tableView.bounds.size.height)];
+		view.delegate = self;
+		[self.tableView addSubview:view];
+		mRefreshHeaderView = view;
+	
+	}
+	//  update the last update date
+	[mRefreshHeaderView refreshLastUpdatedDate];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -333,10 +426,23 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	}
 }
 
+#pragma mark Memory Management
+- (void)viewDidUnload {
+	mRefreshHeaderView = nil;
+}
+
+
 - (void)didReceiveMemoryWarning
 {
 	[super didReceiveMemoryWarning];
 }
+
+- (void)dealloc {
+	mRefreshHeaderView = nil;
+}
+
+
+#pragma mark Notification
 
 //2回目以降のフォアグラウンド実行になった際に呼び出される (Background --> Foreground)
 - (void)applicationWillEnterForeground

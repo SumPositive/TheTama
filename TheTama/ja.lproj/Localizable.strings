@@ -13,3 +13,10 @@
 "Lz.Connecting" = "THETA\n接続中...";
 "Lz.Disconnecting" = "THETA\n切断中...";
 "Lz.Capture" = "撮影・記録中...";
+
+
+// EGOTableViewPullRefresh
+"Pull down to refresh..." = "さらに引き下げて続きを見る";
+"Release to refresh..." = "指を離せば読み込みます";
+"Loading..." = "読込中...";
+

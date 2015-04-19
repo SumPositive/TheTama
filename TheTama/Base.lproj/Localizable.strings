@@ -13,3 +13,9 @@
 "Lz.Connecting" = "THETA\nConnecting...";
 "Lz.Disconnecting" = "THETA\nDisconnecting...";
 "Lz.Capture" = "Capture...";
+
+// EGOTableViewPullRefresh
+"Pull down to refresh..." = "Pull down to refresh...";
+"Release to refresh..." = "Release to refresh...";
+"Loading..." = "Loading...";
+
