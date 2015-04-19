@@ -343,7 +343,6 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		[mData.ptpConnection operateSession:^(PtpIpSession *session) {
 			// Get
 			mStorageInfo = [session getStorageInfo];
-			mData.volumeLevel = [session getAudioVolume];
 			mData.batteryLevel = [session getBatteryLevel];
 		}];
 	}
