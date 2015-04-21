@@ -12,11 +12,11 @@
 		44170C471ADF797A006E1C4B /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44170C461ADF797A006E1C4B /* GlanceController.swift */; };
 		44170C491ADF797A006E1C4B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44170C481ADF797A006E1C4B /* Images.xcassets */; };
 		44170C4D1ADF797A006E1C4B /* TheTama WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 44170C4C1ADF797A006E1C4B /* TheTama WatchKit App.app */; };
-		44170C5A1ADF797B006E1C4B /* TheTama WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 44170C3D1ADF797A006E1C4B /* TheTama WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		44170C681ADF7B21006E1C4B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44170C671ADF7B21006E1C4B /* Images.xcassets */; };
 		44170C6B1ADF7B32006E1C4B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44170C691ADF7B32006E1C4B /* Interface.storyboard */; };
 		44170C711AE13B47006E1C4B /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44CD6E031AD916580001F5B3 /* iAd.framework */; };
 		44170C7F1AE16A99006E1C4B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44170C811AE16A99006E1C4B /* Localizable.strings */; };
+		446D9DFF1AE561CA003F8924 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 446D9DFD1AE561CA003F8924 /* InfoViewController.m */; };
 		44907B3E1ADCCE870053294A /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44907B3C1ADCCDF20053294A /* WatchKit.framework */; };
 		44A67B811AD39CF4002A826C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A67B801AD39CF4002A826C /* AppDelegate.swift */; };
 		44A67B881AD39CF4002A826C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44A67B861AD39CF4002A826C /* Main.storyboard */; };
@@ -81,13 +81,6 @@
 			remoteGlobalIDString = 44170C4B1ADF797A006E1C4B;
 			remoteInfo = "TheTama WatchKit App";
 		};
-		44170C581ADF797B006E1C4B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 44A67B731AD39CF4002A826C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 44170C3C1ADF797A006E1C4B;
-			remoteInfo = "TheTama WatchKit Extension";
-		};
 		44A67B931AD39CF5002A826C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 44A67B731AD39CF4002A826C /* Project object */;
@@ -96,20 +89,6 @@
 			remoteInfo = TheTama;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		44907B3B1ADCCA670053294A /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				44170C5A1ADF797B006E1C4B /* TheTama WatchKit Extension.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		44170C3D1ADF797A006E1C4B /* TheTama WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "TheTama WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +105,8 @@
 		44170C7C1AE15F03006E1C4B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		44170C801AE16A99006E1C4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		44170C821AE16A9C006E1C4B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		446D9DFD1AE561CA003F8924 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
+		446D9DFE1AE561CA003F8924 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
 		44907B3C1ADCCDF20053294A /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
 		44A67B7B1AD39CF4002A826C /* TheTama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheTama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44A67B7F1AD39CF4002A826C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -369,6 +350,8 @@
 				44A67C631AD4A1B8002A826C /* TableCellTama.m */,
 				44A67C5D1AD3E305002A826C /* ViewerViewController.h */,
 				44A67C5E1AD3E305002A826C /* ViewerViewController.m */,
+				446D9DFE1AE561CA003F8924 /* InfoViewController.h */,
+				446D9DFD1AE561CA003F8924 /* InfoViewController.m */,
 			);
 			path = TheTama;
 			sourceTree = "<group>";
@@ -592,12 +575,10 @@
 				44A67B781AD39CF4002A826C /* Frameworks */,
 				44A67B791AD39CF4002A826C /* Resources */,
 				15A2B762CADA9ED7642EBA6F /* Copy Pods Resources */,
-				44907B3B1ADCCA670053294A /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				44170C591ADF797B006E1C4B /* PBXTargetDependency */,
 			);
 			name = TheTama;
 			productName = TheTama;
@@ -772,6 +753,7 @@
 				44A67C371AD3B5E0002A826C /* ptpip_packets.cpp in Sources */,
 				44A67C291AD3B5E0002A826C /* ExifTags.m in Sources */,
 				44A67C311AD3B5E0002A826C /* bytestream.cpp in Sources */,
+				446D9DFF1AE561CA003F8924 /* InfoViewController.m in Sources */,
 				44A67C3C1AD3B5E0002A826C /* PtpIpObjectContainer.mm in Sources */,
 				44A67C451AD3B5E0002A826C /* PtpOperator.m in Sources */,
 				44A67C281AD3B5E0002A826C /* ExifRawData.mm in Sources */,
@@ -823,11 +805,6 @@
 			isa = PBXTargetDependency;
 			target = 44170C4B1ADF797A006E1C4B /* TheTama WatchKit App */;
 			targetProxy = 44170C4E1ADF797A006E1C4B /* PBXContainerItemProxy */;
-		};
-		44170C591ADF797B006E1C4B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 44170C3C1ADF797A006E1C4B /* TheTama WatchKit Extension */;
-			targetProxy = 44170C581ADF797B006E1C4B /* PBXContainerItemProxy */;
 		};
 		44A67B941AD39CF5002A826C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -917,6 +894,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -935,6 +913,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "TheTama WatchKit Extension/Info.plist";
@@ -1055,7 +1034,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "afb0f307-607f-458b-9909-8a90086910a8";
 				SWIFT_OBJC_BRIDGING_HEADER = "TheTama/TheTama-Bridging-Header.h";
 				VALID_ARCHS = "arm64 armv7s armv7";
 			};

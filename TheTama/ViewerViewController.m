@@ -6,17 +6,19 @@
 //  Copyright (c) 2015年 Azukid. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import <GLKit/GLKit.h>
 #import "PtpConnection.h"
 #import "PtpObject.h"
 #import "RicohEXIF.h"
 #import "ExifTags.h"
 
-#import <QuartzCore/QuartzCore.h>
-#import "SVProgressHUD.h"
-#import "Azukid.h"
+#import "MRProgress.h"		// http://cocoadocs.org/docsets/MRProgress/0.2.2/
+//#import "SVProgressHUD.h"
 
+#import "Azukid.h"
 #import "TheTama-Swift.h"
+
 #import "ViewerViewController.h"
 #import "glkViewController.h"
 #import "GLRenderView.h"
@@ -54,6 +56,23 @@
 - (IBAction)onBackTouchUpIn:(id)sender
 {
 	[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)progressOnTitle:(NSString*)zTitle
+{
+	if (zTitle) {
+		[MRProgressOverlayView showOverlayAddedTo:self.view
+											title:zTitle	// nil だと落ちる
+											 mode:MRProgressOverlayViewModeIndeterminate
+										 animated:YES];
+	} else {
+		[MRProgressOverlayView showOverlayAddedTo:self.view animated:YES];
+	}
+}
+
+- (void)progressOff
+{
+	[MRProgressOverlayView dismissOverlayForView:self.view animated:YES];
 }
 
 

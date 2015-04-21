@@ -1,14 +1,20 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 
-pod 'SVProgressHUD'
-pod 'MRProgress'	#http://dev.classmethod.jp/smartphone/iphone/sp17-ios-introduce-library-for-ios7/
-
+pod 'MRProgress'	#http://cocoadocs.org/docsets/MRProgress/0.2.2/
 pod 'BDToastAlert'	#トーストメッセージ
+pod 'SVProgressHUD'
+
+
+#pod 'OpenSSL'
+pod 'RMStore', '~> 0.7'		#アプリ内課金　https://github.com/robotmedia/RMStore
+#pod 'RMStore/AppReceiptVerificator'
+pod 'RMStore/KeychainPersistence'
+
+
+
 
 # pod 'SIAlertView'
-# pod 'RMStore', '~> 0.7'		#アプリ内課金　https://github.com/robotmedia/RMStore
-
 # pod 'AFNetworking', '~> 2.0'
 # pod 'BlocksKit'
 # pod 'EGOTableViewPullRefresh' 標準UIRefreshControlを使用

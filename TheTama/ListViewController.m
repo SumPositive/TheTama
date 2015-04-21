@@ -6,10 +6,12 @@
 //  Copyright (c) 2015年 Azukid. All rights reserved.
 //
 
-#import "SVProgressHUD.h"
-#import "Azukid.h"
+//#import "SVProgressHUD.h"
+#import "MRProgress.h"		// http://cocoadocs.org/docsets/MRProgress/0.2.2/
 
+#import "Azukid.h"
 #import "TheTama-Swift.h"
+
 #import "ListViewController.h"
 #import "PtpConnection.h"
 #import "PtpLogging.h"
@@ -51,7 +53,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			break;
 	}
 	dispatch_async_main(^{
-		[SVProgressHUD dismiss];
+		[self progressOff];
 	});
 }
 
@@ -85,7 +87,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	
 	dispatch_async_main(^{
 		LOG(@"socket error(0x%X,closed=%@).\n--- %@", err, closed? @"YES": @"NO", desc);
-		[SVProgressHUD dismiss];
+		[self progressOff];
 		// Back Model Connect View
 		[self dismissViewControllerAnimated:YES completion:nil];
 	});
@@ -114,6 +116,23 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	}
 }
 
+- (void)progressOnTitle:(NSString*)zTitle
+{
+	if (zTitle) {
+		[MRProgressOverlayView showOverlayAddedTo:self.view
+											title:zTitle	// nil だと落ちる
+											 mode:MRProgressOverlayViewModeIndeterminate
+										 animated:YES];
+	} else {
+		[MRProgressOverlayView showOverlayAddedTo:self.view animated:YES];
+	}
+}
+
+- (void)progressOff
+{
+	[MRProgressOverlayView dismissOverlayForView:self.view animated:YES];
+}
+
 
 #pragma mark - PTP/IP Operations.
 
@@ -124,9 +143,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 #if TARGET_IPHONE_SIMULATOR
 	return;
 #endif
-	
-	[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Reloading", nil) //再読込...
-						 maskType:SVProgressHUDMaskTypeGradient];
+
+	[self progressOnTitle:NSLocalizedString(@"Lz.Reloading",nil)];
 
 	[mData.tamaObjects removeAllObjects];
 	
@@ -166,7 +184,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			[self.tableView reloadData];
 			[self bottomTableView:self.tableView animated:NO]; //最終行へ
 			mTableBottom = YES;
-			[SVProgressHUD dismiss];
+			[self progressOff];
 		});
 	}];
 }
@@ -284,6 +302,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	assert(mData != nil);
 
 	// UITableView
+	self.tableView.delegate = self;
 	self.tableView.dataSource = self;
 	mTableBottom = NO;
 	
@@ -304,9 +323,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	// self.refreshControl にセットする前に行うこと！
 	NSString * zRefreshTitle;
 	if (mData.option1payed) {
-		zRefreshTitle = NSLocalizedString(@"Lz.NextLoad",nil);
+		zRefreshTitle = NSLocalizedString(@"Continue to load...",nil);
 	} else {
-		zRefreshTitle = NSLocalizedString(@"Lz.PrivilegeNextLoad",nil);
+		zRefreshTitle = NSLocalizedString(@"Please wait for the update.",nil);
 	}
 	mRefreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:zRefreshTitle attributes:nil];
 	

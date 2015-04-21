@@ -13,8 +13,8 @@
 "Lz.Connecting" = "THETA\n接続中...";
 "Lz.Disconnecting" = "THETA\n切断中...";
 "Lz.Capture" = "撮影・記録中...";
-"Lz.PrivilegeNextLoad" = "（応援よろしくお願いします）";
-"Lz.NextLoad" = "さらに読み込みます...";
+"Please wait for the update." = "機能アップ準備中です。";
+"Continue to load..." = "さらに読み込みます...";
 "Lz.PrivilegeVolumeZero" = "＄ここで課金画面を出す＄";
 
 // In-App Purchase

@@ -7,16 +7,17 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
-#import <StoreKit/StoreKit.h>
-#import "SVProgressHUD.h"
-#import "Azukid.h"
+//#import "SVProgressHUD.h"
+#import "BDToastAlert.h"
+#import "MRProgress.h"		// http://cocoadocs.org/docsets/MRProgress/0.2.2/
 
+#import "Azukid.h"
 #import "TheTama-Swift.h"
+
 #import "CaptureViewController.h"
 #import "PtpConnection.h"
 #import "PtpLogging.h"
 #import "PtpObject.h"
-#import "BDToastAlert.h"
 
 
 
@@ -25,7 +26,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	dispatch_async(dispatch_get_main_queue(), block);
 }
 
-@interface CaptureViewController () <PtpIpEventListener, SKProductsRequestDelegate, SKPaymentTransactionObserver>
+@interface CaptureViewController () <PtpIpEventListener>
 {
 	DataObject * mData;
 	NSUInteger mShutterSpeed;
@@ -65,11 +66,16 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			LOG(@"Event(0x%04x) received", code);
 			break;
 			
+//		case PTPIP_CAPTURE_COMPLETE:
+//		{	// 撮影が完了した際に呼び出される
+//			dispatch_async_main(^{
+//				[self progressOff];
+//			});
+//		} break;
+		
 		case PTPIP_OBJECT_ADDED:
-		{
-			// It will be receive when the camera has taken a new photo.
+		{	// 撮影などを行った際にオブジェクトが作成された際に呼び出される
 			LOG(@"Object added Event(0x%04x) - 0x%08x", code, param1);
-			
 			[mData.ptpConnection operateSession:^(PtpIpSession *session) {
 				// サムネイル表示
 				UIImage * thumb = [self imageThumbnail:param1 session:session];
@@ -80,13 +86,17 @@ inline static void dispatch_async_main(dispatch_block_t block)
 					[self viewRefresh];
 				});
 			}];
-		}
-			break;
+		} break;
+			
+		case PTPIP_STORE_FULL:
+		{	// ストレージFULL
+			
+		} break;
 	}
 	
 	dispatch_async_main(^{
 		self.captureButton.enabled = YES;
-		[SVProgressHUD dismiss];
+		[self progressOff];
 	});
 }
 
@@ -123,10 +133,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		[mData.ptpConnection setEventListener:nil];
 		
 		dispatch_async_main(^{
-			[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Disconnect", nil)
-								 maskType:SVProgressHUDMaskTypeGradient];
 			//[self disconnect];
-			[SVProgressHUD dismiss];
+			[self progressOff];
 			// Back Model Connect View
 			[self dismissViewControllerAnimated:YES completion:nil];
 		});
@@ -194,30 +202,31 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 - (IBAction)volumeSliderChanged:(UISlider*)sender
 {
-	if (!mData.option1payed && sender.value < 1) {
-		//BDToastAlert *toast = [BDToastAlert sharedInstance];
-		//[toast showToastWithText:NSLocalizedString(@"Lz.PrivilegeVolumeZero",nil) onViewController:self];
-		sender.value = 1;
+//	if (!mData.option1payed && sender.value < 1) {
+//		//BDToastAlert *toast = [BDToastAlert sharedInstance];
+//		//[toast showToastWithText:NSLocalizedString(@"Lz.PrivilegeVolumeZero",nil) onViewController:self];
+//		sender.value = 1;
+//
+//		UIAlertController *alertController = [UIAlertController
+//											  alertControllerWithTitle:NSLocalizedString(@"Lz.PurchaseAlertTitle",nil)
+//											  message:NSLocalizedString(@"Lz.PurchaseAlertMessage",nil)
+//											  preferredStyle:UIAlertControllerStyleAlert];
+//		// addActionした順に左から右にボタンが配置されます
+//		[alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Lz.PurchaseAlertBuLeft",nil)
+//						style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+//		{
+//			// ボタンが押された時の処理
+//			//[self otherButtonPushed];
+//		}]];
+//		[alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Lz.PurchaseAlertBuRight",nil)
+//						style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+//		{
+//			// ボタンが押された時の処理
+//			//[self checkInAppPurchase];
+//		}]];
+//		[self presentViewController:alertController animated:YES completion:nil];
+//	}
 
-		UIAlertController *alertController = [UIAlertController
-											  alertControllerWithTitle:NSLocalizedString(@"Lz.PurchaseAlertTitle",nil)
-											  message:NSLocalizedString(@"Lz.PurchaseAlertMessage",nil)
-											  preferredStyle:UIAlertControllerStyleAlert];
-		// addActionした順に左から右にボタンが配置されます
-		[alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Lz.PurchaseAlertBuLeft",nil)
-						style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
-		{
-			// ボタンが押された時の処理
-			//[self otherButtonPushed];
-		}]];
-		[alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Lz.PurchaseAlertBuRight",nil)
-						style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
-		{
-			// ボタンが押された時の処理
-			[self checkInAppPurchase];
-		}]];
-		[self presentViewController:alertController animated:YES completion:nil];
-	}
 	mData.volumeLevel = sender.value;
 	[self volumeShow];
 }
@@ -245,11 +254,28 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 - (void)capture
 {
-	//[self.indicator startAnimating];
-	//[SVProgressHUD show];
-	[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Capture",nil)
-						 maskType:SVProgressHUDMaskTypeGradient];
-
+	//[self progressOnTitle:NSLocalizedString(@"Lz.Capture",nil)];
+	[MRProgressOverlayView showOverlayAddedTo:self.view
+										title:NSLocalizedString(@"Lz.Capture",nil)
+										 mode:MRProgressOverlayViewModeIndeterminate
+									 animated:YES
+									stopBlock:^(MRProgressOverlayView *progressOverlayView) {
+										// STOP処理
+//										[self progressOnTitle:NSLocalizedString(@"Session closeing...",nil)];
+//										[mData.ptpConnection close:^{
+//											dispatch_async_main(^{
+//												[self progressOff];
+//												[self dismissViewControllerAnimated:YES completion:nil];
+//											});
+//										}];
+										dispatch_async_main(^{
+											[mData.ptpConnection setEventListener:nil];
+											[self progressOff];
+											[self dismissViewControllerAnimated:YES completion:nil];
+										});
+										return;
+									}];
+	
 	self.captureButton.enabled = NO;
 	self.ivThumbnail.image = nil;
 	
@@ -326,11 +352,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		self.batteryProgress.progressTintColor = [UIColor blueColor];
 	}
 	self.batteryProgress.progress = ff;
-	
-	
-	
-	//[self.indicator stopAnimating];
-	[SVProgressHUD dismiss];
+
+	[self progressOff];
 }
 
 
@@ -530,129 +553,23 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	}
 }
 
-
-#pragma mark - In-App Purchase.
-
-// 課金イベントにアプリ内課金が使えるかチェック
-- (BOOL)checkInAppPurchase
+- (void)progressOnTitle:(NSString*)zTitle
 {
-	if (![SKPaymentQueue canMakePayments]) {
-		// 購入が制限されています
-		BDToastAlert *toast = [BDToastAlert sharedInstance];
-		[toast showToastWithText:NSLocalizedString(@"Lz.PurchaseLimit",nil) onViewController:self];
-		return NO;
-	}
-	
-	// OK
-	[self startInAppPurchase];
-	
-	
-	return YES;
-}
-
-// アイテム情報の取得と購入開始の処理
-- (void)startInAppPurchase
-{
-	// com.companyname.application.productidは、「1-1. iTunes ConnectでManage In-App Purchasesの追加」で作成したProduct IDを設定します。
-	NSSet *set = [NSSet setWithObjects:@"com.azukid.TheTama.BenefitsPackage", nil];
-	SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:set];
-	productsRequest.delegate = self;
-	[productsRequest start];
-}
-
-#pragma mark SKProductsRequestDelegate
-- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
-	// 無効なアイテムがないかチェック
-	if ([response.invalidProductIdentifiers count] > 0) {
-		// アイテムIDが不正です
-		BDToastAlert *toast = [BDToastAlert sharedInstance];
-		[toast showToastWithText:NSLocalizedString(@"Lz.ItemIdInvalid",nil) onViewController:self];
-		return;
-	}
-	// 購入処理開始(「iTunes Storeにサインイン」ポップアップが表示)
-	[[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-	for (SKProduct *product in response.products) {
-		SKPayment *payment = [SKPayment paymentWithProduct:product];
-		[[SKPaymentQueue defaultQueue] addPayment:payment];
+	if (zTitle) {
+		[MRProgressOverlayView showOverlayAddedTo:self.view
+											title:zTitle	// nil だと落ちる
+											 mode:MRProgressOverlayViewModeIndeterminate
+										 animated:YES];
+	} else {
+		[MRProgressOverlayView showOverlayAddedTo:self.view animated:YES];
 	}
 }
 
-#pragma mark SKPaymentTransactionObserver
-// App Storeがトランザクションを処理するのを待機し、購入が成功した場合アイテム購入の処理を行う
-- (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
+- (void)progressOff
 {
-	BDToastAlert *toast = [BDToastAlert sharedInstance];
-
-	for (SKPaymentTransaction *transaction in transactions) {
-		switch (transaction.transactionState) {
-			case SKPaymentTransactionStatePurchasing:
-				// NSLog(@"購入処理中");
-				// インジケータなど回して頑張ってる感を出す。
-				[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.PurchaseProcess", nil)
-									 maskType:SVProgressHUDMaskTypeGradient];
-				break;
-			case SKPaymentTransactionStatePurchased:
-			{
-				// NSLog(@"購入成功");
-				[toast showToastWithText:NSLocalizedString(@"Lz.PurchaseSuccessful",nil) onViewController:self];
-				// アイテム購入した処理（アップグレード版の機能制限解除処理等）
-				mData.option1payed = YES;
-				// 購入の持続的な記録
-				NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-				[defaults setObject:[NSNumber numberWithBool:YES] forKey:@"option1payed"];
-				// finish
-				[queue finishTransaction:transaction];
-			} break;
-			case SKPaymentTransactionStateFailed:
-			{
-				NSLog(@"購入失敗: %@, %@", transaction.transactionIdentifier, transaction.error);
-				// 失敗のアラート表示等
-				NSString * zz = [NSString stringWithFormat:@"%@\n\n%@\n%@", NSLocalizedString(@"Lz.CouldNotBuy",nil),
-								 transaction.transactionIdentifier, transaction.error];
-				[toast showToastWithText:zz onViewController:self];
-			} break;
-			case SKPaymentTransactionStateRestored:
-			{
-				// リストア処理
-				NSLog(@"以前に購入した機能を復元");
-				mData.option1payed = YES;
-				// 購入の持続的な記録
-				NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-				[defaults setObject:[NSNumber numberWithBool:YES] forKey:@"option1payed"];
-				// finish
-				[queue finishTransaction:transaction];
-				// アイテム購入した処理（アップグレード版の機能制限解除処理等）
-			} break;
-			default:
-				[queue finishTransaction:transaction];
-				break;
-		}
-	}
+	[MRProgressOverlayView dismissOverlayForView:self.view animated:YES];
 }
 
-// リストア処理結果
-- (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error
-{
-	NSLog(@"リストア失敗:%@", error);
-	// 失敗のアラート表示等
-	BDToastAlert *toast = [BDToastAlert sharedInstance];
-	NSString * zz = [NSString stringWithFormat:@"%@\n\n%@", NSLocalizedString(@"Lz.RestoreFailed",nil), error.description];
-	[toast showToastWithText:zz onViewController:self];
-}
-
-- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
-{
-	NSLog(@"全てのリストア完了");
-	// 完了のアラート表示等
-	BDToastAlert *toast = [BDToastAlert sharedInstance];
-	[toast showToastWithText:NSLocalizedString(@"Lz.RestoreCompleted",nil) onViewController:self];
-}
-
-#pragma mark SKPaymentQueue
-- (void)paymentQueue:(SKPaymentQueue *)queue removedTransactions:(NSArray *)transactions
-{
-	[[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
-}
 
 
 #pragma mark - Life cycle.
@@ -686,8 +603,14 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	[[self.ivThumbnail layer] setCornerRadius:20.0];
 	[self.ivThumbnail setClipsToBounds:YES];
 	
-	self.batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 3.0f ); // 横方向に1倍、縦方向に3倍して表示する
-
+	//self.batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 3.0f ); // 横方向に1倍、縦方向に3倍して表示する
+//	[UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+//		self.batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 0.0f );
+//	} completion:^(BOOL finished) {
+//		self.batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 3.0f );
+//	}];
+	
+	
 	self.sgShutter1.selectedSegmentIndex = 0;
 	self.sgShutter2.selectedSegmentIndex = UISegmentedControlNoSegment;
 	self.sgIso.selectedSegmentIndex = 0;
@@ -716,7 +639,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	LOG_FUNC
 	
 #if TARGET_IPHONE_SIMULATOR
-	mData.batteryLevel = mData.volumeLevel; // TEST Dummy.
+	mData.volumeLevel = 33; // TEST Dummy.
+	mData.batteryLevel = 88; // TEST Dummy.
 	[self viewRefresh];
 #else
 	// コネクト・チェック

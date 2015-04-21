@@ -6,11 +6,13 @@
 //  Copyright (c) 2015年 Azukid. All rights reserved.
 //
 
-#import "SVProgressHUD.h"
 #import <iAd/iAd.h>
-#import "Azukid.h"
+//#import "SVProgressHUD.h"
+#import "MRProgress.h"		// http://cocoadocs.org/docsets/MRProgress/0.2.2/
 
+#import "Azukid.h"
 #import "TheTama-Swift.h"
+
 #import "ConnectViewController.h"
 #import "PtpConnection.h"
 #import "PtpLogging.h"
@@ -53,8 +55,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			
 	}
 	dispatch_async_main(^{
-		[SVProgressHUD dismiss];
-		
+		//[SVProgressHUD dismiss];
+		[self progressOff];
 	});
 }
 
@@ -92,10 +94,12 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		[mData.ptpConnection setEventListener:nil];
 		
 		dispatch_async_main(^{
-			[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Disconnect", nil)
-								 maskType:SVProgressHUDMaskTypeGradient];
+			//[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Disconnect", nil)
+			//					 maskType:SVProgressHUDMaskTypeGradient];
+			[self progressOnTitle:NSLocalizedString(@"Lz.Disconnect", nil)];
 			[self disconnect];
-			[SVProgressHUD dismiss];
+			//[SVProgressHUD dismiss];
+			[self progressOff];
 		});
 	}
 }
@@ -106,9 +110,20 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)connect
 {
 	LOG_FUNC
-	[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Connecting",nil)
-						 maskType:SVProgressHUDMaskTypeGradient];
+	//[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Connecting",nil)
+	//					 maskType:SVProgressHUDMaskTypeGradient];
 
+	//	[MRProgressOverlayView showOverlayAddedTo:self.view
+	//										title:NSLocalizedString(@"Lz.Connecting", nil)
+	//										 mode:MRProgressOverlayViewModeIndeterminate
+	//									 animated:YES stopBlock:^(MRProgressOverlayView *progressOverlayView){
+	//		// STOP
+	//		[self progressOff];
+	//	}];
+
+	[self progressOnTitle:NSLocalizedString(@"Lz.Connecting", nil)];
+	
+	
 	self.buSetting.enabled = NO;
 	self.buRetry.enabled = NO;
 
@@ -141,7 +156,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 #endif
 		}
 		dispatch_async_main(^{
-			[SVProgressHUD dismiss];
+			//[SVProgressHUD dismiss];
+			[self progressOff];
 			self.buSetting.enabled = YES;
 			self.buRetry.enabled = YES;
 		});
@@ -179,6 +195,23 @@ inline static void dispatch_async_main(dispatch_block_t block)
 {
 	LOG_FUNC
 	[self connect];
+}
+
+- (void)progressOnTitle:(NSString*)zTitle
+{
+	if (zTitle) {
+		[MRProgressOverlayView showOverlayAddedTo:self.view
+											title:zTitle	// nil だと落ちる
+											 mode:MRProgressOverlayViewModeIndeterminate
+										 animated:YES];
+	} else {
+		[MRProgressOverlayView showOverlayAddedTo:self.view animated:YES];
+	}
+}
+
+- (void)progressOff
+{
+	[MRProgressOverlayView dismissOverlayForView:self.view animated:YES];
 }
 
 
