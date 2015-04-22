@@ -1,47 +1,46 @@
-
-/* Class = "UILabel"; text = "音量"; ObjectID = "0to-Ib-YKk"; */
+/* Class = "UILabel"; text = "Sound"; ObjectID = "0to-Ib-YKk"; */
 "0to-Ib-YKk.text" = "音量";
 
 /* Class = "UILabel"; text = "100%"; ObjectID = "1Fe-f6-o3R"; */
 "1Fe-f6-o3R.text" = "100%";
 
-/* Class = "UILabel"; text = "シャッター速度"; ObjectID = "2dL-rA-zia"; */
+/* Class = "UILabel"; text = "Shutter speed"; ObjectID = "2dL-rA-zia"; */
 "2dL-rA-zia.text" = "シャッター速度";
 
-/* Class = "UILabel"; text = "1. THETAの電源を入れて、Wi-Fiを有効にしてください。"; ObjectID = "4up-KM-NcS"; */
+/* Class = "UILabel"; text = "1. Please enable THETA of power and Wi-Fi. "; ObjectID = "4up-KM-NcS"; */
 "4up-KM-NcS.text" = "1. THETAの電源を入れて、Wi-Fiを有効にしてください。";
 
-/* Class = "UIButton"; normalTitle = "一覧表示"; ObjectID = "8rv-c1-QTt"; */
-"8rv-c1-QTt.normalTitle" = "一覧表示";
+/* Class = "UILabel"; text = "Title"; ObjectID = "8Gs-gT-8Mx"; */
+"8Gs-gT-8Mx.text" = "アプリ名";
 
-/* Class = "UIButton"; normalTitle = "設定画面へ"; ObjectID = "9SY-9f-djn"; */
+/* Class = "UIButton"; normalTitle = "To setting screen"; ObjectID = "9SY-9f-djn"; */
 "9SY-9f-djn.normalTitle" = "設定画面へ";
 
 /* Class = "UILabel"; text = "Subtitle"; ObjectID = "Crf-Ke-Grw"; */
 "Crf-Ke-Grw.text" = "Subtitle";
 
-/* Class = "UILabel"; text = "3. Wi-Fi接続を試みてください。"; ObjectID = "FHC-Zl-C3L"; */
+/* Class = "UILabel"; text = "3. Please retry the connection."; ObjectID = "FHC-Zl-C3L"; */
 "FHC-Zl-C3L.text" = "3. Wi-Fi接続を試みてください。";
 
 /* Class = "UISegmentedControl"; Hlq-pg-6W6.segmentTitles[0] = "Auto"; ObjectID = "Hlq-pg-6W6"; */
 "Hlq-pg-6W6.segmentTitles[0]" = "Auto";
 
-/* Class = "UISegmentedControl"; Hlq-pg-6W6.segmentTitles[1] = "屋外"; ObjectID = "Hlq-pg-6W6"; */
+/* Class = "UISegmentedControl"; Hlq-pg-6W6.segmentTitles[1] = "Day"; ObjectID = "Hlq-pg-6W6"; */
 "Hlq-pg-6W6.segmentTitles[1]" = "屋外";
 
-/* Class = "UISegmentedControl"; Hlq-pg-6W6.segmentTitles[2] = "日陰"; ObjectID = "Hlq-pg-6W6"; */
+/* Class = "UISegmentedControl"; Hlq-pg-6W6.segmentTitles[2] = "Sha"; ObjectID = "Hlq-pg-6W6"; */
 "Hlq-pg-6W6.segmentTitles[2]" = "日陰";
 
-/* Class = "UISegmentedControl"; Hlq-pg-6W6.segmentTitles[3] = "曇天"; ObjectID = "Hlq-pg-6W6"; */
+/* Class = "UISegmentedControl"; Hlq-pg-6W6.segmentTitles[3] = "Clo"; ObjectID = "Hlq-pg-6W6"; */
 "Hlq-pg-6W6.segmentTitles[3]" = "曇天";
 
-/* Class = "UISegmentedControl"; Hlq-pg-6W6.segmentTitles[4] = "白熱灯1"; ObjectID = "Hlq-pg-6W6"; */
+/* Class = "UISegmentedControl"; Hlq-pg-6W6.segmentTitles[4] = "Tun1"; ObjectID = "Hlq-pg-6W6"; */
 "Hlq-pg-6W6.segmentTitles[4]" = "白熱1";
 
-/* Class = "UISegmentedControl"; Hlq-pg-6W6.segmentTitles[5] = "白熱灯2"; ObjectID = "Hlq-pg-6W6"; */
+/* Class = "UISegmentedControl"; Hlq-pg-6W6.segmentTitles[5] = "Tun2"; ObjectID = "Hlq-pg-6W6"; */
 "Hlq-pg-6W6.segmentTitles[5]" = "白熱2";
 
-/* Class = "UILabel"; text = "2. iPhoneの設定画面にてWi-Fi選択してください。"; ObjectID = "J2X-hu-HVe"; */
+/* Class = "UILabel"; text = "2. Please check the Wi-Fi setting of iPhone."; ObjectID = "J2X-hu-HVe"; */
 "J2X-hu-HVe.text" = "2. iPhoneの設定画面にてWi-Fi選択してください。";
 
 /* Class = "UISegmentedControl"; N0p-S0-cPg.segmentTitles[0] = "Auto"; ObjectID = "N0p-S0-cPg"; */
@@ -83,23 +82,17 @@
 /* Class = "UISegmentedControl"; O1E-UO-Gvo.segmentTitles[5] = "/8000"; ObjectID = "O1E-UO-Gvo"; */
 "O1E-UO-Gvo.segmentTitles[5]" = "/8000";
 
-/* Class = "UILabel"; text = "電池"; ObjectID = "OsV-r8-Col"; */
+/* Class = "UILabel"; text = "Battery"; ObjectID = "OsV-r8-Col"; */
 "OsV-r8-Col.text" = "電池";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "QxI-Ge-OpR"; */
 "QxI-Ge-OpR.text" = "Label";
 
-/* Class = "UITabBarItem"; title = "Viewer"; ObjectID = "XoG-mc-g16"; */
-"XoG-mc-g16.title" = "Viewer";
-
-/* Class = "UILabel"; text = "ホワイトバランス"; ObjectID = "YE5-mr-vMa"; */
+/* Class = "UILabel"; text = "White balance"; ObjectID = "YE5-mr-vMa"; */
 "YE5-mr-vMa.text" = "ホワイトバランス";
 
-/* Class = "UIButton"; normalTitle = "再読込"; ObjectID = "ZEZ-9X-3Dk"; */
-"ZEZ-9X-3Dk.normalTitle" = "再読込";
-
-/* Class = "UITabBarItem"; title = "Setting"; ObjectID = "acW-dT-cKf"; */
-"acW-dT-cKf.title" = "Setting";
+/* Class = "UILabel"; text = "Title"; ObjectID = "bOr-07-gIT"; */
+"bOr-07-gIT.text" = "アプリ名";
 
 /* Class = "UILabel"; text = "100%"; ObjectID = "cCL-P9-1Yo"; */
 "cCL-P9-1Yo.text" = "100%";
@@ -107,25 +100,28 @@
 /* Class = "UITabBarItem"; title = "Capture"; ObjectID = "cPa-gy-q4n"; */
 "cPa-gy-q4n.title" = "Capture";
 
-/* Class = "UISegmentedControl"; fMv-7Y-UgM.segmentTitles[0] = "6500K昼光"; ObjectID = "fMv-7Y-UgM"; */
+/* Class = "UISegmentedControl"; fMv-7Y-UgM.segmentTitles[0] = "6500K"; ObjectID = "fMv-7Y-UgM"; */
 "fMv-7Y-UgM.segmentTitles[0]" = "昼光色";
 
-/* Class = "UISegmentedControl"; fMv-7Y-UgM.segmentTitles[1] = "5000K昼白"; ObjectID = "fMv-7Y-UgM"; */
+/* Class = "UISegmentedControl"; fMv-7Y-UgM.segmentTitles[1] = "5000K"; ObjectID = "fMv-7Y-UgM"; */
 "fMv-7Y-UgM.segmentTitles[1]" = "昼白色";
 
-/* Class = "UISegmentedControl"; fMv-7Y-UgM.segmentTitles[2] = "4200K白色"; ObjectID = "fMv-7Y-UgM"; */
+/* Class = "UISegmentedControl"; fMv-7Y-UgM.segmentTitles[2] = "4200K"; ObjectID = "fMv-7Y-UgM"; */
 "fMv-7Y-UgM.segmentTitles[2]" = "白色";
 
-/* Class = "UISegmentedControl"; fMv-7Y-UgM.segmentTitles[3] = "3000K電球"; ObjectID = "fMv-7Y-UgM"; */
+/* Class = "UISegmentedControl"; fMv-7Y-UgM.segmentTitles[3] = "3000K"; ObjectID = "fMv-7Y-UgM"; */
 "fMv-7Y-UgM.segmentTitles[3]" = "電球色";
 
-/* Class = "UIButton"; normalTitle = "戻る"; ObjectID = "iGr-3C-pXN"; */
+/* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "iGr-3C-pXN"; */
 "iGr-3C-pXN.normalTitle" = "戻る";
 
-/* Class = "UIButton"; normalTitle = "戻る"; ObjectID = "jIt-bB-sH1"; */
+/* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "jIt-bB-sH1"; */
 "jIt-bB-sH1.normalTitle" = "戻る";
 
-/* Class = "UILabel"; text = "ISO感度"; ObjectID = "ovH-bF-oPl"; */
+/* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "mWN-8O-acZ"; */
+"mWN-8O-acZ.normalTitle" = "戻る";
+
+/* Class = "UILabel"; text = "ISO"; ObjectID = "ovH-bF-oPl"; */
 "ovH-bF-oPl.text" = "ISO感度";
 
 /* Class = "UISegmentedControl"; siJ-Aa-jjP.segmentTitles[0] = "Auto"; ObjectID = "siJ-Aa-jjP"; */
@@ -146,7 +142,7 @@
 /* Class = "UISegmentedControl"; siJ-Aa-jjP.segmentTitles[5] = "1600"; ObjectID = "siJ-Aa-jjP"; */
 "siJ-Aa-jjP.segmentTitles[5]" = "1600";
 
-/* Class = "UIButton"; normalTitle = "再接続する"; ObjectID = "wMo-PD-zzK"; */
+/* Class = "UIButton"; normalTitle = "Reconnect"; ObjectID = "wMo-PD-zzK"; */
 "wMo-PD-zzK.normalTitle" = "再接続する";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "wcP-Be-tSg"; */
@@ -154,3 +150,16 @@
 
 /* Class = "UILabel"; text = "Second View"; ObjectID = "zEq-FU-wV5"; */
 "zEq-FU-wV5.text" = "Second View";
+
+/* Class = "UIButton"; normalTitle = "一覧表示"; ObjectID = "8rv-c1-QTt"; */
+"8rv-c1-QTt.normalTitle" = "一覧表示";
+
+/* Class = "UITabBarItem"; title = "Viewer"; ObjectID = "XoG-mc-g16"; */
+"XoG-mc-g16.title" = "Viewer";
+
+/* Class = "UIButton"; normalTitle = "再読込"; ObjectID = "ZEZ-9X-3Dk"; */
+"ZEZ-9X-3Dk.normalTitle" = "再読込";
+
+/* Class = "UITabBarItem"; title = "Setting"; ObjectID = "acW-dT-cKf"; */
+"acW-dT-cKf.title" = "Setting";
+

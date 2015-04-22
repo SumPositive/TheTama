@@ -106,7 +106,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 					return
 
 				case "capture":		// キャプチャ実行、サムネイルを送る
-//					let image:UIImage? = UIImage(named:"TheTama-Tran-NG.svg")
 					let image:UIImage? = dataObject!.tamaCapture!.thumbnail
 
 					let thum:NSData? = UIImagePNGRepresentation(image)

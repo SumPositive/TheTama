@@ -120,7 +120,11 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {	// セクション数
+#if false	//TODO: Store
 	return 3;
+#else
+	return 1;
+#endif
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -133,7 +137,7 @@
 			return mPurchasedProductIDs.count <= 0 ? 1 : mPurchasedProductIDs.count;
 			
 		case 2:	// 製品数
-			return mProductsRequestFinished ? mProductIDs.count : 0;
+			return mProductsRequestFinished ? mProductIDs.count : 1;
 		
 		default:
 			return 0;
@@ -184,7 +188,7 @@
 	else if (indexPath.section==1) {
 		// 購入済み製品
 		if (mPurchasedProductIDs.count <= 0) {
-			cell.detailTextLabel.text = NSLocalizedString(@"Non", nil);
+			cell.detailTextLabel.text = NSLocalizedString(@"Nothing", nil);
 		}
 		else {
 			NSString *productID = [mPurchasedProductIDs objectAtIndex:indexPath.row];
@@ -197,10 +201,14 @@
 	}
 	else if (indexPath.section==2) {
 		// 製品
-		NSString *productID = [mProductIDs objectAtIndex:indexPath.row];
-		SKProduct *product = [[RMStore defaultStore] productForIdentifier:productID];
-		cell.textLabel.text = product ? product.localizedTitle : productID;
-		cell.detailTextLabel.text = [RMStore localizedPriceOfProduct:product];
+		if (mProductsRequestFinished) {
+			NSString *productID = [mProductIDs objectAtIndex:indexPath.row];
+			SKProduct *product = [[RMStore defaultStore] productForIdentifier:productID];
+			cell.textLabel.text = product ? product.localizedTitle : productID;
+			cell.detailTextLabel.text = [RMStore localizedPriceOfProduct:product];
+		} else {
+			cell.detailTextLabel.text = NSLocalizedString(@"In preparation", nil);
+		}
 		return cell;
 	}
 	return nil;
@@ -230,7 +238,7 @@
 	}
 	else if (indexPath.section==2) {
 		// 製品
-		if (0<=indexPath.row && indexPath.row<[mProductIDs count])
+		if (mProductsRequestFinished && 0<=indexPath.row && indexPath.row<[mProductIDs count])
 		{
 			NSString *productID = [mProductIDs objectAtIndex:indexPath.row];
 			[self progressOnTitle:nil];
@@ -259,7 +267,7 @@
 	self.tableView.delegate = self;
 	self.tableView.dataSource = self;
 	
-	
+#if false	//TODO: Store
 	//_receiptVerificator = [[RMStoreAppReceiptVerificator alloc] init];
 	//[RMStore defaultStore].receiptVerificator = _receiptVerificator;
 	
@@ -276,7 +284,8 @@
 		[self.tableView reloadData];
 	} failure:^(NSError *error) {
 		[self progressOff];
-		[self alertTitle:NSLocalizedString(@"Products Request Failed",nil) message:error.localizedDescription button:@"OK"];
+		//[self alertTitle:NSLocalizedString(@"Products Request Failed",nil) message:error.localizedDescription button:@"OK"];
+		//単にテーブル行が無い状態
 	}];
 
 	// 購入済み製品情報
@@ -284,6 +293,7 @@
 	[store addStoreObserver:self];
 	mPersistence = store.transactionPersistor;
 	mPurchasedProductIDs = [[mPersistence purchasedProductIdentifiers] allObjects];
+#endif
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -303,7 +313,9 @@
 
 - (void)dealloc
 {
+#if false	//TODO: Store
 	[[RMStore defaultStore] removeStoreObserver:self];
+#endif
 }
 
 

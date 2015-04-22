@@ -1,4 +1,3 @@
-
 /* Class = "UILabel"; text = "Sound"; ObjectID = "0to-Ib-YKk"; */
 "0to-Ib-YKk.text" = "Sound";
 
@@ -11,11 +10,11 @@
 /* Class = "UILabel"; text = "1. Please enable THETA of power and Wi-Fi. "; ObjectID = "4up-KM-NcS"; */
 "4up-KM-NcS.text" = "1. Please enable THETA of power and Wi-Fi. ";
 
-/* Class = "UIButton"; normalTitle = "List >"; ObjectID = "8rv-c1-QTt"; */
-"8rv-c1-QTt.normalTitle" = "List >";
+/* Class = "UILabel"; text = "Title"; ObjectID = "8Gs-gT-8Mx"; */
+"8Gs-gT-8Mx.text" = "Title";
 
-/* Class = "UIButton"; normalTitle = "Wi-Fi Setting >"; ObjectID = "9SY-9f-djn"; */
-"9SY-9f-djn.normalTitle" = "Wi-Fi Setting >";
+/* Class = "UIButton"; normalTitle = "To setting screen"; ObjectID = "9SY-9f-djn"; */
+"9SY-9f-djn.normalTitle" = "To setting screen";
 
 /* Class = "UILabel"; text = "Subtitle"; ObjectID = "Crf-Ke-Grw"; */
 "Crf-Ke-Grw.text" = "Subtitle";
@@ -89,17 +88,11 @@
 /* Class = "UILabel"; text = "Label"; ObjectID = "QxI-Ge-OpR"; */
 "QxI-Ge-OpR.text" = "Label";
 
-/* Class = "UITabBarItem"; title = "Viewer"; ObjectID = "XoG-mc-g16"; */
-"XoG-mc-g16.title" = "Viewer";
-
 /* Class = "UILabel"; text = "White balance"; ObjectID = "YE5-mr-vMa"; */
 "YE5-mr-vMa.text" = "White balance";
 
-/* Class = "UIButton"; normalTitle = "Reload"; ObjectID = "ZEZ-9X-3Dk"; */
-"ZEZ-9X-3Dk.normalTitle" = "Reload";
-
-/* Class = "UITabBarItem"; title = "Setting"; ObjectID = "acW-dT-cKf"; */
-"acW-dT-cKf.title" = "Setting";
+/* Class = "UILabel"; text = "Title"; ObjectID = "bOr-07-gIT"; */
+"bOr-07-gIT.text" = "Title";
 
 /* Class = "UILabel"; text = "100%"; ObjectID = "cCL-P9-1Yo"; */
 "cCL-P9-1Yo.text" = "100%";
@@ -125,32 +118,39 @@
 /* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "jIt-bB-sH1"; */
 "jIt-bB-sH1.normalTitle" = "BACK";
 
+/* Class = "UIButton"; normalTitle = "BACK"; ObjectID = "mWN-8O-acZ"; */
+"mWN-8O-acZ.normalTitle" = "BACK";
+
 /* Class = "UILabel"; text = "ISO"; ObjectID = "ovH-bF-oPl"; */
 "ovH-bF-oPl.text" = "ISO";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "pQB-IU-oHp"; */
+"pQB-IU-oHp.text" = "Detail";
 
 /* Class = "UISegmentedControl"; siJ-Aa-jjP.segmentTitles[0] = "Auto"; ObjectID = "siJ-Aa-jjP"; */
 "siJ-Aa-jjP.segmentTitles[0]" = "Auto";
 
-/* Class = "UISegmentedControl"; siJ-Aa-jjP.segmentTitles[1] = "x100"; ObjectID = "siJ-Aa-jjP"; */
-"siJ-Aa-jjP.segmentTitles[1]" = "x100";
+/* Class = "UISegmentedControl"; siJ-Aa-jjP.segmentTitles[1] = "100"; ObjectID = "siJ-Aa-jjP"; */
+"siJ-Aa-jjP.segmentTitles[1]" = "100";
 
-/* Class = "UISegmentedControl"; siJ-Aa-jjP.segmentTitles[2] = "x200"; ObjectID = "siJ-Aa-jjP"; */
-"siJ-Aa-jjP.segmentTitles[2]" = "x200";
+/* Class = "UISegmentedControl"; siJ-Aa-jjP.segmentTitles[2] = "200"; ObjectID = "siJ-Aa-jjP"; */
+"siJ-Aa-jjP.segmentTitles[2]" = "200";
 
-/* Class = "UISegmentedControl"; siJ-Aa-jjP.segmentTitles[3] = "x400"; ObjectID = "siJ-Aa-jjP"; */
-"siJ-Aa-jjP.segmentTitles[3]" = "x400";
+/* Class = "UISegmentedControl"; siJ-Aa-jjP.segmentTitles[3] = "400"; ObjectID = "siJ-Aa-jjP"; */
+"siJ-Aa-jjP.segmentTitles[3]" = "400";
 
-/* Class = "UISegmentedControl"; siJ-Aa-jjP.segmentTitles[4] = "x800"; ObjectID = "siJ-Aa-jjP"; */
-"siJ-Aa-jjP.segmentTitles[4]" = "x800";
+/* Class = "UISegmentedControl"; siJ-Aa-jjP.segmentTitles[4] = "800"; ObjectID = "siJ-Aa-jjP"; */
+"siJ-Aa-jjP.segmentTitles[4]" = "800";
 
 /* Class = "UISegmentedControl"; siJ-Aa-jjP.segmentTitles[5] = "1600"; ObjectID = "siJ-Aa-jjP"; */
 "siJ-Aa-jjP.segmentTitles[5]" = "1600";
 
-/* Class = "UIButton"; normalTitle = "Retry connection >"; ObjectID = "wMo-PD-zzK"; */
-"wMo-PD-zzK.normalTitle" = "Retry connection >";
+/* Class = "UIButton"; normalTitle = "Reconnect"; ObjectID = "wMo-PD-zzK"; */
+"wMo-PD-zzK.normalTitle" = "Reconnect";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "wcP-Be-tSg"; */
 "wcP-Be-tSg.text" = "Title";
 
 /* Class = "UILabel"; text = "Second View"; ObjectID = "zEq-FU-wV5"; */
 "zEq-FU-wV5.text" = "Second View";
+

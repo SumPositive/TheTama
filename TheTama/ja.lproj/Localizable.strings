@@ -30,3 +30,15 @@
 "Lz.PurchaseAlertBuLeft" = "まだ試す";
 "Lz.PurchaseAlertBuRight" = "応援する";
 
+"Restore Transaction Failed" = "購入済みの復元に失敗";
+"App Information" = "アプリ情報";
+"Purchased producs" = "購入済みの商品";
+"Producs list" = "販売商品一覧";
+"Title" = "アプリ名";
+"Version" = "バージョン";
+"In preparation" = "準備中";
+"Payment Transaction Failed" = "購入できませんでした";
+"Products Request Failed" = "販売できる商品がありません";
+"Nothing" = "ありません";
+
+

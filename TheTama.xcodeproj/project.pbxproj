@@ -102,7 +102,6 @@
 		44170C671ADF7B21006E1C4B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		44170C6A1ADF7B32006E1C4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		44170C6C1ADF7B40006E1C4B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		44170C7C1AE15F03006E1C4B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		44170C801AE16A99006E1C4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		44170C821AE16A9C006E1C4B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		446D9DFD1AE561CA003F8924 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
@@ -210,6 +209,8 @@
 		44CD6E001AD8C2960001F5B3 /* UVSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UVSphere.h; path = "../../RICOH_THETA_SDK_for_iOS.0.3.0/ricoh-theta-sample-for-ios/ricoh-theta-sample-for-ios/UVSphere.h"; sourceTree = "<group>"; };
 		44CD6E031AD916580001F5B3 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		44CD6E051AD94E440001F5B3 /* Azukid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Azukid.h; sourceTree = "<group>"; };
+		44DA4CD31AE7F3780000BBD7 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		44DA4CD71AE804930000BBD7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		B9AD8F4C9E07E5512CAFF712 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D281DCA70D60157B97683C9B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F72BE7B8DB0524CD2C36F399 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -575,6 +576,7 @@
 				44A67B781AD39CF4002A826C /* Frameworks */,
 				44A67B791AD39CF4002A826C /* Resources */,
 				15A2B762CADA9ED7642EBA6F /* Copy Pods Resources */,
+				44DA4CD81AE8070F0000BBD7 /* Run update_storyboard_strings.sh */,
 			);
 			buildRules = (
 			);
@@ -730,6 +732,20 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		44DA4CD81AE8070F0000BBD7 /* Run update_storyboard_strings.sh */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run update_storyboard_strings.sh";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/Users/masa/Code2015/THETA/TheTama/scripts/update_storyboard_strings.sh\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -835,7 +851,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				44A67B871AD39CF4002A826C /* Base */,
-				44170C7C1AE15F03006E1C4B /* ja */,
+				44DA4CD31AE7F3780000BBD7 /* ja */,
+				44DA4CD71AE804930000BBD7 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

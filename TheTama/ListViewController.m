@@ -218,12 +218,12 @@ inline static void dispatch_async_main(dispatch_block_t block)
 							}];
 		if (!result) {
 			LOG(@"getThumb(0x%08x) failed.", objectHandle);
-			thumb = nil; //[UIImage imageNamed:@"TheTama-Tran-NG.svg"];
+			thumb = nil;
 		} else {
 			thumb = [UIImage imageWithData:thumbData];
 		}
 	} else {
-		thumb = nil; //[UIImage imageNamed:@"TheTama-Tran-NG.svg"];
+		thumb = nil;
 	}
 	return [[PtpObject alloc] initWithObjectInfo:objectInfo thumbnail:thumb];
 }
@@ -269,11 +269,19 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	cell = [tableView dequeueReusableCellWithIdentifier:@"cellTama"];
 	cell.textLabel.text = [df stringFromDate:obj.objectInfo.capture_date];
 	cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", obj.objectInfo.filename];
-	cell.imageView.image = obj.thumbnail;
-	cell.objectIndex = (uint32_t)indexPath.row;
+
 	// cell.imageViewのコーナを丸くする
 	[[cell.imageView layer] setCornerRadius:12.0];
 	[cell.imageView setClipsToBounds:YES];
+	cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+	if (obj.thumbnail) {
+		cell.imageView.image = obj.thumbnail;
+	} else {
+		cell.imageView.image = [UIImage imageNamed:@"NoThumb.svg"];
+	}
+	
+	// Original param.
+	cell.objectIndex = (uint32_t)indexPath.row;
 
 	return cell;
 }

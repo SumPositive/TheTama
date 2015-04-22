@@ -180,7 +180,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 							}];
 		if (!result) {
 			LOG(@"getThumb(0x%08x) failed.", objectHandle);
-			thumb = [UIImage imageNamed:@"TheTama-Tran-NG.svg"];
+			thumb = [UIImage imageNamed:@"NoThumb.svg"];
 		} else {
 			// OK
 			thumb = [UIImage imageWithData:thumbData];
@@ -192,7 +192,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			LOG(@"mData.tamaObjects.count=%ld", (unsigned long)mData.tamaObjects.count);
 		}
 	} else {
-		thumb = [UIImage imageNamed:@"TheTama-Tran-NG.svg"];
+		thumb = [UIImage imageNamed:@"NoThumb.svg"];
 	}
 	return thumb;
 }
@@ -277,7 +277,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 									}];
 	
 	self.captureButton.enabled = NO;
-	self.ivThumbnail.image = nil;
+	self.ivThumbnail.image = [UIImage imageNamed:@"NoThumb.svg"];
 	
 	[mData.ptpConnection operateSession:^(PtpIpSession *session){
 
@@ -587,6 +587,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	mShutterSpeed = 0;  //AUTO(0)
 	mFilmIso = 0xFFFF;  //AUTOMATIC(0xFFFF)
 	mWhiteBalance = PTPIP_WHITE_BALANCE_AUTOMATIC;
+
 	
 	//  通知受信の設定
 	NSNotificationCenter*   nc = [NSNotificationCenter defaultCenter];
@@ -602,7 +603,10 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	// Thumbnailコーナを丸くする
 	[[self.ivThumbnail layer] setCornerRadius:20.0];
 	[self.ivThumbnail setClipsToBounds:YES];
-	
+	if (self.ivThumbnail.image==nil) {
+		self.ivThumbnail.image = [UIImage imageNamed:@"NoThumb.svg"];
+	}
+
 	//self.batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 3.0f ); // 横方向に1倍、縦方向に3倍して表示する
 //	[UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
 //		self.batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 0.0f );

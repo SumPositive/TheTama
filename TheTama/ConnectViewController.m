@@ -189,6 +189,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	// 設定画面へのURLスキーム
 	NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
 	[[UIApplication sharedApplication] openURL:url];
+	
+	//iOS5以前//[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs://"]];
 }
 
 - (IBAction)onRetryTouchUpIn:(id)sender
