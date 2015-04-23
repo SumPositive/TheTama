@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="2048"
+   height="1024"
+   viewBox="0 0 2048 1024"
+   id="svg3420"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="NoThumb.svg"
+   inkscape:export-filename="/Users/masa/Code2015/THETA/TheTama/Images/TheTama-tran-1024.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs3422" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.5"
+     inkscape:cx="1081.4035"
+     inkscape:cy="501"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1942"
+     inkscape:window-height="1051"
+     inkscape:window-x="303"
+     inkscape:window-y="181"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata3425">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="hiddon"
+     style="display:none"
+     sodipodi:insensitive="true" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-28.362143)"
+     style="display:inline">
+    <path
+       style="opacity:1;fill:#dcdcdc;fill-opacity:1;stroke:none;stroke-width:50;stroke-miterlimit:2;stroke-dasharray:none;stroke-opacity:1"
+       d="m 1522.4045,808.96783 c -39.9954,-22.15198 -75.7994,-112.77421 -87.8747,-222.41688 -7.3096,-66.37097 -6.2906,-118.40282 3.5018,-178.78517 12.3664,-76.25516 35.7831,-122.95386 66.7049,-133.02599 9.9112,-3.22838 26.3221,0.10332 36.5936,7.42913 10.8818,7.76113 28.9799,31.28698 38.669,50.26636 24.8506,48.67787 43.5707,128.78235 47.8408,204.7137 2.9912,53.1906 0.922,97.24429 -6.7545,143.79929 -8.058,48.86606 -18.3545,79.87006 -34.9745,105.30708 -8.0516,12.32295 -23.8135,25.36332 -33.4522,27.67616 -8.4077,2.01745 -21.5399,-0.13709 -30.2542,-4.96374 l 0,6e-5 z"
+       id="path4216"
+       inkscape:connector-curvature="0" />
+    <ellipse
+       style="display:inline;fill:none;stroke:#dcdcdc;stroke-width:38.11756134;stroke-miterlimit:2;stroke-dasharray:none;stroke-opacity:1"
+       id="path3436"
+       cx="512.12659"
+       cy="542.55695"
+       rx="348.06778"
+       ry="332.13602" />
+    <ellipse
+       ry="332.13602"
+       rx="348.06778"
+       cy="514.19482"
+       cx="1536.1266"
+       id="ellipse4177"
+       style="display:inline;fill:none;stroke:#dcdcdc;stroke-width:38.11756134;stroke-miterlimit:2;stroke-dasharray:none;stroke-opacity:1"
+       transform="translate(0,28.362143)" />
+    <path
+       style="opacity:1;fill:#dcdcdc;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:100;stroke-miterlimit:2;stroke-dasharray:none;stroke-opacity:1"
+       d="m 482.30325,805.55518 c -28.56399,-8.73227 -49.58045,-44.57006 -63.17557,-107.72857 -24.82494,-115.32867 -8.33423,-274.50174 38.23518,-369.0565 15.98981,-32.46581 35.27686,-54.42939 54.0625,-61.56491 11.15973,-4.23891 26.6985,-1.48658 36.91538,6.53871 77.06829,60.53655 79.50438,343.63741 4.13534,480.56759 -20.98495,38.12536 -48.16316,57.97225 -70.17283,51.24368 z"
+       id="path4214"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>
