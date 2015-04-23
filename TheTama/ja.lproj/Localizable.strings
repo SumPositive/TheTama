@@ -1,44 +1,67 @@
-/* 
-  Localizable.strings (Japanese)
+/* Localizable.strings (Base)
   TheTama
 
   Created by masa on 2015/04/18.
-  Copyright (c) 2015年 Azukid. All rights reserved.
-*/
+  Copyright (c) 2015年 Azukid. All rights reserved. */
 
-//  NSLocalizedString(@"Lz.Connecting",nil)
-
+/* NSLocalizedString(@"Lz.Connecting",nil) */
 "Lz.Reloading" = "読込中...";
+
 "Lz.Disconnect" = "THETA\n未接続";
+
 "Lz.Connecting" = "THETA\n接続中...";
+
 "Lz.Disconnecting" = "THETA\n切断中...";
+
 "Lz.Capture" = "撮影・記録中...";
-"Please wait for the update." = "機能アップ準備中です。";
-"Continue to load..." = "さらに読み込みます...";
+
+/* "Lz.PrivilegeNextLoad" = "(Thank you for your support.)";"Lz.NextLoad" = "Continue to load..."; */
 "Lz.PrivilegeVolumeZero" = "＄ここで課金画面を出す＄";
 
-// In-App Purchase
+/* In-App Purchase */
 "Lz.PurchaseLimit" = "販売中止されています。";
+
 "Lz.ItemIdInvalid" = "販売中止されています。\n商品IDが無効です。";
+
 "Lz.PurchaseProcess" = "購入処理中...";
+
 "Lz.PurchaseSuccessful" = "購入が成功しました。";
+
 "Lz.CouldNotBuy" = "購入できませんでした。";
+
 "Lz.RestoreFailed" = "リストア失敗";
+
 "Lz.RestoreCompleted" = "リストア成功";
+
 "Lz.PurchaseAlertTitle" = "応援よろしくお願いします";
+
 "Lz.PurchaseAlertMessage" = "お礼に特典パックをプレゼント";
+
 "Lz.PurchaseAlertBuLeft" = "まだ試す";
+
 "Lz.PurchaseAlertBuRight" = "応援する";
 
-"Restore Transaction Failed" = "購入済みの復元に失敗";
-"App Information" = "アプリ情報";
-"Purchased producs" = "購入済みの商品";
-"Producs list" = "販売商品一覧";
-"Title" = "アプリ名";
-"Version" = "バージョン";
-"In preparation" = "準備中";
-"Payment Transaction Failed" = "購入できませんでした";
-"Products Request Failed" = "販売できる商品がありません";
-"Nothing" = "ありません";
+"Please wait for the update." = "機能アップ準備中です。";
 
+"Continue to load..." = "さらに読み込みます...";
+
+"Restore Transaction Failed" = "購入済みの復元に失敗";
+
+"App Information" = "アプリ情報";
+
+"Purchased producs" = "購入済みの商品";
+
+"Producs list" = "販売商品一覧";
+
+"Title" = "アプリ名";
+
+"Version" = "バージョン";
+
+"In preparation" = "準備中";
+
+"Payment Transaction Failed" = "購入できませんでした";
+
+"Products Request Failed" = "販売できる商品がありません";
+
+"Nothing" = "ありません";
 

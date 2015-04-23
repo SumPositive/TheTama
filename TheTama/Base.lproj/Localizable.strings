@@ -1,33 +1,43 @@
-/* 
-  Localizable.strings (Base)
+/* Localizable.strings (Base)
   TheTama
 
   Created by masa on 2015/04/18.
-  Copyright (c) 2015年 Azukid. All rights reserved.
-*/
+  Copyright (c) 2015年 Azukid. All rights reserved. */
 
-//  NSLocalizedString(@"Lz.Connecting",nil)
-
+/* NSLocalizedString(@"Lz.Connecting",nil) */
 "Lz.Reloading" = "Loading...";
+
 "Lz.Disconnect" = "THETA\nDisconnect.";
+
 "Lz.Connecting" = "THETA\nConnecting...";
+
 "Lz.Disconnecting" = "THETA\nDisconnecting...";
+
 "Lz.Capture" = "Capture...";
-//"Lz.PrivilegeNextLoad" = "(Thank you for your support.)";
-//"Lz.NextLoad" = "Continue to load...";
+
+/* "Lz.PrivilegeNextLoad" = "(Thank you for your support.)";"Lz.NextLoad" = "Continue to load..."; */
 "Lz.PrivilegeVolumeZero" = "$ In-App Purchase View $";
 
-// In-App Purchase
+/* In-App Purchase */
 "Lz.PurchaseLimit" = "Has been discontinued.";
-"Lz.ItemIdInvalid" = "Has been discontinued.\nItem ID is invalid.";
-"Lz.PurchaseProcess" = "During purchase process ...";
-"Lz.PurchaseSuccessful" = "Purchase was successful.";
-"Lz.CouldNotBuy" = "Could not buy.";
-"Lz.RestoreFailed" = "Restore failed.";
-"Lz.RestoreCompleted" = "Restore completed.";
-"Lz.PurchaseAlertTitle" = "Thank you for your support.";
-"Lz.PurchaseAlertMessage" = "I will present the benefits pack.";
-"Lz.PurchaseAlertBuLeft" = "Still try";
-"Lz.PurchaseAlertBuRight" = "Cheer";
 
+"Lz.ItemIdInvalid" = "Has been discontinued.\nItem ID is invalid.";
+
+"Lz.PurchaseProcess" = "During purchase process ...";
+
+"Lz.PurchaseSuccessful" = "Purchase was successful.";
+
+"Lz.CouldNotBuy" = "Could not buy.";
+
+"Lz.RestoreFailed" = "Restore failed.";
+
+"Lz.RestoreCompleted" = "Restore completed.";
+
+"Lz.PurchaseAlertTitle" = "Thank you for your support.";
+
+"Lz.PurchaseAlertMessage" = "I will present the benefits pack.";
+
+"Lz.PurchaseAlertBuLeft" = "Still try";
+
+"Lz.PurchaseAlertBuRight" = "Cheer";
 

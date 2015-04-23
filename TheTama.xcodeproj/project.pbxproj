@@ -210,7 +210,7 @@
 		44CD6E031AD916580001F5B3 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		44CD6E051AD94E440001F5B3 /* Azukid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Azukid.h; sourceTree = "<group>"; };
 		44DA4CD31AE7F3780000BBD7 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
-		44DA4CD71AE804930000BBD7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		44DA4CDA1AE91D2C0000BBD7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		B9AD8F4C9E07E5512CAFF712 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D281DCA70D60157B97683C9B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		F72BE7B8DB0524CD2C36F399 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -576,7 +576,6 @@
 				44A67B781AD39CF4002A826C /* Frameworks */,
 				44A67B791AD39CF4002A826C /* Resources */,
 				15A2B762CADA9ED7642EBA6F /* Copy Pods Resources */,
-				44DA4CD81AE8070F0000BBD7 /* Run update_storyboard_strings.sh */,
 			);
 			buildRules = (
 			);
@@ -732,20 +731,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		44DA4CD81AE8070F0000BBD7 /* Run update_storyboard_strings.sh */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run update_storyboard_strings.sh";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/Users/masa/Code2015/THETA/TheTama/scripts/update_storyboard_strings.sh\n";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -852,7 +837,7 @@
 			children = (
 				44A67B871AD39CF4002A826C /* Base */,
 				44DA4CD31AE7F3780000BBD7 /* ja */,
-				44DA4CD71AE804930000BBD7 /* en */,
+				44DA4CDA1AE91D2C0000BBD7 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1023,7 +1008,6 @@
 			baseConfigurationReference = D281DCA70D60157B97683C9B /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1043,7 +1027,6 @@
 			baseConfigurationReference = B9AD8F4C9E07E5512CAFF712 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
