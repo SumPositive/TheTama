@@ -8,7 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 //#import "SVProgressHUD.h"
-#import "BDToastAlert.h"
+//#import "BDToastAlert.h"
 #import "MRProgress.h"		// http://cocoadocs.org/docsets/MRProgress/0.2.2/
 
 #import "Azukid.h"
@@ -29,9 +29,11 @@ inline static void dispatch_async_main(dispatch_block_t block)
 @interface CaptureViewController () <PtpIpEventListener>
 {
 	DataObject * mData;
-	NSUInteger mShutterSpeed;
-	NSInteger mFilmIso;
-	NSInteger mWhiteBalance;
+	
+	NSUInteger		mShutterSpeed;
+	NSInteger		mFilmIso;
+	NSInteger		mWhiteBalance;
+	CAPTURE_MODE	mCaptureMode;
 }
 
 @property (nonatomic, strong) IBOutlet UISegmentedControl * sgShutter1;
@@ -280,6 +282,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	self.ivThumbnail.image = [UIImage imageNamed:@"NoThumb.svg"];
 	
 	[mData.ptpConnection operateSession:^(PtpIpSession *session){
+		// This block is running at PtpConnection#gcd thread.
 
 		// シャッタースピード
 		//     AUTO(0),
@@ -322,14 +325,43 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		// set シャッターの音量
 		[session setAudioVolume: mData.volumeLevel];
 		
-		 // This block is running at PtpConnection#gcd thread.
-		 BOOL rtn = [session initiateCapture];
-		 LOG(@"execShutter[rtn:%d]", rtn);
-		
-		if (rtn != 1) {
-			dispatch_async_main(^{
-				[self dismissViewControllerAnimated:YES completion:nil];
-			});
+		switch (mCaptureMode) {
+			case CAPTURE_MODE_NORMAL:
+			{
+				BOOL rtn = [session initiateCapture];
+				LOG(@"execShutter[rtn:%d]", rtn);
+				
+				if (rtn != 1) {
+					dispatch_async_main(^{
+						[self dismissViewControllerAnimated:YES completion:nil];
+					});
+				}
+			}	break;
+
+			case CAPTURE_MODE_TIMELAPSE:
+			{
+				BOOL rtn = [session initiateOpenCapture];
+				LOG(@"execShutter[rtn:%d]", rtn);
+				if (rtn != 1) {
+					dispatch_async_main(^{
+						[self dismissViewControllerAnimated:YES completion:nil];
+					});
+				}
+			}	break;
+				
+			case CAPTURE_MODE_MOVIE:
+			{
+				BOOL rtn = [session initiateOpenCapture];
+				LOG(@"execShutter[rtn:%d]", rtn);
+				if (rtn != 1) {
+					dispatch_async_main(^{
+						[self dismissViewControllerAnimated:YES completion:nil];
+					});
+				}
+			}	break;
+
+			default:
+				break;
 		}
 	 }];
 }
@@ -594,15 +626,15 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	//[nc addObserver:self selector:@selector(applicationDidEnterBackground) name:@"applicationDidEnterBackground" object:nil];
 	[nc addObserver:self selector:@selector(applicationWillEnterForeground) name:@"applicationWillEnterForeground" object:nil];
 
+	// Thumbnailコーナを丸くする
+	[[self.ivThumbnail layer] setCornerRadius: self.ivThumbnail.frame.size.height / 3.0];
+	[self.ivThumbnail setClipsToBounds:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
 
-	// Thumbnailコーナを丸くする
-	[[self.ivThumbnail layer] setCornerRadius:20.0];
-	[self.ivThumbnail setClipsToBounds:YES];
 	if (self.ivThumbnail.image==nil) {
 		self.ivThumbnail.image = [UIImage imageNamed:@"NoThumb.svg"];
 	}
@@ -621,13 +653,13 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	self.sgWhite1.selectedSegmentIndex = 0;
 	self.sgWhite2.selectedSegmentIndex = UISegmentedControlNoSegment;
 	
-	[self applicationWillEnterForeground];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
 	LOG_FUNC
+	[self applicationWillEnterForeground];
 }
 
 - (void)didReceiveMemoryWarning
@@ -657,8 +689,51 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		
 		[mData.ptpConnection operateSession:^(PtpIpSession *session) {
 			// Get
-			mData.batteryLevel = [session getBatteryLevel];
 
+			// 充電レベル   FULL(100), HALF(67), NEAR_END(33), END(0)
+			mData.batteryLevel = [session getBatteryLevel];
+			
+
+			// 静止画撮影の方法
+			//     0(静止画撮影モードではない＝動画モードと判定しても良い),
+			//     NORMAL(単写モード), TIMELAPSE(インターバル撮影)
+//			// DevceProp: STILL_CAPTURE_MODE
+//			PTPIP_STILL_CAPTURE_MODE_NORMAL     = 0x0001,
+//			PTPIP_STILL_CAPTURE_MODE_BURST,
+//			PTPIP_STILL_CAPTURE_MODE_TIMELAPSE,
+//			PTPIP_STILL_CAPTURE_MODE_SOUND      = 0x8000,
+//			PTPIP_STILL_CAPTURE_MODE_NORMAL_WITH_SOUND    = PTPIP_STILL_CAPTURE_MODE_NORMAL    | PTPIP_STILL_CAPTURE_MODE_SOUND,
+//			PTPIP_STILL_CAPTURE_MODE_BURST_WITH_SOUND     = PTPIP_STILL_CAPTURE_MODE_BURST     | PTPIP_STILL_CAPTURE_MODE_SOUND,
+//			PTPIP_STILL_CAPTURE_MODE_TIMELAPSE_WITH_SOUND = PTPIP_STILL_CAPTURE_MODE_TIMELAPSE | PTPIP_STILL_CAPTURE_MODE_SOUND,
+//			PTPIP_STILL_CAPTURE_MODE_MOVIE      = 0x8010,
+
+			NSInteger stillCaptureMode = [session getStillCaptureMode];
+			LOG(@"stillCaptureMode=%ld",(long)stillCaptureMode);
+
+			mCaptureMode = CAPTURE_MODE_NORMAL;
+			if (stillCaptureMode==0 || stillCaptureMode==PTPIP_STILL_CAPTURE_MODE_MOVIE) {
+				mCaptureMode = CAPTURE_MODE_MOVIE;
+				// 動画記録時間(秒)(型番：RICOH THETA m15)
+				NSUInteger recordingTime = [session getRecordingTime];
+				LOG(@"recordingTime=%ld",(long)recordingTime);
+				
+				// 動画の残り記録時間（秒）(型番：RICOH THETA m15)
+				NSUInteger remainingRecordingTime = [session getRemainingRecordingTime];
+				LOG(@"remainingRecordingTime=%ld",(long)remainingRecordingTime);
+			}
+			else if	(stillCaptureMode==PTPIP_STILL_CAPTURE_MODE_TIMELAPSE) {
+				mCaptureMode = CAPTURE_MODE_TIMELAPSE;
+				// インターバル撮影の上限枚数
+				//     0(上限なし), 2-65535
+				NSInteger timelapseNumber = [session getTimelapseNumber];
+				LOG(@"timelapseNumber=%ld",(long)timelapseNumber);
+				
+				// インターバル撮影の撮影間隔
+				//     5000-3600000 msec
+				NSInteger timelapseInterval= [session getTimelapseInterval];
+				LOG(@"timelapseInterval=%ld",(long)timelapseInterval);
+			}
+			
 			dispatch_async_main(^{
 				[self viewRefresh];
 			});

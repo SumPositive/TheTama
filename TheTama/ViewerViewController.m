@@ -180,15 +180,18 @@
 
 - (void)startGLK
 {
-	glkViewController = [[GlkViewController alloc] init:_imageView.frame image:mImageData width:imageWidth height:imageHeight yaw:_yaw roll:_roll pitch:_pitch];
-	glkViewController.view.frame = _imageView.frame;
+	glkViewController = [[GlkViewController alloc] init:self.imageView.frame image:mImageData
+												  width:imageWidth height:imageHeight
+													yaw:_yaw roll:_roll pitch:_pitch];
+	glkViewController.view.frame = self.imageView.frame;
  
 	
 	NSLog(@"startGLK imageData: %@", [[NSString alloc] initWithData:mImageData encoding:NSUTF8StringEncoding]);
-	NSLog(@"startGLK: frame %f %f %f %f", _imageView.frame.origin.x, _imageView.frame.origin.y, _imageView.frame.size.width, _imageView.frame.size.height);
+	NSLog(@"startGLK: frame %f %f %f %f", self.imageView.frame.origin.x, self.imageView.frame.origin.y, self.imageView.frame.size.width, self.imageView.frame.size.height);
 	
 	[self.view addSubview:glkViewController.view];
 	
+
 //	UIButton *myButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 //	myButton.frame = _closeButton.frame;
 //	[myButton setTitle:_closeButton.currentTitle forState:UIControlStateNormal];
@@ -221,17 +224,18 @@
 	[nc addObserver:self selector:@selector(applicationWillEnterForeground) name:@"applicationWillEnterForeground" object:nil];
 	[nc addObserver:self selector:@selector(applicationDidEnterBackground) name:@"applicationDidEnterBackground" object:nil];
 
+	
+//無効	// コーナを丸くする
+//	[[self.imageView layer] setCornerRadius:20.0];
+//	[self.imageView setClipsToBounds:YES];
+
+	self.progressView.transform = CGAffineTransformMakeScale( 1.0f, 3.0f ); // 横方向に1倍、縦方向に3倍して表示する
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
 	
-	// コーナを丸くする
-	[[self.imageView layer] setCornerRadius:40.0];
-	[self.imageView setClipsToBounds:YES];
-
-	self.progressView.transform = CGAffineTransformMakeScale( 1.0f, 3.0f ); // 横方向に1倍、縦方向に3倍して表示する
 	self.progressView.progress = 0.0;
 	//	[self viewRefresh];
 }

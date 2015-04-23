@@ -270,15 +270,15 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	cell.textLabel.text = [df stringFromDate:obj.objectInfo.capture_date];
 	cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", obj.objectInfo.filename];
 
-	// cell.imageViewのコーナを丸くする
-	[[cell.imageView layer] setCornerRadius:12.0];
-	[cell.imageView setClipsToBounds:YES];
 	cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
 	if (obj.thumbnail) {
 		cell.imageView.image = obj.thumbnail;
 	} else {
 		cell.imageView.image = [UIImage imageNamed:@"NoThumb.svg"];
 	}
+	// cell.imageViewのコーナを丸くする
+	[[cell.imageView layer] setCornerRadius:28.0];
+	[cell.imageView setClipsToBounds:YES];
 	
 	// Original param.
 	cell.objectIndex = (uint32_t)indexPath.row;

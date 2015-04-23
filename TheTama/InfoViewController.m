@@ -7,7 +7,7 @@
 //
 
 //#import <StoreKit/StoreKit.h>
-#import "BDToastAlert.h"
+//#import "BDToastAlert.h"
 #import "MRProgress.h"		// http://cocoadocs.org/docsets/MRProgress/0.2.2/
 
 //#import "RMPurchasesViewController.h"
@@ -158,6 +158,27 @@
 			break;
 	}
 	return nil; //ビルド警告回避用
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+	if (section==0) {
+		NSString * zz = [NSString stringWithFormat:@"TheTama  Version %@ #%@\n",
+						 [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"],
+						 [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
+		zz = [zz stringByAppendingString:@"Copyright(c)2015 Azukid\n All Rights Reserved.\n\n"];
+		
+		zz = [zz stringByAppendingString:
+			  @"RICOH THETA SDK\n"
+			  @"Copyright(c)2013 Ricoh Co., Ltd.\n\n"];
+		
+		zz = [zz stringByAppendingString:
+			  @"MBProgress\n"
+			  @"Copyright(c)2013 Marius Rackwitz\n\n"];
+		
+		return zz;
+	}
+	return nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
