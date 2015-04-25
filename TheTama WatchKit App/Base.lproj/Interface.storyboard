@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ApG-76-fjX">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ApG-76-fjX">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
     </dependencies>
     <scenes>
@@ -10,7 +10,7 @@
             <objects>
                 <controller id="ApG-76-fjX" userLabel="Capture" customClass="InterfaceController" customModule="TheTama_WatchKit_Extension">
                     <items>
-                        <button alignment="center" verticalAlignment="center" backgroundImage="TheTama-Tran-BASA.svg" id="LUM-Yj-563">
+                        <button alignment="center" verticalAlignment="center" backgroundImage="Tama.svg-Eye" id="LUM-Yj-563">
                             <connections>
                                 <action selector="buttonTouchUp" destination="ApG-76-fjX" id="ATU-g2-cNG"/>
                             </connections>

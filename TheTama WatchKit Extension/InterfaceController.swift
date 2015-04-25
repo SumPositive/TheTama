@@ -83,7 +83,7 @@ class InterfaceController: WKInterfaceController {
 
 	
 	func buttonDisable() {
-		self.button.setBackgroundImageNamed("TheTama-Tran-Capture.svg")
+		self.button.setBackgroundImageNamed("Tama.svg-Start")
 		self.button.setEnabled(false)
 		//self.label.setHidden(false)
 	}
@@ -93,7 +93,7 @@ class InterfaceController: WKInterfaceController {
 			self.button.setBackgroundImageData(imageData)
 			mButtonCapture = false
 		} else {
-			self.button.setBackgroundImageNamed("TheTama-Tran-BASA.svg")
+			self.button.setBackgroundImageNamed("Tama.svg-Eye")
 			mButtonCapture = true
 		}
 		self.button.setEnabled(true)

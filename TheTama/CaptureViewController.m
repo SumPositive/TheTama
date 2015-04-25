@@ -34,6 +34,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	NSInteger		mFilmIso;
 	NSInteger		mWhiteBalance;
 	CAPTURE_MODE	mCaptureMode;
+	NSInteger		mTransactionId;
+	UIImage	*		mImageThumb;
+	NSTimer *		mTimerCheck;
 }
 
 @property (nonatomic, strong) IBOutlet UISegmentedControl * sgShutter1;
@@ -47,7 +50,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 @property (nonatomic, strong) IBOutlet UILabel  * volumeLabel;
 @property (nonatomic, strong) IBOutlet UISlider * volumeSlider;
 @property (nonatomic, strong) IBOutlet UIImageView * ivThumbnail;
-@property (nonatomic, strong) IBOutlet UIButton * captureButton;
+@property (nonatomic, strong) IBOutlet UIButton * buCapture;
 
 @end
 
@@ -68,12 +71,17 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			LOG(@"Event(0x%04x) received", code);
 			break;
 			
-//		case PTPIP_CAPTURE_COMPLETE:
-//		{	// 撮影が完了した際に呼び出される
-//			dispatch_async_main(^{
-//				[self progressOff];
-//			});
-//		} break;
+		case PTPIP_DEVICE_PROP_CHANGED:
+		{	// デバイスのプロパティに変化あり
+			return;
+		} break;
+
+		case PTPIP_CAPTURE_COMPLETE:
+		{	// 撮影が完了した際に呼び出される
+			dispatch_async_main(^{
+				[self progressOff];
+			});
+		} break;
 		
 		case PTPIP_OBJECT_ADDED:
 		{	// 撮影などを行った際にオブジェクトが作成された際に呼び出される
@@ -92,14 +100,10 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			
 		case PTPIP_STORE_FULL:
 		{	// ストレージFULL
-			
+			return;
 		} break;
 	}
 	
-	dispatch_async_main(^{
-		self.captureButton.enabled = YES;
-		[self progressOff];
-	});
 }
 
 -(void)ptpip_socketError:(int)err
@@ -135,7 +139,6 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		[mData.ptpConnection setEventListener:nil];
 		
 		dispatch_async_main(^{
-			//[self disconnect];
 			[self progressOff];
 			// Back Model Connect View
 			[self dismissViewControllerAnimated:YES completion:nil];
@@ -182,7 +185,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 							}];
 		if (!result) {
 			LOG(@"getThumb(0x%08x) failed.", objectHandle);
-			thumb = [UIImage imageNamed:@"NoThumb.svg"];
+			thumb = mImageThumb;
 		} else {
 			// OK
 			thumb = [UIImage imageWithData:thumbData];
@@ -194,7 +197,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			LOG(@"mData.tamaObjects.count=%ld", (unsigned long)mData.tamaObjects.count);
 		}
 	} else {
-		thumb = [UIImage imageNamed:@"NoThumb.svg"];
+		thumb = mImageThumb;
 	}
 	return thumb;
 }
@@ -256,30 +259,62 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 - (void)capture
 {
-	//[self progressOnTitle:NSLocalizedString(@"Lz.Capture",nil)];
-	[MRProgressOverlayView showOverlayAddedTo:self.view
-										title:NSLocalizedString(@"Lz.Capture",nil)
-										 mode:MRProgressOverlayViewModeIndeterminate
-									 animated:YES
-									stopBlock:^(MRProgressOverlayView *progressOverlayView) {
-										// STOP処理
-//										[self progressOnTitle:NSLocalizedString(@"Session closeing...",nil)];
-//										[mData.ptpConnection close:^{
-//											dispatch_async_main(^{
-//												[self progressOff];
-//												[self dismissViewControllerAnimated:YES completion:nil];
-//											});
-//										}];
-										dispatch_async_main(^{
-											[mData.ptpConnection setEventListener:nil];
-											[self progressOff];
-											[self dismissViewControllerAnimated:YES completion:nil];
-										});
-										return;
-									}];
+	switch (mCaptureMode) {
+		case CAPTURE_MODE_NORMAL:
+		{
+			[self progressOnTitle:NSLocalizedString(@"During 360° Capture.",nil)];
+		}	break;
+			
+		case CAPTURE_MODE_TIMELAPSE:
+		{
+			[MRProgressOverlayView showOverlayAddedTo:self.view
+												title:NSLocalizedString(@"During timelapse shooting.",nil)
+												 mode:MRProgressOverlayViewModeIndeterminate
+											 animated:YES
+											stopBlock:^(MRProgressOverlayView *progressOverlayView) {
+												// STOP処理
+												[self progressOff];
+												[self progressOnTitle:NSLocalizedString(@"Saveing...",nil)];
+												[mData.ptpConnection operateSession:^(PtpIpSession *session){
+													BOOL result = [session terminateOpenCapture: mTransactionId];
+													LOG(@"terminateOpenCapture: result=%d", result);
+													dispatch_async_main(^{
+														self.buCapture.enabled = YES;
+													});
+												}];
+												return;
+											}];
+		}	break;
+			
+		case CAPTURE_MODE_MOVIE:
+		{
+			[MRProgressOverlayView showOverlayAddedTo:self.view
+												title:NSLocalizedString(@"During movie shooting.",nil)
+												 mode:MRProgressOverlayViewModeIndeterminate
+											 animated:YES
+											stopBlock:^(MRProgressOverlayView *progressOverlayView) {
+												// STOP処理
+												[self progressOff];
+												[self progressOnTitle:NSLocalizedString(@"Saveing...",nil)];
+												[mData.ptpConnection operateSession:^(PtpIpSession *session){
+													BOOL result = [session terminateOpenCapture: mTransactionId];
+													LOG(@"terminateOpenCapture: result=%d", result);
+													dispatch_async_main(^{
+														self.buCapture.enabled = YES;
+													});
+												}];
+												return;
+											}];
+		}	break;
+			
+		default:
+			break;
+	}
+
 	
-	self.captureButton.enabled = NO;
-	self.ivThumbnail.image = [UIImage imageNamed:@"NoThumb.svg"];
+	//[self.buCapture setImage:[UIImage imageNamed:@"Tama.svg-Stop"] forState:UIControlStateNormal];
+	self.buCapture.enabled = NO;
+	self.ivThumbnail.image = mImageThumb;
 	
 	[mData.ptpConnection operateSession:^(PtpIpSession *session){
 		// This block is running at PtpConnection#gcd thread.
@@ -340,24 +375,14 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 			case CAPTURE_MODE_TIMELAPSE:
 			{
-				BOOL rtn = [session initiateOpenCapture];
-				LOG(@"execShutter[rtn:%d]", rtn);
-				if (rtn != 1) {
-					dispatch_async_main(^{
-						[self dismissViewControllerAnimated:YES completion:nil];
-					});
-				}
+				mTransactionId = [session initiateOpenCapture];
+				LOG(@"mTransactionId:%ld", mTransactionId);
 			}	break;
 				
 			case CAPTURE_MODE_MOVIE:
 			{
-				BOOL rtn = [session initiateOpenCapture];
-				LOG(@"execShutter[rtn:%d]", rtn);
-				if (rtn != 1) {
-					dispatch_async_main(^{
-						[self dismissViewControllerAnimated:YES completion:nil];
-					});
-				}
+				mTransactionId = [session initiateOpenCapture];
+				LOG(@"mTransactionId:%ld", mTransactionId);
 			}	break;
 
 			default:
@@ -368,9 +393,20 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 - (void)viewRefresh
 {
+	//[self.buCapture setImage:[UIImage imageNamed:@"Tama.svg-Start"] forState:UIControlStateNormal];
+	self.buCapture.enabled = YES;
+	
 	// 音量
 	[self volumeShow];
 	
+	// 充電レベル
+	[self viewRefreshBattery];
+
+	[self progressOff];
+}
+
+- (void)viewRefreshBattery
+{
 	// 充電レベル   FULL(100), HALF(67), NEAR_END(33), END(0)
 	self.batteryLabel.text = [NSString stringWithFormat:@"%ld%%", (unsigned long)mData.batteryLevel];
 	float ff = (float)mData.batteryLevel / 100.0;
@@ -384,10 +420,29 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		self.batteryProgress.progressTintColor = [UIColor blueColor];
 	}
 	self.batteryProgress.progress = ff;
-
-	[self progressOff];
 }
 
+- (void)timerCheck:(NSTimer*)timer
+{	// Wi-Fi接続状態を監視する、切れると第一画面へ
+	LOG_FUNC
+	
+	//[mTimerCheck invalidate];	//タイマー停止
+	
+	if (!mData.connected) {
+		[self progressOff];
+		[self dismissViewControllerAnimated:YES completion:nil];
+		return;
+	}
+
+	[mData.ptpConnection operateSession:^(PtpIpSession *session) {
+		// 充電レベル
+		mData.batteryLevel = [session getBatteryLevel];
+		dispatch_async_main(^{
+			[self viewRefreshBattery];
+		});
+		//[mTimerCheck fire]; //タイマー再開
+	}];
+}
 
 - (IBAction)onThumbnailTouchUpIn:(id)sender
 {
@@ -629,15 +684,21 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	// Thumbnailコーナを丸くする
 	[[self.ivThumbnail layer] setCornerRadius: self.ivThumbnail.frame.size.height / 3.0];
 	[self.ivThumbnail setClipsToBounds:YES];
+	
+	// 監視タイマー生成
+//	mTimerCheck = [NSTimer	scheduledTimerWithTimeInterval:5.0f
+//												   target:self
+//												 selector:@selector(timerCheck:)
+//												 userInfo:nil
+//												  repeats:YES ];
+
+	mTimerCheck = [NSTimer timerWithTimeInterval:6.0f target:self selector:@selector(timerCheck:) userInfo:nil repeats:YES];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-
-	if (self.ivThumbnail.image==nil) {
-		self.ivThumbnail.image = [UIImage imageNamed:@"NoThumb.svg"];
-	}
 
 	//self.batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 3.0f ); // 横方向に1倍、縦方向に3倍して表示する
 //	[UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
@@ -646,6 +707,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 //		self.batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 3.0f );
 //	}];
 	
+	if (self.ivThumbnail.image==nil) {
+		self.ivThumbnail.image = [UIImage imageNamed:@"Tama2.svg"];
+	}
 	
 	self.sgShutter1.selectedSegmentIndex = 0;
 	self.sgShutter2.selectedSegmentIndex = UISegmentedControlNoSegment;
@@ -659,7 +723,14 @@ inline static void dispatch_async_main(dispatch_block_t block)
 {
 	[super viewDidAppear:animated];
 	LOG_FUNC
+
 	[self applicationWillEnterForeground];
+
+	if (self.ivThumbnail.image==nil) {
+		self.ivThumbnail.image = mImageThumb;
+	}
+	
+	[mTimerCheck fire]; //タイマー開始
 }
 
 - (void)didReceiveMemoryWarning
@@ -684,6 +755,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	if (mData.connected) {
 		// Ready to PTP/IP.
 		[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
+		[mData.ptpConnection setTimeLimitForResponse:PTP_TIMEOUT];
+
 		// PtpIpEventListener delegates.
 		[mData.ptpConnection setEventListener:self]; //画面遷移の都度、デリゲート指定必須
 		
@@ -710,9 +783,10 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			NSInteger stillCaptureMode = [session getStillCaptureMode];
 			LOG(@"stillCaptureMode=%ld",(long)stillCaptureMode);
 
-			mCaptureMode = CAPTURE_MODE_NORMAL;
 			if (stillCaptureMode==0 || stillCaptureMode==PTPIP_STILL_CAPTURE_MODE_MOVIE) {
 				mCaptureMode = CAPTURE_MODE_MOVIE;
+				mImageThumb = [UIImage imageNamed:@"Tama2.svg-Movie"];
+
 				// 動画記録時間(秒)(型番：RICOH THETA m15)
 				NSUInteger recordingTime = [session getRecordingTime];
 				LOG(@"recordingTime=%ld",(long)recordingTime);
@@ -723,6 +797,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			}
 			else if	(stillCaptureMode==PTPIP_STILL_CAPTURE_MODE_TIMELAPSE) {
 				mCaptureMode = CAPTURE_MODE_TIMELAPSE;
+				mImageThumb = [UIImage imageNamed:@"Tama2.svg-Timelapse"];
 				// インターバル撮影の上限枚数
 				//     0(上限なし), 2-65535
 				NSInteger timelapseNumber = [session getTimelapseNumber];
@@ -733,8 +808,13 @@ inline static void dispatch_async_main(dispatch_block_t block)
 				NSInteger timelapseInterval= [session getTimelapseInterval];
 				LOG(@"timelapseInterval=%ld",(long)timelapseInterval);
 			}
+			else {
+				mCaptureMode = CAPTURE_MODE_NORMAL;
+				mImageThumb = [UIImage imageNamed:@"Tama2.svg"];
+			}
 			
 			dispatch_async_main(^{
+				self.ivThumbnail.image = mImageThumb;
 				[self viewRefresh];
 			});
 		}];

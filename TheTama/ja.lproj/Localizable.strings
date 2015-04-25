@@ -13,7 +13,9 @@
 
 "Lz.Disconnecting" = "THETA\n切断中...";
 
-"Lz.Capture" = "撮影・記録中...";
+"During 360° Capture." = "360° 撮影中";
+"During timelapse shooting." = "タイムラプス撮影中";
+"During movie shooting." = "動画撮影中";
 
 /* "Lz.PrivilegeNextLoad" = "(Thank you for your support.)";"Lz.NextLoad" = "Continue to load..."; */
 "Lz.PrivilegeVolumeZero" = "＄ここで課金画面を出す＄";
@@ -64,4 +66,6 @@
 "Products Request Failed" = "販売できる商品がありません";
 
 "Nothing" = "ありません";
+
+"Saveing..." = "保存中...";
 

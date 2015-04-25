@@ -273,8 +273,10 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
 	if (obj.thumbnail) {
 		cell.imageView.image = obj.thumbnail;
+	} else if ([obj.objectInfo.filename hasSuffix:@".MOV"]) {
+		cell.imageView.image = [UIImage imageNamed:@"Tama2.svg-Movie"];
 	} else {
-		cell.imageView.image = [UIImage imageNamed:@"NoThumb.svg"];
+		cell.imageView.image = [UIImage imageNamed:@"Tama2.svg"];
 	}
 	// cell.imageViewのコーナを丸くする
 	[[cell.imageView layer] setCornerRadius:28.0];

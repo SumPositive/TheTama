@@ -55,7 +55,6 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			
 	}
 	dispatch_async_main(^{
-		//[SVProgressHUD dismiss];
 		[self progressOff];
 	});
 }
@@ -91,15 +90,14 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	
 	LOG(@"socket error(0x%X,closed=%@).\n--- %@", err, closed? @"YES": @"NO", desc);
 	if (closed) {
-		[mData.ptpConnection setEventListener:nil];
+		//[mData.ptpConnection setEventListener:nil];
 		
 		dispatch_async_main(^{
-			//[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Disconnect", nil)
-			//					 maskType:SVProgressHUDMaskTypeGradient];
-			[self progressOnTitle:NSLocalizedString(@"Lz.Disconnect", nil)];
-			[self disconnect];
-			//[SVProgressHUD dismiss];
 			[self progressOff];
+			//[self progressOnTitle:NSLocalizedString(@"Lz.Disconnect", nil)];
+			//[self disconnect];
+			//[SVProgressHUD dismiss];
+			//[self progressOff];
 		});
 	}
 }
@@ -127,11 +125,18 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	self.buSetting.enabled = NO;
 	self.buRetry.enabled = NO;
 
+	assert(mData.ptpConnection);
+	// Ready to PTP/IP.
+	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
+	[mData.ptpConnection setTimeLimitForResponse:PTP_TIMEOUT];
+	
+	// PtpIpEventListener delegates.
+	[mData.ptpConnection setEventListener:self]; //画面遷移の都度、デリゲート指定必須
+
 	// Setup `target IP`(camera IP).
 	// Product default is "192.168.1.1".
 	[mData.ptpConnection setTargetIp: @"192.168.1.1"]; // _ipField.text];
 	
-	assert(mData.ptpConnection);
 	// Connect to target.
 	[mData.ptpConnection connect:^(BOOL connected) {
 		// "Connect" and "OpenSession" completion callback.
@@ -294,10 +299,6 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	// Refresh
 	//mData.ptpConnection = nil;
 	//mData.ptpConnection = [[PtpConnection alloc] init];
-	// Ready to PTP/IP.
-	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
-	// PtpIpEventListener delegates.
-	[mData.ptpConnection setEventListener:self]; //画面遷移の都度、デリゲート指定必須
 #endif
 	[self connect];
 }

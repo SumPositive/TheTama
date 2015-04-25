@@ -11,6 +11,7 @@
 // TheTama Original Define.
 #define LIST_CHUNK_FIRST	7		// ListViewTableでTHETAから１度に読み込む画像数
 #define LIST_CHUNK_NEXT		15		// ListViewTableでTHETAから１度に読み込む画像数
+#define PTP_TIMEOUT			3		//(second)
 
 
 
