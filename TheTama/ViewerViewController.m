@@ -41,10 +41,11 @@
 	float _yaw;
 	float _roll;
 	float _pitch;
+	MRProgressOverlayView * mMrpov;
 }
 @property (nonatomic, strong) IBOutlet UIImageView* imageView;
 @property (nonatomic, strong) IBOutlet UILabel * lbTitle;
-@property (nonatomic, strong) IBOutlet UIProgressView* progressView;
+//@property (nonatomic, strong) IBOutlet UIProgressView* progressView;
 @end
 
 
@@ -84,13 +85,19 @@
 #if TARGET_IPHONE_SIMULATOR
 	return;
 #endif
-
+	
 	mPtpObject = ptpObject;
 
 	dispatch_async(dispatch_get_main_queue(), ^{
-		self.progressView.progress = 0.0;
-		self.progressView.hidden = NO;
-	
+		//self.progressView.progress = 0.0;
+		//self.progressView.hidden = NO;
+		mMrpov = [MRProgressOverlayView showOverlayAddedTo:self.imageView
+											title:@"Loading..."	// nil だと落ちる
+											 mode:MRProgressOverlayViewModeDeterminateCircular
+										 animated:YES];
+		[mMrpov setProgress:0.0f];
+		
+		
 		NSDateFormatter* df = [[NSDateFormatter alloc] init];
 		[df setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
 		[df setDateStyle:NSDateFormatterShortStyle];
@@ -126,16 +133,23 @@
 											 
 											 // Update progress.
 											 dispatch_async(dispatch_get_main_queue(), ^{
-												 self.progressView.progress = (float)imageData.length / total;
+												 //self.progressView.progress = (float)imageData.length / total;
+												 [mMrpov setProgress: (float)imageData.length / total];
 											 });
 											 
 											 // Continue to receive.
 											 return YES;
 										 }];
-		self.progressView.progress = 1.0;
+
+		dispatch_async(dispatch_get_main_queue(), ^{
+			//self.progressView.progress = 1.0;
+			[mMrpov setProgress: 1.0f];
+		});
+
 		if (!result) {
 			dispatch_async(dispatch_get_main_queue(), ^{
-				self.progressView.hidden = YES;
+				//self.progressView.hidden = YES;
+				[mMrpov dismiss:YES];
 			});
 			return;
 		}
@@ -145,31 +159,35 @@
 		RicohEXIF* exif = [[RicohEXIF alloc] initWithNSData:imageData];
 		
 		// If there is no information, yaw, pitch and roll method returns NaN.
-		NSString* tiltInfo = [NSString stringWithFormat:@"yaw:%0.1f pitch:%0.1f roll:%0.1f",
-							  exif.yaw,
-							  exif.pitch,
-							  exif.roll];
+		LOG(@"RicohEXIF: yaw:%0.1f pitch:%0.1f roll:%0.1f", exif.yaw, exif.pitch, exif.roll);
 		
-		if (isnan(exif.yaw)) {
+		// 方位角 0 - 360
+		if (isnan(exif.yaw) || exif.yaw < 0.0f || 360.0f < exif.yaw) {
 			_yaw = 0.0f;
 		} else {
 			_yaw = exif.yaw;
 		}
-		if (isnan(exif.pitch)) {
+		
+		// 仰角 -90 - 90
+		if (isnan(exif.pitch) || exif.pitch < -90.0f || 90.0f < exif.pitch) {
 			_pitch = 0.0f;
 		} else {
 			_pitch = exif.pitch;
 		}
-		if (isnan(exif.roll)) {
+
+		// 水平角 0 - 360
+		if (isnan(exif.roll) || exif.roll < 0.0f || 360.0f < exif.roll) {
 			_roll = 0.0f;
 		} else {
 			_roll = exif.roll;
 		}
 		
+		LOG(@"Viewer: _yaw:%0.1f _pitch:%0.1f _roll:%0.1f", _yaw, _pitch, _roll);
+		
 		dispatch_async(dispatch_get_main_queue(), ^{
-			self.progressView.hidden = YES;
+			//self.progressView.hidden = YES;
+			[mMrpov dismiss:YES];
 			//[self appendLog:tiltInfo];
-			NSLog(@"tiltInfo: %@", tiltInfo);
 			[self startGLK];
 		});
 	}];
@@ -229,14 +247,14 @@
 //	[[self.imageView layer] setCornerRadius:20.0];
 //	[self.imageView setClipsToBounds:YES];
 
-	self.progressView.transform = CGAffineTransformMakeScale( 1.0f, 3.0f ); // 横方向に1倍、縦方向に3倍して表示する
+	//self.progressView.transform = CGAffineTransformMakeScale( 1.0f, 3.0f ); // 横方向に1倍、縦方向に3倍して表示する
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
 	
-	self.progressView.progress = 0.0;
+	//self.progressView.progress = 0.0;
 	//	[self viewRefresh];
 }
 

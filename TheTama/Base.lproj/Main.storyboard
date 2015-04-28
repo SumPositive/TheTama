@@ -682,12 +682,6 @@
                                     <constraint firstAttribute="width" secondItem="EEa-2q-U6N" secondAttribute="height" multiplier="1:1" id="q4s-41-u6w"/>
                                 </constraints>
                             </imageView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MXN-cK-mD3">
-                                <rect key="frame" x="82" y="367" width="250" height="2"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="WHf-mn-OcD"/>
-                                </constraints>
-                            </progressView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iGr-3C-pXN">
                                 <rect key="frame" x="16" y="706" width="382" height="30"/>
                                 <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
@@ -709,7 +703,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="QxI-Ge-OpR" firstAttribute="leading" secondItem="oh3-8t-1TR" secondAttribute="leadingMargin" constant="10" id="936-KX-PZR"/>
-                            <constraint firstAttribute="centerX" secondItem="MXN-cK-mD3" secondAttribute="centerX" id="Y7Y-QR-wGT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="QxI-Ge-OpR" secondAttribute="trailing" constant="10" id="Z9p-r8-gt5"/>
                             <constraint firstItem="EEa-2q-U6N" firstAttribute="top" secondItem="QxI-Ge-OpR" secondAttribute="bottom" constant="3" id="aMg-Mj-twh"/>
                             <constraint firstAttribute="centerY" secondItem="EEa-2q-U6N" secondAttribute="centerY" id="am3-4d-Yq5"/>
@@ -718,13 +711,11 @@
                             <constraint firstItem="iGr-3C-pXN" firstAttribute="leading" secondItem="oh3-8t-1TR" secondAttribute="leadingMargin" id="rEv-D8-g1d"/>
                             <constraint firstItem="EEa-2q-U6N" firstAttribute="leading" secondItem="oh3-8t-1TR" secondAttribute="leadingMargin" id="rnF-ys-FES"/>
                             <constraint firstItem="ypb-1k-yAf" firstAttribute="top" secondItem="iGr-3C-pXN" secondAttribute="bottom" id="xhz-xl-cIM"/>
-                            <constraint firstAttribute="centerY" secondItem="MXN-cK-mD3" secondAttribute="centerY" id="zpN-ub-4hl"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="EEa-2q-U6N" id="IwL-nR-FVY"/>
                         <outlet property="lbTitle" destination="QxI-Ge-OpR" id="2gU-xS-eD4"/>
-                        <outlet property="progressView" destination="MXN-cK-mD3" id="Hui-Zb-pYm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="slj-kv-JJy" userLabel="First Responder" sceneMemberID="firstResponder"/>

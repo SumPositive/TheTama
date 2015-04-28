@@ -95,7 +95,7 @@
 "bOr-07-gIT.text" = "アプリ名";
 
 /* Class = "UILabel"; text = "If touch around the time display, \n  you can jump to the top line."; ObjectID = "bzv-LI-FU0"; */
-"bzv-LI-FU0.text" = "一覧表では時刻部分をタッチすると、\n先頭行へ戻ることができます。";
+"bzv-LI-FU0.text" = "一覧表では時刻部分をタッチすると、\n先頭行へジャンプできます。";
 
 /* Class = "UILabel"; text = "100%"; ObjectID = "cCL-P9-1Yo"; */
 "cCL-P9-1Yo.text" = "100%";
