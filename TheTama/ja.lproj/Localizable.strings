@@ -5,7 +5,7 @@
   Copyright (c) 2015年 Azukid. All rights reserved. */
 
 /* NSLocalizedString(@"Lz.Connecting",nil) */
-"Lz.Reloading" = "読込中...";
+"Loading..." = "読込中...";
 
 "Lz.Disconnect" = "THETA\n未接続";
 

@@ -87,8 +87,10 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		{	// 撮影などを行った際にオブジェクトが作成された際に呼び出される
 			LOG(@"Object added Event(0x%04x) - 0x%08x", code, param1);
 			[mData.ptpConnection operateSession:^(PtpIpSession *session) {
-				// サムネイル表示
+
+				// サムネイルを取得すると同時に mData.tamaObjectsへ追加する
 				UIImage * thumb = [self imageThumbnail:param1 session:session];
+
 				dispatch_async_main(^{
 					self.ivThumbnail.image = thumb;
 					// Get Battery level.
@@ -194,6 +196,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			assert(tamaObj);
 			[mData.tamaObjects addObject:tamaObj];
 			mData.tamaCapture = tamaObj;
+			mData.listBottom = YES; // ListViewにて最終行を表示させる
 			LOG(@"mData.tamaObjects.count=%ld", (unsigned long)mData.tamaObjects.count);
 		}
 	} else {
@@ -457,6 +460,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (IBAction)onListTouchUpIn:(id)sender
 {
 	// List > を押したとき
+	mData.listBottom = YES; // ListViewにて最終行を表示させる
 	// Goto Model Viewer View
 	[self performSegueWithIdentifier:@"segList" sender:self];
 }
@@ -707,10 +711,6 @@ inline static void dispatch_async_main(dispatch_block_t block)
 //		self.batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 3.0f );
 //	}];
 	
-	if (self.ivThumbnail.image==nil) {
-		self.ivThumbnail.image = [UIImage imageNamed:@"Tama2.svg"];
-	}
-	
 	self.sgShutter1.selectedSegmentIndex = 0;
 	self.sgShutter2.selectedSegmentIndex = UISegmentedControlNoSegment;
 	self.sgIso.selectedSegmentIndex = 0;
@@ -726,11 +726,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 	[self applicationWillEnterForeground];
 
-	if (self.ivThumbnail.image==nil) {
-		self.ivThumbnail.image = mImageThumb;
-	}
-	
-	[mTimerCheck fire]; //タイマー開始
+	[mTimerCheck fire]; //タイマー開始   //TODO:リピートされない？
 }
 
 - (void)didReceiveMemoryWarning
@@ -814,7 +810,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			}
 			
 			dispatch_async_main(^{
-				self.ivThumbnail.image = mImageThumb;
+				if (self.ivThumbnail.image==nil || mData.tamaViewer==nil || mData.tamaCapture==nil || mData.tamaViewer != mData.tamaCapture) {
+					self.ivThumbnail.image = mImageThumb;
+				}
 				[self viewRefresh];
 			});
 		}];

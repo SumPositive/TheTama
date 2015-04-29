@@ -92,7 +92,7 @@
 		//self.progressView.progress = 0.0;
 		//self.progressView.hidden = NO;
 		mMrpov = [MRProgressOverlayView showOverlayAddedTo:self.imageView
-											title:@"Loading..."	// nil だと落ちる
+											title:NSLocalizedString(@"Loading...",nil)	// nil だと落ちる
 											 mode:MRProgressOverlayViewModeDeterminateCircular
 										 animated:YES];
 		[mMrpov setProgress:0.0f];

@@ -13,6 +13,7 @@ class DataObject: NSObject, NSCoding {
 	//--------------------------非保存、初期化される
 	// BOOL
 	var connected = false;
+	var listBottom = true;		// true=ListView:最終行を表示する
 
 	// Integer
 	var batteryLevel = 0

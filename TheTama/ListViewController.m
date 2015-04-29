@@ -18,6 +18,7 @@
 #import "PtpObject.h"
 #import "TableCellTama.h"
 
+#import "CaptureViewController.h"
 #import "ViewerViewController.h"
 
 
@@ -29,9 +30,10 @@ inline static void dispatch_async_main(dispatch_block_t block)
 @interface ListViewController () <PtpIpEventListener, UITableViewDelegate, UITableViewDataSource>
 {
 	DataObject * mData;
-	PtpIpStorageInfo * mStorageInfo;
-	BOOL mTableBottom;
-	UIRefreshControl * mRefreshControl;
+	PtpIpStorageInfo *	mStorageInfo;
+	BOOL				mTableBottom;
+	UIRefreshControl *	mRefreshControl;
+	//NSInteger			mIndexPrev;
 }
 @property (nonatomic, strong) IBOutlet UITableView * tableView;
 @end
@@ -109,7 +111,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
 {
 	id dvc = [segue destinationViewController];
-	if ([dvc isKindOfClass:[ViewerViewController class]]) {
+
+	if ([dvc isKindOfClass:[ViewerViewController class]]) {	// ViewerViewController:へ遷移するとき
 		//ViewerViewController* dest = (ViewerViewController*)dvc;
 		TableCellTama* cell = (TableCellTama*)sender;
 		mData.tamaViewer = [mData.tamaObjects objectAtIndex:cell.objectIndex];
@@ -137,22 +140,11 @@ inline static void dispatch_async_main(dispatch_block_t block)
 #pragma mark - PTP/IP Operations.
 
 - (void)reloadTamaObjects
-
 {
 	LOG_FUNC
 #if TARGET_IPHONE_SIMULATOR
 	return;
 #endif
-
-	[self progressOnTitle:NSLocalizedString(@"Lz.Reloading",nil)];
-
-	[mData.tamaObjects removeAllObjects];
-	
-//	[mData.ptpConnection getDeviceInfo:^(const PtpIpDeviceInfo* info) {
-//		// "GetDeviceInfo" completion callback.
-//		// This block is running at PtpConnection#gcd thread.
-//		LOG(@"DeviceInfo:%@", info);
-//	}];
 	
 	[mData.ptpConnection operateSession:^(PtpIpSession *session) {
 		// This block is running at PtpConnection#gcd thread.
@@ -167,23 +159,69 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		LOG(@"getObjectHandles() recevied %zd handles.", objectHandles.count);
 		
 		// Get object informations and thumbnail images for each primary images.
-		NSInteger cnt = objectHandles.count - LIST_CHUNK_FIRST;
+		NSArray * arPrev;
+		NSRange rgTama;
 
-		for (NSNumber* it in objectHandles) {
-			if (0 < cnt) {
-				cnt--;
+		if ([mData.tamaObjects count] <= 0) {
+			if (LIST_CHUNK_FIRST < objectHandles.count) {
+				rgTama.location = objectHandles.count - LIST_CHUNK_FIRST;
+				rgTama.length = LIST_CHUNK_FIRST;
 			} else {
-				uint32_t objectHandle = (uint32_t)it.integerValue;
-				PtpObject * obj = [self loadObject:objectHandle session:session];
-				if (obj != nil) {
-					[mData.tamaObjects addObject:obj];
-				}
+				rgTama.location = 0;
+				rgTama.length = objectHandles.count;
+			}
+			arPrev = nil;
+		}
+		else {
+			NSInteger indexPrev = [objectHandles count] - [mData.tamaObjects count] - 1;
+			if (LIST_CHUNK_NEXT < indexPrev) {
+				rgTama.location = indexPrev - LIST_CHUNK_NEXT;
+				rgTama.length = LIST_CHUNK_NEXT;
+			} else {
+				rgTama.location = 0;
+				rgTama.length = indexPrev;
+			}
+			//直前のListを保存
+			arPrev = [[NSArray alloc] initWithArray:mData.tamaObjects];
+		}
+		//Listクリア
+		[mData.tamaObjects removeAllObjects];
+		
+		//新たにListへ追加するobjects
+		NSArray * arHandles = [objectHandles subarrayWithRange: rgTama];
+		
+		//新たにListへ追加するPtpObject
+		for (NSNumber * it in arHandles) {
+			uint32_t objectHandle = (uint32_t)it.integerValue;
+			PtpObject * obj = [self loadObject:objectHandle session:session];
+			if (obj != nil) {
+				[mData.tamaObjects addObject:obj];
 			}
 		}
+		
+		if (arPrev) {
+			//直前のListがあれば末尾へ追加する
+			[mData.tamaObjects addObjectsFromArray:arPrev];
+		}
+		
 		dispatch_async_main(^{
 			[self.tableView reloadData];
-			[self bottomTableView:self.tableView animated:NO]; //最終行へ
-			mTableBottom = YES;
+			//[self progressOff];
+			
+			if (0 < [arPrev count] && 0 < [arHandles count] && !mData.listBottom) {
+				// 最上行を復元
+				NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[arHandles count] inSection:0];
+				[self.tableView scrollToRowAtIndexPath:indexPath
+									  atScrollPosition:UITableViewScrollPositionTop
+											  animated:NO];
+			} else {
+				// 最下行へ
+				[self bottomTableView:self.tableView animated:NO];
+				mData.listBottom = NO;
+			}
+			
+			// UIRefreshControl更新終了時に呼び出す
+			[mRefreshControl endRefreshing];
 			[self progressOff];
 		});
 	}];
@@ -314,7 +352,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	// UITableView
 	self.tableView.delegate = self;
 	self.tableView.dataSource = self;
-	mTableBottom = NO;
+	mTableBottom = YES;	//最初に１度だけ最終行へ移動させる
 	
 	//  通知受信の設定
 	NSNotificationCenter*   nc = [NSNotificationCenter defaultCenter];
@@ -331,30 +369,20 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	
 	
 	// self.refreshControl にセットする前に行うこと！
-	NSString * zRefreshTitle;
-	if (mData.option1payed) {
-		zRefreshTitle = NSLocalizedString(@"Continue to load...",nil);
-	} else {
-		zRefreshTitle = NSLocalizedString(@"Please wait for the update.",nil);
-	}
-	mRefreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:zRefreshTitle attributes:nil];
+	mRefreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Loading...",nil) attributes:nil];
 	
 	//self.refreshControl = mRefreshControl;		//UITableViewControllerの場合
 	[self.tableView addSubview:mRefreshControl];	//UITableViewの場合
 }
 
+// UIRefreshControl-Action テーブルを下へ引きずって離したとき呼び出される
 - (void)tableRefresh:(id)sender
 {
 	NSLog(@"tableRefresh!");
-	if (mData.option1payed) {
-		[mRefreshControl beginRefreshing];
-		
-		// ここにリフレッシュ時の処理を記述.
-		[self reloadTamaObjects];
-		
-	}
-	// 更新終了時などに呼び出します.
-	[mRefreshControl endRefreshing];
+	[mRefreshControl beginRefreshing];
+	
+	// ここにリフレッシュ時の処理を記述.
+	[self reloadTamaObjects];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -379,22 +407,25 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		[self onBackTouchUpIn:nil];
 	}
 #endif
+
+	if (0 < mData.tamaObjects.count) {
+		//[self.tableView reloadData];
+		if (mData.listBottom) {
+			// 最下行へ
+			[self bottomTableView:self.tableView animated:NO];
+			mData.listBottom = NO;
+		}
+	}
+	else {
+		[self progressOnTitle:NSLocalizedString(@"Loading...",nil)];
+		[self reloadTamaObjects];
+	}
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
-
-	if (0 < mData.tamaObjects.count) {
-		[self.tableView reloadData];
-		if (mTableBottom==NO) {
-			[self bottomTableView:self.tableView animated:NO];
-			mTableBottom = YES;
-		}
-	}
-	else {
-		[self reloadTamaObjects];
-	}
+	[self.tableView reloadData];	//選択（反転）を解除するため
 }
 
 - (void)didReceiveMemoryWarning
