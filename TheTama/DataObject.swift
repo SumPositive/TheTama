@@ -25,9 +25,10 @@ class DataObject: NSObject, NSCoding {
 	var tamaViewer: PtpObject?			// 3D-Viewerで表示する写真情報
 	
 	
-	//--------------------------永続化
+	//--------------------------永続化　（同時に下にある、NSCoding protocolへも実装すること）
 	// BOOL
 	var captureTouchDown = false;
+	var capturePreview = true;		//キャプチャ後プレビューする（false:転送に待たされない）
 	var option1payed = false;		//１課金済み　特典パック
 	var option2payed = false;		//２課金済み
 	var option3payed = false;		//３課金済み
@@ -52,6 +53,7 @@ class DataObject: NSObject, NSCoding {
 		
 		// BOOL
 		aCoder.encodeBool(self.captureTouchDown,	forKey: "captureTouchDown")
+		aCoder.encodeBool(self.capturePreview,		forKey: "capturePreview")
 		aCoder.encodeBool(self.option1payed,		forKey: "option1payed")
 		aCoder.encodeBool(self.option2payed,		forKey: "option2payed")
 		aCoder.encodeBool(self.option3payed,		forKey: "option3payed")
@@ -67,6 +69,7 @@ class DataObject: NSObject, NSCoding {
 	required init(coder aDecoder: NSCoder) {
 		// BOOL
 		self.captureTouchDown	= aDecoder.decodeBoolForKey("captureTouchDown")
+		self.capturePreview		= aDecoder.decodeBoolForKey("capturePreview")
 		self.option1payed		= aDecoder.decodeBoolForKey("option1payed")
 		self.option2payed		= aDecoder.decodeBoolForKey("option2payed")
 		self.option3payed		= aDecoder.decodeBoolForKey("option3payed")

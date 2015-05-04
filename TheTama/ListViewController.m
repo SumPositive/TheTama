@@ -417,7 +417,18 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		}
 	}
 	else {
-		[self progressOnTitle:NSLocalizedString(@"Loading...",nil)];
+		//[self progressOnTitle:NSLocalizedString(@"Loading...",nil)];
+		//キャンセル可能にするため
+		[MRProgressOverlayView showOverlayAddedTo:self.view
+											title:NSLocalizedString(@"Loading...",nil)
+											 mode:MRProgressOverlayViewModeIndeterminate
+										 animated:YES
+										stopBlock:^(MRProgressOverlayView *progressOverlayView) {
+											// CANCEL処理
+											[self progressOff];
+											[self onBackTouchUpIn:nil];
+											return;
+										}];
 		[self reloadTamaObjects];
 	}
 }

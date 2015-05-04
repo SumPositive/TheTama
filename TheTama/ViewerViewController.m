@@ -91,10 +91,22 @@
 	dispatch_async(dispatch_get_main_queue(), ^{
 		//self.progressView.progress = 0.0;
 		//self.progressView.hidden = NO;
-		mMrpov = [MRProgressOverlayView showOverlayAddedTo:self.imageView
-											title:NSLocalizedString(@"Loading...",nil)	// nil だと落ちる
-											 mode:MRProgressOverlayViewModeDeterminateCircular
-										 animated:YES];
+
+		//		mMrpov = [MRProgressOverlayView showOverlayAddedTo:self.imageView
+		//											title:NSLocalizedString(@"Loading...",nil)	// nil だと落ちる
+		//											 mode:MRProgressOverlayViewModeDeterminateCircular
+		//										 animated:YES];
+		//キャンセル可能にするため
+		mMrpov = [MRProgressOverlayView showOverlayAddedTo:self.view
+											title:NSLocalizedString(@"Loading...",nil)
+											 mode:MRProgressOverlayViewModeDeterminateCircular //MRProgressOverlayViewModeIndeterminate
+										 animated:YES
+										stopBlock:^(MRProgressOverlayView *progressOverlayView) {
+											// CANCEL処理
+											[self progressOff];
+											[self onBackTouchUpIn:nil];
+											return;
+										}];
 		[mMrpov setProgress:0.0f];
 		
 		
@@ -144,13 +156,10 @@
 		dispatch_async(dispatch_get_main_queue(), ^{
 			//self.progressView.progress = 1.0;
 			[mMrpov setProgress: 1.0f];
+			[mMrpov dismiss:YES];
 		});
 
 		if (!result) {
-			dispatch_async(dispatch_get_main_queue(), ^{
-				//self.progressView.hidden = YES;
-				[mMrpov dismiss:YES];
-			});
 			return;
 		}
 		mImageData = imageData;

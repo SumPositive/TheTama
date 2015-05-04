@@ -50,7 +50,10 @@ inline static void dispatch_async_main(dispatch_block_t block)
 @property (nonatomic, strong) IBOutlet UILabel  * volumeLabel;
 @property (nonatomic, strong) IBOutlet UISlider * volumeSlider;
 @property (nonatomic, strong) IBOutlet UIImageView * ivThumbnail;
+@property (nonatomic, strong) IBOutlet UILabel  * lbThumbnail;
+@property (nonatomic, strong) IBOutlet UIButton * buThumbnail;
 @property (nonatomic, strong) IBOutlet UIButton * buCapture;
+@property (nonatomic, strong) IBOutlet UISwitch * swPreview;
 
 @end
 
@@ -79,7 +82,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		case PTPIP_CAPTURE_COMPLETE:
 		{	// 撮影が完了した際に呼び出される
 			dispatch_async_main(^{
-				[self progressOff];
+				//[self progressOff];
+				[self viewRefresh];
 			});
 		} break;
 		
@@ -87,16 +91,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		{	// 撮影などを行った際にオブジェクトが作成された際に呼び出される
 			LOG(@"Object added Event(0x%04x) - 0x%08x", code, param1);
 			[mData.ptpConnection operateSession:^(PtpIpSession *session) {
-
-				// サムネイルを取得すると同時に mData.tamaObjectsへ追加する
-				UIImage * thumb = [self imageThumbnail:param1 session:session];
-
-				dispatch_async_main(^{
-					self.ivThumbnail.image = thumb;
-					// Get Battery level.
-					mData.batteryLevel = [session getBatteryLevel];
-					[self viewRefresh];
-				});
+				// サムネイルを取得し、表示する
+				[self imageThumbnail:param1 session:session];
 			}];
 		} break;
 			
@@ -151,26 +147,24 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 #pragma mark - PTP/IP Operations.
 
-- (UIImage *)imageThumbnail:(uint32_t)objectHandle session:(PtpIpSession*)session
+- (void)imageThumbnail:(uint32_t)objectHandle session:(PtpIpSession*)session
 {
 	LOG_FUNC
 	// This method MUST be running at PtpConnection#gcd thread.
-	//mData.tamaObjectHandle = objectHandle;
+
 	mData.tamaCapture = nil;
 	
 	// Get object informations.
 	// It containes filename, capture-date and etc.
 	PtpIpObjectInfo* objectInfo = [session getObjectInfo:objectHandle];
 	if (!objectInfo) {
-		dispatch_async_main(^{
-			LOG(@"getObjectInfo(0x%08x) failed.", objectHandle);
-		});
+		LOG(@"getObjectInfo(0x%08x) failed.", objectHandle);
 		//mData.tamaObjectHandle = 0;
-		return nil;
+		return;
 	}
 	
-	UIImage* thumb;
-	if (objectInfo.object_format==PTPIP_FORMAT_JPEG) {
+	UIImage* thumb = mImageThumb;
+	if (mData.capturePreview && objectInfo.object_format==PTPIP_FORMAT_JPEG) {
 		// Get thumbnail image.
 		NSMutableData* thumbData = [NSMutableData data];
 		BOOL result = [session getThumb:objectHandle
@@ -185,24 +179,34 @@ inline static void dispatch_async_main(dispatch_block_t block)
 								// Continue to receive.
 								return YES;
 							}];
-		if (!result) {
-			LOG(@"getThumb(0x%08x) failed.", objectHandle);
-			thumb = mImageThumb;
-		} else {
+		if (result) {
 			// OK
 			thumb = [UIImage imageWithData:thumbData];
 			//set mData
 			PtpObject * tamaObj = [[PtpObject alloc] initWithObjectInfo:objectInfo thumbnail:thumb];
 			assert(tamaObj);
-			[mData.tamaObjects addObject:tamaObj];
+			if (0 < mData.tamaObjects.count) {
+				[mData.tamaObjects addObject:tamaObj];
+			}
+			LOG(@"mData.tamaObjects.count=%ld", (unsigned long)mData.tamaObjects.count);
 			mData.tamaCapture = tamaObj;
 			mData.listBottom = YES; // ListViewにて最終行を表示させる
-			LOG(@"mData.tamaObjects.count=%ld", (unsigned long)mData.tamaObjects.count);
+		} else {
+			LOG(@"getThumb(0x%08x) failed.", objectHandle);
 		}
-	} else {
-		thumb = mImageThumb;
 	}
-	return thumb;
+	
+	// Get Battery level.
+	mData.batteryLevel = [session getBatteryLevel];
+	
+	// UI Refresh
+	NSDateFormatter* df = [[NSDateFormatter alloc] init];
+	[df setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+	[df setDateStyle:NSDateFormatterShortStyle];
+	[df setTimeStyle:NSDateFormatterMediumStyle];
+	dispatch_async_main(^{
+		[self thumbnail:thumb title:[df stringFromDate:objectInfo.capture_date]];
+	});
 }
 
 
@@ -262,6 +266,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 - (void)capture
 {
+	self.buCapture.enabled = NO;
+	[self thumbnailOff];
+
 	switch (mCaptureMode) {
 		case CAPTURE_MODE_NORMAL:
 		{
@@ -313,11 +320,6 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		default:
 			break;
 	}
-
-	
-	//[self.buCapture setImage:[UIImage imageNamed:@"Tama.svg-Stop"] forState:UIControlStateNormal];
-	self.buCapture.enabled = NO;
-	self.ivThumbnail.image = mImageThumb;
 	
 	[mData.ptpConnection operateSession:^(PtpIpSession *session){
 		// This block is running at PtpConnection#gcd thread.
@@ -428,7 +430,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)timerCheck:(NSTimer*)timer
 {	// Wi-Fi接続状態を監視する、切れると第一画面へ
 	LOG_FUNC
-	
+#if TARGET_IPHONE_SIMULATOR
+	return;
+#endif
 	//[mTimerCheck invalidate];	//タイマー停止
 	
 	if (!mData.connected) {
@@ -644,6 +648,15 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	}
 }
 
+- (IBAction)swPreviewChanged:(UISwitch*)sender
+{
+	mData.capturePreview = sender.on;
+	
+	if (!mData.capturePreview) {
+		[self thumbnailOff];
+	}
+}
+
 - (void)progressOnTitle:(NSString*)zTitle
 {
 	if (zTitle) {
@@ -659,6 +672,22 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)progressOff
 {
 	[MRProgressOverlayView dismissOverlayForView:self.view animated:YES];
+}
+
+- (void)thumbnail:(UIImage*)img title:(NSString*)title
+{
+	self.ivThumbnail.image = img;
+	self.lbThumbnail.text = title;
+	self.buThumbnail.enabled = YES;
+	[self viewRefresh];
+}
+
+- (void)thumbnailOff
+{
+	self.ivThumbnail.image = mImageThumb;
+	self.lbThumbnail.text = nil;
+	self.buThumbnail.enabled = NO;
+	[self viewRefresh];
 }
 
 
@@ -717,6 +746,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	self.sgWhite1.selectedSegmentIndex = 0;
 	self.sgWhite2.selectedSegmentIndex = UISegmentedControlNoSegment;
 	
+	mData.capturePreview = YES; //常にYES: プレビューOFFにしてもレスポンス変わらず廃案とした
+	self.swPreview.on = mData.capturePreview;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -746,6 +777,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	mData.batteryLevel = 88; // TEST Dummy.
 	[self viewRefresh];
 #else
+	[self viewRefresh];
 	// コネクト・チェック
 	LOG(@"mData.ptpConnection.connected=%d", mData.ptpConnection.connected);
 	if (mData.connected) {
@@ -811,7 +843,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			
 			dispatch_async_main(^{
 				if (self.ivThumbnail.image==nil || mData.tamaViewer==nil || mData.tamaCapture==nil || mData.tamaViewer != mData.tamaCapture) {
-					self.ivThumbnail.image = mImageThumb;
+					[self thumbnailOff];
 				}
 				[self viewRefresh];
 			});
