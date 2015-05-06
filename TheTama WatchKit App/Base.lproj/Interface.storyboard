@@ -8,7 +8,7 @@
         <!--Capture-->
         <scene sceneID="PPL-b7-yAj">
             <objects>
-                <controller id="ApG-76-fjX" userLabel="Capture" customClass="InterfaceController" customModule="TheTama_WatchKit_Extension">
+                <controller hidesWhenLoading="NO" id="ApG-76-fjX" userLabel="Capture" customClass="InterfaceController" customModule="TheTama_WatchKit_Extension">
                     <items>
                         <button alignment="center" verticalAlignment="center" backgroundImage="Tama.svg-Eye" id="LUM-Yj-563">
                             <connections>

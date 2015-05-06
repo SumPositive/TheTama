@@ -7,3 +7,7 @@
 #import "PtpConnection.h"
 #import "PtpLogging.h"
 #import "PtpObject.h"
+
+#import "Capture.h"
+
+

@@ -12,11 +12,11 @@
 
 #import "Azukid.h"
 #import "TheTama-Swift.h"
+#import "Capture.h"
 
 #import "ConnectViewController.h"
 #import "PtpConnection.h"
 #import "PtpLogging.h"
-
 
 
 inline static void dispatch_async_main(dispatch_block_t block)
@@ -24,9 +24,10 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	dispatch_async(dispatch_get_main_queue(), block);
 }
 
-@interface ConnectViewController () <PtpIpEventListener>
+@interface ConnectViewController () <CaptureDelegate> //<PtpIpEventListener>
 {
-	DataObject * mData;
+	DataObject *	mData;
+	Capture *		mCapture;
 }
 
 @property (nonatomic, weak) IBOutlet UILabel * lbConnect;
@@ -105,84 +106,132 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 #pragma mark - PTP/IP Operations.
 
-- (void)connect
+//- (void)connect
+//{
+//	LOG_FUNC
+//	//[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Connecting",nil)
+//	//					 maskType:SVProgressHUDMaskTypeGradient];
+//
+//	//	[MRProgressOverlayView showOverlayAddedTo:self.view
+//	//										title:NSLocalizedString(@"Lz.Connecting", nil)
+//	//										 mode:MRProgressOverlayViewModeIndeterminate
+//	//									 animated:YES stopBlock:^(MRProgressOverlayView *progressOverlayView){
+//	//		// STOP
+//	//		[self progressOff];
+//	//	}];
+//
+//	[self progressOnTitle:NSLocalizedString(@"Lz.Connecting", nil)];
+//	
+//	
+//	self.buSetting.enabled = NO;
+//	self.buRetry.enabled = NO;
+//
+//	assert(mData.ptpConnection);
+//	// Ready to PTP/IP.
+//	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
+//	[mData.ptpConnection setTimeLimitForResponse:PTP_TIMEOUT];
+//	
+//	// PtpIpEventListener delegates.
+//	[mData.ptpConnection setEventListener:self]; //画面遷移の都度、デリゲート指定必須
+//
+//	// Setup `target IP`(camera IP).
+//#if TARGET_IPHONE_SIMULATOR
+//	[mData.ptpConnection setTargetIp: @"192.168.1.5"]; //SIMULATOR Wi-Fi
+//#else
+//	[mData.ptpConnection setTargetIp: @"192.168.1.1"]; //THETA DEF.
+//#endif
+//	
+//	// Connect to target.
+//	[mData.ptpConnection connect:^(BOOL connected) {
+//		// "Connect" and "OpenSession" completion callback.
+//		// This block is running at PtpConnection#gcd thread.
+//		
+//		if (connected) {
+//			// "Connect" is succeeded.
+//			mData.connected = true;
+//			LOG(@"connected.");
+//			LOG(@"  mData.ptpConnection.connected=%d", mData.ptpConnection.connected);
+//			
+//			// Goto Capture View
+//			[self performSegueWithIdentifier:@"segCapture" sender:self];
+//			
+//		} else {
+//			// "Connect" is failed.
+//			mData.connected = false;
+//			LOG(@"connect failed.");
+//			// Retry after 5sec.
+//#if TARGET_IPHONE_SIMULATOR
+//			[self performSegueWithIdentifier:@"segCapture" sender:self];
+//#endif
+//		}
+//		dispatch_async_main(^{
+//			//[SVProgressHUD dismiss];
+//			[self progressOff];
+//			self.buSetting.enabled = YES;
+//			self.buRetry.enabled = YES;
+//		});
+//	}];
+//}
+//
+//- (void)disconnect:(BOOL)connect
+//{
+//	LOG_FUNC
+//	[self progressOnTitle:NSLocalizedString(@"Lz.Connecting", nil)];
+//	
+//	[mData.ptpConnection close:^{
+//		// "CloseSession" and "Close" completion callback.
+//		// This block is running at PtpConnection#gcd thread.
+//		dispatch_async_main(^{
+//			LOG(@"disconnected.");
+//			[self progressOff];
+//			
+//			if (connect) {
+//				[self connect];
+//			}
+//		});
+//	}];
+//}
+
+#pragma mark - <CaptureDelegate>
+
+- (void)connected:(BOOL)result
 {
 	LOG_FUNC
-	//[SVProgressHUD showWithStatus:NSLocalizedString(@"Lz.Connecting",nil)
-	//					 maskType:SVProgressHUDMaskTypeGradient];
-
-	//	[MRProgressOverlayView showOverlayAddedTo:self.view
-	//										title:NSLocalizedString(@"Lz.Connecting", nil)
-	//										 mode:MRProgressOverlayViewModeIndeterminate
-	//									 animated:YES stopBlock:^(MRProgressOverlayView *progressOverlayView){
-	//		// STOP
-	//		[self progressOff];
-	//	}];
-
-	[self progressOnTitle:NSLocalizedString(@"Lz.Connecting", nil)];
-	
-	
-	self.buSetting.enabled = NO;
-	self.buRetry.enabled = NO;
-
-	assert(mData.ptpConnection);
-	// Ready to PTP/IP.
-	[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
-	[mData.ptpConnection setTimeLimitForResponse:PTP_TIMEOUT];
-	
-	// PtpIpEventListener delegates.
-	[mData.ptpConnection setEventListener:self]; //画面遷移の都度、デリゲート指定必須
-
-	// Setup `target IP`(camera IP).
-	// Product default is "192.168.1.1".
-	[mData.ptpConnection setTargetIp: @"192.168.1.1"]; // _ipField.text];
-	
-	// Connect to target.
-	[mData.ptpConnection connect:^(BOOL connected) {
-		// "Connect" and "OpenSession" completion callback.
-		// This block is running at PtpConnection#gcd thread.
-		
-		if (connected) {
-			// "Connect" is succeeded.
-			mData.connected = true;
-			LOG(@"connected.");
-			LOG(@"  mData.ptpConnection.connected=%d", mData.ptpConnection.connected);
-			
-			// Goto Capture View
-			[self performSegueWithIdentifier:@"segCapture" sender:self];
-			
-		} else {
-			// "Connect" is failed.
-			mData.connected = false;
-			LOG(@"connect failed.");
-			// Retry after 5sec.
+	if (result) {
+		// "Connect" is succeeded.
+		// Goto Capture View
+		[self performSegueWithIdentifier:@"segCapture" sender:self];
+	}
+	else {
+		// "Connect" is failed.
 #if TARGET_IPHONE_SIMULATOR
-			[self performSegueWithIdentifier:@"segCapture" sender:self];
+		[self performSegueWithIdentifier:@"segCapture" sender:self];
 #endif
-		}
-		dispatch_async_main(^{
-			//[SVProgressHUD dismiss];
-			[self progressOff];
-			self.buSetting.enabled = YES;
-			self.buRetry.enabled = YES;
-		});
-	}];
+	}
+	dispatch_async_main(^{
+		self.buSetting.enabled = YES;
+		self.buRetry.enabled = YES;
+	});
 }
 
-- (void)disconnect
+- (void)disconnected
 {
 	LOG_FUNC
-	
-	[mData.ptpConnection close:^{
-		// "CloseSession" and "Close" completion callback.
-		// This block is running at PtpConnection#gcd thread.
-		
-		dispatch_async_main(^{
-			LOG(@"disconnected.");
-			//[self.connectButton setTitle:@"Connect" forState:UIControlStateNormal];
-			//[mData.tamaObjects removeAllObjects];
-		});
-	}];
+}
+
+- (void)captured:(BOOL)result thumb:(UIImage*)thumb
+{
+	LOG_FUNC
+}
+
+- (void)strageFull
+{
+	LOG_FUNC
+}
+
+- (void)socketError
+{
+	LOG_FUNC
 }
 
 
@@ -201,7 +250,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (IBAction)onRetryTouchUpIn:(id)sender
 {
 	LOG_FUNC
-	[self connect];
+	[mCapture disconnect:YES];  //YES= Disconnectの後、Connectする
 }
 
 - (void)progressOnTitle:(NSString*)zTitle
@@ -229,7 +278,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 //{
 //	NSLog(@"iAd取得成功");
 //	self.iAd.hidden = NO;
-//	self.canDisplayBannerAds = NO;
+//	//self.canDisplayBannerAds = NO;
 //}
 //
 ////iAd取得失敗
@@ -237,7 +286,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 //{
 //	NSLog(@"iAd取得失敗");
 //	self.iAd.hidden = YES;
-//	self.canDisplayBannerAds = YES;
+//	//self.canDisplayBannerAds = YES;
 //}
 
 
@@ -251,12 +300,15 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	AppDelegate * app = [UIApplication sharedApplication].delegate;
 	mData = [app getDataObject];
 	assert(mData != nil);
-	assert(mData.ptpConnection != nil);
+	
+	mCapture = [app getCaptureObject];
+	assert(mCapture != nil);
+	
 
 	// iAd
 #if TARGET_IPHONE_SIMULATOR
 	self.canDisplayBannerAds = NO;
-	self.iAd.delegate = nil;
+	[self.iAd removeFromSuperview];
 #else
 	self.canDisplayBannerAds = YES;
 	[UIViewController prepareInterstitialAds];
@@ -266,15 +318,17 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	//  通知受信の設定
 	NSNotificationCenter*   nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(applicationWillEnterForeground) name:@"applicationWillEnterForeground" object:nil];
+	[nc addObserver:self selector:@selector(applicationDidEnterBackground) name:@"applicationDidEnterBackground" object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+	mCapture.delegate = self;
+	mCapture.view = self.view;
 	
 	if (mData.option1payed) {
 		self.canDisplayBannerAds = NO;
-		self.iAd.delegate = nil;
 	}
 }
 
@@ -296,11 +350,16 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	LOG_FUNC
 #if TARGET_IPHONE_SIMULATOR
 #else
-	// Refresh
-	//mData.ptpConnection = nil;
-	//mData.ptpConnection = [[PtpConnection alloc] init];
+	//[self connect];
+	[mCapture connect];
 #endif
-	[self connect];
+}
+
+- (void)applicationDidEnterBackground
+{
+	// 閉じるとき切断する、さもなくば他の(THETA純正)アプリから接続できない
+	//[self disconnect:NO];
+	[mCapture disconnect:NO];
 }
 
 @end

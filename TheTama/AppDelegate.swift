@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
 	var dataObject: DataObject?
+	var captureObject: Capture?
 	
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
@@ -33,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			let ud = NSUserDefaults.standardUserDefaults()
 			dataObject?.option1payed = ud.boolForKey("option1payed")
 		}
-
+		
 		return true
 	}
 	
@@ -75,13 +76,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 	
 	
-	// MARK: - Shared Data
+	// MARK: - Shared Object
 
 	func getDataObject() -> DataObject? {
 		if dataObject == nil {
 			dataObject = DataObject()
 		}
 		return dataObject
+	}
+
+	func getCaptureObject() -> Capture? {
+		if captureObject == nil {
+			captureObject = Capture()
+		}
+		return captureObject
 	}
 
 
@@ -95,19 +103,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				println("command=" + command)
 				switch command {
 				case "isConnect":	// THETA Wi-Fi接続状態
-//					reply(["result":true])
-//					return
-
-					if (dataObject != nil && dataObject?.connected==true) {
+					#if arch(i386) || arch(x86_64)
+						// シミュレータ
 						reply(["result":true])
-					} else {
-						reply(["result":false])
-					}
+					#else
+						// 実機
+						if (captureObject != nil && captureObject?.connected==true) {
+							reply(["result":true])
+						} else {
+							reply(["result":false])
+						}
+					#endif
 					return
 
 				case "capture":		// キャプチャ実行、サムネイルを送る
-					let image:UIImage? = dataObject!.tamaCapture!.thumbnail
-
+					#if arch(i386) || arch(x86_64)
+						// シミュレータ
+						let image:UIImage? = UIImage(named:"Tama2.svg")
+					#else
+						// 実機
+						
+						
+						
+						let image:UIImage? = dataObject!.tamaCapture!.thumbnail
+					#endif
 					let thum:NSData? = UIImagePNGRepresentation(image)
 					reply(["result":true, "thumbData":thum!])
 					return

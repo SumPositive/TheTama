@@ -12,14 +12,14 @@ class DataObject: NSObject, NSCoding {
 	
 	//--------------------------非保存、初期化される
 	// BOOL
-	var connected = false;
+//	var connected = false;
 	var listBottom = true;		// true=ListView:最終行を表示する
 
 	// Integer
-	var batteryLevel = 0
+//	var batteryLevel = 0
 
 	// Object
-	var ptpConnection: PtpConnection
+//	var ptpConnection: PtpConnection
 	var tamaObjects: NSMutableArray		// 全写真情報を保持
 	var tamaCapture: PtpObject?			// 撮影直後または選択中の写真情報
 	var tamaViewer: PtpObject?			// 3D-Viewerで表示する写真情報
@@ -43,7 +43,7 @@ class DataObject: NSObject, NSCoding {
 	
 	override init() {
 		// Initial
-		self.ptpConnection = PtpConnection()
+//		self.ptpConnection = PtpConnection()
 		self.tamaObjects = NSMutableArray()
 	}
 
@@ -79,7 +79,7 @@ class DataObject: NSObject, NSCoding {
 		self.volumeLevel		= aDecoder.decodeIntegerForKey("volumeLevel")
 		
 		// Object
-		self.ptpConnection		= PtpConnection()	//非保存、初期化
+//		self.ptpConnection		= PtpConnection()	//非保存、初期化
 		self.tamaObjects		= NSMutableArray()	//非保存、初期化
 	}
 

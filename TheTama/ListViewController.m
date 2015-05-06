@@ -11,6 +11,7 @@
 
 #import "Azukid.h"
 #import "TheTama-Swift.h"
+#import "Capture.h"
 
 #import "ListViewController.h"
 #import "PtpConnection.h"
@@ -27,9 +28,11 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	dispatch_async(dispatch_get_main_queue(), block);
 }
 
-@interface ListViewController () <PtpIpEventListener, UITableViewDelegate, UITableViewDataSource>
+@interface ListViewController () <CaptureDelegate, UITableViewDelegate, UITableViewDataSource>
 {
-	DataObject * mData;
+	DataObject *	mData;
+	Capture *		mCapture;
+
 	PtpIpStorageInfo *	mStorageInfo;
 	BOOL				mTableBottom;
 	UIRefreshControl *	mRefreshControl;
@@ -146,7 +149,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	return;
 #endif
 	
-	[mData.ptpConnection operateSession:^(PtpIpSession *session) {
+	[mCapture.connection operateSession:^(PtpIpSession *session) {
 		// This block is running at PtpConnection#gcd thread.
 		
 		// Setting the RICOH THETA's clock.
@@ -349,6 +352,10 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	mData = [app getDataObject];
 	assert(mData != nil);
 
+	mCapture = [app getCaptureObject];
+	assert(mCapture != nil);
+
+	
 	// UITableView
 	self.tableView.delegate = self;
 	self.tableView.dataSource = self;
@@ -388,19 +395,17 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+	mCapture.delegate = self;
+	mCapture.view = self.view;
+
 #if TARGET_IPHONE_SIMULATOR
 #else
 	// コネクト・チェック
-	if (mData.connected) {
-		// Ready to PTP/IP.
-		[mData.ptpConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
-		// PtpIpEventListener delegates.
-		[mData.ptpConnection setEventListener:self]; //画面遷移の都度、デリゲート指定必須
-		
-		[mData.ptpConnection operateSession:^(PtpIpSession *session) {
+	if (mCapture.connected) {
+		[mCapture.connection operateSession:^(PtpIpSession *session) {
 			// Get
 			mStorageInfo = [session getStorageInfo];
-			mData.batteryLevel = [session getBatteryLevel];
+			mCapture.batteryLevel = [session getBatteryLevel];
 		}];
 	}
 	else {

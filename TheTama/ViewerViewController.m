@@ -18,6 +18,7 @@
 
 #import "Azukid.h"
 #import "TheTama-Swift.h"
+#import "Capture.h"
 
 #import "ViewerViewController.h"
 #import "glkViewController.h"
@@ -29,9 +30,10 @@
 //	dispatch_async(dispatch_get_main_queue(), block);
 //}
 
-@interface ViewerViewController ()
+@interface ViewerViewController () <CaptureDelegate>
 {
-	DataObject * mData;
+	DataObject *	mData;
+	Capture *		mCapture;
 
 	PtpObject * mPtpObject;
 	NSMutableData * mImageData;
@@ -246,6 +248,9 @@
 	mData = [app getDataObject];
 	assert(mData != nil);
 	
+	mCapture = [app getCaptureObject];
+	assert(mCapture != nil);
+
 	//  通知受信の設定
 	NSNotificationCenter*   nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(applicationWillEnterForeground) name:@"applicationWillEnterForeground" object:nil];
@@ -262,6 +267,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+	mCapture.delegate = self;
+	mCapture.view = self.view;
 	
 	//self.progressView.progress = 0.0;
 	//	[self viewRefresh];
@@ -271,12 +278,12 @@
 {
 	[super viewDidAppear:animated];
 	
-	if (!mData.connected || mData.tamaViewer==nil) {
+	if (!mCapture.connected || mCapture.tamaViewer==nil) {
 		[self dismissViewControllerAnimated:YES completion:nil];
 		return;
 	}
 	
-	[self getObject:mData.ptpConnection ptpObject:mData.tamaViewer];
+	[self getObject:mCapture.connection ptpObject:mCapture.tamaViewer];
 
 	
 //	[self applicationWillEnterForeground];

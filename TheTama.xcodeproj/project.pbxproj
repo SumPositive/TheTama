@@ -19,6 +19,8 @@
 		442401181AEFD2B100F3EA23 /* glkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 442401131AEFD2B100F3EA23 /* glkViewController.m */; };
 		442401191AEFD2B100F3EA23 /* GLRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 442401151AEFD2B100F3EA23 /* GLRenderView.m */; };
 		4424011A1AEFD2B100F3EA23 /* UVSphere.m in Sources */ = {isa = PBXBuildFile; fileRef = 442401171AEFD2B100F3EA23 /* UVSphere.m */; };
+		444271371AF9F07A00D6FB60 /* TheTama WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 44170C3D1ADF797A006E1C4B /* TheTama WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		444271411AFA0CFC00D6FB60 /* Capture.m in Sources */ = {isa = PBXBuildFile; fileRef = 444271401AFA0CFC00D6FB60 /* Capture.m */; };
 		446D9DFF1AE561CA003F8924 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 446D9DFD1AE561CA003F8924 /* InfoViewController.m */; };
 		44907B3E1ADCCE870053294A /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44907B3C1ADCCDF20053294A /* WatchKit.framework */; };
 		44A67B811AD39CF4002A826C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A67B801AD39CF4002A826C /* AppDelegate.swift */; };
@@ -81,6 +83,13 @@
 			remoteGlobalIDString = 44170C4B1ADF797A006E1C4B;
 			remoteInfo = "TheTama WatchKit App";
 		};
+		444271381AF9F07A00D6FB60 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 44A67B731AD39CF4002A826C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 44170C3C1ADF797A006E1C4B;
+			remoteInfo = "TheTama WatchKit Extension";
+		};
 		44A67B931AD39CF5002A826C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 44A67B731AD39CF4002A826C /* Project object */;
@@ -89,6 +98,20 @@
 			remoteInfo = TheTama;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4442713A1AF9F07A00D6FB60 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				444271371AF9F07A00D6FB60 /* TheTama WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		44170C3D1ADF797A006E1C4B /* TheTama WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "TheTama WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,6 +134,8 @@
 		442401151AEFD2B100F3EA23 /* GLRenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLRenderView.m; sourceTree = "<group>"; };
 		442401161AEFD2B100F3EA23 /* UVSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UVSphere.h; sourceTree = "<group>"; };
 		442401171AEFD2B100F3EA23 /* UVSphere.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UVSphere.m; sourceTree = "<group>"; };
+		4442713F1AFA0CFC00D6FB60 /* Capture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capture.h; sourceTree = "<group>"; };
+		444271401AFA0CFC00D6FB60 /* Capture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capture.m; sourceTree = "<group>"; };
 		446D9DFD1AE561CA003F8924 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		446D9DFE1AE561CA003F8924 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
 		44907B3C1ADCCDF20053294A /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
@@ -367,6 +392,8 @@
 				44A67C5E1AD3E305002A826C /* ViewerViewController.m */,
 				446D9DFE1AE561CA003F8924 /* InfoViewController.h */,
 				446D9DFD1AE561CA003F8924 /* InfoViewController.m */,
+				4442713F1AFA0CFC00D6FB60 /* Capture.h */,
+				444271401AFA0CFC00D6FB60 /* Capture.m */,
 			);
 			path = TheTama;
 			sourceTree = "<group>";
@@ -576,10 +603,12 @@
 				44A67B781AD39CF4002A826C /* Frameworks */,
 				44A67B791AD39CF4002A826C /* Resources */,
 				15A2B762CADA9ED7642EBA6F /* Copy Pods Resources */,
+				4442713A1AF9F07A00D6FB60 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				444271391AF9F07A00D6FB60 /* PBXTargetDependency */,
 			);
 			name = TheTama;
 			productName = TheTama;
@@ -754,6 +783,7 @@
 				44A67C371AD3B5E0002A826C /* ptpip_packets.cpp in Sources */,
 				44A67C291AD3B5E0002A826C /* ExifTags.m in Sources */,
 				44A67C311AD3B5E0002A826C /* bytestream.cpp in Sources */,
+				444271411AFA0CFC00D6FB60 /* Capture.m in Sources */,
 				446D9DFF1AE561CA003F8924 /* InfoViewController.m in Sources */,
 				44A67C3C1AD3B5E0002A826C /* PtpIpObjectContainer.mm in Sources */,
 				44A67C451AD3B5E0002A826C /* PtpOperator.m in Sources */,
@@ -806,6 +836,11 @@
 			isa = PBXTargetDependency;
 			target = 44170C4B1ADF797A006E1C4B /* TheTama WatchKit App */;
 			targetProxy = 44170C4E1ADF797A006E1C4B /* PBXContainerItemProxy */;
+		};
+		444271391AF9F07A00D6FB60 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 44170C3C1ADF797A006E1C4B /* TheTama WatchKit Extension */;
+			targetProxy = 444271381AF9F07A00D6FB60 /* PBXContainerItemProxy */;
 		};
 		44A67B941AD39CF5002A826C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -963,6 +998,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};

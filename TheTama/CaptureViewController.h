@@ -10,10 +10,5 @@
 
 @interface CaptureViewController : UIViewController
 
-typedef enum {
-	CAPTURE_MODE_NORMAL		= 1,
-	CAPTURE_MODE_TIMELAPSE	= 2,
-	CAPTURE_MODE_MOVIE		= 3,
-} CAPTURE_MODE;
 
 @end
