@@ -219,10 +219,10 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	LOG_FUNC
 }
 
-- (void)captured:(BOOL)result thumb:(UIImage*)thumb
-{
-	LOG_FUNC
-}
+//- (void)captured:(BOOL)result thumb:(UIImage*)thumb
+//{
+//	LOG_FUNC
+//}
 
 - (void)strageFull
 {
@@ -350,8 +350,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	LOG_FUNC
 #if TARGET_IPHONE_SIMULATOR
 #else
-	//[self connect];
-	[mCapture connect];
+	[mCapture connectCompletion:nil];
 #endif
 }
 

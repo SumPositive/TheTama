@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
 	var dataObject: DataObject?
-	var captureObject: Capture?
+	var captureObject: Capture = Capture()
 	
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			let ud = NSUserDefaults.standardUserDefaults()
 			dataObject?.option1payed = ud.boolForKey("option1payed")
 		}
-		
+
 		return true
 	}
 	
@@ -86,9 +86,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 
 	func getCaptureObject() -> Capture? {
-		if captureObject == nil {
-			captureObject = Capture()
-		}
 		return captureObject
 	}
 
@@ -99,6 +96,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]?,
 		reply: (([NSObject : AnyObject]!) -> Void)!) {
 
+			var error: NSError?
+
 			if let command:String = userInfo?["command"] as? String {
 				println("command=" + command)
 				switch command {
@@ -108,7 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 						reply(["result":true])
 					#else
 						// 実機
-						if (captureObject != nil && captureObject?.connected==true) {
+						if (captureObject.connected==true) {
 							reply(["result":true])
 						} else {
 							reply(["result":false])
@@ -117,18 +116,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 					return
 
 				case "capture":		// キャプチャ実行、サムネイルを送る
-					#if arch(i386) || arch(x86_64)
-						// シミュレータ
-						let image:UIImage? = UIImage(named:"Tama2.svg")
-					#else
+//					#if arch(i386) || arch(x86_64)
+//						// シミュレータ
+//						let image:UIImage? = UIImage(named:"Tama2.svg")
+//					#else
 						// 実機
-						
-						
-						
-						let image:UIImage? = dataObject!.tamaCapture!.thumbnail
-					#endif
-					let thum:NSData? = UIImagePNGRepresentation(image)
-					reply(["result":true, "thumbData":thum!])
+						//TODO: 音量など、パラメータセット
+						captureObject.captureCompletion({(success, thumbnail, capture_date, error) -> Void in
+							if success==true {
+								let thum:NSData? = UIImagePNGRepresentation(thumbnail)
+								reply(["result":true, "thumbData":thum!])
+							}
+							else {
+								reply(["result":false])
+							}
+						})
+//
+//						//TODO: レスポンス処理
+//						let image:UIImage? = dataObject!.tamaCapture!.thumbnail
+//					#endif
+//					let thum:NSData? = UIImagePNGRepresentation(image)
+//					reply(["result":true, "thumbData":thum!])
 					return
 					
 				default:

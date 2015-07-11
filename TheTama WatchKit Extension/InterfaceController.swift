@@ -61,7 +61,7 @@ class InterfaceController: WKInterfaceController {
 		
 		if mButtonCapture {
 			// Capture Mode
-			//Send count to parent application
+			//Send count to parent application --->> AppDelegate.swift WatchKit I/O
 			let userInfo = ["command" : "capture"]
 			WKInterfaceController.openParentApplication(userInfo) { (reply, error) -> Void in
 				if reply != nil {

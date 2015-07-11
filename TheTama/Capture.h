@@ -12,11 +12,15 @@
 #import "PtpObject.h"
 
 
+typedef void (^ConnectCompletion)(BOOL success, NSError *error);
+typedef void (^CaptureCompletion)(BOOL success, UIImage * thumbnail, NSDate * capture_date, NSError *error);
+
+
 @protocol CaptureDelegate <NSObject>
 @optional
 - (void)connected:(BOOL)result;
 - (void)disconnected;
-- (void)captured:(BOOL)result thumb:(UIImage*)thumb date:(NSDate *)capture_date;
+//- (void)captured:(BOOL)result thumb:(UIImage*)thumb date:(NSDate *)capture_date;
 - (void)strageFull;
 - (void)socketError;
 @end
@@ -48,9 +52,11 @@ typedef enum {
 @property (readwrite) PtpObject *		tamaViewer;			// 3D-Viewerで表示する写真情報
 
 
-- (void)connect;
+//- (void)connect;
+- (void)connectCompletion:(ConnectCompletion)completion;
 - (void)disconnect:(BOOL)connect;
-- (void)capture;
+//- (void)capture;
+- (void)captureCompletion:(CaptureCompletion)completion;
 - (UIImage *)imageThumbnail:(uint32_t)objectHandle session:(PtpIpSession *)session;
 
 

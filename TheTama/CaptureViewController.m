@@ -223,25 +223,25 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	LOG_FUNC
 }
 
-- (void)captured:(BOOL)result thumb:(UIImage*)thumb date:(NSDate *)capture_date
-{
-	LOG_FUNC
-	if (result) {
-		NSDateFormatter* df = [[NSDateFormatter alloc] init];
-		[df setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-		[df setDateStyle:NSDateFormatterShortStyle];
-		[df setTimeStyle:NSDateFormatterMediumStyle];
-		dispatch_async_main(^{
-			[self thumbnail:thumb title:[df stringFromDate:capture_date]];
-			self.buCapture.enabled = YES;
-		});
-	}
-	else {
-		dispatch_async_main(^{
-			[self dismissViewControllerAnimated:YES completion:nil];
-		});
-	}
-}
+//- (void)captured:(BOOL)result thumb:(UIImage*)thumb date:(NSDate *)capture_date
+//{
+//	LOG_FUNC
+//	if (result) {
+//		NSDateFormatter* df = [[NSDateFormatter alloc] init];
+//		[df setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+//		[df setDateStyle:NSDateFormatterShortStyle];
+//		[df setTimeStyle:NSDateFormatterMediumStyle];
+//		dispatch_async_main(^{
+//			[self thumbnail:thumb title:[df stringFromDate:capture_date]];
+//			self.buCapture.enabled = YES;
+//		});
+//	}
+//	else {
+//		dispatch_async_main(^{
+//			[self dismissViewControllerAnimated:YES completion:nil];
+//		});
+//	}
+//}
 
 - (void)strageFull
 {
@@ -274,13 +274,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 {
 	// シャッターボタンを押したとき撮影
 	if (mData.captureTouchDown) {
-		//[self capture];
-		
-		mCapture.shutterSpeed = mShutterSpeed;
-		mCapture.filmIso = mFilmIso;
-		mCapture.whiteBalance = mWhiteBalance;
-		mCapture.volumeLevel = mData.volumeLevel;
-		[mCapture capture];
+		[self capture];
 	}
 }
 
@@ -288,15 +282,37 @@ inline static void dispatch_async_main(dispatch_block_t block)
 {
 	// シャッターボタンを離したとき撮影
 	if (!mData.captureTouchDown) {
-		//[self capture];
-
-		mCapture.shutterSpeed = mShutterSpeed;
-		mCapture.filmIso = mFilmIso;
-		mCapture.whiteBalance = mWhiteBalance;
-		mCapture.volumeLevel = mData.volumeLevel;
-		[mCapture capture];
+		[self capture];
 	}
 }
+
+- (void)capture
+{
+	LOG_FUNC
+	mCapture.shutterSpeed = mShutterSpeed;
+	mCapture.filmIso = mFilmIso;
+	mCapture.whiteBalance = mWhiteBalance;
+	mCapture.volumeLevel = mData.volumeLevel;
+	[mCapture captureCompletion:^(BOOL success, UIImage * thumbnail, NSDate * capture_date, NSError *error) {
+		if (success) {
+			// サムネイル表示
+			NSDateFormatter* df = [[NSDateFormatter alloc] init];
+			[df setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+			[df setDateStyle:NSDateFormatterShortStyle];
+			[df setTimeStyle:NSDateFormatterMediumStyle];
+			dispatch_async_main(^{
+				[self thumbnail:thumbnail title:[df stringFromDate:capture_date]];
+				self.buCapture.enabled = YES;
+			});
+		}
+		else{
+			dispatch_async_main(^{
+				[self dismissViewControllerAnimated:YES completion:nil];
+			});
+		}
+	}];
+}
+
 
 //- (void)capture
 //{
@@ -432,16 +448,17 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 - (void)viewRefresh
 {
-	//[self.buCapture setImage:[UIImage imageNamed:@"Tama.svg-Start"] forState:UIControlStateNormal];
-	self.buCapture.enabled = YES;
-	
-	// 音量
-	[self volumeShow];
-	
-	// 充電レベル
-	[self viewRefreshBattery];
-
-	[self progressOff];
+	dispatch_async_main(^{
+		self.buCapture.enabled = YES;
+		
+		// 音量
+		[self volumeShow];
+		
+		// 充電レベル
+		[self viewRefreshBattery];
+		
+		[self progressOff];
+	});
 }
 
 - (void)viewRefreshBattery
@@ -755,6 +772,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	[[self.ivThumbnail layer] setCornerRadius: self.ivThumbnail.frame.size.height / 3.0];
 	[self.ivThumbnail setClipsToBounds:YES];
 	
+	self.lbThumbnail.text = nil;
+	
 	// 監視タイマー生成
 //	mTimerCheck = [NSTimer	scheduledTimerWithTimeInterval:5.0f
 //												   target:self
@@ -813,7 +832,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	
 #if TARGET_IPHONE_SIMULATOR
 	mData.volumeLevel = 33; // TEST Dummy.
-	mData.batteryLevel = 88; // TEST Dummy.
+	//mData.batteryLevel = 88; // TEST Dummy.
 	[self viewRefresh];
 #else
 	[self viewRefresh];

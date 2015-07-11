@@ -12,6 +12,9 @@
 #import "TheTama-Swift.h"
 #import "Capture.h"
 
+#define KEY_CONNECT_COMPLETION		@"KEY_CONNECT_COMPLETION"
+#define KEY_CAPTURE_COMPLETION		@"KEY_CAPTURE_COMPLETION"
+
 
 inline static void dispatch_async_main(dispatch_block_t block)
 {
@@ -28,12 +31,6 @@ inline static void dispatch_async_main(dispatch_block_t block)
 @implementation Capture
 @synthesize connection = mConnection;
 @synthesize connected = mConnected;
-//@synthesize view;
-//@synthesize volumeLevel;
-//@synthesize shutterSpeed;
-//@synthesize filmIso;
-//@synthesize whiteBalance;
-//@synthesize captureMode;
 
 
 - (id)init
@@ -49,12 +46,19 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 #pragma mark - PTP/IP Operations.
 
-- (void)connect
+- (void)connectCompletion:(ConnectCompletion)completion
 {
 	LOG_FUNC
 	assert(mConnection);
 	assert(self.view);
 
+	// completionオブジェクトを保持する
+	objc_setAssociatedObject(self,
+							 KEY_CONNECT_COMPLETION,
+							 [completion copy],
+							 OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+	
+	
 	[self progressOnTitle:NSLocalizedString(@"Lz.Connecting", nil)];
 	
 	// Ready to PTP/IP.
@@ -148,6 +152,14 @@ inline static void dispatch_async_main(dispatch_block_t block)
 				[self.delegate connected:NO];
 			}
 		}
+		
+		// completionオブジェクトを取得する
+		ConnectCompletion completion = objc_getAssociatedObject(self, KEY_CONNECT_COMPLETION);
+		if (completion) {
+			completion(connected, nil);
+		}
+		
+		
 	}];
 }
 
@@ -166,7 +178,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		});
 		
 		if (connect) {
-			[self connect];
+			[self connectCompletion:nil];
 		}
 		else {
 			if ([self.delegate respondsToSelector:@selector(disconnected)]) {
@@ -177,11 +189,14 @@ inline static void dispatch_async_main(dispatch_block_t block)
 }
 
 
-
-- (void)capture
+- (void)captureCompletion:(CaptureCompletion)completion
 {
-//	self.buCapture.enabled = NO;
-//	[self thumbnailOff];
+	// completionオブジェクトを保持する
+	objc_setAssociatedObject(self,
+							 KEY_CAPTURE_COMPLETION,
+							 [completion copy],
+							 OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+
 	
 	switch (self.captureMode) {
 		case CAPTURE_MODE_NORMAL:
@@ -202,8 +217,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 												[mConnection operateSession:^(PtpIpSession *session){
 													BOOL result = [session terminateOpenCapture: mTransactionId];
 													LOG(@"terminateOpenCapture: result=%d", result);
-													if ([self.delegate respondsToSelector:@selector(captured:thumb:date:)]) {
-														[self.delegate captured:YES thumb:nil date:nil];
+													if (completion) {
+														completion(YES, nil, nil, nil);
 													}
 												}];
 												return;
@@ -223,8 +238,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 												[mConnection operateSession:^(PtpIpSession *session){
 													BOOL result = [session terminateOpenCapture: mTransactionId];
 													LOG(@"terminateOpenCapture: result=%d", result);
-													if ([self.delegate respondsToSelector:@selector(captured:thumb:date:)]) {
-														[self.delegate captured:YES thumb:nil date:nil];
+													if (completion) {
+														completion(YES, nil, nil, nil);
 													}
 												}];
 												return;
@@ -282,12 +297,13 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		switch (self.captureMode) {
 			case CAPTURE_MODE_NORMAL:
 			{
-				BOOL rtn = [session initiateCapture];
+				BOOL rtn = [session initiateCapture]; //---> PtpIpEventListener delegates.
 				LOG(@"execShutter[rtn:%d]", rtn);
 				
-				if (rtn != 1) {
-					if ([self.delegate respondsToSelector:@selector(captured:thumb:date:)]) {
-						[self.delegate captured:NO thumb:nil date:nil];
+				if (!rtn) {
+					// NG
+					if (completion) {
+						completion(NO, nil, nil, nil);
 					}
 				}
 			}	break;
@@ -392,8 +408,10 @@ inline static void dispatch_async_main(dispatch_block_t block)
 					capture_date = objectInfo.capture_date; //撮影日時
 				}
 				// サムネイルを取得し、表示する
-				if ([self.delegate respondsToSelector:@selector(captured:thumb:date:)]) {
-					[self.delegate captured:YES thumb:[self imageThumbnail:param1 session:session] date:capture_date];
+				// completionオブジェクトを取得する
+				CaptureCompletion completion = objc_getAssociatedObject(self, KEY_CAPTURE_COMPLETION);
+				if (completion) {
+					completion(YES, [self imageThumbnail:param1 session:session], capture_date, nil);
 				}
 			}];
 		} break;
