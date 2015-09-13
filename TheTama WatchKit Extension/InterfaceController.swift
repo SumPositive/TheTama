@@ -29,22 +29,20 @@ class InterfaceController: WKInterfaceController {
 		super.willActivate()
 		NSLog("%@ %@", self, __FUNCTION__)
 
-		// Disconnect
-		self.buttonDisable()
-		//self.label.setHidden(false)
-
-		//Send count to parent application
-		let userInfo = ["command" : "isConnect"]
-		WKInterfaceController.openParentApplication(userInfo) { (reply, error) -> Void in
-			if reply != nil {
-				NSLog("reply=%@", reply["result"] as! Bool)
-				if reply["result"] as! Bool {
-					// Connect
-					self.buttonEnable(nil)
-					//self.label.setHidden(true)
-				}
-			}
-		}
+//		// Disconnect
+//		self.buttonDisable()
+//		//self.label.setHidden(false)
+//
+//		//Send count to parent application
+//		let userInfo = ["command" : "isConnect"]
+//		WKInterfaceController.openParentApplication(userInfo) { (reply, error) -> Void in
+//			//NSLog("reply=%@", reply["result"] as! Bool)
+//			if reply["result"] as! Bool {
+//				// Connect
+//				self.buttonEnable(nil)
+//				//self.label.setHidden(true)
+//			}
+//		}
 	}
 	
 	override func didDeactivate() {
@@ -64,13 +62,11 @@ class InterfaceController: WKInterfaceController {
 			//Send count to parent application --->> AppDelegate.swift WatchKit I/O
 			let userInfo = ["command" : "capture"]
 			WKInterfaceController.openParentApplication(userInfo) { (reply, error) -> Void in
-				if reply != nil {
-					NSLog("reply=%@", reply["result"] as! Bool)
-					if reply["result"] as! Bool {
-						// Thumbnail
-						if let thumbData = reply["thumbData"] as? NSData {
-							self.buttonEnable(thumbData) // To Thumbnail Mode
-						}
+				NSLog("reply=%@", reply["result"] as! Bool)
+				if reply["result"] as! Bool {
+					// Thumbnail
+					if let thumbData = reply["thumbData"] as? NSData {
+						self.buttonEnable(thumbData) // To Thumbnail Mode
 					}
 				}
 			}

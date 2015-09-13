@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "9F43D5BD6B26E22D6505165256D27CC82C2D3BB3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "9F43D5BD6B26E22D6505165256D27CC82C2D3BB3" : 0,
+    "78B0850B1D8D204C79DEFA75BED768DA2698F732" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "2ABB37F5-3FF2-413A-914E-3D7A866EC4C9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "9F43D5BD6B26E22D6505165256D27CC82C2D3BB3" : "TheTama",
+    "78B0850B1D8D204C79DEFA75BED768DA2698F732" : "AzClass"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "TheTama",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "TheTama.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/azukid\/azclass.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "78B0850B1D8D204C79DEFA75BED768DA2698F732"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/azukid\/thetama.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9F43D5BD6B26E22D6505165256D27CC82C2D3BB3"
+    }
+  ]
+}

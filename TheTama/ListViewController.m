@@ -11,7 +11,7 @@
 
 #import "Azukid.h"
 #import "TheTama-Swift.h"
-#import "Capture.h"
+#import "TheTaManager.h"
 
 #import "ListViewController.h"
 #import "PtpConnection.h"
@@ -28,10 +28,10 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	dispatch_async(dispatch_get_main_queue(), block);
 }
 
-@interface ListViewController () <CaptureDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface ListViewController () <TheTaManagerDelegate, UITableViewDelegate, UITableViewDataSource>
 {
 	DataObject *	mData;
-	Capture *		mCapture;
+	//Capture *		mCapture;
 
 	PtpIpStorageInfo *	mStorageInfo;
 	BOOL				mTableBottom;
@@ -149,7 +149,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	return;
 #endif
 	
-	[mCapture.connection operateSession:^(PtpIpSession *session) {
+	[[TheTaManager sharedInstance].connection operateSession:^(PtpIpSession *session) {
 		// This block is running at PtpConnection#gcd thread.
 		
 		// Setting the RICOH THETA's clock.
@@ -352,8 +352,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	mData = [app getDataObject];
 	assert(mData != nil);
 
-	mCapture = [app getCaptureObject];
-	assert(mCapture != nil);
+//	mCapture = [app getCaptureObject];
+//	assert(mCapture != nil);
 
 	
 	// UITableView
@@ -395,17 +395,18 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	mCapture.delegate = self;
-	mCapture.view = self.view;
+	[TheTaManager sharedInstance].delegate = self;
+	[TheTaManager sharedInstance].view = self.view;
 
-#if TARGET_IPHONE_SIMULATOR
+#if TARGET_IPHONE_SIMULATORxxx
 #else
+	TheTaManager* thetama = [TheTaManager sharedInstance];
 	// コネクト・チェック
-	if (mCapture.connected) {
-		[mCapture.connection operateSession:^(PtpIpSession *session) {
+	if (thetama.isConnected) {
+		[thetama.connection operateSession:^(PtpIpSession *session) {
 			// Get
 			mStorageInfo = [session getStorageInfo];
-			mCapture.batteryLevel = [session getBatteryLevel];
+			thetama.batteryLevel = [session getBatteryLevel];
 		}];
 	}
 	else {

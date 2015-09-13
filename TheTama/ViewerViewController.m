@@ -18,7 +18,7 @@
 
 #import "Azukid.h"
 #import "TheTama-Swift.h"
-#import "Capture.h"
+#import "TheTaManager.h"
 
 #import "ViewerViewController.h"
 #import "glkViewController.h"
@@ -30,10 +30,10 @@
 //	dispatch_async(dispatch_get_main_queue(), block);
 //}
 
-@interface ViewerViewController () <CaptureDelegate>
+@interface ViewerViewController () <TheTaManagerDelegate>
 {
 	DataObject *	mData;
-	Capture *		mCapture;
+	//Capture *		mCapture;
 
 	PtpObject * mPtpObject;
 	NSMutableData * mImageData;
@@ -248,8 +248,8 @@
 	mData = [app getDataObject];
 	assert(mData != nil);
 	
-	mCapture = [app getCaptureObject];
-	assert(mCapture != nil);
+//	mCapture = [app getCaptureObject];
+//	assert(mCapture != nil);
 
 	//  通知受信の設定
 	NSNotificationCenter*   nc = [NSNotificationCenter defaultCenter];
@@ -267,8 +267,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	mCapture.delegate = self;
-	mCapture.view = self.view;
+	[TheTaManager sharedInstance].delegate = self;
+	[TheTaManager sharedInstance].view = self.view;
 	
 	//self.progressView.progress = 0.0;
 	//	[self viewRefresh];
@@ -278,12 +278,14 @@
 {
 	[super viewDidAppear:animated];
 	
-	if (!mCapture.connected || mCapture.tamaViewer==nil) {
+	TheTaManager* thetama = [TheTaManager sharedInstance];
+	
+	if (!thetama.isConnected || thetama.tamaViewer==nil) {
 		[self dismissViewControllerAnimated:YES completion:nil];
 		return;
 	}
 	
-	[self getObject:mCapture.connection ptpObject:mCapture.tamaViewer];
+	[self getObject:thetama.connection ptpObject:thetama.tamaViewer];
 
 	
 //	[self applicationWillEnterForeground];

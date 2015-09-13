@@ -8,5 +8,5 @@
 #import "PtpLogging.h"
 #import "PtpObject.h"
 
-#import "Capture.h"
+#import "TheTaManager.h"
 

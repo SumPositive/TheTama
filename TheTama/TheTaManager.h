@@ -1,5 +1,5 @@
 //
-//  Capture.h
+//  TheTaManager
 //  TheTama
 //
 //  Created by masa on 2015/05/06.
@@ -16,7 +16,7 @@ typedef void (^ConnectCompletion)(BOOL success, NSError *error);
 typedef void (^CaptureCompletion)(BOOL success, UIImage * thumbnail, NSDate * capture_date, NSError *error);
 
 
-@protocol CaptureDelegate <NSObject>
+@protocol TheTaManagerDelegate <NSObject>
 @optional
 - (void)connected:(BOOL)result;
 - (void)disconnected;
@@ -26,7 +26,7 @@ typedef void (^CaptureCompletion)(BOOL success, UIImage * thumbnail, NSDate * ca
 @end
 
 
-@interface Capture : NSObject
+@interface TheTaManager : NSObject
 
 typedef enum {
 	CAPTURE_MODE_NORMAL		= 1,
@@ -34,12 +34,12 @@ typedef enum {
 	CAPTURE_MODE_MOVIE		= 3,
 } CAPTURE_MODE;
 
-@property (nonatomic, weak) id<CaptureDelegate> delegate;
+@property (nonatomic, weak) id<TheTaManagerDelegate> delegate;
 
-@property (readonly) PtpConnection *connection;
-@property (readonly) BOOL			connected;
+@property (readonly) PtpConnection*	connection;
+@property (readonly) BOOL			isConnected;
 
-@property (readwrite) UIView *		view;
+@property (readwrite) UIView* 		view;
 @property (readwrite) NSUInteger	volumeLevel;
 @property (readwrite) NSUInteger	batteryLevel;
 @property (readwrite) NSUInteger	shutterSpeed;
@@ -47,10 +47,13 @@ typedef enum {
 @property (readwrite) NSInteger		whiteBalance;
 @property (readwrite) CAPTURE_MODE	captureMode;
 
-@property (readwrite) NSMutableArray *	tamaObjects;		// 全写真情報を保持
-@property (readwrite) PtpObject *		tamaCapture;		// 撮影直後または選択中の写真情報
-@property (readwrite) PtpObject *		tamaViewer;			// 3D-Viewerで表示する写真情報
+@property (readwrite) NSMutableArray*	tamaObjects;		// 全写真情報を保持
+@property (readwrite) PtpObject*		tamaCapture;		// 撮影直後または選択中の写真情報
+@property (readwrite) PtpObject*		tamaViewer;			// 3D-Viewerで表示する写真情報
 
+
+/// Singleton 固有インスタンスを返す
++ (TheTaManager*)sharedInstance;
 
 //- (void)connect;
 - (void)connectCompletion:(ConnectCompletion)completion;

@@ -1,16 +1,17 @@
 //
-//  Capture.m
+//  TheTaManager
 //  TheTama
 //
 //  Created by masa on 2015/05/06.
 //  Copyright (c) 2015年 Azukid. All rights reserved.
 //
 
+#import <objc/runtime.h>
 #import "MRProgress.h"		// http://cocoadocs.org/docsets/MRProgress/0.2.2/
 
 #import "Azukid.h"
-#import "TheTama-Swift.h"
-#import "Capture.h"
+//#import "TheTama-Swift.h"
+#import "TheTaManager.h"
 
 #define KEY_CONNECT_COMPLETION		@"KEY_CONNECT_COMPLETION"
 #define KEY_CAPTURE_COMPLETION		@"KEY_CAPTURE_COMPLETION"
@@ -21,27 +22,45 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	dispatch_async(dispatch_get_main_queue(), block);
 }
 
-@interface Capture() <PtpIpEventListener>
+@interface TheTaManager() <PtpIpEventListener>
 {
-	//PtpConnection	*	mConnection;
+	//PtpConnection	*	_connection;
 	NSInteger			mTransactionId;
 }
 @end
 
-@implementation Capture
-@synthesize connection = mConnection;
-@synthesize connected = mConnected;
 
+@implementation TheTaManager
+//@synthesize connection = mConnection;
+//@synthesize connected = mConnected;
 
-- (id)init
-{
+/// Singleton 固有インスタンスを返す
++ (TheTaManager*)sharedInstance {
+	static TheTaManager *singleton;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		singleton = [[TheTaManager alloc] initSharedInstance];
+	});
+	return singleton;
+}
+
+- (id)initSharedInstance {
 	self = [super init];
 	if (self) {
-		mConnection = [[PtpConnection alloc] init];
-		self.tamaObjects = [NSMutableArray new];
+
+		_connection = [[PtpConnection alloc] init];
+		_tamaObjects = [NSMutableArray new];
+		
 	}
 	return self;
 }
+
+- (id)init {
+	// alloc init するとエラー発生させる
+	[self doesNotRecognizeSelector:_cmd];
+	return nil;
+}
+
 
 
 #pragma mark - PTP/IP Operations.
@@ -49,8 +68,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)connectCompletion:(ConnectCompletion)completion
 {
 	LOG_FUNC
-	assert(mConnection);
-	assert(self.view);
+	assert(_connection);
 
 	// completionオブジェクトを保持する
 	objc_setAssociatedObject(self,
@@ -58,39 +76,38 @@ inline static void dispatch_async_main(dispatch_block_t block)
 							 [completion copy],
 							 OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 	
-	
-	[self progressOnTitle:NSLocalizedString(@"Lz.Connecting", nil)];
+	//Progressなどのビュー表示は、ここでは禁止（Watch対応のため）
+	//[self progressOnTitle:NSLocalizedString(@"Lz.Connecting", nil)];
 	
 	// Ready to PTP/IP.
-	[mConnection setLoglevel:PTPIP_LOGLEVEL_WARN];
-	[mConnection setTimeLimitForResponse:PTP_TIMEOUT];
+	[_connection setLoglevel:PTPIP_LOGLEVEL_WARN];
+	[_connection setTimeLimitForResponse:PTP_TIMEOUT];
 	
 	// PtpIpEventListener delegates.
-	[mConnection setEventListener:self]; //画面遷移の都度、デリゲート指定必須
+	[_connection setEventListener:self]; //画面遷移の都度、デリゲート指定必須
 	
 	// Setup `target IP`(camera IP).
 #if TARGET_IPHONE_SIMULATOR
-	[mConnection setTargetIp: @"192.168.1.5"]; //SIMULATOR Wi-Fi
+	[_connection setTargetIp: @"192.168.1.5"]; //SIMULATOR Wi-Fi
 #else
-	[mConnection setTargetIp: @"192.168.1.1"]; //THETA DEF.
+	[_connection setTargetIp: @"192.168.1.1"]; //THETA DEF.
 #endif
 	
 	
 	// Connect to target.
-	[mConnection connect:^(BOOL connected) {
+	[_connection connect:^(BOOL connected) {
 		// "Connect" and "OpenSession" completion callback.
 		// This block is running at PtpConnection#gcd thread.
 		
-		dispatch_async_main(^{
-			[self progressOff];
-		});
-		if (connected) {
+		//[self progressOff];
+
+		if (_isConnected) {
 			// "Connect" is succeeded.
-			mConnected = true;
+			_isConnected = true;
 			LOG(@"connected.");
-			LOG(@"  mData.ptpConnection.connected=%d", mConnection.connected);
+			LOG(@"  mData.ptpConnection.connected=%d", _connection.connected);
 			
-			[mConnection operateSession:^(PtpIpSession *session) {
+			[_connection operateSession:^(PtpIpSession *session) {
 
 				// 充電レベル   FULL(100), HALF(67), NEAR_END(33), END(0)
 				self.batteryLevel = [session getBatteryLevel];
@@ -146,7 +163,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		}
 		else {
 			// "Connect" is failed.
-			mConnected = false;
+			_isConnected = false;
 			LOG(@"connect failed.");
 			if ([self.delegate respondsToSelector:@selector(connected:)]) {
 				[self.delegate connected:NO];
@@ -156,7 +173,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		// completionオブジェクトを取得する
 		ConnectCompletion completion = objc_getAssociatedObject(self, KEY_CONNECT_COMPLETION);
 		if (completion) {
-			completion(connected, nil);
+			completion(_isConnected, nil);
 		}
 		
 		
@@ -168,14 +185,12 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	LOG_FUNC
 	[self progressOnTitle:NSLocalizedString(@"Lz.Connecting", nil)];
 	
-	[mConnection close:^{
+	[_connection close:^{
 		// "CloseSession" and "Close" completion callback.
 		// This block is running at PtpConnection#gcd thread.
 		LOG(@"disconnected.");
 		
-		dispatch_async_main(^{
-			[self progressOff];
-		});
+		[self progressOff];
 		
 		if (connect) {
 			[self connectCompletion:nil];
@@ -198,6 +213,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 							 OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 
 	
+	//Progressなどのビュー表示は、ここでは禁止（Watch対応のため）
 	switch (self.captureMode) {
 		case CAPTURE_MODE_NORMAL:
 		{
@@ -214,7 +230,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 												// STOP処理
 												[self progressOff];
 												[self progressOnTitle:NSLocalizedString(@"Saveing...", nil)];
-												[mConnection operateSession:^(PtpIpSession *session){
+												[_connection operateSession:^(PtpIpSession *session){
 													BOOL result = [session terminateOpenCapture: mTransactionId];
 													LOG(@"terminateOpenCapture: result=%d", result);
 													if (completion) {
@@ -235,7 +251,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 												// STOP処理
 												[self progressOff];
 												[self progressOnTitle:NSLocalizedString(@"Saveing...", nil)];
-												[mConnection operateSession:^(PtpIpSession *session){
+												[_connection operateSession:^(PtpIpSession *session){
 													BOOL result = [session terminateOpenCapture: mTransactionId];
 													LOG(@"terminateOpenCapture: result=%d", result);
 													if (completion) {
@@ -250,7 +266,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			break;
 	}
 	
-	[mConnection operateSession:^(PtpIpSession *session){
+	[_connection operateSession:^(PtpIpSession *session){
 		// This block is running at PtpConnection#gcd thread.
 		
 		// シャッタースピード
@@ -401,7 +417,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		case PTPIP_OBJECT_ADDED:
 		{	// 撮影などを行った際にオブジェクトが作成された際に呼び出される
 			LOG(@"Object added Event(0x%04x) - 0x%08x", code, param1);
-			[mConnection operateSession:^(PtpIpSession *session) {
+			[_connection operateSession:^(PtpIpSession *session) {
 				NSDate * capture_date = nil;
 				PtpIpObjectInfo* objectInfo = [session getObjectInfo:param1];
 				if (objectInfo) {
@@ -456,11 +472,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	}
 	
 	LOG(@"socket error(0x%X,closed=%@).\n--- %@", err, closed? @"YES": @"NO", desc);
-	[mConnection setEventListener:nil];
+	[_connection setEventListener:nil];
 	
-	dispatch_async_main(^{
-		[self progressOff];
-	});
+	[self progressOff];
 
 	if ([self.delegate respondsToSelector:@selector(socketError)]) {
 		[self.delegate socketError];
@@ -473,20 +487,24 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)progressOnTitle:(NSString*)zTitle
 {
 	assert(self.view);
-	if (zTitle) {
-		[MRProgressOverlayView showOverlayAddedTo:self.view
-											title:zTitle	// nil だと落ちる
-											 mode:MRProgressOverlayViewModeIndeterminate
-										 animated:YES];
-	} else {
-		[MRProgressOverlayView showOverlayAddedTo:self.view animated:YES];
-	}
+	dispatch_async_main(^{
+		if (zTitle) {
+			[MRProgressOverlayView showOverlayAddedTo:self.view
+												title:zTitle	// nil だと落ちる
+												 mode:MRProgressOverlayViewModeIndeterminate
+											 animated:YES];
+		} else {
+			[MRProgressOverlayView showOverlayAddedTo:self.view animated:YES];
+		}
+	});
 }
 
 - (void)progressOff
 {
 	assert(self.view);
-	[MRProgressOverlayView dismissOverlayForView:self.view animated:YES];
+	dispatch_async_main(^{
+		[MRProgressOverlayView dismissOverlayForView:self.view animated:YES];
+	});
 }
 
 

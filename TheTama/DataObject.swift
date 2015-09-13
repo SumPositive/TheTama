@@ -66,7 +66,7 @@ class DataObject: NSObject, NSCoding {
 
 	}
 	
-	required init(coder aDecoder: NSCoder) {
+	required init?(coder aDecoder: NSCoder) {
 		// BOOL
 		self.captureTouchDown	= aDecoder.decodeBoolForKey("captureTouchDown")
 		self.capturePreview		= aDecoder.decodeBoolForKey("capturePreview")

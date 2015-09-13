@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import WatchKit
+//import WatchKit
 
 
 @UIApplicationMain
@@ -15,26 +15,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
 	var dataObject: DataObject?
-	var captureObject: Capture = Capture()
+	//var thetama: TheTaManager = TheTaManager.sharedInstance()
 	
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
 		// 初起動したとき
-		
-		// mData 復帰
-		let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as! Array<String>
-		let filePath = paths[0].stringByAppendingPathComponent("mData.TheTama")
-		dataObject = NSKeyedUnarchiver.unarchiveObjectWithFile(filePath) as? DataObject
-		if dataObject == nil {
-			println("ERROR! mData load");
-		}
-		
-		// option1payed
-		if dataObject?.option1payed == false {
-			let ud = NSUserDefaults.standardUserDefaults()
-			dataObject?.option1payed = ud.boolForKey("option1payed")
-		}
 
+		// mData 復帰
+		let fileManager = NSFileManager.defaultManager()
+		let urls = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+		if let documentDirectory: NSURL = urls.first {
+			let fileURL = documentDirectory.URLByAppendingPathComponent("mData.TheTama")
+			dataObject = NSKeyedUnarchiver.unarchiveObjectWithFile(fileURL.absoluteString) as? DataObject
+			if dataObject == nil {
+				print("ERROR! mData load");
+			}
+
+			// option1payed
+			if dataObject?.option1payed == false {
+				let ud = NSUserDefaults.standardUserDefaults()
+				dataObject?.option1payed = ud.boolForKey("option1payed")
+			}
+
+		} else {
+			print("Couldn't get documents directory!")
+		}
+		
 		return true
 	}
 	
@@ -50,14 +56,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		NSNotificationCenter.defaultCenter().postNotificationName("applicationDidEnterBackground", object: nil)
 		// mData 保存
 		if dataObject != nil {
-			//パスの取得
-			let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as! Array<String>
-			//保存するファイルの名前
-			let filePath = paths[0].stringByAppendingPathComponent("mData.TheTama")
-			//アーカイブして保存する
-			let successful = NSKeyedArchiver.archiveRootObject(dataObject!, toFile: filePath)
-			if !successful {
-				println("ERROR! mData save");
+			
+			let fileManager = NSFileManager.defaultManager()
+			let urls = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+			if let documentDirectory: NSURL = urls.first {
+				let fileURL = documentDirectory.URLByAppendingPathComponent("mData.TheTama")
+				//アーカイブして保存する
+				let successful = NSKeyedArchiver.archiveRootObject(dataObject!, toFile: fileURL.absoluteString)
+				if !successful {
+					print("ERROR! mData save");
+				}
+				
+			} else {
+				print("Couldn't get documents directory!")
 			}
 		}
 	}
@@ -85,66 +96,66 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		return dataObject
 	}
 
-	func getCaptureObject() -> Capture? {
-		return captureObject
-	}
+//	func getThetama() -> TheTaManager? {
+//		return thetama
+//	}
 
 
 	// MARK: - WatchKit I/O
 
-	func application(application: UIApplication,
-		handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]?,
-		reply: (([NSObject : AnyObject]!) -> Void)!) {
-
-			var error: NSError?
-
-			if let command:String = userInfo?["command"] as? String {
-				println("command=" + command)
-				switch command {
-				case "isConnect":	// THETA Wi-Fi接続状態
-					#if arch(i386) || arch(x86_64)
-						// シミュレータ
-						reply(["result":true])
-					#else
-						// 実機
-						if (captureObject.connected==true) {
-							reply(["result":true])
-						} else {
-							reply(["result":false])
-						}
-					#endif
-					return
-
-				case "capture":		// キャプチャ実行、サムネイルを送る
+//	func application(application: UIApplication,
+//		handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]?,
+//		reply: (([NSObject : AnyObject]?) -> Void)) {
+//
+//			//var error: NSError?
+//
+//			if let command:String = userInfo?["command"] as? String {
+//				print("command=" + command)
+//				switch command {
+//				case "isConnect":	// THETA Wi-Fi接続状態
 //					#if arch(i386) || arch(x86_64)
 //						// シミュレータ
-//						let image:UIImage? = UIImage(named:"Tama2.svg")
+//						reply(["result":true])
 //					#else
-						// 実機
-						//TODO: 音量など、パラメータセット
-						captureObject.captureCompletion({(success, thumbnail, capture_date, error) -> Void in
-							if success==true {
-								let thum:NSData? = UIImagePNGRepresentation(thumbnail)
-								reply(["result":true, "thumbData":thum!])
-							}
-							else {
-								reply(["result":false])
-							}
-						})
-//
-//						//TODO: レスポンス処理
-//						let image:UIImage? = dataObject!.tamaCapture!.thumbnail
+//						// 実機
+//						if (captureObject.connected==true) {
+//							reply(["result":true])
+//						} else {
+//							reply(["result":false])
+//						}
 //					#endif
-//					let thum:NSData? = UIImagePNGRepresentation(image)
-//					reply(["result":true, "thumbData":thum!])
-					return
-					
-				default:
-					break
-				}
-			}
-			reply([:])
-	}
+//					return
+//
+//				case "capture":		// キャプチャ実行、サムネイルを送る
+////					#if arch(i386) || arch(x86_64)
+////						// シミュレータ
+////						let image:UIImage? = UIImage(named:"Tama2.svg")
+////					#else
+//						// 実機
+//						//TODO: 音量など、パラメータセット
+//						captureObject.captureCompletion({(success, thumbnail, capture_date, error) -> Void in
+//							if success==true {
+//								let thum:NSData? = UIImagePNGRepresentation(thumbnail)
+//								reply(["result":true, "thumbData":thum!])
+//							}
+//							else {
+//								reply(["result":false])
+//							}
+//						})
+////
+////						//TODO: レスポンス処理
+////						let image:UIImage? = dataObject!.tamaCapture!.thumbnail
+////					#endif
+////					let thum:NSData? = UIImagePNGRepresentation(image)
+////					reply(["result":true, "thumbData":thum!])
+//					return
+//					
+//				default:
+//					break
+//				}
+//			}
+//			reply([:])
+//	}
 
 }
 

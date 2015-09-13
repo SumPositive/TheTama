@@ -11,7 +11,7 @@
 
 #import "Azukid.h"
 #import "TheTama-Swift.h"
-#import "Capture.h"
+#import "TheTaManager.h"
 
 #import "CaptureViewController.h"
 #import "PtpConnection.h"
@@ -25,18 +25,18 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	dispatch_async(dispatch_get_main_queue(), block);
 }
 
-@interface CaptureViewController () <CaptureDelegate>
+@interface CaptureViewController () <TheTaManagerDelegate>
 {
-	DataObject *	mData;
-	Capture *		mCapture;
+	DataObject*		mData;
+	//TheTaManager*	mCapture;
 	
 	NSUInteger		mShutterSpeed;
 	NSInteger		mFilmIso;
 	NSInteger		mWhiteBalance;
 	CAPTURE_MODE	mCaptureMode;
 	NSInteger		mTransactionId;
-	UIImage	*		mImageThumb;
-	NSTimer *		mTimerCheck;
+	UIImage*		mImageThumb;
+	NSTimer*		mTimerCheck;
 }
 
 @property (nonatomic, strong) IBOutlet UISegmentedControl * sgShutter1;
@@ -216,6 +216,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)connected:(BOOL)result
 {
 	LOG_FUNC
+	[self progressOff];
 }
 
 - (void)disconnected
@@ -274,7 +275,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 {
 	// シャッターボタンを押したとき撮影
 	if (mData.captureTouchDown) {
-		[self capture];
+		//[self capture];
 	}
 }
 
@@ -282,36 +283,91 @@ inline static void dispatch_async_main(dispatch_block_t block)
 {
 	// シャッターボタンを離したとき撮影
 	if (!mData.captureTouchDown) {
-		[self capture];
+		//[self capture];
 	}
 }
 
-- (void)capture
-{
-	LOG_FUNC
-	mCapture.shutterSpeed = mShutterSpeed;
-	mCapture.filmIso = mFilmIso;
-	mCapture.whiteBalance = mWhiteBalance;
-	mCapture.volumeLevel = mData.volumeLevel;
-	[mCapture captureCompletion:^(BOOL success, UIImage * thumbnail, NSDate * capture_date, NSError *error) {
-		if (success) {
-			// サムネイル表示
-			NSDateFormatter* df = [[NSDateFormatter alloc] init];
-			[df setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-			[df setDateStyle:NSDateFormatterShortStyle];
-			[df setTimeStyle:NSDateFormatterMediumStyle];
-			dispatch_async_main(^{
-				[self thumbnail:thumbnail title:[df stringFromDate:capture_date]];
-				self.buCapture.enabled = YES;
-			});
-		}
-		else{
-			dispatch_async_main(^{
-				[self dismissViewControllerAnimated:YES completion:nil];
-			});
-		}
-	}];
-}
+//- (void)capture
+//{
+//	LOG_FUNC
+//
+//	switch (mCaptureMode) {
+//		case CAPTURE_MODE_NORMAL:
+//		{
+//			[self progressOnTitle:NSLocalizedString(@"During 360° Capture.", nil)];
+//		}	break;
+//			
+//		case CAPTURE_MODE_TIMELAPSE:
+//		{
+//			[MRProgressOverlayView showOverlayAddedTo:self.view
+//												title:NSLocalizedString(@"During timelapse shooting.",nil)
+//												 mode:MRProgressOverlayViewModeIndeterminate
+//											 animated:YES
+//											stopBlock:^(MRProgressOverlayView *progressOverlayView) {
+//												// STOP処理
+//												[self progressOff];
+//												[self progressOnTitle:NSLocalizedString(@"Saveing...", nil)];
+//												[mConnection operateSession:^(PtpIpSession *session){
+//													BOOL result = [session terminateOpenCapture: mTransactionId];
+//													LOG(@"terminateOpenCapture: result=%d", result);
+//													if (completion) {
+//														completion(YES, nil, nil, nil);
+//													}
+//												}];
+//												return;
+//											}];
+//		}	break;
+//			
+//		case CAPTURE_MODE_MOVIE:
+//		{
+//			[MRProgressOverlayView showOverlayAddedTo:self.view
+//												title:NSLocalizedString(@"During movie shooting.",nil)
+//												 mode:MRProgressOverlayViewModeIndeterminate
+//											 animated:YES
+//											stopBlock:^(MRProgressOverlayView *progressOverlayView) {
+//												// STOP処理
+//												[self progressOff];
+//												[self progressOnTitle:NSLocalizedString(@"Saveing...", nil)];
+//												[mConnection operateSession:^(PtpIpSession *session){
+//													BOOL result = [session terminateOpenCapture: mTransactionId];
+//													LOG(@"terminateOpenCapture: result=%d", result);
+//													if (completion) {
+//														completion(YES, nil, nil, nil);
+//													}
+//												}];
+//												return;
+//											}];
+//		}	break;
+//			
+//		default:
+//			break;
+//	}
+//
+//	mCapture.shutterSpeed = mShutterSpeed;
+//	mCapture.filmIso = mFilmIso;
+//	mCapture.whiteBalance = mWhiteBalance;
+//	mCapture.volumeLevel = mData.volumeLevel;
+//	[mCapture captureCompletion:^(BOOL success, UIImage * thumbnail, NSDate * capture_date, NSError *error) {
+//		if (success) {
+//			// サムネイル表示
+//			NSDateFormatter* df = [[NSDateFormatter alloc] init];
+//			[df setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+//			[df setDateStyle:NSDateFormatterShortStyle];
+//			[df setTimeStyle:NSDateFormatterMediumStyle];
+//			dispatch_async_main(^{
+//				[self thumbnail:thumbnail title:[df stringFromDate:capture_date]];
+//				self.buCapture.enabled = YES;
+//			});
+//		}
+//		else{
+//			dispatch_async_main(^{
+//				[self dismissViewControllerAnimated:YES completion:nil];
+//			});
+//		}
+//		
+//		[self progressOff];
+//	}];
+//}
 
 
 //- (void)capture
@@ -463,9 +519,10 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 - (void)viewRefreshBattery
 {
+	TheTaManager *thetama = [TheTaManager sharedInstance];
 	// 充電レベル   FULL(100), HALF(67), NEAR_END(33), END(0)
-	self.batteryLabel.text = [NSString stringWithFormat:@"%ld%%", (unsigned long)mCapture.batteryLevel];
-	float ff = (float)mCapture.batteryLevel / 100.0;
+	self.batteryLabel.text = [NSString stringWithFormat:@"%ld%%", (unsigned long)thetama.batteryLevel];
+	float ff = (float)thetama.batteryLevel / 100.0;
 	if (ff < 0.33) {
 		self.batteryProgress.progressTintColor = [UIColor redColor];
 	}
@@ -486,7 +543,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 #endif
 	//[mTimerCheck invalidate];	//タイマー停止
 	
-	if (!mCapture.connected) {
+	if (![TheTaManager sharedInstance].isConnected) {
 		[self progressOff];
 		[self dismissViewControllerAnimated:YES completion:nil];
 		return;
@@ -754,8 +811,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	mData = [app getDataObject];
 	assert(mData != nil);
 	
-	mCapture = [app getCaptureObject];
-	assert(mCapture != nil);
+//	mCapture = [app getCaptureObject];
+//	assert(mCapture != nil);
 
 	//
 	mShutterSpeed = 0;  //AUTO(0)
@@ -788,9 +845,11 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	mCapture.delegate = self;
-	mCapture.view = self.view;
-
+//	mCapture.delegate = self;
+//	mCapture.view = self.view;
+	[TheTaManager sharedInstance].delegate = self;
+	[TheTaManager sharedInstance].view = self.view;
+	
 	//self.batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 3.0f ); // 横方向に1倍、縦方向に3倍して表示する
 //	[UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
 //		self.batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 0.0f );
@@ -813,7 +872,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	[super viewDidAppear:animated];
 	LOG_FUNC
 
-	[self applicationWillEnterForeground];
+	[self applicationWillEnterForeground]; //[self viewRefresh];
 
 	[mTimerCheck fire]; //タイマー開始   //TODO:リピートされない？
 }
@@ -836,9 +895,11 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	[self viewRefresh];
 #else
 	[self viewRefresh];
+	
+	TheTaManager* thetama = [TheTaManager sharedInstance];
 	// コネクト・チェック
-	if (mCapture.connected) {
-		switch (mCapture.captureMode) {
+	if (thetama.isConnected) {
+		switch (thetama.captureMode) {
 			case CAPTURE_MODE_NORMAL:
 				mImageThumb = [UIImage imageNamed:@"Tama2.svg"];
 				break;

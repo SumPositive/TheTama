@@ -12,7 +12,7 @@
 
 #import "Azukid.h"
 #import "TheTama-Swift.h"
-#import "Capture.h"
+#import "TheTaManager.h"
 
 #import "ConnectViewController.h"
 #import "PtpConnection.h"
@@ -24,17 +24,16 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	dispatch_async(dispatch_get_main_queue(), block);
 }
 
-@interface ConnectViewController () <CaptureDelegate> //<PtpIpEventListener>
+@interface ConnectViewController () <TheTaManagerDelegate> //<PtpIpEventListener>
 {
+	//__weak IBOutlet UILabel*		_lbConnect;
+	__weak IBOutlet UIButton*		_buSetting;
+	__weak IBOutlet UIButton*		_buRetry;
+	__weak IBOutlet ADBannerView*	_iAd;
+	
 	DataObject *	mData;
-	Capture *		mCapture;
+	//Capture *		mCapture;
 }
-
-@property (nonatomic, weak) IBOutlet UILabel * lbConnect;
-@property (nonatomic, weak) IBOutlet UIButton * buSetting;
-@property (nonatomic, weak) IBOutlet UIButton * buRetry;
-@property (nonatomic, weak) IBOutlet ADBannerView * iAd;
-
 @end
 
 
@@ -42,66 +41,66 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 
 
-#pragma mark - PtpIpEventListener delegates.
-
--(void)ptpip_eventReceived:(int)code :(uint32_t)param1 :(uint32_t)param2 :(uint32_t)param3
-{
-	LOG_FUNC
-	// PTP/IP-Event callback.
-	// This method is running at PtpConnection#gcd thread.
-	switch (code) {
-		default:
-			LOG(@"Event(0x%04x) received", code);
-			break;
-			
-	}
-	dispatch_async_main(^{
-		[self progressOff];
-	});
-}
-
--(void)ptpip_socketError:(int)err
-{
-	LOG_FUNC
-	// socket error callback.
-	// This method is running at PtpConnection#gcd thread.
-	
-	// If libptpip closed the socket, `closed` is non-zero.
-	BOOL closed = PTP_CONNECTION_CLOSED(err);
-	
-	// PTPIP_PROTOCOL_*** or POSIX error number (errno()).
-	err = PTP_ORIGINAL_PTPIPERROR(err);
-	
-	NSArray* errTexts = @[@"Socket closed",              // PTPIP_PROTOCOL_SOCKET_CLOSED
-						  @"Brocken packet",             // PTPIP_PROTOCOL_BROCKEN_PACKET
-						  @"Rejected",                   // PTPIP_PROTOCOL_REJECTED
-						  @"Invalid session id",         // PTPIP_PROTOCOL_INVALID_SESSION_ID
-						  @"Invalid transaction id.",    // PTPIP_PROTOCOL_INVALID_TRANSACTION_ID
-						  @"Unrecognided command",       // PTPIP_PROTOCOL_UNRECOGNIZED_COMMAND
-						  @"Invalid receive state",      // PTPIP_PROTOCOL_INVALID_RECEIVE_STATE
-						  @"Invalid data length",        // PTPIP_PROTOCOL_INVALID_DATA_LENGTH
-						  @"Watchdog expired",           // PTPIP_PROTOCOL_WATCHDOG_EXPIRED
-						  ];
-	NSString* desc;
-	if ((PTPIP_PROTOCOL_SOCKET_CLOSED<=err) && (err<=PTPIP_PROTOCOL_WATCHDOG_EXPIRED)) {
-		desc = [errTexts objectAtIndex:err-PTPIP_PROTOCOL_SOCKET_CLOSED];
-	} else {
-		desc = [NSString stringWithUTF8String:strerror(err)];
-	}
-	
-	LOG(@"socket error(0x%X,closed=%@).\n--- %@", err, closed? @"YES": @"NO", desc);
-	if (closed) {
-		//[mData.ptpConnection setEventListener:nil];
-		
-		dispatch_async_main(^{
-			[self progressOff];
-			//[self progressOnTitle:NSLocalizedString(@"Lz.Disconnect", nil)];
-			//[self disconnect];
-			//[SVProgressHUD dismiss];
-			//[self progressOff];
-		});
-	}
-}
+//#pragma mark - PtpIpEventListener delegates.
+//
+//-(void)ptpip_eventReceived:(int)code :(uint32_t)param1 :(uint32_t)param2 :(uint32_t)param3
+//{
+//	LOG_FUNC
+//	// PTP/IP-Event callback.
+//	// This method is running at PtpConnection#gcd thread.
+//	switch (code) {
+//		default:
+//			LOG(@"Event(0x%04x) received", code);
+//			break;
+//			
+//	}
+//	dispatch_async_main(^{
+//		[self progressOff];
+//	});
+//}
+//
+//-(void)ptpip_socketError:(int)err
+//{
+//	LOG_FUNC
+//	// socket error callback.
+//	// This method is running at PtpConnection#gcd thread.
+//	
+//	// If libptpip closed the socket, `closed` is non-zero.
+//	BOOL closed = PTP_CONNECTION_CLOSED(err);
+//	
+//	// PTPIP_PROTOCOL_*** or POSIX error number (errno()).
+//	err = PTP_ORIGINAL_PTPIPERROR(err);
+//	
+//	NSArray* errTexts = @[@"Socket closed",              // PTPIP_PROTOCOL_SOCKET_CLOSED
+//						  @"Brocken packet",             // PTPIP_PROTOCOL_BROCKEN_PACKET
+//						  @"Rejected",                   // PTPIP_PROTOCOL_REJECTED
+//						  @"Invalid session id",         // PTPIP_PROTOCOL_INVALID_SESSION_ID
+//						  @"Invalid transaction id.",    // PTPIP_PROTOCOL_INVALID_TRANSACTION_ID
+//						  @"Unrecognided command",       // PTPIP_PROTOCOL_UNRECOGNIZED_COMMAND
+//						  @"Invalid receive state",      // PTPIP_PROTOCOL_INVALID_RECEIVE_STATE
+//						  @"Invalid data length",        // PTPIP_PROTOCOL_INVALID_DATA_LENGTH
+//						  @"Watchdog expired",           // PTPIP_PROTOCOL_WATCHDOG_EXPIRED
+//						  ];
+//	NSString* desc;
+//	if ((PTPIP_PROTOCOL_SOCKET_CLOSED<=err) && (err<=PTPIP_PROTOCOL_WATCHDOG_EXPIRED)) {
+//		desc = [errTexts objectAtIndex:err-PTPIP_PROTOCOL_SOCKET_CLOSED];
+//	} else {
+//		desc = [NSString stringWithUTF8String:strerror(err)];
+//	}
+//	
+//	LOG(@"socket error(0x%X,closed=%@).\n--- %@", err, closed? @"YES": @"NO", desc);
+//	if (closed) {
+//		//[mData.ptpConnection setEventListener:nil];
+//		
+//		dispatch_async_main(^{
+//			[self progressOff];
+//			//[self progressOnTitle:NSLocalizedString(@"Lz.Disconnect", nil)];
+//			//[self disconnect];
+//			//[SVProgressHUD dismiss];
+//			//[self progressOff];
+//		});
+//	}
+//}
 
 
 #pragma mark - PTP/IP Operations.
@@ -200,17 +199,17 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	if (result) {
 		// "Connect" is succeeded.
 		// Goto Capture View
-		[self performSegueWithIdentifier:@"segCapture" sender:self];
+		//[self performSegueWithIdentifier:@"segCapture" sender:self];
 	}
 	else {
 		// "Connect" is failed.
 #if TARGET_IPHONE_SIMULATOR
-		[self performSegueWithIdentifier:@"segCapture" sender:self];
+		//[self performSegueWithIdentifier:@"segCapture" sender:self];
 #endif
 	}
 	dispatch_async_main(^{
-		self.buSetting.enabled = YES;
-		self.buRetry.enabled = YES;
+		_buSetting.enabled = YES;
+		_buRetry.enabled = YES;
 	});
 }
 
@@ -250,7 +249,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (IBAction)onRetryTouchUpIn:(id)sender
 {
 	LOG_FUNC
-	[mCapture disconnect:YES];  //YES= Disconnectの後、Connectする
+	[[TheTaManager sharedInstance] disconnect:YES];  //YES= Disconnectの後、Connectする
 }
 
 - (void)progressOnTitle:(NSString*)zTitle
@@ -301,14 +300,14 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	mData = [app getDataObject];
 	assert(mData != nil);
 	
-	mCapture = [app getCaptureObject];
-	assert(mCapture != nil);
+//	mCapture = [app getCaptureObject];
+//	assert(mCapture != nil);
 	
 
 	// iAd
 #if TARGET_IPHONE_SIMULATOR
 	self.canDisplayBannerAds = NO;
-	[self.iAd removeFromSuperview];
+	[_iAd removeFromSuperview];
 #else
 	self.canDisplayBannerAds = YES;
 	[UIViewController prepareInterstitialAds];
@@ -324,8 +323,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	mCapture.delegate = self;
-	mCapture.view = self.view;
+	[TheTaManager sharedInstance].delegate = self;
+	[TheTaManager sharedInstance].view = self.view;
 	
 	if (mData.option1payed) {
 		self.canDisplayBannerAds = NO;
@@ -350,7 +349,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	LOG_FUNC
 #if TARGET_IPHONE_SIMULATOR
 #else
-	[mCapture connectCompletion:nil];
+	[[TheTaManager sharedInstance] connectCompletion:nil];
 #endif
 }
 
@@ -358,7 +357,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 {
 	// 閉じるとき切断する、さもなくば他の(THETA純正)アプリから接続できない
 	//[self disconnect:NO];
-	[mCapture disconnect:NO];
+	[[TheTaManager sharedInstance] disconnect:NO];
 }
 
 @end
