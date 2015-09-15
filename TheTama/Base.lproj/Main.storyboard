@@ -127,10 +127,6 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
-                        <outlet property="buRetry" destination="wMo-PD-zzK" id="jMF-x5-EwZ"/>
-                        <outlet property="buSetting" destination="9SY-9f-djn" id="GrG-LZ-iHK"/>
-                        <outlet property="iAd" destination="Dt6-O2-fsC" id="Y3y-20-sRh"/>
-                        <outlet property="lbConnect" destination="J2X-hu-HVe" id="SLC-0a-1yf"/>
                         <segue destination="9pv-A4-QxB" kind="show" identifier="segCapture" id="Z8r-kB-Bi6"/>
                     </connections>
                 </viewController>

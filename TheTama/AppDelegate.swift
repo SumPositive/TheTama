@@ -41,6 +41,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			print("Couldn't get documents directory!")
 		}
 		
+		// Root View を指定する　（Storyboardを使わないため）
+		self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+		self.window!.rootViewController = ConnectViewController()
+		self.window!.backgroundColor = UIColor.whiteColor()
+		self.window!.makeKeyAndVisible()
+		
 		return true
 	}
 	

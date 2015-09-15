@@ -9,4 +9,5 @@
 #import "PtpObject.h"
 
 #import "TheTaManager.h"
+#import "ConnectViewController.h"
 

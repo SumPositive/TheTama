@@ -1,0 +1,18 @@
+
+/* Class = "UILabel"; text = "2. Please check the Wi-Fi setting of iPhone."; ObjectID = "QyR-tD-QBX"; */
+"QyR-tD-QBX.text" = "2. Please check the Wi-Fi setting of iPhone.";
+
+/* Class = "UILabel"; text = "3. Please retry the connection."; ObjectID = "S7V-CR-5ng"; */
+"S7V-CR-5ng.text" = "3. Please retry the connection.";
+
+/* Class = "UIButton"; normalTitle = "Reconnect"; ObjectID = "U17-op-QzV"; */
+"U17-op-QzV.normalTitle" = "Reconnect";
+
+/* Class = "UILabel"; text = "In the list, if you touch the part of the time display, You can jump to the top line."; ObjectID = "eVd-it-0yo"; */
+"eVd-it-0yo.text" = "In the list, if you touch the part of the time display, You can jump to the top line.";
+
+/* Class = "UIButton"; normalTitle = "To setting screen"; ObjectID = "pio-EJ-yPh"; */
+"pio-EJ-yPh.normalTitle" = "To setting screen";
+
+/* Class = "UILabel"; text = "1. Please enable THETA of power and Wi-Fi. "; ObjectID = "uSE-KE-wnB"; */
+"uSE-KE-wnB.text" = "1. Please enable THETA of power and Wi-Fi. ";
