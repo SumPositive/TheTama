@@ -24,6 +24,10 @@
 
 @interface InfoViewController () <UITableViewDelegate, UITableViewDataSource, RMStoreObserver>
 {
+	__weak IBOutlet UITableView *	_tableView;
+	__weak IBOutlet UIButton	*	_buBack;
+
+	
 	DataObject * mData;
 	
 	//id<RMStoreReceiptVerificator> _receiptVerificator;
@@ -33,8 +37,6 @@
 	NSArray *mPurchasedProductIDs;
 
 }
-@property (nonatomic, strong) IBOutlet UITableView * tableView;
-@property (nonatomic, strong) IBOutlet UIButton	* buBack;
 @end
 
 
@@ -47,7 +49,7 @@
 	[self progressOnTitle:nil];
 	[[RMStore defaultStore] restoreTransactionsOnSuccess:^(NSArray *transactions) {
 		[self progressOff];
-		[self.tableView reloadData];
+		[_tableView reloadData];
 	} failure:^(NSError *error) {
 		[self progressOff];
 		[self alertTitle:NSLocalizedString(@"Restore Transaction Failed",nil) message:error.localizedDescription button:@"OK"];
@@ -58,7 +60,7 @@
 {
 	[mPersistence removeTransactions];
 	mPurchasedProductIDs = [[mPersistence purchasedProductIdentifiers] allObjects];
-	[self.tableView reloadData];
+	[_tableView reloadData];
 }
 
 
@@ -66,13 +68,13 @@
 
 - (void)storeProductsRequestFinished:(NSNotification*)notification
 {
-	[self.tableView reloadData];
+	[_tableView reloadData];
 }
 
 - (void)storePaymentTransactionFinished:(NSNotification*)notification
 {
 	mPurchasedProductIDs = [[mPersistence purchasedProductIdentifiers] allObjects];
-	[self.tableView reloadData];
+	[_tableView reloadData];
 }
 
 
@@ -239,7 +241,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	[self.tableView deselectRowAtIndexPath:indexPath animated:YES]; // 選択解除
+	[_tableView deselectRowAtIndexPath:indexPath animated:YES]; // 選択解除
 	
 	if (![RMStore canMakePayments]) return;
 	
@@ -253,7 +255,7 @@
 			const BOOL consumed = [mPersistence consumeProductOfIdentifier:productID];
 			if (consumed)
 			{
-				[self.tableView reloadData];
+				[_tableView reloadData];
 			}
 		}
 	}
@@ -285,8 +287,8 @@
 	assert(mData != nil);
 	
 	// UITableView
-	self.tableView.delegate = self;
-	self.tableView.dataSource = self;
+	_tableView.delegate = self;
+	_tableView.dataSource = self;
 	
 #if false	//TODO: Store
 	//_receiptVerificator = [[RMStoreAppReceiptVerificator alloc] init];
@@ -302,7 +304,7 @@
 	[[RMStore defaultStore] requestProducts:[NSSet setWithArray:mProductIDs] success:^(NSArray *products, NSArray *invalidProductIdentifiers){
 		[self progressOff];
 		mProductsRequestFinished = YES;
-		[self.tableView reloadData];
+		[_tableView reloadData];
 	} failure:^(NSError *error) {
 		[self progressOff];
 		//[self alertTitle:NSLocalizedString(@"Products Request Failed",nil) message:error.localizedDescription button:@"OK"];

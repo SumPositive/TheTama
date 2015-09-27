@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4405505C1BB79E5700B8841A /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4405505B1BB79E5700B8841A /* InfoViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		44170C711AE13B47006E1C4B /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44CD6E031AD916580001F5B3 /* iAd.framework */; };
 		44170C7F1AE16A99006E1C4B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44170C811AE16A99006E1C4B /* Localizable.strings */; };
 		442401181AEFD2B100F3EA23 /* glkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 442401131AEFD2B100F3EA23 /* glkViewController.m */; };
@@ -81,6 +82,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4405505B1BB79E5700B8841A /* InfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoViewController.xib; sourceTree = "<group>"; };
 		44170C801AE16A99006E1C4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		44170C821AE16A9C006E1C4B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		442401111AEFD2B100F3EA23 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 				443F7A851BB7893200DC17A1 /* ViewerViewController.xib */,
 				446D9DFE1AE561CA003F8924 /* InfoViewController.h */,
 				446D9DFD1AE561CA003F8924 /* InfoViewController.m */,
+				4405505B1BB79E5700B8841A /* InfoViewController.xib */,
 			);
 			path = TheTama;
 			sourceTree = "<group>";
@@ -592,6 +595,7 @@
 			files = (
 				446083331BAF13CD00BA134A /* CaptureViewController.xib in Resources */,
 				444368061BA864A00067660C /* ConnectViewController.xib in Resources */,
+				4405505C1BB79E5700B8841A /* InfoViewController.xib in Resources */,
 				443F7A861BB7893200DC17A1 /* ViewerViewController.xib in Resources */,
 				446083351BAF19A600BA134A /* ListViewController.xib in Resources */,
 				44170C7F1AE16A99006E1C4B /* Localizable.strings in Resources */,
