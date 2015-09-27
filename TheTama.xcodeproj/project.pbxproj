@@ -12,8 +12,11 @@
 		442401181AEFD2B100F3EA23 /* glkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 442401131AEFD2B100F3EA23 /* glkViewController.m */; };
 		442401191AEFD2B100F3EA23 /* GLRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 442401151AEFD2B100F3EA23 /* GLRenderView.m */; };
 		4424011A1AEFD2B100F3EA23 /* UVSphere.m in Sources */ = {isa = PBXBuildFile; fileRef = 442401171AEFD2B100F3EA23 /* UVSphere.m */; };
+		443F7A861BB7893200DC17A1 /* ViewerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443F7A851BB7893200DC17A1 /* ViewerViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		444271411AFA0CFC00D6FB60 /* TheTaManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 444271401AFA0CFC00D6FB60 /* TheTaManager.m */; };
 		444368061BA864A00067660C /* ConnectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444368081BA864A00067660C /* ConnectViewController.xib */; };
+		446083331BAF13CD00BA134A /* CaptureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 446083321BAF13CC00BA134A /* CaptureViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		446083351BAF19A600BA134A /* ListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 446083341BAF19A600BA134A /* ListViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		446D9DFF1AE561CA003F8924 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 446D9DFD1AE561CA003F8924 /* InfoViewController.m */; };
 		44907B3E1ADCCE870053294A /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44907B3C1ADCCDF20053294A /* WatchKit.framework */; };
 		44A67B811AD39CF4002A826C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A67B801AD39CF4002A826C /* AppDelegate.swift */; };
@@ -87,12 +90,15 @@
 		442401151AEFD2B100F3EA23 /* GLRenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLRenderView.m; sourceTree = "<group>"; };
 		442401161AEFD2B100F3EA23 /* UVSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UVSphere.h; sourceTree = "<group>"; };
 		442401171AEFD2B100F3EA23 /* UVSphere.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UVSphere.m; sourceTree = "<group>"; };
+		443F7A851BB7893200DC17A1 /* ViewerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewerViewController.xib; sourceTree = "<group>"; };
 		4442713F1AFA0CFC00D6FB60 /* TheTaManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheTaManager.h; sourceTree = "<group>"; };
 		444271401AFA0CFC00D6FB60 /* TheTaManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheTaManager.m; sourceTree = "<group>"; };
 		444271451B06351B00D6FB60 /* TheTamaTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TheTamaTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		444368071BA864A00067660C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ConnectViewController.xib; sourceTree = "<group>"; };
 		4443680A1BA864BB0067660C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/ConnectViewController.strings; sourceTree = "<group>"; };
 		4443680C1BA864BE0067660C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ConnectViewController.strings; sourceTree = "<group>"; };
+		446083321BAF13CC00BA134A /* CaptureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaptureViewController.xib; sourceTree = "<group>"; };
+		446083341BAF19A600BA134A /* ListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListViewController.xib; sourceTree = "<group>"; };
 		446D9DFD1AE561CA003F8924 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		446D9DFE1AE561CA003F8924 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
 		44907B3C1ADCCDF20053294A /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
@@ -314,12 +320,15 @@
 				444368081BA864A00067660C /* ConnectViewController.xib */,
 				44B4EA601AD3E26900DE5C7E /* CaptureViewController.h */,
 				44B4EA611AD3E26900DE5C7E /* CaptureViewController.m */,
+				446083321BAF13CC00BA134A /* CaptureViewController.xib */,
 				44A67C6A1AD5AA1A002A826C /* ListViewController.h */,
 				44A67C691AD5AA1A002A826C /* ListViewController.m */,
+				446083341BAF19A600BA134A /* ListViewController.xib */,
 				44A67C621AD4A1B8002A826C /* TableCellTama.h */,
 				44A67C631AD4A1B8002A826C /* TableCellTama.m */,
 				44A67C5D1AD3E305002A826C /* ViewerViewController.h */,
 				44A67C5E1AD3E305002A826C /* ViewerViewController.m */,
+				443F7A851BB7893200DC17A1 /* ViewerViewController.xib */,
 				446D9DFE1AE561CA003F8924 /* InfoViewController.h */,
 				446D9DFD1AE561CA003F8924 /* InfoViewController.m */,
 			);
@@ -581,7 +590,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				446083331BAF13CD00BA134A /* CaptureViewController.xib in Resources */,
 				444368061BA864A00067660C /* ConnectViewController.xib in Resources */,
+				443F7A861BB7893200DC17A1 /* ViewerViewController.xib in Resources */,
+				446083351BAF19A600BA134A /* ListViewController.xib in Resources */,
 				44170C7F1AE16A99006E1C4B /* Localizable.strings in Resources */,
 				44A67B8D1AD39CF5002A826C /* LaunchScreen.xib in Resources */,
 				44A67B8A1AD39CF4002A826C /* Images.xcassets in Resources */,

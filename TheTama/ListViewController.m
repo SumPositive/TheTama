@@ -30,6 +30,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 @interface ListViewController () <TheTaManagerDelegate, UITableViewDelegate, UITableViewDataSource>
 {
+	__weak IBOutlet UITableView*	_tableView;
+
 	DataObject *	mData;
 	//Capture *		mCapture;
 
@@ -38,7 +40,6 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	UIRefreshControl *	mRefreshControl;
 	//NSInteger			mIndexPrev;
 }
-@property (nonatomic, strong) IBOutlet UITableView * tableView;
 @end
 
 
@@ -208,18 +209,18 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		}
 		
 		dispatch_async_main(^{
-			[self.tableView reloadData];
+			[_tableView reloadData];
 			//[self progressOff];
 			
 			if (0 < [arPrev count] && 0 < [arHandles count] && !mData.listBottom) {
 				// 最上行を復元
 				NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[arHandles count] inSection:0];
-				[self.tableView scrollToRowAtIndexPath:indexPath
+				[_tableView scrollToRowAtIndexPath:indexPath
 									  atScrollPosition:UITableViewScrollPositionTop
 											  animated:NO];
 			} else {
 				// 最下行へ
-				[self bottomTableView:self.tableView animated:NO];
+				[self bottomTableView:_tableView animated:NO];
 				mData.listBottom = NO;
 			}
 			
@@ -357,8 +358,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 	
 	// UITableView
-	self.tableView.delegate = self;
-	self.tableView.dataSource = self;
+	_tableView.delegate = self;
+	_tableView.dataSource = self;
 	mTableBottom = YES;	//最初に１度だけ最終行へ移動させる
 	
 	//  通知受信の設定
@@ -379,7 +380,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	mRefreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Loading...",nil) attributes:nil];
 	
 	//self.refreshControl = mRefreshControl;		//UITableViewControllerの場合
-	[self.tableView addSubview:mRefreshControl];	//UITableViewの場合
+	[_tableView addSubview:mRefreshControl];	//UITableViewの場合
 }
 
 // UIRefreshControl-Action テーブルを下へ引きずって離したとき呼び出される
@@ -418,7 +419,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		//[self.tableView reloadData];
 		if (mData.listBottom) {
 			// 最下行へ
-			[self bottomTableView:self.tableView animated:NO];
+			[self bottomTableView:_tableView animated:NO];
 			mData.listBottom = NO;
 		}
 	}
@@ -442,7 +443,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
-	[self.tableView reloadData];	//選択（反転）を解除するため
+	[_tableView reloadData];	//選択（反転）を解除するため
 }
 
 - (void)didReceiveMemoryWarning

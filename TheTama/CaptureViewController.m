@@ -27,6 +27,23 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 @interface CaptureViewController () <TheTaManagerDelegate>
 {
+	__weak IBOutlet UISegmentedControl* _sgShutter1;
+	__weak IBOutlet UISegmentedControl* _sgShutter2;
+	__weak IBOutlet UISegmentedControl* _sgIso;
+	__weak IBOutlet UISegmentedControl* _sgWhite1;
+	__weak IBOutlet UISegmentedControl* _sgWhite2;
+	
+	__weak IBOutlet UILabel *			_batteryLabel;
+	__weak IBOutlet UIProgressView *	_batteryProgress;
+	__weak IBOutlet UILabel  *			_volumeLabel;
+	__weak IBOutlet UISlider *			_volumeSlider;
+	__weak IBOutlet UIImageView *		_ivThumbnail;
+	__weak IBOutlet UILabel  *			_lbThumbnail;
+	__weak IBOutlet UIButton *			_buThumbnail;
+	__weak IBOutlet UIButton *			_buCapture;
+	__weak IBOutlet UISwitch *			_swPreview;
+
+	
 	DataObject*		mData;
 	//TheTaManager*	mCapture;
 	
@@ -39,21 +56,6 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	NSTimer*		mTimerCheck;
 }
 
-@property (nonatomic, strong) IBOutlet UISegmentedControl * sgShutter1;
-@property (nonatomic, strong) IBOutlet UISegmentedControl * sgShutter2;
-@property (nonatomic, strong) IBOutlet UISegmentedControl * sgIso;
-@property (nonatomic, strong) IBOutlet UISegmentedControl * sgWhite1;
-@property (nonatomic, strong) IBOutlet UISegmentedControl * sgWhite2;
-
-@property (nonatomic, strong) IBOutlet UILabel * batteryLabel;
-@property (nonatomic, strong) IBOutlet UIProgressView * batteryProgress;
-@property (nonatomic, strong) IBOutlet UILabel  * volumeLabel;
-@property (nonatomic, strong) IBOutlet UISlider * volumeSlider;
-@property (nonatomic, strong) IBOutlet UIImageView * ivThumbnail;
-@property (nonatomic, strong) IBOutlet UILabel  * lbThumbnail;
-@property (nonatomic, strong) IBOutlet UIButton * buThumbnail;
-@property (nonatomic, strong) IBOutlet UIButton * buCapture;
-@property (nonatomic, strong) IBOutlet UISwitch * swPreview;
 
 @end
 
@@ -234,7 +236,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 //		[df setTimeStyle:NSDateFormatterMediumStyle];
 //		dispatch_async_main(^{
 //			[self thumbnail:thumb title:[df stringFromDate:capture_date]];
-//			self.buCapture.enabled = YES;
+//			_buCapture.enabled = YES;
 //		});
 //	}
 //	else {
@@ -267,8 +269,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 }
 - (void)volumeShow
 {
-	self.volumeSlider.value = mData.volumeLevel;
-	self.volumeLabel.text = [NSString stringWithFormat:@"%ld%%", (long)mData.volumeLevel];
+	_volumeSlider.value = mData.volumeLevel;
+	_volumeLabel.text = [NSString stringWithFormat:@"%ld%%", (long)mData.volumeLevel];
 }
 
 - (IBAction)onCaptureTouchDown:(id)sender
@@ -356,7 +358,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 //			[df setTimeStyle:NSDateFormatterMediumStyle];
 //			dispatch_async_main(^{
 //				[self thumbnail:thumbnail title:[df stringFromDate:capture_date]];
-//				self.buCapture.enabled = YES;
+//				_buCapture.enabled = YES;
 //			});
 //		}
 //		else{
@@ -372,7 +374,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 //- (void)capture
 //{
-//	self.buCapture.enabled = NO;
+//	_buCapture.enabled = NO;
 //	[self thumbnailOff];
 //
 //	switch (mCaptureMode) {
@@ -395,7 +397,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 //													BOOL result = [session terminateOpenCapture: mTransactionId];
 //													LOG(@"terminateOpenCapture: result=%d", result);
 //													dispatch_async_main(^{
-//														self.buCapture.enabled = YES;
+//														_buCapture.enabled = YES;
 //													});
 //												}];
 //												return;
@@ -505,7 +507,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)viewRefresh
 {
 	dispatch_async_main(^{
-		self.buCapture.enabled = YES;
+		_buCapture.enabled = YES;
 		
 		// 音量
 		[self volumeShow];
@@ -521,18 +523,18 @@ inline static void dispatch_async_main(dispatch_block_t block)
 {
 	TheTaManager *thetama = [TheTaManager sharedInstance];
 	// 充電レベル   FULL(100), HALF(67), NEAR_END(33), END(0)
-	self.batteryLabel.text = [NSString stringWithFormat:@"%ld%%", (unsigned long)thetama.batteryLevel];
+	_batteryLabel.text = [NSString stringWithFormat:@"%ld%%", (unsigned long)thetama.batteryLevel];
 	float ff = (float)thetama.batteryLevel / 100.0;
 	if (ff < 0.33) {
-		self.batteryProgress.progressTintColor = [UIColor redColor];
+		_batteryProgress.progressTintColor = [UIColor redColor];
 	}
 	else if (ff < 0.67) {
-		self.batteryProgress.progressTintColor = [UIColor yellowColor];
+		_batteryProgress.progressTintColor = [UIColor yellowColor];
 	}
 	else {
-		self.batteryProgress.progressTintColor = [UIColor blueColor];
+		_batteryProgress.progressTintColor = [UIColor blueColor];
 	}
-	self.batteryProgress.progress = ff;
+	_batteryProgress.progress = ff;
 }
 
 - (void)timerCheck:(NSTimer*)timer
@@ -587,7 +589,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 //     1/25, 1/15, 1/13, 1/10, 10/75
 - (IBAction)sgShutter1Changed:(UISegmentedControl*)sender
 {
-	self.sgShutter2.selectedSegmentIndex = UISegmentedControlNoSegment; //クリア
+	_sgShutter2.selectedSegmentIndex = UISegmentedControlNoSegment; //クリア
 	switch (sender.selectedSegmentIndex) {
 		case 0: // Auto
 			mShutterSpeed = 0;
@@ -614,12 +616,12 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	}
 //	// ISO感度をAutoにする
 //	mFilmIso = 0xFFFF;
-//	self.sgIso.selectedSegmentIndex = 0; //Auto
+//	_sgIso.selectedSegmentIndex = 0; //Auto
 }
 
 - (IBAction)sgShutter2Changed:(UISegmentedControl*)sender
 {
-	self.sgShutter1.selectedSegmentIndex = UISegmentedControlNoSegment; //クリア
+	_sgShutter1.selectedSegmentIndex = UISegmentedControlNoSegment; //クリア
 	switch (sender.selectedSegmentIndex) {
 		case 0: // 1/250
 			mShutterSpeed = 250;
@@ -646,7 +648,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	}
 //	// ISO感度をAutoにする
 //	mFilmIso = 0xFFFF;
-//	self.sgIso.selectedSegmentIndex = 0; //Auto
+//	_sgIso.selectedSegmentIndex = 0; //Auto
 }
 
 // ISO感度
@@ -681,8 +683,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	}
 //	// シャッタースピードをAutoにする
 //	mShutterSpeed = 0;
-//	self.sgShutter1.selectedSegmentIndex = 0; //Auto
-//	self.sgShutter2.selectedSegmentIndex = UISegmentedControlNoSegment; //クリア
+//	_sgShutter1.selectedSegmentIndex = 0; //Auto
+//	_sgShutter2.selectedSegmentIndex = UISegmentedControlNoSegment; //クリア
 }
 
 // ホワイトバランス
@@ -706,7 +708,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 //PTPIP_WHITE_BALANCE_TUNGSTEN2   = 0x8020,
 - (IBAction)sgWhite1Changed:(UISegmentedControl*)sender
 {
-	self.sgWhite2.selectedSegmentIndex = UISegmentedControlNoSegment; //クリア
+	_sgWhite2.selectedSegmentIndex = UISegmentedControlNoSegment; //クリア
 	switch (sender.selectedSegmentIndex) {
 		case 0: // Auto
 			mWhiteBalance = PTPIP_WHITE_BALANCE_AUTOMATIC;
@@ -735,7 +737,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 - (IBAction)sgWhite2Changed:(UISegmentedControl*)sender
 {
-	self.sgWhite1.selectedSegmentIndex = UISegmentedControlNoSegment; //クリア
+	_sgWhite1.selectedSegmentIndex = UISegmentedControlNoSegment; //クリア
 	switch (sender.selectedSegmentIndex) {
 		case 0: // 蛍光灯1(昼光色)
 			mWhiteBalance = PTPIP_WHITE_BALANCE_FLUORESCENT1;
@@ -784,17 +786,17 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 - (void)thumbnail:(UIImage*)img title:(NSString*)title
 {
-	self.ivThumbnail.image = img;
-	self.lbThumbnail.text = title;
-	self.buThumbnail.enabled = YES;
+	_ivThumbnail.image = img;
+	_lbThumbnail.text = title;
+	_buThumbnail.enabled = YES;
 	[self viewRefresh];
 }
 
 - (void)thumbnailOff
 {
-	self.ivThumbnail.image = mImageThumb;
-	self.lbThumbnail.text = nil;
-	self.buThumbnail.enabled = NO;
+	_ivThumbnail.image = mImageThumb;
+	_lbThumbnail.text = nil;
+	_buThumbnail.enabled = NO;
 	[self viewRefresh];
 }
 
@@ -826,10 +828,10 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	[nc addObserver:self selector:@selector(applicationWillEnterForeground) name:@"applicationWillEnterForeground" object:nil];
 
 	// Thumbnailコーナを丸くする
-	[[self.ivThumbnail layer] setCornerRadius: self.ivThumbnail.frame.size.height / 3.0];
-	[self.ivThumbnail setClipsToBounds:YES];
+	[[_ivThumbnail layer] setCornerRadius: _ivThumbnail.frame.size.height / 3.0];
+	[_ivThumbnail setClipsToBounds:YES];
 	
-	self.lbThumbnail.text = nil;
+	_lbThumbnail.text = nil;
 	
 	// 監視タイマー生成
 //	mTimerCheck = [NSTimer	scheduledTimerWithTimeInterval:5.0f
@@ -850,21 +852,21 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	[TheTaManager sharedInstance].delegate = self;
 	[TheTaManager sharedInstance].view = self.view;
 	
-	//self.batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 3.0f ); // 横方向に1倍、縦方向に3倍して表示する
+	//_batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 3.0f ); // 横方向に1倍、縦方向に3倍して表示する
 //	[UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-//		self.batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 0.0f );
+//		_batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 0.0f );
 //	} completion:^(BOOL finished) {
-//		self.batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 3.0f );
+//		_batteryProgress.transform = CGAffineTransformMakeScale( 1.0f, 3.0f );
 //	}];
 	
-	self.sgShutter1.selectedSegmentIndex = 0;
-	self.sgShutter2.selectedSegmentIndex = UISegmentedControlNoSegment;
-	self.sgIso.selectedSegmentIndex = 0;
-	self.sgWhite1.selectedSegmentIndex = 0;
-	self.sgWhite2.selectedSegmentIndex = UISegmentedControlNoSegment;
+	_sgShutter1.selectedSegmentIndex = 0;
+	_sgShutter2.selectedSegmentIndex = UISegmentedControlNoSegment;
+	_sgIso.selectedSegmentIndex = 0;
+	_sgWhite1.selectedSegmentIndex = 0;
+	_sgWhite2.selectedSegmentIndex = UISegmentedControlNoSegment;
 	
 	mData.capturePreview = YES; //常にYES: プレビューOFFにしてもレスポンス変わらず廃案とした
-	self.swPreview.on = mData.capturePreview;
+	_swPreview.on = mData.capturePreview;
 }
 
 - (void)viewDidAppear:(BOOL)animated
