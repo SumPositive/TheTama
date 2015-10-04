@@ -1,0 +1,111 @@
+
+/* Class = "UISegmentedControl"; Axh-Yu-dEi.segmentTitles[0] = "Auto"; ObjectID = "Axh-Yu-dEi"; */
+"Axh-Yu-dEi.segmentTitles[0]" = "Auto";
+
+/* Class = "UISegmentedControl"; Axh-Yu-dEi.segmentTitles[1] = "Day"; ObjectID = "Axh-Yu-dEi"; */
+"Axh-Yu-dEi.segmentTitles[1]" = "Day";
+
+/* Class = "UISegmentedControl"; Axh-Yu-dEi.segmentTitles[2] = "Sha"; ObjectID = "Axh-Yu-dEi"; */
+"Axh-Yu-dEi.segmentTitles[2]" = "Sha";
+
+/* Class = "UISegmentedControl"; Axh-Yu-dEi.segmentTitles[3] = "Clo"; ObjectID = "Axh-Yu-dEi"; */
+"Axh-Yu-dEi.segmentTitles[3]" = "Clo";
+
+/* Class = "UISegmentedControl"; Axh-Yu-dEi.segmentTitles[4] = "Tun1"; ObjectID = "Axh-Yu-dEi"; */
+"Axh-Yu-dEi.segmentTitles[4]" = "Tun1";
+
+/* Class = "UISegmentedControl"; Axh-Yu-dEi.segmentTitles[5] = "Tun2"; ObjectID = "Axh-Yu-dEi"; */
+"Axh-Yu-dEi.segmentTitles[5]" = "Tun2";
+
+/* Class = "UILabel"; text = "Preview"; ObjectID = "FU2-fo-eCN"; */
+"FU2-fo-eCN.text" = "Preview";
+
+/* Class = "UISegmentedControl"; FZv-mU-8cV.segmentTitles[0] = "Auto"; ObjectID = "FZv-mU-8cV"; */
+"FZv-mU-8cV.segmentTitles[0]" = "Auto";
+
+/* Class = "UISegmentedControl"; FZv-mU-8cV.segmentTitles[1] = "1/7.5"; ObjectID = "FZv-mU-8cV"; */
+"FZv-mU-8cV.segmentTitles[1]" = "1/7.5";
+
+/* Class = "UISegmentedControl"; FZv-mU-8cV.segmentTitles[2] = "1/15"; ObjectID = "FZv-mU-8cV"; */
+"FZv-mU-8cV.segmentTitles[2]" = "1/15";
+
+/* Class = "UISegmentedControl"; FZv-mU-8cV.segmentTitles[3] = "1/30"; ObjectID = "FZv-mU-8cV"; */
+"FZv-mU-8cV.segmentTitles[3]" = "1/30";
+
+/* Class = "UISegmentedControl"; FZv-mU-8cV.segmentTitles[4] = "1/60"; ObjectID = "FZv-mU-8cV"; */
+"FZv-mU-8cV.segmentTitles[4]" = "1/60";
+
+/* Class = "UISegmentedControl"; FZv-mU-8cV.segmentTitles[5] = "1/125"; ObjectID = "FZv-mU-8cV"; */
+"FZv-mU-8cV.segmentTitles[5]" = "1/125";
+
+/* Class = "UILabel"; text = "White balance"; ObjectID = "KHM-Xy-jbF"; */
+"KHM-Xy-jbF.text" = "White balance";
+
+/* Class = "UILabel"; text = "Shutter speed"; ObjectID = "SfM-Cr-i7d"; */
+"SfM-Cr-i7d.text" = "Shutter speed";
+
+/* Class = "UISegmentedControl"; WaD-f3-nvy.segmentTitles[0] = "6500K"; ObjectID = "WaD-f3-nvy"; */
+"WaD-f3-nvy.segmentTitles[0]" = "6500K";
+
+/* Class = "UISegmentedControl"; WaD-f3-nvy.segmentTitles[1] = "5000K"; ObjectID = "WaD-f3-nvy"; */
+"WaD-f3-nvy.segmentTitles[1]" = "5000K";
+
+/* Class = "UISegmentedControl"; WaD-f3-nvy.segmentTitles[2] = "4200K"; ObjectID = "WaD-f3-nvy"; */
+"WaD-f3-nvy.segmentTitles[2]" = "4200K";
+
+/* Class = "UISegmentedControl"; WaD-f3-nvy.segmentTitles[3] = "3000K"; ObjectID = "WaD-f3-nvy"; */
+"WaD-f3-nvy.segmentTitles[3]" = "3000K";
+
+/* Class = "UILabel"; text = "100%"; ObjectID = "XyZ-AS-NiU"; */
+"XyZ-AS-NiU.text" = "100%";
+
+/* Class = "UISegmentedControl"; f0o-e4-3Mb.segmentTitles[0] = "Auto"; ObjectID = "f0o-e4-3Mb"; */
+"f0o-e4-3Mb.segmentTitles[0]" = "Auto";
+
+/* Class = "UISegmentedControl"; f0o-e4-3Mb.segmentTitles[1] = "100"; ObjectID = "f0o-e4-3Mb"; */
+"f0o-e4-3Mb.segmentTitles[1]" = "100";
+
+/* Class = "UISegmentedControl"; f0o-e4-3Mb.segmentTitles[2] = "200"; ObjectID = "f0o-e4-3Mb"; */
+"f0o-e4-3Mb.segmentTitles[2]" = "200";
+
+/* Class = "UISegmentedControl"; f0o-e4-3Mb.segmentTitles[3] = "400"; ObjectID = "f0o-e4-3Mb"; */
+"f0o-e4-3Mb.segmentTitles[3]" = "400";
+
+/* Class = "UISegmentedControl"; f0o-e4-3Mb.segmentTitles[4] = "800"; ObjectID = "f0o-e4-3Mb"; */
+"f0o-e4-3Mb.segmentTitles[4]" = "800";
+
+/* Class = "UISegmentedControl"; f0o-e4-3Mb.segmentTitles[5] = "1600"; ObjectID = "f0o-e4-3Mb"; */
+"f0o-e4-3Mb.segmentTitles[5]" = "1600";
+
+/* Class = "UILabel"; text = "Battery"; ObjectID = "gAn-7Y-Rga"; */
+"gAn-7Y-Rga.text" = "Battery";
+
+/* Class = "UILabel"; text = "100%"; ObjectID = "nGb-es-54z"; */
+"nGb-es-54z.text" = "100%";
+
+/* Class = "UILabel"; text = "Sound"; ObjectID = "q7k-yy-sNN"; */
+"q7k-yy-sNN.text" = "Sound";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "vAL-uG-89K"; */
+"vAL-uG-89K.text" = "Label";
+
+/* Class = "UISegmentedControl"; wiT-Bh-dY5.segmentTitles[0] = "1/250"; ObjectID = "wiT-Bh-dY5"; */
+"wiT-Bh-dY5.segmentTitles[0]" = "1/250";
+
+/* Class = "UISegmentedControl"; wiT-Bh-dY5.segmentTitles[1] = "1/500"; ObjectID = "wiT-Bh-dY5"; */
+"wiT-Bh-dY5.segmentTitles[1]" = "1/500";
+
+/* Class = "UISegmentedControl"; wiT-Bh-dY5.segmentTitles[2] = "/1000"; ObjectID = "wiT-Bh-dY5"; */
+"wiT-Bh-dY5.segmentTitles[2]" = "/1000";
+
+/* Class = "UISegmentedControl"; wiT-Bh-dY5.segmentTitles[3] = "/2000"; ObjectID = "wiT-Bh-dY5"; */
+"wiT-Bh-dY5.segmentTitles[3]" = "/2000";
+
+/* Class = "UISegmentedControl"; wiT-Bh-dY5.segmentTitles[4] = "/4000"; ObjectID = "wiT-Bh-dY5"; */
+"wiT-Bh-dY5.segmentTitles[4]" = "/4000";
+
+/* Class = "UISegmentedControl"; wiT-Bh-dY5.segmentTitles[5] = "/8000"; ObjectID = "wiT-Bh-dY5"; */
+"wiT-Bh-dY5.segmentTitles[5]" = "/8000";
+
+/* Class = "UILabel"; text = "ISO"; ObjectID = "ylM-7x-rRI"; */
+"ylM-7x-rRI.text" = "ISO";

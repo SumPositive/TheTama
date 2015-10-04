@@ -46,6 +46,10 @@
                 </constraints>
             </view>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="_buBack" destination="gOC-eu-hGe" id="4LY-K7-pfb"/>
+                <outlet property="_tableView" destination="gTy-Pf-bUH" id="YUr-qp-5T2"/>
+            </connections>
             <point key="canvasLocation" x="293" y="-279"/>
         </viewController>
     </objects>

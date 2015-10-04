@@ -6,20 +6,10 @@
 //  Copyright (c) 2015年 Azukid. All rights reserved.
 //
 
-//#import <StoreKit/StoreKit.h>
-//#import "BDToastAlert.h"
-#import "MRProgress.h"		// http://cocoadocs.org/docsets/MRProgress/0.2.2/
-
-//#import "RMPurchasesViewController.h"
 #import "RMStore.h"
-//#import "RMStoreTransactionReceiptVerificator.h"
-//#import "RMStoreAppReceiptVerificator.h"
 #import "RMStoreKeychainPersistence.h"
 
-#import "Azukid.h"
-#import "TheTama-Swift.h"
-
-#import "InfoViewController.h"
+#import "TheTamaBase.h"
 
 
 @interface InfoViewController () <UITableViewDelegate, UITableViewDataSource, RMStoreObserver>

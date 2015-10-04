@@ -1,18 +1,18 @@
 
-/* Class = "UILabel"; text = "2. Please check the Wi-Fi setting of iPhone."; ObjectID = "QyR-tD-QBX"; */
-"QyR-tD-QBX.text" = "2. Please check the Wi-Fi setting of iPhone.";
+/* Class = "UILabel"; text = "3. Wi-Fi接続してください。"; ObjectID = "A3h-l2-eCQ"; */
+"A3h-l2-eCQ.text" = "3. Wi-Fi接続してください。";
 
-/* Class = "UILabel"; text = "3. Please retry the connection."; ObjectID = "S7V-CR-5ng"; */
-"S7V-CR-5ng.text" = "3. Please retry the connection.";
+/* Class = "UIButton"; normalTitle = "再接続する"; ObjectID = "INk-IP-Ov6"; */
+"INk-IP-Ov6.normalTitle" = "再接続する";
 
-/* Class = "UIButton"; normalTitle = "Reconnect"; ObjectID = "U17-op-QzV"; */
-"U17-op-QzV.normalTitle" = "Reconnect";
+/* Class = "UIButton"; normalTitle = "設定画面へ"; ObjectID = "NYG-Ez-L8f"; */
+"NYG-Ez-L8f.normalTitle" = "設定画面へ";
 
-/* Class = "UILabel"; text = "In the list, if you touch the part of the time display, You can jump to the top line."; ObjectID = "eVd-it-0yo"; */
-"eVd-it-0yo.text" = "In the list, if you touch the part of the time display, You can jump to the top line.";
+/* Class = "UILabel"; text = "一覧表では時刻部分をタッチすると、\n先頭行へジャンプできます。"; ObjectID = "Xqd-Ob-USw"; */
+"Xqd-Ob-USw.text" = "一覧表では時刻部分をタッチすると、\n先頭行へジャンプできます。";
 
-/* Class = "UIButton"; normalTitle = "To setting screen"; ObjectID = "pio-EJ-yPh"; */
-"pio-EJ-yPh.normalTitle" = "To setting screen";
+/* Class = "UILabel"; text = "2. iPhoneの設定画面にて\n　　Wi-Fi選択してください。"; ObjectID = "dcD-0R-BYs"; */
+"dcD-0R-BYs.text" = "2. iPhoneの設定画面にて\n　　Wi-Fi選択してください。";
 
-/* Class = "UILabel"; text = "1. Please enable THETA of power and Wi-Fi. "; ObjectID = "uSE-KE-wnB"; */
-"uSE-KE-wnB.text" = "1. Please enable THETA of power and Wi-Fi. ";
+/* Class = "UILabel"; text = "1. THETAの電源を入れて、\n　　Wi-Fiを有効にしてください。"; ObjectID = "n0d-OJ-9si"; */
+"n0d-OJ-9si.text" = "1. THETAの電源を入れて、\n　　Wi-Fiを有効にしてください。";

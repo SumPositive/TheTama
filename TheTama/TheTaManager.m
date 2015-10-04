@@ -10,8 +10,9 @@
 #import "MRProgress.h"		// http://cocoadocs.org/docsets/MRProgress/0.2.2/
 
 #import "Azukid.h"
-//#import "TheTama-Swift.h"
+#import "TheTama-Swift.h"
 #import "TheTaManager.h"
+
 
 #define KEY_CONNECT_COMPLETION		@"KEY_CONNECT_COMPLETION"
 #define KEY_CAPTURE_COMPLETION		@"KEY_CAPTURE_COMPLETION"
@@ -24,15 +25,15 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 @interface TheTaManager() <PtpIpEventListener>
 {
-	//PtpConnection	*	_connection;
 	NSInteger			mTransactionId;
 }
 @end
 
 
+// @property に対応する @synthesize がなければ、アンダースコアつきのインスタンス変数が自動生成される
+
 @implementation TheTaManager
-//@synthesize connection = mConnection;
-//@synthesize connected = mConnected;
+
 
 /// Singleton 固有インスタンスを返す
 + (TheTaManager*)sharedInstance {
@@ -51,6 +52,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		_connection = [[PtpConnection alloc] init];
 		_tamaObjects = [NSMutableArray new];
 		
+		//AppDelegate * app = [UIApplication sharedApplication].delegate;
+		//mWindow = [[[UIApplication sharedApplication] delegate] window];
 	}
 	return self;
 }
@@ -110,8 +113,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			[_connection operateSession:^(PtpIpSession *session) {
 
 				// 充電レベル   FULL(100), HALF(67), NEAR_END(33), END(0)
-				self.batteryLevel = [session getBatteryLevel];
-				
+				_batteryLevel = [session getBatteryLevel];
 				
 				// 静止画撮影の方法
 				//     0(静止画撮影モードではない＝動画モードと判定しても良い),
@@ -130,7 +132,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 				LOG(@"stillCaptureMode=%ld",(long)stillCaptureMode);
 				
 				if (stillCaptureMode==0 || stillCaptureMode==PTPIP_STILL_CAPTURE_MODE_MOVIE) {
-					self.captureMode = CAPTURE_MODE_MOVIE;
+					_captureMode = CAPTURE_MODE_MOVIE;
 					
 					// 動画記録時間(秒)(型番：RICOH THETA m15)
 					NSUInteger recordingTime = [session getRecordingTime];
@@ -141,7 +143,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 					LOG(@"remainingRecordingTime=%ld",(long)remainingRecordingTime);
 				}
 				else if	(stillCaptureMode==PTPIP_STILL_CAPTURE_MODE_TIMELAPSE) {
-					self.captureMode = CAPTURE_MODE_TIMELAPSE;
+					_captureMode = CAPTURE_MODE_TIMELAPSE;
 					// インターバル撮影の上限枚数
 					//     0(上限なし), 2-65535
 					NSInteger timelapseNumber = [session getTimelapseNumber];
@@ -153,11 +155,11 @@ inline static void dispatch_async_main(dispatch_block_t block)
 					LOG(@"timelapseInterval=%ld",(long)timelapseInterval);
 				}
 				else {
-					self.captureMode = CAPTURE_MODE_NORMAL;
+					_captureMode = CAPTURE_MODE_NORMAL;
 				}
 				
-				if ([self.delegate respondsToSelector:@selector(connected:)]) {
-					[self.delegate connected:YES];
+				if ([_delegate respondsToSelector:@selector(connected:)]) {
+					[_delegate connected:YES];
 				}
 			}];
 		}
@@ -165,8 +167,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			// "Connect" is failed.
 			_isConnected = false;
 			LOG(@"connect failed.");
-			if ([self.delegate respondsToSelector:@selector(connected:)]) {
-				[self.delegate connected:NO];
+			if ([_delegate respondsToSelector:@selector(connected:)]) {
+				[_delegate connected:NO];
 			}
 		}
 		
@@ -196,8 +198,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			[self connectCompletion:nil];
 		}
 		else {
-			if ([self.delegate respondsToSelector:@selector(disconnected)]) {
-				[self.delegate disconnected];
+			if ([_delegate respondsToSelector:@selector(disconnected)]) {
+				[_delegate disconnected];
 			}
 		}
 	}];
@@ -214,7 +216,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 	
 	//Progressなどのビュー表示は、ここでは禁止（Watch対応のため）
-	switch (self.captureMode) {
+	switch (_captureMode) {
 		case CAPTURE_MODE_NORMAL:
 		{
 			[self progressOnTitle:NSLocalizedString(@"During 360° Capture.", nil)];
@@ -222,7 +224,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			
 		case CAPTURE_MODE_TIMELAPSE:
 		{
-			[MRProgressOverlayView showOverlayAddedTo:self.view
+			[MRProgressOverlayView showOverlayAddedTo:_progressBlockView
 												title:NSLocalizedString(@"During timelapse shooting.",nil)
 												 mode:MRProgressOverlayViewModeIndeterminate
 											 animated:YES
@@ -243,7 +245,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			
 		case CAPTURE_MODE_MOVIE:
 		{
-			[MRProgressOverlayView showOverlayAddedTo:self.view
+			[MRProgressOverlayView showOverlayAddedTo:_progressBlockView
 												title:NSLocalizedString(@"During movie shooting.",nil)
 												 mode:MRProgressOverlayViewModeIndeterminate
 											 animated:YES
@@ -278,12 +280,12 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		//     1/80, 1/60, 1/50, 1/40, 1/30,
 		//     1/25, 1/15, 1/13, 1/10, 10/75
 		// [session setShutterSpeed: PtpIpRationalMake(1,400)]; // 1/400sec
-		if (self.shutterSpeed < 7) {
+		if (_shutterSpeed < 7) {
 			[session setShutterSpeed: PtpIpRationalMake(0,0)]; // Auto
-		} else if (self.shutterSpeed < 10) {
+		} else if (_shutterSpeed < 10) {
 			[session setShutterSpeed: PtpIpRationalMake(10,75)]; // 10/75 = 1/7.5
 		} else {
-			[session setShutterSpeed: PtpIpRationalMake(1,self.shutterSpeed)];
+			[session setShutterSpeed: PtpIpRationalMake(1,_shutterSpeed)];
 		}
 		
 		// ISO感度
@@ -291,7 +293,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		//     800, 1000, 1250, 1600,
 		//     AUTOMATIC(0xFFFF)
 		// [session setExposureIndex: 100]; // ISO100
-		[session setExposureIndex: self.filmIso];
+		[session setExposureIndex: _filmIso];
 		
 		// ホワイトバランス
 		//     AUTOMATIC, DAYLIGHT(屋外), SHADE(日陰), CLOUDY(曇天),
@@ -299,7 +301,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		//     FLUORESCENT1(蛍光灯1(昼光色)), FLUORESCENT2(蛍光灯2(昼白色)),
 		//     FLUORESCENT3(蛍光灯3(白色)), FLUORESCENT4(蛍光灯4(電球色))
 		// [session setWhiteBalance: PTPIP_WHITE_BALANCE_DAYLIGHT]; // 屋外
-		[session setWhiteBalance: self.whiteBalance];
+		[session setWhiteBalance: _whiteBalance];
 		
 		// 露出補正値
 		//     2000, 1700, 1300, 1000, 700, 300,
@@ -308,9 +310,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		[session setExposureBiasCompensation: 0];
 		
 		// set シャッターの音量
-		[session setAudioVolume: self.volumeLevel];
+		[session setAudioVolume: _volumeLevel];
 		
-		switch (self.captureMode) {
+		switch (_captureMode) {
 			case CAPTURE_MODE_NORMAL:
 			{
 				BOOL rtn = [session initiateCapture]; //---> PtpIpEventListener delegates.
@@ -434,8 +436,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			
 		case PTPIP_STORE_FULL:
 		{	// ストレージFULL
-			if ([self.delegate respondsToSelector:@selector(strageFull)]) {
-				[self.delegate strageFull];
+			if ([_delegate respondsToSelector:@selector(strageFull)]) {
+				[_delegate strageFull];
 			}
 			return;
 		} break;
@@ -476,8 +478,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	
 	[self progressOff];
 
-	if ([self.delegate respondsToSelector:@selector(socketError)]) {
-		[self.delegate socketError];
+	if ([_delegate respondsToSelector:@selector(socketError)]) {
+		[_delegate socketError];
 	}
 }
 
@@ -486,25 +488,27 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 - (void)progressOnTitle:(NSString*)zTitle
 {
-	assert(self.view);
-	dispatch_async_main(^{
-		if (zTitle) {
-			[MRProgressOverlayView showOverlayAddedTo:self.view
-												title:zTitle	// nil だと落ちる
-												 mode:MRProgressOverlayViewModeIndeterminate
-											 animated:YES];
-		} else {
-			[MRProgressOverlayView showOverlayAddedTo:self.view animated:YES];
-		}
-	});
+	if (_progressBlockView) {
+		dispatch_async_main(^{
+			if (zTitle) {
+				[MRProgressOverlayView showOverlayAddedTo:_progressBlockView
+													title:zTitle	// nil だと落ちる
+													 mode:MRProgressOverlayViewModeIndeterminate
+												 animated:YES];
+			} else {
+				[MRProgressOverlayView showOverlayAddedTo:_progressBlockView animated:YES];
+			}
+		});
+	}
 }
 
 - (void)progressOff
 {
-	assert(self.view);
-	dispatch_async_main(^{
-		[MRProgressOverlayView dismissOverlayForView:self.view animated:YES];
-	});
+	if (_progressBlockView) {
+		dispatch_async_main(^{
+			[MRProgressOverlayView dismissOverlayForView:_progressBlockView animated:YES];
+		});
+	}
 }
 
 

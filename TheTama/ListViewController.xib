@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ListViewController"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <viewController id="ceB-C9-SAk" userLabel="ListViewController" customClass="ListViewController">
             <layoutGuides>
@@ -33,32 +33,6 @@
                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="yG3-0W-29G" userLabel="tableView">
                         <rect key="frame" x="16" y="30" width="288" height="400"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellTama" textLabel="90S-BM-zhn" detailTextLabel="aei-aP-kFt" rowHeight="70" style="IBUITableViewCellStyleSubtitle" id="uba-yo-nUp" customClass="TableCellTama">
-                                <rect key="frame" x="0.0" y="22" width="288" height="70"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uba-yo-nUp" id="CEU-Fv-lNf">
-                                    <rect key="frame" x="0.0" y="0.0" width="288" height="69"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="90S-BM-zhn">
-                                            <rect key="frame" x="15" y="18" width="32" height="20"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aei-aP-kFt">
-                                            <rect key="frame" x="15" y="38" width="41" height="14"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="ceB-C9-SAk" id="sLe-Vw-GeX"/>
                             <outlet property="delegate" destination="ceB-C9-SAk" id="AC2-Te-nHB"/>
@@ -92,9 +66,9 @@
             </view>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="tableView" destination="yG3-0W-29G" id="pRb-lK-cbM"/>
+                <outlet property="_tableView" destination="yG3-0W-29G" id="shf-zY-VJu"/>
             </connections>
-            <point key="canvasLocation" x="1328" y="-1004"/>
+            <point key="canvasLocation" x="1250" y="-981"/>
         </viewController>
     </objects>
 </document>

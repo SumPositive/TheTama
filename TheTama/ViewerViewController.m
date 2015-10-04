@@ -8,19 +8,14 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import <GLKit/GLKit.h>
-#import "PtpConnection.h"
-#import "PtpObject.h"
+
+//#import "PtpConnection.h"
+//#import "PtpObject.h"
 #import "RicohEXIF.h"
 #import "ExifTags.h"
 
-#import "MRProgress.h"		// http://cocoadocs.org/docsets/MRProgress/0.2.2/
-//#import "SVProgressHUD.h"
+#import "TheTamaBase.h"
 
-#import "Azukid.h"
-#import "TheTama-Swift.h"
-#import "TheTaManager.h"
-
-#import "ViewerViewController.h"
 #import "glkViewController.h"
 #import "GLRenderView.h"
 
@@ -32,6 +27,10 @@
 
 @interface ViewerViewController () <TheTaManagerDelegate>
 {
+	__weak IBOutlet UIImageView*	_ivViewer;
+	__weak IBOutlet UILabel *		_lbTitle;
+
+	
 	DataObject *	mData;
 	//Capture *		mCapture;
 
@@ -45,8 +44,8 @@
 	float _pitch;
 	MRProgressOverlayView * mMrpov;
 }
-@property (nonatomic, strong) IBOutlet UIImageView* imageView;
-@property (nonatomic, strong) IBOutlet UILabel * lbTitle;
+//@property (nonatomic, strong) IBOutlet UIImageView* _ivViewer;
+//@property (nonatomic, strong) IBOutlet UILabel * _lbTitle;
 //@property (nonatomic, strong) IBOutlet UIProgressView* progressView;
 @end
 
@@ -94,7 +93,7 @@
 		//self.progressView.progress = 0.0;
 		//self.progressView.hidden = NO;
 
-		//		mMrpov = [MRProgressOverlayView showOverlayAddedTo:self.imageView
+		//		mMrpov = [MRProgressOverlayView showOverlayAddedTo:self._ivViewer
 		//											title:NSLocalizedString(@"Loading...",nil)	// nil だと落ちる
 		//											 mode:MRProgressOverlayViewModeDeterminateCircular
 		//										 animated:YES];
@@ -117,7 +116,7 @@
 		[df setDateStyle:NSDateFormatterShortStyle];
 		[df setTimeStyle:NSDateFormatterMediumStyle];
 		
-		self.lbTitle.text = [df stringFromDate:mPtpObject.objectInfo.capture_date];
+		_lbTitle.text = [df stringFromDate:mPtpObject.objectInfo.capture_date];
 
 		//cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", obj.objectInfo.filename];
 
@@ -209,14 +208,14 @@
 
 - (void)startGLK
 {
-	glkViewController = [[GlkViewController alloc] init:self.imageView.frame image:mImageData
+	glkViewController = [[GlkViewController alloc] init:_ivViewer.frame image:mImageData
 												  width:imageWidth height:imageHeight
 													yaw:_yaw roll:_roll pitch:_pitch];
-	glkViewController.view.frame = self.imageView.frame;
+	glkViewController.view.frame = _ivViewer.frame;
  
 	
 	NSLog(@"startGLK imageData: %@", [[NSString alloc] initWithData:mImageData encoding:NSUTF8StringEncoding]);
-	NSLog(@"startGLK: frame %f %f %f %f", self.imageView.frame.origin.x, self.imageView.frame.origin.y, self.imageView.frame.size.width, self.imageView.frame.size.height);
+	NSLog(@"startGLK: frame %f %f %f %f", _ivViewer.frame.origin.x, _ivViewer.frame.origin.y, _ivViewer.frame.size.width, _ivViewer.frame.size.height);
 	
 	[self.view addSubview:glkViewController.view];
 	
@@ -258,8 +257,8 @@
 
 	
 //無効	// コーナを丸くする
-//	[[self.imageView layer] setCornerRadius:20.0];
-//	[self.imageView setClipsToBounds:YES];
+//	[[self._ivViewer layer] setCornerRadius:20.0];
+//	[self._ivViewer setClipsToBounds:YES];
 
 	//self.progressView.transform = CGAffineTransformMakeScale( 1.0f, 3.0f ); // 横方向に1倍、縦方向に3倍して表示する
 }
@@ -268,7 +267,7 @@
 {
 	[super viewWillAppear:animated];
 	[TheTaManager sharedInstance].delegate = self;
-	[TheTaManager sharedInstance].view = self.view;
+	[TheTaManager sharedInstance].progressBlockView = self.view;
 	
 	//self.progressView.progress = 0.0;
 	//	[self viewRefresh];
@@ -294,8 +293,8 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-	self.lbTitle.text = nil;
-	self.imageView.image = nil;
+	_lbTitle.text = nil;
+	_ivViewer.image = nil;
 }
 
 

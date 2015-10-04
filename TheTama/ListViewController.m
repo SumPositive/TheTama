@@ -6,21 +6,10 @@
 //  Copyright (c) 2015年 Azukid. All rights reserved.
 //
 
-//#import "SVProgressHUD.h"
-#import "MRProgress.h"		// http://cocoadocs.org/docsets/MRProgress/0.2.2/
+#import "TheTamaBase.h"
 
-#import "Azukid.h"
-#import "TheTama-Swift.h"
-#import "TheTaManager.h"
-
-#import "ListViewController.h"
-#import "PtpConnection.h"
-#import "PtpLogging.h"
-#import "PtpObject.h"
 #import "TableCellTama.h"
 
-#import "CaptureViewController.h"
-#import "ViewerViewController.h"
 
 
 inline static void dispatch_async_main(dispatch_block_t block)
@@ -272,7 +261,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 
 
-#pragma mark - UITableViewDataSource delegates.
+#pragma mark - <UITableViewDataSource>
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -308,7 +297,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	
 	PtpObject* obj = [mData.tamaObjects objectAtIndex:indexPath.row];
 	assert(obj);
-	cell = [tableView dequeueReusableCellWithIdentifier:@"cellTama"];
+	cell = [tableView dequeueReusableCellWithIdentifier:CELL_NAME_TableCellTama];
 	cell.textLabel.text = [df stringFromDate:obj.objectInfo.capture_date];
 	cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", obj.objectInfo.filename];
 
@@ -356,11 +345,15 @@ inline static void dispatch_async_main(dispatch_block_t block)
 //	mCapture = [app getCaptureObject];
 //	assert(mCapture != nil);
 
-	
 	// UITableView
 	_tableView.delegate = self;
 	_tableView.dataSource = self;
 	mTableBottom = YES;	//最初に１度だけ最終行へ移動させる
+	
+	// UITableViewCell 登録
+	UINib *nib = [UINib nibWithNibName:CELL_NAME_TableCellTama bundle:nil];
+	[_tableView registerNib:nib forCellReuseIdentifier:CELL_NAME_TableCellTama];
+	
 	
 	//  通知受信の設定
 	NSNotificationCenter*   nc = [NSNotificationCenter defaultCenter];
@@ -397,7 +390,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 {
 	[super viewWillAppear:animated];
 	[TheTaManager sharedInstance].delegate = self;
-	[TheTaManager sharedInstance].view = self.view;
+	[TheTaManager sharedInstance].progressBlockView = self.view;
 
 #if TARGET_IPHONE_SIMULATORxxx
 #else

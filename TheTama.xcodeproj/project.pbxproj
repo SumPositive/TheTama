@@ -16,9 +16,12 @@
 		443F7A861BB7893200DC17A1 /* ViewerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443F7A851BB7893200DC17A1 /* ViewerViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		444271411AFA0CFC00D6FB60 /* TheTaManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 444271401AFA0CFC00D6FB60 /* TheTaManager.m */; };
 		444368061BA864A00067660C /* ConnectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444368081BA864A00067660C /* ConnectViewController.xib */; };
-		446083331BAF13CD00BA134A /* CaptureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 446083321BAF13CC00BA134A /* CaptureViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		444C7BA61BB81E8F002C00B8 /* TableCellTama.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444C7BA51BB81E8F002C00B8 /* TableCellTama.xib */; settings = {ASSET_TAGS = (); }; };
 		446083351BAF19A600BA134A /* ListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 446083341BAF19A600BA134A /* ListViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		4463DDE11BBADB8B0031B78A /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4463DDDF1BBADB8B0031B78A /* MainViewController.m */; settings = {ASSET_TAGS = (); }; };
+		4463DDE21BBADB8B0031B78A /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4463DDE01BBADB8B0031B78A /* MainViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		446D9DFF1AE561CA003F8924 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 446D9DFD1AE561CA003F8924 /* InfoViewController.m */; };
+		447E80A11BC167C600903BC2 /* CaptureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 447E80A31BC167C600903BC2 /* CaptureViewController.xib */; };
 		44907B3E1ADCCE870053294A /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44907B3C1ADCCDF20053294A /* WatchKit.framework */; };
 		44A67B811AD39CF4002A826C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A67B801AD39CF4002A826C /* AppDelegate.swift */; };
 		44A67B8A1AD39CF4002A826C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44A67B891AD39CF4002A826C /* Images.xcassets */; };
@@ -97,12 +100,17 @@
 		444271401AFA0CFC00D6FB60 /* TheTaManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheTaManager.m; sourceTree = "<group>"; };
 		444271451B06351B00D6FB60 /* TheTamaTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TheTamaTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		444368071BA864A00067660C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ConnectViewController.xib; sourceTree = "<group>"; };
-		4443680A1BA864BB0067660C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/ConnectViewController.strings; sourceTree = "<group>"; };
-		4443680C1BA864BE0067660C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ConnectViewController.strings; sourceTree = "<group>"; };
-		446083321BAF13CC00BA134A /* CaptureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaptureViewController.xib; sourceTree = "<group>"; };
+		444C7BA51BB81E8F002C00B8 /* TableCellTama.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableCellTama.xib; sourceTree = "<group>"; };
 		446083341BAF19A600BA134A /* ListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListViewController.xib; sourceTree = "<group>"; };
+		4463DDDD1BBAD3C70031B78A /* TheTamaBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TheTamaBase.h; sourceTree = "<group>"; };
+		4463DDDE1BBADB8B0031B78A /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		4463DDDF1BBADB8B0031B78A /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		4463DDE01BBADB8B0031B78A /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		446D9DFD1AE561CA003F8924 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		446D9DFE1AE561CA003F8924 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
+		447E80A21BC167C600903BC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CaptureViewController.xib; sourceTree = "<group>"; };
+		447E80A71BC16AEE00903BC2 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/ConnectViewController.strings; sourceTree = "<group>"; };
+		447E80A81BC1727100903BC2 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/CaptureViewController.strings; sourceTree = "<group>"; };
 		44907B3C1ADCCDF20053294A /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
 		44A67B7B1AD39CF4002A826C /* TheTama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheTama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44A67B7F1AD39CF4002A826C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -309,25 +317,27 @@
 				442401101AEFD2B100F3EA23 /* Ricoh */,
 				44A67C4A1AD3BA9D002A826C /* PtpObject.h */,
 				44A67C491AD3BA9D002A826C /* PtpObject.m */,
+				44A67BAE1AD3B27B002A826C /* TheTama-Bridging-Header.h */,
+				4463DDDD1BBAD3C70031B78A /* TheTamaBase.h */,
+				44A67B801AD39CF4002A826C /* AppDelegate.swift */,
 				4442713F1AFA0CFC00D6FB60 /* TheTaManager.h */,
 				444271401AFA0CFC00D6FB60 /* TheTaManager.m */,
-				44A67B801AD39CF4002A826C /* AppDelegate.swift */,
-				44170C811AE16A99006E1C4B /* Localizable.strings */,
-				44A67B891AD39CF4002A826C /* Images.xcassets */,
-				44A67B8B1AD39CF5002A826C /* LaunchScreen.xib */,
 				44A67B7E1AD39CF4002A826C /* Supporting Files */,
-				44A67BAE1AD3B27B002A826C /* TheTama-Bridging-Header.h */,
+				4463DDDE1BBADB8B0031B78A /* MainViewController.h */,
+				4463DDDF1BBADB8B0031B78A /* MainViewController.m */,
+				4463DDE01BBADB8B0031B78A /* MainViewController.xib */,
 				44CD6DF21AD81B760001F5B3 /* ConnectViewController.h */,
 				44CD6DF11AD81B760001F5B3 /* ConnectViewController.m */,
 				444368081BA864A00067660C /* ConnectViewController.xib */,
 				44B4EA601AD3E26900DE5C7E /* CaptureViewController.h */,
 				44B4EA611AD3E26900DE5C7E /* CaptureViewController.m */,
-				446083321BAF13CC00BA134A /* CaptureViewController.xib */,
+				447E80A31BC167C600903BC2 /* CaptureViewController.xib */,
 				44A67C6A1AD5AA1A002A826C /* ListViewController.h */,
 				44A67C691AD5AA1A002A826C /* ListViewController.m */,
 				446083341BAF19A600BA134A /* ListViewController.xib */,
 				44A67C621AD4A1B8002A826C /* TableCellTama.h */,
 				44A67C631AD4A1B8002A826C /* TableCellTama.m */,
+				444C7BA51BB81E8F002C00B8 /* TableCellTama.xib */,
 				44A67C5D1AD3E305002A826C /* ViewerViewController.h */,
 				44A67C5E1AD3E305002A826C /* ViewerViewController.m */,
 				443F7A851BB7893200DC17A1 /* ViewerViewController.xib */,
@@ -342,6 +352,9 @@
 			isa = PBXGroup;
 			children = (
 				44A67B7F1AD39CF4002A826C /* Info.plist */,
+				44A67B8B1AD39CF5002A826C /* LaunchScreen.xib */,
+				44170C811AE16A99006E1C4B /* Localizable.strings */,
+				44A67B891AD39CF4002A826C /* Images.xcassets */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -593,12 +606,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				446083331BAF13CD00BA134A /* CaptureViewController.xib in Resources */,
+				447E80A11BC167C600903BC2 /* CaptureViewController.xib in Resources */,
+				444C7BA61BB81E8F002C00B8 /* TableCellTama.xib in Resources */,
 				444368061BA864A00067660C /* ConnectViewController.xib in Resources */,
 				4405505C1BB79E5700B8841A /* InfoViewController.xib in Resources */,
 				443F7A861BB7893200DC17A1 /* ViewerViewController.xib in Resources */,
 				446083351BAF19A600BA134A /* ListViewController.xib in Resources */,
 				44170C7F1AE16A99006E1C4B /* Localizable.strings in Resources */,
+				4463DDE21BBADB8B0031B78A /* MainViewController.xib in Resources */,
 				44A67B8D1AD39CF5002A826C /* LaunchScreen.xib in Resources */,
 				44A67B8A1AD39CF4002A826C /* Images.xcassets in Resources */,
 			);
@@ -676,6 +691,7 @@
 				44A67C441AD3B5E0002A826C /* PtpLogging.mm in Sources */,
 				44A67C351AD3B5E0002A826C /* ptpip.cpp in Sources */,
 				442401181AEFD2B100F3EA23 /* glkViewController.m in Sources */,
+				4463DDE11BBADB8B0031B78A /* MainViewController.m in Sources */,
 				44A67C3B1AD3B5E0002A826C /* PtpIpInitiator.mm in Sources */,
 				442401191AEFD2B100F3EA23 /* GLRenderView.m in Sources */,
 				44A67C2E1AD3B5E0002A826C /* ObjcLogger.mm in Sources */,
@@ -727,10 +743,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				444368071BA864A00067660C /* Base */,
-				4443680A1BA864BB0067660C /* ja */,
-				4443680C1BA864BE0067660C /* en */,
+				447E80A71BC16AEE00903BC2 /* ja */,
 			);
 			name = ConnectViewController.xib;
+			sourceTree = "<group>";
+		};
+		447E80A31BC167C600903BC2 /* CaptureViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				447E80A21BC167C600903BC2 /* Base */,
+				447E80A81BC1727100903BC2 /* ja */,
+			);
+			name = CaptureViewController.xib;
 			sourceTree = "<group>";
 		};
 		44A67B8B1AD39CF5002A826C /* LaunchScreen.xib */ = {

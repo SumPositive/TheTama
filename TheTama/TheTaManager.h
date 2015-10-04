@@ -18,7 +18,7 @@ typedef void (^CaptureCompletion)(BOOL success, UIImage * thumbnail, NSDate * ca
 
 @protocol TheTaManagerDelegate <NSObject>
 @optional
-- (void)connected:(BOOL)result;
+- (void)connected:(BOOL)succeeded;
 - (void)disconnected;
 //- (void)captured:(BOOL)result thumb:(UIImage*)thumb date:(NSDate *)capture_date;
 - (void)strageFull;
@@ -36,20 +36,20 @@ typedef enum {
 
 @property (nonatomic, weak) id<TheTaManagerDelegate> delegate;
 
-@property (readonly) PtpConnection*	connection;
-@property (readonly) BOOL			isConnected;
+@property (nonatomic, readonly) PtpConnection*	connection;
+@property (nonatomic, readonly) BOOL			isConnected;
 
-@property (readwrite) UIView* 		view;
-@property (readwrite) NSUInteger	volumeLevel;
-@property (readwrite) NSUInteger	batteryLevel;
-@property (readwrite) NSUInteger	shutterSpeed;
-@property (readwrite) NSInteger		filmIso;
-@property (readwrite) NSInteger		whiteBalance;
-@property (readwrite) CAPTURE_MODE	captureMode;
+@property (nonatomic, readwrite) UIView* 		progressBlockView;
+@property (nonatomic, readwrite) NSUInteger		volumeLevel;
+@property (nonatomic, readwrite) NSUInteger		batteryLevel;
+@property (nonatomic, readwrite) NSUInteger		shutterSpeed;
+@property (nonatomic, readwrite) NSInteger		filmIso;
+@property (nonatomic, readwrite) NSInteger		whiteBalance;
+@property (nonatomic, readwrite) CAPTURE_MODE	captureMode;
 
-@property (readwrite) NSMutableArray*	tamaObjects;		// 全写真情報を保持
-@property (readwrite) PtpObject*		tamaCapture;		// 撮影直後または選択中の写真情報
-@property (readwrite) PtpObject*		tamaViewer;			// 3D-Viewerで表示する写真情報
+@property (nonatomic, readwrite) NSMutableArray*	tamaObjects;	// 全写真情報を保持
+@property (nonatomic, readwrite) PtpObject*		tamaCapture;		// 撮影直後または選択中の写真情報
+@property (nonatomic, readwrite) PtpObject*		tamaViewer;			// 3D-Viewerで表示する写真情報
 
 
 /// Singleton 固有インスタンスを返す
@@ -64,3 +64,6 @@ typedef enum {
 
 
 @end
+
+
+

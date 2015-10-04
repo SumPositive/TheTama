@@ -10,6 +10,7 @@ import UIKit
 //import WatchKit
 
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -21,25 +22,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Override point for customization after application launch.
 		// 初起動したとき
 
-		// mData 復帰
-		let fileManager = NSFileManager.defaultManager()
-		let urls = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-		if let documentDirectory: NSURL = urls.first {
-			let fileURL = documentDirectory.URLByAppendingPathComponent("mData.TheTama")
-			dataObject = NSKeyedUnarchiver.unarchiveObjectWithFile(fileURL.absoluteString) as? DataObject
-			if dataObject == nil {
-				print("ERROR! mData load");
-			}
-
-			// option1payed
-			if dataObject?.option1payed == false {
-				let ud = NSUserDefaults.standardUserDefaults()
-				dataObject?.option1payed = ud.boolForKey("option1payed")
-			}
-
-		} else {
-			print("Couldn't get documents directory!")
-		}
+//		// mData 復帰
+//		let fileManager = NSFileManager.defaultManager()
+//		let urls = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+//		if let documentDirectory: NSURL = urls.first {
+//			let fileURL = documentDirectory.URLByAppendingPathComponent("mData.TheTama")
+//			dataObject = NSKeyedUnarchiver.unarchiveObjectWithFile(fileURL.absoluteString) as? DataObject
+//			if dataObject == nil {
+//				print("ERROR! mData load");
+//			}
+//
+//			// option1payed
+//			if dataObject?.option1payed == false {
+//				let ud = NSUserDefaults.standardUserDefaults()
+//				dataObject?.option1payed = ud.boolForKey("option1payed")
+//			}
+//
+//		} else {
+//			print("Couldn't get documents directory!")
+//		}
 		
 		// Root View を指定する　（Storyboardを使わないため）
 		self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
