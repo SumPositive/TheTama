@@ -12,7 +12,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tabBarController id="pQf-hE-ceV">
-            <tabBar key="tabBar" contentMode="scaleToFill" id="UMF-EE-GpI">
+            <tabBar key="tabBar" contentMode="scaleToFill" selectedItem="7Hh-X8-zLn" id="UMF-EE-GpI">
                 <rect key="frame" x="0.0" y="551" width="600" height="49"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

@@ -7,21 +7,13 @@
 //
 
 #import <objc/runtime.h>
-#import "MRProgress.h"		// http://cocoadocs.org/docsets/MRProgress/0.2.2/
-
-#import "Azukid.h"
-#import "TheTama-Swift.h"
-#import "TheTaManager.h"
+#import "TheTamaBase.h"
 
 
 #define KEY_CONNECT_COMPLETION		@"KEY_CONNECT_COMPLETION"
 #define KEY_CAPTURE_COMPLETION		@"KEY_CAPTURE_COMPLETION"
 
 
-inline static void dispatch_async_main(dispatch_block_t block)
-{
-	dispatch_async(dispatch_get_main_queue(), block);
-}
 
 @interface TheTaManager() <PtpIpEventListener>
 {
@@ -34,6 +26,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 @implementation TheTaManager
 
+
+//----------------------------------------------------------------------
+#pragma mark - Public methods.
 
 /// Singleton 固有インスタンスを返す
 + (TheTaManager*)sharedInstance {
@@ -65,8 +60,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 }
 
 
-
-#pragma mark - PTP/IP Operations.
+//----------------------------------------------------------------------
+#pragma mark - Public methods. THETA Operations.
 
 - (void)connectCompletion:(ConnectCompletion)completion
 {
@@ -104,7 +99,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		
 		//[self progressOff];
 
-		if (_isConnected) {
+		if (connected) {
 			// "Connect" is succeeded.
 			_isConnected = true;
 			LOG(@"connected.");
@@ -159,7 +154,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 				}
 				
 				if ([_delegate respondsToSelector:@selector(connected:)]) {
-					[_delegate connected:YES];
+					dispatch_async_main(^{
+						[_delegate connected:YES];
+					});
 				}
 			}];
 		}
@@ -168,17 +165,19 @@ inline static void dispatch_async_main(dispatch_block_t block)
 			_isConnected = false;
 			LOG(@"connect failed.");
 			if ([_delegate respondsToSelector:@selector(connected:)]) {
-				[_delegate connected:NO];
+				dispatch_async_main(^{
+					[_delegate connected:NO];
+				});
 			}
 		}
 		
 		// completionオブジェクトを取得する
 		ConnectCompletion completion = objc_getAssociatedObject(self, KEY_CONNECT_COMPLETION);
 		if (completion) {
-			completion(_isConnected, nil);
+			dispatch_async_main(^{
+				completion(_isConnected, nil);
+			});
 		}
-		
-		
 	}];
 }
 
@@ -199,7 +198,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		}
 		else {
 			if ([_delegate respondsToSelector:@selector(disconnected)]) {
-				[_delegate disconnected];
+				dispatch_async_main(^{
+					[_delegate disconnected];
+				});
 			}
 		}
 	}];
@@ -236,7 +237,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 													BOOL result = [session terminateOpenCapture: mTransactionId];
 													LOG(@"terminateOpenCapture: result=%d", result);
 													if (completion) {
-														completion(YES, nil, nil, nil);
+														dispatch_async_main(^{
+															completion(YES, nil, nil, nil);
+														});
 													}
 												}];
 												return;
@@ -257,7 +260,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 													BOOL result = [session terminateOpenCapture: mTransactionId];
 													LOG(@"terminateOpenCapture: result=%d", result);
 													if (completion) {
-														completion(YES, nil, nil, nil);
+														dispatch_async_main(^{
+															completion(YES, nil, nil, nil);
+														});
 													}
 												}];
 												return;
@@ -321,7 +326,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 				if (!rtn) {
 					// NG
 					if (completion) {
-						completion(NO, nil, nil, nil);
+						dispatch_async_main(^{
+							completion(NO, nil, nil, nil);
+						});
 					}
 				}
 			}	break;
@@ -391,7 +398,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 
 
-#pragma mark - PtpIpEventListener delegates.
+//----------------------------------------------------------------------
+#pragma mark - <PtpIpEventListener> delegates.
 
 -(void)ptpip_eventReceived:(int)code :(uint32_t)param1 :(uint32_t)param2 :(uint32_t)param3
 {
@@ -426,10 +434,16 @@ inline static void dispatch_async_main(dispatch_block_t block)
 					capture_date = objectInfo.capture_date; //撮影日時
 				}
 				// サムネイルを取得し、表示する
+				UIImage* thumImage = [self imageThumbnail:param1 session:session];
+				//set _dataObject
+				PtpObject * tamaObj = [[PtpObject alloc] initWithObjectInfo:objectInfo thumbnail:thumImage];
+				assert(tamaObj);
 				// completionオブジェクトを取得する
 				CaptureCompletion completion = objc_getAssociatedObject(self, KEY_CAPTURE_COMPLETION);
 				if (completion) {
-					completion(YES, [self imageThumbnail:param1 session:session], capture_date, nil);
+					dispatch_async_main(^{
+						completion(YES, tamaObj, capture_date, nil);
+					});
 				}
 			}];
 		} break;
@@ -437,7 +451,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		case PTPIP_STORE_FULL:
 		{	// ストレージFULL
 			if ([_delegate respondsToSelector:@selector(strageFull)]) {
-				[_delegate strageFull];
+				dispatch_async_main(^{
+					[_delegate strageFull];
+				});
 			}
 			return;
 		} break;
@@ -479,11 +495,19 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	[self progressOff];
 
 	if ([_delegate respondsToSelector:@selector(socketError)]) {
-		[_delegate socketError];
+		dispatch_async_main(^{
+			[_delegate socketError];
+		});
 	}
 }
 
 
+//----------------------------------------------------------------------
+#pragma mark - Plivate methods.
+
+
+
+//----------------------------------------------------------------------
 #pragma mark - UI events.
 
 - (void)progressOnTitle:(NSString*)zTitle

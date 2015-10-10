@@ -7,19 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4405505C1BB79E5700B8841A /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4405505B1BB79E5700B8841A /* InfoViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		4405505C1BB79E5700B8841A /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4405505B1BB79E5700B8841A /* InfoViewController.xib */; };
 		44170C711AE13B47006E1C4B /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44CD6E031AD916580001F5B3 /* iAd.framework */; };
 		44170C7F1AE16A99006E1C4B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44170C811AE16A99006E1C4B /* Localizable.strings */; };
 		442401181AEFD2B100F3EA23 /* glkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 442401131AEFD2B100F3EA23 /* glkViewController.m */; };
 		442401191AEFD2B100F3EA23 /* GLRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 442401151AEFD2B100F3EA23 /* GLRenderView.m */; };
 		4424011A1AEFD2B100F3EA23 /* UVSphere.m in Sources */ = {isa = PBXBuildFile; fileRef = 442401171AEFD2B100F3EA23 /* UVSphere.m */; };
-		443F7A861BB7893200DC17A1 /* ViewerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443F7A851BB7893200DC17A1 /* ViewerViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		442C66551BC96794005367FF /* Azukid.m in Sources */ = {isa = PBXBuildFile; fileRef = 442C66541BC96794005367FF /* Azukid.m */; settings = {ASSET_TAGS = (); }; };
+		443F7A861BB7893200DC17A1 /* ViewerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443F7A851BB7893200DC17A1 /* ViewerViewController.xib */; };
 		444271411AFA0CFC00D6FB60 /* TheTaManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 444271401AFA0CFC00D6FB60 /* TheTaManager.m */; };
 		444368061BA864A00067660C /* ConnectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444368081BA864A00067660C /* ConnectViewController.xib */; };
-		444C7BA61BB81E8F002C00B8 /* TableCellTama.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444C7BA51BB81E8F002C00B8 /* TableCellTama.xib */; settings = {ASSET_TAGS = (); }; };
-		446083351BAF19A600BA134A /* ListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 446083341BAF19A600BA134A /* ListViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		4463DDE11BBADB8B0031B78A /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4463DDDF1BBADB8B0031B78A /* MainViewController.m */; settings = {ASSET_TAGS = (); }; };
-		4463DDE21BBADB8B0031B78A /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4463DDE01BBADB8B0031B78A /* MainViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		444C7BA61BB81E8F002C00B8 /* TableCellTama.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444C7BA51BB81E8F002C00B8 /* TableCellTama.xib */; };
+		446083351BAF19A600BA134A /* ListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 446083341BAF19A600BA134A /* ListViewController.xib */; };
 		446D9DFF1AE561CA003F8924 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 446D9DFD1AE561CA003F8924 /* InfoViewController.m */; };
 		447E80A11BC167C600903BC2 /* CaptureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 447E80A31BC167C600903BC2 /* CaptureViewController.xib */; };
 		44907B3E1ADCCE870053294A /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44907B3C1ADCCDF20053294A /* WatchKit.framework */; };
@@ -95,6 +94,7 @@
 		442401151AEFD2B100F3EA23 /* GLRenderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLRenderView.m; sourceTree = "<group>"; };
 		442401161AEFD2B100F3EA23 /* UVSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UVSphere.h; sourceTree = "<group>"; };
 		442401171AEFD2B100F3EA23 /* UVSphere.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UVSphere.m; sourceTree = "<group>"; };
+		442C66541BC96794005367FF /* Azukid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Azukid.m; sourceTree = "<group>"; };
 		443F7A851BB7893200DC17A1 /* ViewerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewerViewController.xib; sourceTree = "<group>"; };
 		4442713F1AFA0CFC00D6FB60 /* TheTaManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheTaManager.h; sourceTree = "<group>"; };
 		444271401AFA0CFC00D6FB60 /* TheTaManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheTaManager.m; sourceTree = "<group>"; };
@@ -103,9 +103,6 @@
 		444C7BA51BB81E8F002C00B8 /* TableCellTama.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableCellTama.xib; sourceTree = "<group>"; };
 		446083341BAF19A600BA134A /* ListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListViewController.xib; sourceTree = "<group>"; };
 		4463DDDD1BBAD3C70031B78A /* TheTamaBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TheTamaBase.h; sourceTree = "<group>"; };
-		4463DDDE1BBADB8B0031B78A /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		4463DDDF1BBADB8B0031B78A /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		4463DDE01BBADB8B0031B78A /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		446D9DFD1AE561CA003F8924 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		446D9DFE1AE561CA003F8924 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
 		447E80A21BC167C600903BC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CaptureViewController.xib; sourceTree = "<group>"; };
@@ -268,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				44CD6E051AD94E440001F5B3 /* Azukid.h */,
+				442C66541BC96794005367FF /* Azukid.m */,
 				44A67C601AD433F9002A826C /* DataObject.swift */,
 			);
 			name = Model;
@@ -323,9 +321,6 @@
 				4442713F1AFA0CFC00D6FB60 /* TheTaManager.h */,
 				444271401AFA0CFC00D6FB60 /* TheTaManager.m */,
 				44A67B7E1AD39CF4002A826C /* Supporting Files */,
-				4463DDDE1BBADB8B0031B78A /* MainViewController.h */,
-				4463DDDF1BBADB8B0031B78A /* MainViewController.m */,
-				4463DDE01BBADB8B0031B78A /* MainViewController.xib */,
 				44CD6DF21AD81B760001F5B3 /* ConnectViewController.h */,
 				44CD6DF11AD81B760001F5B3 /* ConnectViewController.m */,
 				444368081BA864A00067660C /* ConnectViewController.xib */,
@@ -524,6 +519,7 @@
 				44A67B781AD39CF4002A826C /* Frameworks */,
 				44A67B791AD39CF4002A826C /* Resources */,
 				15A2B762CADA9ED7642EBA6F /* Copy Pods Resources */,
+				A2D5F7CA9A53AD7C4223A839 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -613,7 +609,6 @@
 				443F7A861BB7893200DC17A1 /* ViewerViewController.xib in Resources */,
 				446083351BAF19A600BA134A /* ListViewController.xib in Resources */,
 				44170C7F1AE16A99006E1C4B /* Localizable.strings in Resources */,
-				4463DDE21BBADB8B0031B78A /* MainViewController.xib in Resources */,
 				44A67B8D1AD39CF5002A826C /* LaunchScreen.xib in Resources */,
 				44A67B8A1AD39CF4002A826C /* Images.xcassets in Resources */,
 			);
@@ -659,6 +654,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		A2D5F7CA9A53AD7C4223A839 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -691,7 +701,7 @@
 				44A67C441AD3B5E0002A826C /* PtpLogging.mm in Sources */,
 				44A67C351AD3B5E0002A826C /* ptpip.cpp in Sources */,
 				442401181AEFD2B100F3EA23 /* glkViewController.m in Sources */,
-				4463DDE11BBADB8B0031B78A /* MainViewController.m in Sources */,
+				442C66551BC96794005367FF /* Azukid.m in Sources */,
 				44A67C3B1AD3B5E0002A826C /* PtpIpInitiator.mm in Sources */,
 				442401191AEFD2B100F3EA23 /* GLRenderView.m in Sources */,
 				44A67C2E1AD3B5E0002A826C /* ObjcLogger.mm in Sources */,

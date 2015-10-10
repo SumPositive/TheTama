@@ -22,9 +22,15 @@
 
 
 
+/// THETA Objects.
+#import "PtpObject.h"
+
 /// Manager's
 #import "TheTaManager.h"
 
+
+/// TabBarController's
+#import "MainTabBarController.h"
 
 /// ViewController's
 #import "ConnectViewController.h"
@@ -33,6 +39,23 @@
 #import "ViewerViewController.h"
 #import "InfoViewController.h"
 
+
+
+// TheTama Original Define.
+#define LIST_CHUNK_FIRST	10		// ListViewTableでTHETAから１度に読み込む画像数
+#define LIST_CHUNK_NEXT		15		// ListViewTableでTHETAから１度に読み込む画像数
+#define PTP_TIMEOUT			3		//(second)
+
+
+
+#include "TargetConditionals.h"
+#if TARGET_IPHONE_SIMULATOR
+// シミュレーター上でのみ実行される処理
+
+#else
+// 実機でのみ実行される処理
+
+#endif
 
 
 

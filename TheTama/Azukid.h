@@ -8,21 +8,10 @@
 #ifndef Azukid_h
 #define Azukid_h
 
-// TheTama Original Define.
-#define LIST_CHUNK_FIRST	10		// ListViewTableでTHETAから１度に読み込む画像数
-#define LIST_CHUNK_NEXT		15		// ListViewTableでTHETAから１度に読み込む画像数
-#define PTP_TIMEOUT			3		//(second)
+#import <UIKit/UIKit.h>
 
 
-
-#include "TargetConditionals.h"
-#if TARGET_IPHONE_SIMULATOR
-// シミュレーター上でのみ実行される処理
-#else
-// 実機でのみ実行される処理
-#endif
-
-
+/// DEBUG Code
 #ifdef DEBUG
 #define LOG(...) NSLog(__VA_ARGS__)
 #define LOG_PRINTF(FORMAT, ...) printf("%s\n", [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
@@ -42,6 +31,43 @@
 #define LOG_SIZE(p)
 #define LOG_RECT(p)
 #endif
+
+
+/// nil | NSNull --> @""
+#define NZ(a)		((a && a!=[NSNull null])?a:@"")
+
+/// NSNull --> nil
+#define NN(a)		(a!=[NSNull null]?a:nil)
+
+
+
+///
+#include "TargetConditionals.h"
+#if TARGET_IPHONE_SIMULATOR
+	// シミュレーター上でのみ実行される処理
+#else
+	// 実機でのみ実行される処理
+#endif
+
+
+/// UI処理・メインスレッド
+inline static void dispatch_async_main(dispatch_block_t block)
+{
+	dispatch_async(dispatch_get_main_queue(), block);
+}
+
+
+
+@interface Azukid : NSObject
+
+/// view以下にあるボタンの複数同時押しを禁止する
++ (void)banMultipleTouch:(UIView*)view;
+
+/// ボタン連打防止
++ (void)banBarrage:(UIButton*)button;
+
+@end
+
 
 
 #endif

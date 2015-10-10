@@ -12,8 +12,8 @@
 #import "PtpObject.h"
 
 
-typedef void (^ConnectCompletion)(BOOL success, NSError *error);
-typedef void (^CaptureCompletion)(BOOL success, UIImage * thumbnail, NSDate * capture_date, NSError *error);
+typedef void (^ConnectCompletion)(BOOL success, NSError* error);
+typedef void (^CaptureCompletion)(BOOL success, PtpObject* tamaObj, NSDate* capture_date, NSError* error);
 
 
 @protocol TheTaManagerDelegate <NSObject>
@@ -41,7 +41,7 @@ typedef enum {
 
 @property (nonatomic, readwrite) UIView* 		progressBlockView;
 @property (nonatomic, readwrite) NSUInteger		volumeLevel;
-@property (nonatomic, readwrite) NSUInteger		batteryLevel;
+@property (nonatomic, readonly)	 NSUInteger		batteryLevel;
 @property (nonatomic, readwrite) NSUInteger		shutterSpeed;
 @property (nonatomic, readwrite) NSInteger		filmIso;
 @property (nonatomic, readwrite) NSInteger		whiteBalance;
@@ -61,6 +61,7 @@ typedef enum {
 //- (void)capture;
 - (void)captureCompletion:(CaptureCompletion)completion;
 - (UIImage *)imageThumbnail:(uint32_t)objectHandle session:(PtpIpSession *)session;
+
 
 
 @end

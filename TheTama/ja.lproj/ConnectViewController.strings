@@ -9,7 +9,7 @@
 "NYG-Ez-L8f.normalTitle" = "設定画面へ";
 
 /* Class = "UILabel"; text = "一覧表では時刻部分をタッチすると、\n先頭行へジャンプできます。"; ObjectID = "Xqd-Ob-USw"; */
-"Xqd-Ob-USw.text" = "一覧表では時刻部分をタッチすると、\n先頭行へジャンプできます。";
+"Xqd-Ob-USw.text" = "一覧表の時刻部分をタッチすると、\n先頭行へジャンプできます。";
 
 /* Class = "UILabel"; text = "2. iPhoneの設定画面にて\n　　Wi-Fi選択してください。"; ObjectID = "dcD-0R-BYs"; */
 "dcD-0R-BYs.text" = "2. iPhoneの設定画面にて\n　　Wi-Fi選択してください。";

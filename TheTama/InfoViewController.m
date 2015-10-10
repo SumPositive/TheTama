@@ -271,7 +271,9 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	
+	LOG_FUNC
+	self.navigationController.navigationBarHidden = YES; //ナビバー非表示
+
 	AppDelegate * app = [UIApplication sharedApplication].delegate;
 	mData = [app getDataObject];
 	assert(mData != nil);

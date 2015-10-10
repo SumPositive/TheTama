@@ -7,16 +7,11 @@
 //
 
 #import <iAd/iAd.h>
-
 #import "TheTamaBase.h"
 
 
-inline static void dispatch_async_main(dispatch_block_t block)
-{
-	dispatch_async(dispatch_get_main_queue(), block);
-}
 
-@interface ConnectViewController () <TheTaManagerDelegate> //<PtpIpEventListener>
+@interface ConnectViewController () <TheTaManagerDelegate>
 {
 	//__weak IBOutlet UILabel*		_lbConnect;
 	__weak IBOutlet UIButton*		_buSetting;
@@ -40,6 +35,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 {
 	[super viewDidLoad];
 	LOG_FUNC
+	self.navigationController.navigationBarHidden = YES; //ナビバー非表示
 	
 	AppDelegate * app = [UIApplication sharedApplication].delegate;
 	mData = [app getDataObject];
@@ -63,6 +59,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	NSNotificationCenter*   nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(applicationWillEnterForeground) name:@"applicationWillEnterForeground" object:nil];
 	[nc addObserver:self selector:@selector(applicationDidEnterBackground) name:@"applicationDidEnterBackground" object:nil];
+
+	//全ボタン設置後、ボタン同時押し対策する
+	[Azukid banMultipleTouch:self.view];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -117,6 +116,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (IBAction)onSettingTouchUpIn:(id)sender
 {
 	LOG_FUNC
+	[Azukid banBarrage:sender];//連打対策
 	// 設定画面へのURLスキーム
 	NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
 	[[UIApplication sharedApplication] openURL:url];
@@ -127,6 +127,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (IBAction)onRetryTouchUpIn:(id)sender
 {
 	LOG_FUNC
+	[Azukid banBarrage:sender];//連打対策
 	[[TheTaManager sharedInstance] disconnect:YES];  //YES= Disconnectの後、Connectする
 }
 
@@ -161,12 +162,11 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	LOG_FUNC
 	if (succeeded) {
 		// "Connect" is succeeded.
-		// Goto Capture View
-		CaptureViewController* vc = [[CaptureViewController alloc] init];
-		[self addChildViewController:vc];
-		[self presentViewController:vc animated:YES completion:^{
-			[vc didMoveToParentViewController:self];
-		}];
+		dispatch_async_main(^{
+			// Goto Capture View
+			CaptureViewController* vc = [[CaptureViewController alloc] init];
+			[self.navigationController pushViewController:vc animated:YES];
+		});
 	}
 	else {
 		// "Connect" is failed.

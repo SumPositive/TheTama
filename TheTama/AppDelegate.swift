@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
 	var dataObject: DataObject?
-	//var thetama: TheTaManager = TheTaManager.sharedInstance()
+	var naviCon: UINavigationController?
 	
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
@@ -42,9 +42,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //			print("Couldn't get documents directory!")
 //		}
 		
+		// TabBarだと各Viewを一時に生成し保持し続けることになるため、Naviにした。
+		let first: ConnectViewController = ConnectViewController()
+		naviCon = UINavigationController(rootViewController: first)
+
 		// Root View を指定する　（Storyboardを使わないため）
 		self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-		self.window!.rootViewController = ConnectViewController()
+		self.window!.rootViewController = naviCon
 		self.window!.backgroundColor = UIColor.whiteColor()
 		self.window!.makeKeyAndVisible()
 		

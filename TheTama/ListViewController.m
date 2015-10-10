@@ -7,15 +7,9 @@
 //
 
 #import "TheTamaBase.h"
-
 #import "TableCellTama.h"
 
 
-
-inline static void dispatch_async_main(dispatch_block_t block)
-{
-	dispatch_async(dispatch_get_main_queue(), block);
-}
 
 @interface ListViewController () <TheTaManagerDelegate, UITableViewDelegate, UITableViewDataSource>
 {
@@ -84,7 +78,7 @@ inline static void dispatch_async_main(dispatch_block_t block)
 		LOG(@"socket error(0x%X,closed=%@).\n--- %@", err, closed? @"YES": @"NO", desc);
 		[self progressOff];
 		// Back Model Connect View
-		[self dismissViewControllerAnimated:YES completion:nil];
+		[self.navigationController popToRootViewControllerAnimated:YES];
 	});
 }
 
@@ -93,7 +87,8 @@ inline static void dispatch_async_main(dispatch_block_t block)
 
 - (IBAction)onBackTouchUpIn:(id)sender
 {
-	[self dismissViewControllerAnimated:YES completion:nil];
+	//[self dismissViewControllerAnimated:YES completion:nil];
+	[self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (IBAction)onReloadTouchUpIn:(id)sender
@@ -337,7 +332,9 @@ inline static void dispatch_async_main(dispatch_block_t block)
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	
+	LOG_FUNC
+	self.navigationController.navigationBarHidden = YES; //ナビバー非表示
+
 	AppDelegate * app = [UIApplication sharedApplication].delegate;
 	mData = [app getDataObject];
 	assert(mData != nil);
@@ -397,11 +394,11 @@ inline static void dispatch_async_main(dispatch_block_t block)
 	TheTaManager* thetama = [TheTaManager sharedInstance];
 	// コネクト・チェック
 	if (thetama.isConnected) {
-		[thetama.connection operateSession:^(PtpIpSession *session) {
-			// Get
-			mStorageInfo = [session getStorageInfo];
-			thetama.batteryLevel = [session getBatteryLevel];
-		}];
+//		[thetama.connection operateSession:^(PtpIpSession *session) {
+//			// Get
+//			mStorageInfo = [session getStorageInfo];
+//			thetama.batteryLevel = [session getBatteryLevel];
+//		}];
 	}
 	else {
 		[self onBackTouchUpIn:nil];
