@@ -18,7 +18,7 @@
 	__weak IBOutlet UIButton	*	_buBack;
 
 	
-	DataObject * mData;
+	//DataObject * mData;
 	
 	//id<RMStoreReceiptVerificator> _receiptVerificator;
 	RMStoreKeychainPersistence *mPersistence;
@@ -274,9 +274,9 @@
 	LOG_FUNC
 	self.navigationController.navigationBarHidden = YES; //ナビバー非表示
 
-	AppDelegate * app = [UIApplication sharedApplication].delegate;
-	mData = [app getDataObject];
-	assert(mData != nil);
+//	AppDelegate * app = [UIApplication sharedApplication].delegate;
+//	mData = [app getDataObject];
+//	assert(mData != nil);
 	
 	// UITableView
 	_tableView.delegate = self;

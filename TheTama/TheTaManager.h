@@ -62,6 +62,15 @@ typedef enum {
 - (void)captureCompletion:(CaptureCompletion)completion;
 - (UIImage *)imageThumbnail:(uint32_t)objectHandle session:(PtpIpSession *)session;
 
+///
+- (void)restore;
+
+///
+- (void)store;
+
+///
+- (DataObject*)dataObject;
+
 
 
 @end

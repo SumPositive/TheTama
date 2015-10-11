@@ -17,6 +17,7 @@
 
 @interface TheTaManager() <PtpIpEventListener>
 {
+	DataObject*			_dataObject;
 	NSInteger			mTransactionId;
 }
 @end
@@ -44,11 +45,9 @@
 	self = [super init];
 	if (self) {
 
+		_dataObject = [[DataObject alloc] init];
 		_connection = [[PtpConnection alloc] init];
 		_tamaObjects = [NSMutableArray new];
-		
-		//AppDelegate * app = [UIApplication sharedApplication].delegate;
-		//mWindow = [[[UIApplication sharedApplication] delegate] window];
 	}
 	return self;
 }
@@ -58,6 +57,25 @@
 	[self doesNotRecognizeSelector:_cmd];
 	return nil;
 }
+
+///
+- (void)restore{
+	[self dataObjectRestore];
+}
+
+///
+- (void)store{
+	[self dataObjectStore];
+}
+
+///
+- (DataObject*)dataObject{
+	if (!_dataObject) {
+		LOG_E(@"_dataObject == nil");
+	}
+	return _dataObject;
+}
+
 
 
 //----------------------------------------------------------------------
@@ -504,6 +522,55 @@
 
 //----------------------------------------------------------------------
 #pragma mark - Plivate methods.
+
+/// _dataObject ファイル・パス
+- (NSString*)dataObjectFilePath
+{
+	static NSString* filePath = nil;
+	if (!filePath) {
+		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+		NSString *documentDirectory = [paths objectAtIndex:0];
+		filePath = [documentDirectory stringByAppendingPathComponent:@"TheTama.data"];
+	}
+	return filePath;
+}
+
+/// _dataObject ファイルより復元または新規生成する
+- (void)dataObjectRestore
+{
+	LOG_FUNC
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	if ([fileManager fileExistsAtPath:[self dataObjectFilePath]]) {
+		NSMutableData *theData  = [NSMutableData dataWithContentsOfFile:[self dataObjectFilePath]];
+		NSKeyedUnarchiver *decoder = [[NSKeyedUnarchiver alloc] initForReadingWithData:theData];
+		
+		_dataObject = [decoder decodeObjectForKey:@"dataObject"];
+		
+		[decoder finishDecoding];
+	}
+	else if (!_dataObject) {
+		// 新規生成
+		_dataObject = [[DataObject alloc] init];
+	}
+}
+
+/// _dataObject ファイルへ保存する
+- (void)dataObjectStore
+{
+	LOG_FUNC
+	if (!_dataObject) {
+		LOG_E(@"_dataObject == nil");
+		return;
+	}
+	NSMutableData *theData = [NSMutableData data];
+	NSKeyedArchiver *encoder = [[NSKeyedArchiver alloc] initForWritingWithMutableData:theData];
+	
+	[encoder encodeObject:_dataObject forKey:@"dataObject"];
+	[encoder finishEncoding];
+	
+	[theData writeToFile:[self dataObjectFilePath] atomically:YES];
+}
+
 
 
 

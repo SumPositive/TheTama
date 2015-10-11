@@ -15,7 +15,7 @@
 {
 	__weak IBOutlet UITableView*	_tableView;
 
-	DataObject *	mData;
+	//DataObject *	mData;
 	//Capture *		mCapture;
 
 	PtpIpStorageInfo *	mStorageInfo;
@@ -103,7 +103,7 @@
 	if ([dvc isKindOfClass:[ViewerViewController class]]) {	// ViewerViewController:へ遷移するとき
 		//ViewerViewController* dest = (ViewerViewController*)dvc;
 		TableCellTama* cell = (TableCellTama*)sender;
-		mData.tamaViewer = [mData.tamaObjects objectAtIndex:cell.objectIndex];
+		[TheTaManager sharedInstance].dataObject.tamaViewer = [[TheTaManager sharedInstance].dataObject.tamaObjects objectAtIndex:cell.objectIndex];
 	}
 }
 
@@ -150,7 +150,7 @@
 		NSArray * arPrev;
 		NSRange rgTama;
 
-		if ([mData.tamaObjects count] <= 0) {
+		if ([[TheTaManager sharedInstance].dataObject.tamaObjects count] <= 0) {
 			if (LIST_CHUNK_FIRST < objectHandles.count) {
 				rgTama.location = objectHandles.count - LIST_CHUNK_FIRST;
 				rgTama.length = LIST_CHUNK_FIRST;
@@ -161,7 +161,7 @@
 			arPrev = nil;
 		}
 		else {
-			NSInteger indexPrev = [objectHandles count] - [mData.tamaObjects count] - 1;
+			NSInteger indexPrev = [objectHandles count] - [[TheTaManager sharedInstance].dataObject.tamaObjects count] - 1;
 			if (LIST_CHUNK_NEXT < indexPrev) {
 				rgTama.location = indexPrev - LIST_CHUNK_NEXT;
 				rgTama.length = LIST_CHUNK_NEXT;
@@ -170,10 +170,10 @@
 				rgTama.length = indexPrev;
 			}
 			//直前のListを保存
-			arPrev = [[NSArray alloc] initWithArray:mData.tamaObjects];
+			arPrev = [[NSArray alloc] initWithArray:[TheTaManager sharedInstance].dataObject.tamaObjects];
 		}
 		//Listクリア
-		[mData.tamaObjects removeAllObjects];
+		[[TheTaManager sharedInstance].dataObject.tamaObjects removeAllObjects];
 		
 		//新たにListへ追加するobjects
 		NSArray * arHandles = [objectHandles subarrayWithRange: rgTama];
@@ -183,20 +183,20 @@
 			uint32_t objectHandle = (uint32_t)it.integerValue;
 			PtpObject * obj = [self loadObject:objectHandle session:session];
 			if (obj != nil) {
-				[mData.tamaObjects addObject:obj];
+				[[TheTaManager sharedInstance].dataObject.tamaObjects addObject:obj];
 			}
 		}
 		
 		if (arPrev) {
 			//直前のListがあれば末尾へ追加する
-			[mData.tamaObjects addObjectsFromArray:arPrev];
+			[[TheTaManager sharedInstance].dataObject.tamaObjects addObjectsFromArray:arPrev];
 		}
 		
 		dispatch_async_main(^{
 			[_tableView reloadData];
 			//[self progressOff];
 			
-			if (0 < [arPrev count] && 0 < [arHandles count] && !mData.listBottom) {
+			if (0 < [arPrev count] && 0 < [arHandles count] && ![TheTaManager sharedInstance].dataObject.listBottom) {
 				// 最上行を復元
 				NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[arHandles count] inSection:0];
 				[_tableView scrollToRowAtIndexPath:indexPath
@@ -205,7 +205,7 @@
 			} else {
 				// 最下行へ
 				[self bottomTableView:_tableView animated:NO];
-				mData.listBottom = NO;
+				[TheTaManager sharedInstance].dataObject.listBottom = NO;
 			}
 			
 			// UIRefreshControl更新終了時に呼び出す
@@ -265,7 +265,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return mData.tamaObjects.count;
+	return [TheTaManager sharedInstance].dataObject.tamaObjects.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
@@ -290,7 +290,7 @@
 	[df setDateStyle:NSDateFormatterShortStyle];
 	[df setTimeStyle:NSDateFormatterMediumStyle];
 	
-	PtpObject* obj = [mData.tamaObjects objectAtIndex:indexPath.row];
+	PtpObject* obj = [[TheTaManager sharedInstance].dataObject.tamaObjects objectAtIndex:indexPath.row];
 	assert(obj);
 	cell = [tableView dequeueReusableCellWithIdentifier:CELL_NAME_TableCellTama];
 	cell.textLabel.text = [df stringFromDate:obj.objectInfo.capture_date];
@@ -335,9 +335,9 @@
 	LOG_FUNC
 	self.navigationController.navigationBarHidden = YES; //ナビバー非表示
 
-	AppDelegate * app = [UIApplication sharedApplication].delegate;
-	mData = [app getDataObject];
-	assert(mData != nil);
+//	AppDelegate * app = [UIApplication sharedApplication].delegate;
+//	mData = [app getDataObject];
+//	assert(mData != nil);
 
 //	mCapture = [app getCaptureObject];
 //	assert(mCapture != nil);
@@ -405,12 +405,12 @@
 	}
 #endif
 
-	if (0 < mData.tamaObjects.count) {
+	if (0 < [TheTaManager sharedInstance].dataObject.tamaObjects.count) {
 		//[self.tableView reloadData];
-		if (mData.listBottom) {
+		if ([TheTaManager sharedInstance].dataObject.listBottom) {
 			// 最下行へ
 			[self bottomTableView:_tableView animated:NO];
-			mData.listBottom = NO;
+			[TheTaManager sharedInstance].dataObject.listBottom = NO;
 		}
 	}
 	else {

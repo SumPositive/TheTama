@@ -31,7 +31,7 @@
 	__weak IBOutlet UILabel *		_lbTitle;
 
 	
-	DataObject *	mData;
+	//DataObject *	mData;
 	//Capture *		mCapture;
 
 	PtpObject * mPtpObject;
@@ -245,9 +245,9 @@
 	LOG_FUNC
 	self.navigationController.navigationBarHidden = YES; //ナビバー非表示
 
-	AppDelegate * app = [UIApplication sharedApplication].delegate;
-	mData = [app getDataObject];
-	assert(mData != nil);
+//	AppDelegate * app = [UIApplication sharedApplication].delegate;
+//	mData = [app getDataObject];
+//	assert(mData != nil);
 	
 //	mCapture = [app getCaptureObject];
 //	assert(mCapture != nil);

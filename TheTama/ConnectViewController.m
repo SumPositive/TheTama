@@ -18,7 +18,7 @@
 	__weak IBOutlet UIButton*		_buRetry;
 	__weak IBOutlet ADBannerView*	_iAd;
 	
-	DataObject *	mData;
+	//DataObject *	mData;
 	//Capture *		mCapture;
 }
 @end
@@ -37,9 +37,9 @@
 	LOG_FUNC
 	self.navigationController.navigationBarHidden = YES; //ナビバー非表示
 	
-	AppDelegate * app = [UIApplication sharedApplication].delegate;
-	mData = [app getDataObject];
-	assert(mData != nil);
+//	AppDelegate * app = [UIApplication sharedApplication].delegate;
+//	mData = [app getDataObject];
+//	assert(mData != nil);
 	
 	//	mCapture = [app getCaptureObject];
 	//	assert(mCapture != nil);
@@ -70,7 +70,7 @@
 	[TheTaManager sharedInstance].delegate = self;
 	[TheTaManager sharedInstance].progressBlockView = self.view;
 	
-	if (mData.option1payed) {
+	if ([[[TheTaManager sharedInstance] dataObject] option1payed]) {
 		self.canDisplayBannerAds = NO;
 	}
 }

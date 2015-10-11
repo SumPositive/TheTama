@@ -15,7 +15,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
-	var dataObject: DataObject?
+	//var dataObject: DataObject?
 	var naviCon: UINavigationController?
 	
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -66,22 +66,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// バックグランドになるとき
 		NSNotificationCenter.defaultCenter().postNotificationName("applicationDidEnterBackground", object: nil)
 		// mData 保存
-		if dataObject != nil {
-			
-			let fileManager = NSFileManager.defaultManager()
-			let urls = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-			if let documentDirectory: NSURL = urls.first {
-				let fileURL = documentDirectory.URLByAppendingPathComponent("mData.TheTama")
-				//アーカイブして保存する
-				let successful = NSKeyedArchiver.archiveRootObject(dataObject!, toFile: fileURL.absoluteString)
-				if !successful {
-					print("ERROR! mData save");
-				}
-				
-			} else {
-				print("Couldn't get documents directory!")
-			}
-		}
+//		if dataObject != nil {
+//			
+//			let fileManager = NSFileManager.defaultManager()
+//			let urls = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+//			if let documentDirectory: NSURL = urls.first {
+//				let fileURL = documentDirectory.URLByAppendingPathComponent("mData.TheTama")
+//				//アーカイブして保存する
+//				let successful = NSKeyedArchiver.archiveRootObject(dataObject!, toFile: fileURL.absoluteString)
+//				if !successful {
+//					print("ERROR! mData save");
+//				}
+//				
+//			} else {
+//				print("Couldn't get documents directory!")
+//			}
+//		}
 	}
 
 	func applicationWillEnterForeground(application: UIApplication) {
@@ -98,14 +98,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 	
 	
-	// MARK: - Shared Object
-
-	func getDataObject() -> DataObject? {
-		if dataObject == nil {
-			dataObject = DataObject()
-		}
-		return dataObject
-	}
+//	// MARK: - Shared Object
+//
+//	func getDataObject() -> DataObject? {
+//		if dataObject == nil {
+//			dataObject = DataObject()
+//		}
+//		return dataObject
+//	}
 
 //	func getThetama() -> TheTaManager? {
 //		return thetama

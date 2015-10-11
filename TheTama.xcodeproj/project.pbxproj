@@ -261,28 +261,20 @@
 			path = Ricoh;
 			sourceTree = "<group>";
 		};
-		444271421B0633ED00D6FB60 /* Model */ = {
+		444271421B0633ED00D6FB60 /* Base files */ = {
 			isa = PBXGroup;
 			children = (
 				44CD6E051AD94E440001F5B3 /* Azukid.h */,
 				442C66541BC96794005367FF /* Azukid.m */,
+				44A67BAE1AD3B27B002A826C /* TheTama-Bridging-Header.h */,
+				4463DDDD1BBAD3C70031B78A /* TheTamaBase.h */,
 				44A67C601AD433F9002A826C /* DataObject.swift */,
+				44A67C4A1AD3BA9D002A826C /* PtpObject.h */,
+				44A67C491AD3BA9D002A826C /* PtpObject.m */,
+				4442713F1AFA0CFC00D6FB60 /* TheTaManager.h */,
+				444271401AFA0CFC00D6FB60 /* TheTaManager.m */,
 			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		444271431B06340800D6FB60 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = View;
-			sourceTree = "<group>";
-		};
-		444271441B06341000D6FB60 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Controller;
+			name = "Base files";
 			sourceTree = "<group>";
 		};
 		44A67B721AD39CF4002A826C = {
@@ -309,18 +301,10 @@
 		44A67B7D1AD39CF4002A826C /* TheTama */ = {
 			isa = PBXGroup;
 			children = (
-				444271421B0633ED00D6FB60 /* Model */,
-				444271431B06340800D6FB60 /* View */,
-				444271441B06341000D6FB60 /* Controller */,
 				442401101AEFD2B100F3EA23 /* Ricoh */,
-				44A67C4A1AD3BA9D002A826C /* PtpObject.h */,
-				44A67C491AD3BA9D002A826C /* PtpObject.m */,
-				44A67BAE1AD3B27B002A826C /* TheTama-Bridging-Header.h */,
-				4463DDDD1BBAD3C70031B78A /* TheTamaBase.h */,
-				44A67B801AD39CF4002A826C /* AppDelegate.swift */,
-				4442713F1AFA0CFC00D6FB60 /* TheTaManager.h */,
-				444271401AFA0CFC00D6FB60 /* TheTaManager.m */,
 				44A67B7E1AD39CF4002A826C /* Supporting Files */,
+				444271421B0633ED00D6FB60 /* Base files */,
+				44A67B801AD39CF4002A826C /* AppDelegate.swift */,
 				44CD6DF21AD81B760001F5B3 /* ConnectViewController.h */,
 				44CD6DF11AD81B760001F5B3 /* ConnectViewController.m */,
 				444368081BA864A00067660C /* ConnectViewController.xib */,

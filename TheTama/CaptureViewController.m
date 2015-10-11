@@ -30,7 +30,7 @@
 	__weak IBOutlet UISwitch *			_swPreview;
 
 	
-	DataObject*		_dataObject;
+	//DataObject*		_dataObject;
 	//TheTaManager*	mCapture;
 	
 	NSUInteger		mShutterSpeed;
@@ -57,9 +57,9 @@
 	LOG_FUNC
 	self.navigationController.navigationBarHidden = YES; //ナビバー非表示
 	
-	AppDelegate * app = [UIApplication sharedApplication].delegate;
-	_dataObject = [app getDataObject];
-	assert(_dataObject != nil);
+//	AppDelegate * app = [UIApplication sharedApplication].delegate;
+//	_dataObject = [app getDataObject];
+//	assert(_dataObject != nil);
 	
 	//	mCapture = [app getCaptureObject];
 	//	assert(mCapture != nil);
@@ -115,8 +115,8 @@
 	_segWhite1.selectedSegmentIndex = 0;
 	_segWhite2.selectedSegmentIndex = UISegmentedControlNoSegment;
 	
-	_dataObject.capturePreview = YES; //常にYES: プレビューOFFにしてもレスポンス変わらず廃案とした
-	_swPreview.on = _dataObject.capturePreview;
+	_swPreview.on = YES; //常にYES: プレビューOFFにしてもレスポンス変わらず廃案とした
+	[TheTaManager sharedInstance].dataObject.capturePreview = _swPreview.on;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -235,20 +235,20 @@
 
 - (IBAction)volumeSliderChanged:(UISlider*)sender
 {
-	_dataObject.volumeLevel = sender.value;
+	[TheTaManager sharedInstance].dataObject.volumeLevel = sender.value;
 	[self volumeShow];
 }
 - (void)volumeShow
 {
-	_sliderVolume.value = _dataObject.volumeLevel;
-	_lbVolumePer.text = [NSString stringWithFormat:@"%ld%%", (long)_dataObject.volumeLevel];
+	_sliderVolume.value = [TheTaManager sharedInstance].dataObject.volumeLevel;
+	_lbVolumePer.text = [NSString stringWithFormat:@"%ld%%", (long)[TheTaManager sharedInstance].dataObject.volumeLevel];
 }
 
 - (IBAction)onCaptureTouchDown:(id)sender
 {
 	[Azukid banBarrage:sender]; //連打防止
 	// シャッターボタンを押したとき撮影
-	if (_dataObject.captureTouchDown) {
+	if ([TheTaManager sharedInstance].dataObject.captureTouchDown) {
 		[self capture];
 	}
 }
@@ -257,7 +257,7 @@
 {
 	[Azukid banBarrage:sender]; //連打防止
 	// シャッターボタンを離したとき撮影
-	if (!_dataObject.captureTouchDown) {
+	if (![TheTaManager sharedInstance].dataObject.captureTouchDown) {
 		[self capture];
 	}
 }
@@ -267,12 +267,12 @@
 	[[TheTaManager sharedInstance] captureCompletion:^(BOOL success, PtpObject* tamaObj, NSDate* capture_date, NSError* error) {
 		if (success || !error) {
 			//OK
-			if (0 < _dataObject.tamaObjects.count) {
-				[_dataObject.tamaObjects addObject:tamaObj];
+			if (0 < [TheTaManager sharedInstance].dataObject.tamaObjects.count) {
+				[[TheTaManager sharedInstance].dataObject.tamaObjects addObject:tamaObj];
 			}
-			LOG(@"_dataObject.tamaObjects.count=%ld", (unsigned long)_dataObject.tamaObjects.count);
-			_dataObject.tamaCapture = tamaObj;
-			_dataObject.listBottom = YES; // ListViewにて最終行を表示させる
+			LOG(@"_dataObject.tamaObjects.count=%ld", (unsigned long)[TheTaManager sharedInstance].dataObject.tamaObjects.count);
+			[TheTaManager sharedInstance].dataObject.tamaCapture = tamaObj;
+			[TheTaManager sharedInstance].dataObject.listBottom = YES; // ListViewにて最終行を表示させる
 		} else {
 			LOG(@"[ERROR] %@", error.localizedDescription);
 		}
@@ -336,9 +336,9 @@
 - (IBAction)onThumbnailTouchUpIn:(id)sender
 {
 	// サムネイル画像を押したとき
-	if (_dataObject.tamaCapture != nil) {
+	if ([TheTaManager sharedInstance].dataObject.tamaCapture != nil) {
 		// Goto Viewer View
-		_dataObject.tamaViewer = _dataObject.tamaCapture;
+		[TheTaManager sharedInstance].dataObject.tamaViewer = [TheTaManager sharedInstance].dataObject.tamaCapture;
 
 		ViewerViewController* vc = [[ViewerViewController alloc] init];
 		[self.navigationController pushViewController:vc animated:YES];
@@ -348,7 +348,7 @@
 - (IBAction)onListTouchUpIn:(id)sender
 {
 	// List > を押したとき
-	_dataObject.listBottom = YES; // ListViewにて最終行を表示させる
+	[TheTaManager sharedInstance].dataObject.listBottom = YES; // ListViewにて最終行を表示させる
 	// Goto Model Viewer View
 	ListViewController* vc = [[ListViewController alloc] init];
 	[self.navigationController pushViewController:vc animated:YES];
@@ -535,9 +535,9 @@
 
 - (IBAction)swPreviewChanged:(UISwitch*)sender
 {
-	_dataObject.capturePreview = sender.on;
+	[TheTaManager sharedInstance].dataObject.capturePreview = sender.on;
 	
-	if (!_dataObject.capturePreview) {
+	if (![TheTaManager sharedInstance].dataObject.capturePreview) {
 		[self thumbnailOff];
 	}
 }
@@ -578,3 +578,4 @@
 
 
 @end
+
