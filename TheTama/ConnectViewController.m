@@ -118,8 +118,7 @@
 	LOG_FUNC
 	[Azukid banBarrage:sender];//連打対策
 	// 設定画面へのURLスキーム
-	NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-	[[UIApplication sharedApplication] openURL:url];
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
 	
 	//iOS5以前//[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs://"]];
 }

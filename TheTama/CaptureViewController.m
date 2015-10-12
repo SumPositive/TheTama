@@ -273,8 +273,22 @@
 			LOG(@"_dataObject.tamaObjects.count=%ld", (unsigned long)[TheTaManager sharedInstance].dataObject.tamaObjects.count);
 			[TheTaManager sharedInstance].dataObject.tamaCapture = tamaObj;
 			[TheTaManager sharedInstance].dataObject.listBottom = YES; // ListViewにて最終行を表示させる
+			
+			NSDateFormatter* df = [[NSDateFormatter alloc] init];
+			[df setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+			[df setDateStyle:NSDateFormatterShortStyle];
+			[df setTimeStyle:NSDateFormatterMediumStyle];
+			dispatch_async_main(^{
+				[self thumbnail:tamaObj.thumbnail title:[df stringFromDate:capture_date]];
+				_buCapture.enabled = YES;
+			});
+			
 		} else {
 			LOG(@"[ERROR] %@", error.localizedDescription);
+			// Connectへ戻る
+			dispatch_async_main(^{
+				[self.navigationController popToRootViewControllerAnimated:YES];
+			});
 		}
 	}];
 }

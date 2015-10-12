@@ -13,9 +13,9 @@
 
 "Lz.Disconnecting" = "THETA\n切断中...";
 
-"During 360° Capture." = "360° 撮影中";
-"During timelapse shooting." = "タイムラプス撮影中";
-"During movie shooting." = "動画撮影中";
+"During 360° Capture." = "360° 撮影\n処理中";
+"During timelapse shooting." = "タイムラプス\n撮影中";
+"During movie shooting." = "動画\n撮影中";
 
 /* "Lz.PrivilegeNextLoad" = "(Thank you for your support.)";"Lz.NextLoad" = "Continue to load..."; */
 "Lz.PrivilegeVolumeZero" = "＄ここで課金画面を出す＄";

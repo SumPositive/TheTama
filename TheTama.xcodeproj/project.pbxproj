@@ -14,6 +14,7 @@
 		442401191AEFD2B100F3EA23 /* GLRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 442401151AEFD2B100F3EA23 /* GLRenderView.m */; };
 		4424011A1AEFD2B100F3EA23 /* UVSphere.m in Sources */ = {isa = PBXBuildFile; fileRef = 442401171AEFD2B100F3EA23 /* UVSphere.m */; };
 		442C66551BC96794005367FF /* Azukid.m in Sources */ = {isa = PBXBuildFile; fileRef = 442C66541BC96794005367FF /* Azukid.m */; settings = {ASSET_TAGS = (); }; };
+		442C66571BCBE788005367FF /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 442C66561BCBE788005367FF /* Settings.bundle */; settings = {ASSET_TAGS = (); }; };
 		443F7A861BB7893200DC17A1 /* ViewerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443F7A851BB7893200DC17A1 /* ViewerViewController.xib */; };
 		444271411AFA0CFC00D6FB60 /* TheTaManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 444271401AFA0CFC00D6FB60 /* TheTaManager.m */; };
 		444368061BA864A00067660C /* ConnectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444368081BA864A00067660C /* ConnectViewController.xib */; };
@@ -95,6 +96,7 @@
 		442401161AEFD2B100F3EA23 /* UVSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UVSphere.h; sourceTree = "<group>"; };
 		442401171AEFD2B100F3EA23 /* UVSphere.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UVSphere.m; sourceTree = "<group>"; };
 		442C66541BC96794005367FF /* Azukid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Azukid.m; sourceTree = "<group>"; };
+		442C66561BCBE788005367FF /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		443F7A851BB7893200DC17A1 /* ViewerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewerViewController.xib; sourceTree = "<group>"; };
 		4442713F1AFA0CFC00D6FB60 /* TheTaManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheTaManager.h; sourceTree = "<group>"; };
 		444271401AFA0CFC00D6FB60 /* TheTaManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheTaManager.m; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 		44A67B7E1AD39CF4002A826C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				442C66561BCBE788005367FF /* Settings.bundle */,
 				44A67B7F1AD39CF4002A826C /* Info.plist */,
 				44A67B8B1AD39CF5002A826C /* LaunchScreen.xib */,
 				44170C811AE16A99006E1C4B /* Localizable.strings */,
@@ -588,6 +591,7 @@
 			files = (
 				447E80A11BC167C600903BC2 /* CaptureViewController.xib in Resources */,
 				444C7BA61BB81E8F002C00B8 /* TableCellTama.xib in Resources */,
+				442C66571BCBE788005367FF /* Settings.bundle in Resources */,
 				444368061BA864A00067660C /* ConnectViewController.xib in Resources */,
 				4405505C1BB79E5700B8841A /* InfoViewController.xib in Resources */,
 				443F7A861BB7893200DC17A1 /* ViewerViewController.xib in Resources */,

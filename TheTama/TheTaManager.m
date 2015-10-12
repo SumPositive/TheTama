@@ -176,6 +176,14 @@
 						[_delegate connected:YES];
 					});
 				}
+				[self progressOff];
+				// completionオブジェクトを取得する
+				ConnectCompletion completion = objc_getAssociatedObject(self, KEY_CONNECT_COMPLETION);
+				if (completion) {
+					dispatch_async_main(^{
+						completion(_isConnected, nil);
+					});
+				}
 			}];
 		}
 		else {
@@ -187,14 +195,14 @@
 					[_delegate connected:NO];
 				});
 			}
-		}
-		
-		// completionオブジェクトを取得する
-		ConnectCompletion completion = objc_getAssociatedObject(self, KEY_CONNECT_COMPLETION);
-		if (completion) {
-			dispatch_async_main(^{
-				completion(_isConnected, nil);
-			});
+			[self progressOff];
+			// completionオブジェクトを取得する
+			ConnectCompletion completion = objc_getAssociatedObject(self, KEY_CONNECT_COMPLETION);
+			if (completion) {
+				dispatch_async_main(^{
+					completion(_isConnected, nil);
+				});
+			}
 		}
 	}];
 }
@@ -209,12 +217,15 @@
 		// This block is running at PtpConnection#gcd thread.
 		LOG(@"disconnected.");
 		
-		[self progressOff];
 		
 		if (connect) {
-			[self connectCompletion:nil];
+			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+				// 1.0秒後開始
+				[self connectCompletion:nil];
+			});
 		}
 		else {
+			[self progressOff];
 			if ([_delegate respondsToSelector:@selector(disconnected)]) {
 				dispatch_async_main(^{
 					[_delegate disconnected];
@@ -340,9 +351,9 @@
 			{
 				BOOL rtn = [session initiateCapture]; //---> PtpIpEventListener delegates.
 				LOG(@"execShutter[rtn:%d]", rtn);
-				
 				if (!rtn) {
 					// NG
+					[self progressOff];
 					if (completion) {
 						dispatch_async_main(^{
 							completion(NO, nil, nil, nil);
@@ -463,6 +474,7 @@
 						completion(YES, tamaObj, capture_date, nil);
 					});
 				}
+				[self progressOff];
 			}];
 		} break;
 			
