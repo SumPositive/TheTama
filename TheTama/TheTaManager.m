@@ -344,7 +344,7 @@
 		[session setExposureBiasCompensation: 0];
 		
 		// set シャッターの音量
-		[session setAudioVolume: _volumeLevel];
+		[session setAudioVolume: _dataObject.volumeLevel];
 		
 		switch (_captureMode) {
 			case CAPTURE_MODE_NORMAL:
@@ -365,13 +365,13 @@
 			case CAPTURE_MODE_TIMELAPSE:
 			{
 				mTransactionId = [session initiateOpenCapture];
-				LOG(@"mTransactionId:%ld", mTransactionId);
+				LOG(@"mTransactionId:%ld", (long)mTransactionId);
 			}	break;
 				
 			case CAPTURE_MODE_MOVIE:
 			{
 				mTransactionId = [session initiateOpenCapture];
-				LOG(@"mTransactionId:%ld", mTransactionId);
+				LOG(@"mTransactionId:%ld", (long)mTransactionId);
 			}	break;
 				
 			default:

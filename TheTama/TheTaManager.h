@@ -40,7 +40,7 @@ typedef enum {
 @property (nonatomic, readonly) BOOL			isConnected;
 
 @property (nonatomic, readwrite) UIView* 		progressBlockView;
-@property (nonatomic, readwrite) NSUInteger		volumeLevel;
+//@property (nonatomic, readwrite) NSUInteger		volumeLevel;
 @property (nonatomic, readonly)	 NSUInteger		batteryLevel;
 @property (nonatomic, readwrite) NSUInteger		shutterSpeed;
 @property (nonatomic, readwrite) NSInteger		filmIso;

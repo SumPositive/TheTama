@@ -1,6 +1,6 @@
 //
 //  DataObject.swift
-//  TheTama
+//  TheTama アプリ全体で共有する情報をシングルトン記録・保存・再生する
 //
 //  Created by masa on 2015/04/08.
 //  Copyright (c) 2015年 Azukid. All rights reserved.
@@ -28,7 +28,8 @@ class DataObject: NSObject, NSCoding {
 	//--------------------------永続化　（同時に下にある、NSCoding protocolへも実装すること）
 	// BOOL
 	var captureTouchDown = false;
-	var capturePreview = true;		//キャプチャ後プレビューする（false:転送に待たされない）
+	var capturePreview = true;		//キャプチャ後プレビューする
+	var saveRoll = true;			//キャプチャ後カメラロールへ保存する
 	var option1payed = false;		//１課金済み　特典パック
 	var option2payed = false;		//２課金済み
 	var option3payed = false;		//３課金済み
@@ -54,6 +55,7 @@ class DataObject: NSObject, NSCoding {
 		// BOOL
 		aCoder.encodeBool(self.captureTouchDown,	forKey: "captureTouchDown")
 		aCoder.encodeBool(self.capturePreview,		forKey: "capturePreview")
+		aCoder.encodeBool(self.saveRoll,			forKey: "saveRoll")
 		aCoder.encodeBool(self.option1payed,		forKey: "option1payed")
 		aCoder.encodeBool(self.option2payed,		forKey: "option2payed")
 		aCoder.encodeBool(self.option3payed,		forKey: "option3payed")
@@ -70,6 +72,7 @@ class DataObject: NSObject, NSCoding {
 		// BOOL
 		self.captureTouchDown	= aDecoder.decodeBoolForKey("captureTouchDown")
 		self.capturePreview		= aDecoder.decodeBoolForKey("capturePreview")
+		self.saveRoll			= aDecoder.decodeBoolForKey("saveRoll")
 		self.option1payed		= aDecoder.decodeBoolForKey("option1payed")
 		self.option2payed		= aDecoder.decodeBoolForKey("option2payed")
 		self.option3payed		= aDecoder.decodeBoolForKey("option3payed")

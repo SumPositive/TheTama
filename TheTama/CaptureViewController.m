@@ -27,7 +27,8 @@
 	__weak IBOutlet UILabel  *			_lbThumbnail;
 	__weak IBOutlet UIButton *			_buThumbnail;
 	__weak IBOutlet UIButton *			_buCapture;
-	__weak IBOutlet UISwitch *			_swPreview;
+//	__weak IBOutlet UISwitch *			_swPreview;
+	__weak IBOutlet UISwitch *			_swSaveRoll;
 
 	
 	//DataObject*		_dataObject;
@@ -115,8 +116,12 @@
 	_segWhite1.selectedSegmentIndex = 0;
 	_segWhite2.selectedSegmentIndex = UISegmentedControlNoSegment;
 	
-	_swPreview.on = YES; //常にYES: プレビューOFFにしてもレスポンス変わらず廃案とした
-	[TheTaManager sharedInstance].dataObject.capturePreview = _swPreview.on;
+//	_swPreview.on = YES; //常にYES: プレビューOFFにしてもレスポンス変わらず廃案とした
+//	[TheTaManager sharedInstance].dataObject.capturePreview = _swPreview.on;
+
+	
+	_swSaveRoll.on = [TheTaManager sharedInstance].dataObject.saveRoll;
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -350,15 +355,21 @@
 
 - (IBAction)onThumbnailTouchUpIn:(id)sender
 {
-	// サムネイル画像を押したとき
-	TheTaManager* thetama = [TheTaManager sharedInstance];
-	if (thetama.dataObject.tamaCapture != nil) {
-		// Goto Viewer View
-		thetama.dataObject.tamaViewer = thetama.dataObject.tamaCapture;
-
-		ViewerViewController* vc = [[ViewerViewController alloc] init];
-		[self.navigationController pushViewController:vc animated:YES];
-	}
+//	// サムネイル画像を押したとき
+//	TheTaManager* thetama = [TheTaManager sharedInstance];
+//	if (thetama.dataObject.tamaCapture != nil) {
+//		// Goto Viewer View
+//		thetama.dataObject.tamaViewer = thetama.dataObject.tamaCapture;
+//
+//		ViewerViewController* vc = [[ViewerViewController alloc] init];
+//		[self.navigationController pushViewController:vc animated:YES];
+//	}
+	
+	//TODO: サムネイル画像を押したとき、カメラロールを表示する
+	
+	
+	
+	
 }
 
 - (IBAction)onListTouchUpIn:(id)sender
@@ -549,13 +560,17 @@
 	}
 }
 
-- (IBAction)swPreviewChanged:(UISwitch*)sender
+//- (IBAction)swPreviewChanged:(UISwitch*)sender
+//{
+//	[TheTaManager sharedInstance].dataObject.capturePreview = sender.on;
+//	
+//	if (![TheTaManager sharedInstance].dataObject.capturePreview) {
+//		[self thumbnailOff];
+//	}
+//}
+- (IBAction)swSaveRollChanged:(UISwitch*)sender
 {
-	[TheTaManager sharedInstance].dataObject.capturePreview = sender.on;
-	
-	if (![TheTaManager sharedInstance].dataObject.capturePreview) {
-		[self thumbnailOff];
-	}
+	[TheTaManager sharedInstance].dataObject.saveRoll = sender.on;
 }
 
 - (void)progressOnTitle:(NSString*)zTitle
@@ -577,10 +592,30 @@
 
 - (void)thumbnail:(UIImage*)img title:(NSString*)title
 {
+	if ([TheTaManager sharedInstance].dataObject.saveRoll) {
+		// カメラロールへ保存する
+		UIImageWriteToSavedPhotosAlbum(img, self, @selector(savingImageIsFinished:didFinishSavingWithError:contextInfo:), nil);
+	}
+
 	_ivThumbnail.image = img;
 	_lbThumbnail.text = title;
 	_buThumbnail.enabled = YES;
 	[self viewRefresh];
+}
+
+- (void)savingImageIsFinished:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+	if(error){//エラーのとき
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"エラー"
+														message:@"画像の保存に失敗しました。"
+													   delegate:nil
+											  cancelButtonTitle:nil
+											  otherButtonTitles:@"OK", nil
+							  ];
+		
+		[alert show];
+	}
+	return;
 }
 
 - (void)thumbnailOff

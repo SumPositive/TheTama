@@ -1,27 +1,33 @@
 
 /* Class = "UISegmentedControl"; Axh-Yu-dEi.segmentTitles[0] = "Auto"; ObjectID = "Axh-Yu-dEi"; */
-"Axh-Yu-dEi.segmentTitles[0]" = "Auto";
+"Axh-Yu-dEi.segmentTitles[0]" = "自動";
 
 /* Class = "UISegmentedControl"; Axh-Yu-dEi.segmentTitles[1] = "Day"; ObjectID = "Axh-Yu-dEi"; */
-"Axh-Yu-dEi.segmentTitles[1]" = "Day";
+"Axh-Yu-dEi.segmentTitles[1]" = "屋外";
 
 /* Class = "UISegmentedControl"; Axh-Yu-dEi.segmentTitles[2] = "Sha"; ObjectID = "Axh-Yu-dEi"; */
-"Axh-Yu-dEi.segmentTitles[2]" = "Sha";
+"Axh-Yu-dEi.segmentTitles[2]" = "日陰";
 
 /* Class = "UISegmentedControl"; Axh-Yu-dEi.segmentTitles[3] = "Clo"; ObjectID = "Axh-Yu-dEi"; */
-"Axh-Yu-dEi.segmentTitles[3]" = "Clo";
+"Axh-Yu-dEi.segmentTitles[3]" = "曇天";
 
 /* Class = "UISegmentedControl"; Axh-Yu-dEi.segmentTitles[4] = "Tun1"; ObjectID = "Axh-Yu-dEi"; */
-"Axh-Yu-dEi.segmentTitles[4]" = "Tun1";
+"Axh-Yu-dEi.segmentTitles[4]" = "昼光色";
 
 /* Class = "UISegmentedControl"; Axh-Yu-dEi.segmentTitles[5] = "Tun2"; ObjectID = "Axh-Yu-dEi"; */
-"Axh-Yu-dEi.segmentTitles[5]" = "Tun2";
+"Axh-Yu-dEi.segmentTitles[5]" = "昼白色";
 
-/* Class = "UILabel"; text = "Preview"; ObjectID = "FU2-fo-eCN"; */
-"FU2-fo-eCN.text" = "Preview";
+// ホワイトバランス
+//     AUTOMATIC, DAYLIGHT(屋外), SHADE(日陰), CLOUDY(曇天),
+//     TUNGSTEN1(白熱灯1),  TUNGSTEN2(白熱灯2),
+//     FLUORESCENT1(蛍光灯1(昼光色)), FLUORESCENT2(蛍光灯2(昼白色)),
+//     FLUORESCENT3(蛍光灯3(白色)), FLUORESCENT4(蛍光灯4(電球色))
+
+/* Class = "UILabel"; text = "Save roll"; ObjectID = "FU2-fo-eCN"; */
+"FU2-fo-eCN.text" = "写真保存";
 
 /* Class = "UISegmentedControl"; FZv-mU-8cV.segmentTitles[0] = "Auto"; ObjectID = "FZv-mU-8cV"; */
-"FZv-mU-8cV.segmentTitles[0]" = "Auto";
+"FZv-mU-8cV.segmentTitles[0]" = "自動";
 
 /* Class = "UISegmentedControl"; FZv-mU-8cV.segmentTitles[1] = "1/7.5"; ObjectID = "FZv-mU-8cV"; */
 "FZv-mU-8cV.segmentTitles[1]" = "1/7.5";
@@ -39,10 +45,10 @@
 "FZv-mU-8cV.segmentTitles[5]" = "1/125";
 
 /* Class = "UILabel"; text = "White balance"; ObjectID = "KHM-Xy-jbF"; */
-"KHM-Xy-jbF.text" = "White balance";
+"KHM-Xy-jbF.text" = "ホワイトバランス";
 
 /* Class = "UILabel"; text = "Shutter speed"; ObjectID = "SfM-Cr-i7d"; */
-"SfM-Cr-i7d.text" = "Shutter speed";
+"SfM-Cr-i7d.text" = "シャッタースピード";
 
 /* Class = "UISegmentedControl"; WaD-f3-nvy.segmentTitles[0] = "6500K"; ObjectID = "WaD-f3-nvy"; */
 "WaD-f3-nvy.segmentTitles[0]" = "6500K";
@@ -60,7 +66,7 @@
 "XyZ-AS-NiU.text" = "100%";
 
 /* Class = "UISegmentedControl"; f0o-e4-3Mb.segmentTitles[0] = "Auto"; ObjectID = "f0o-e4-3Mb"; */
-"f0o-e4-3Mb.segmentTitles[0]" = "Auto";
+"f0o-e4-3Mb.segmentTitles[0]" = "自動";
 
 /* Class = "UISegmentedControl"; f0o-e4-3Mb.segmentTitles[1] = "100"; ObjectID = "f0o-e4-3Mb"; */
 "f0o-e4-3Mb.segmentTitles[1]" = "100";
@@ -84,7 +90,7 @@
 "nGb-es-54z.text" = "100%";
 
 /* Class = "UILabel"; text = "Sound"; ObjectID = "q7k-yy-sNN"; */
-"q7k-yy-sNN.text" = "Sound";
+"q7k-yy-sNN.text" = "音量";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "vAL-uG-89K"; */
 "vAL-uG-89K.text" = "Label";
@@ -108,4 +114,4 @@
 "wiT-Bh-dY5.segmentTitles[5]" = "/8000";
 
 /* Class = "UILabel"; text = "ISO"; ObjectID = "ylM-7x-rRI"; */
-"ylM-7x-rRI.text" = "ISO";
+"ylM-7x-rRI.text" = "ISO感度";
