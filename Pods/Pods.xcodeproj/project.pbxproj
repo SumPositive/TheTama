@@ -7,142 +7,142 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		05F954779EEE46E3B8376ABF86FB1546 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 356EC7189CD6CB688DD745D5733977C3 /* QuartzCore.framework */; };
-		0D4C3B0976E69C7686D88319B92B4DAA /* RMStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B52A1CF0D54D0F20BAB36C13C86DD78 /* RMStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1357F33E0C92B2DEE42CA952BCD8647F /* RMStoreKeychainPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F38CDF26ED6371C05FD95CCF064A93D /* RMStoreKeychainPersistence.m */; };
+		081800FEA1A82A2A1E6DAA9650B53250 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D7CCD008EDCE5951AC57108470A1C82 /* StoreKit.framework */; };
 		170CDC1A34C81E5F872CB30C335ACFA0 /* MRProgressHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 68408654320F32195DA551103DC74B6B /* MRProgressHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1A7DF2E2F8C29A2ECF7E952DCB58294D /* RMStore-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D80B747FDA3C4AE3CE40125CC4E9FE5 /* RMStore-dummy.m */; };
 		1BA0ACE7DBE177D195679D8302E30E2D /* MRNavigationBarProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = A00D9B00DC6E3EC31F18F7B9095DCE54 /* MRNavigationBarProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		28AFB4304C9E59A767C8263988CCF908 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5494067152C19B49E243B34C08A8C18 /* Foundation.framework */; };
+		25E9624B09DBDFEE7710E1DF04D4512F /* RMStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B419C1197EC2D9EAF73DF8733B1A0B2 /* RMStore.m */; };
 		38134BE6D8D60FD41DCF3EF588D0FBB4 /* MRIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = B30B6FCFF0F3F448510036BD195477AE /* MRIconView.m */; };
 		390D32456E8CB10A60F772A1244513F1 /* MRStopButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 06D98C9724CE28B5B85EBB18CCE0DE3D /* MRStopButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		396E6136B82F13FB7075D5001CBA0EF5 /* MRProgress-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FAA42C907F98FAFF590BE687D93F8C /* MRProgress-dummy.m */; };
-		3A1C02B8E3D9A8950FE976D9975418BA /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 272643F56613CA0D336AE3DBF19DC404 /* Pods-dummy.m */; };
+		428D19D4BEFBD467AB9B9E6D14CCB8CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F94226AF85482EEA12C27CFC22E9C4 /* Foundation.framework */; };
 		447EAFBBCB338F2335DEB3F6E5C96345 /* MRBlurView.h in Headers */ = {isa = PBXBuildFile; fileRef = 476D65E7F333E214BE53035305679439 /* MRBlurView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4770067E085E9EB15CB9C0C638630148 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD0A1E00583F564B954835CAC66B4B5B /* Security.framework */; };
 		4AB473DE4A1733CB93F9E3AF0010F4E2 /* MRCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF6A26AC56E4185D3D074C4791807FB /* MRCircularProgressView.m */; };
+		53CD9ED6D4469024EC853C0CF825DCD6 /* RMStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B52A1CF0D54D0F20BAB36C13C86DD78 /* RMStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5419BEE7F53FC7943CA1E865AE9F31A1 /* RMStoreKeychainPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F38CDF26ED6371C05FD95CCF064A93D /* RMStoreKeychainPersistence.m */; };
 		586CFF8D764ABCB1403A6775F9DEABCE /* MRCircularProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = EF4545F14FFEAB53DFF353F0120C4251 /* MRCircularProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6AE97C15C6C4727C51F0DC03BC1414C1 /* MRProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4EA50315A2CD0879F52B82EF799CAB /* MRProgressView.m */; };
+		6D7F9E50CDC2536F51EDA28331857512 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0916755F70DEFBB72EA8368CCA1A5AE /* Accelerate.framework */; };
 		6EAC2581EE943070BB6AB5251957317E /* MRActivityIndicatorView.h in Headers */ = {isa = PBXBuildFile; fileRef = 60C56608B9769C4F6B34D614B55FA48E /* MRActivityIndicatorView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		707EAC1BB885B7932B51FBE1A9D46A3B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD7D7AD426A1B6EA0E2C82B86985E8EE /* Security.framework */; };
 		7137FCAD688592DB1E6B7A751DFEBF54 /* MRIconView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7614782023393416D4BC01428488A3F5 /* MRIconView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		85EFE67A5704388337BF3A246C2BFDCF /* RMStoreKeychainPersistence.h in Headers */ = {isa = PBXBuildFile; fileRef = 9943B49043988868FF44B317D204B460 /* RMStoreKeychainPersistence.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		88938D9881C4A45259A6E9F940F93B28 /* MRProgressOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 590D3B87E4284C53486FC377852E6FBD /* MRProgressOverlayView.m */; };
-		8F69A9F6641864D194C65859D893811D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 670A74BCFC8014967451E5A133078344 /* CoreGraphics.framework */; };
-		A13DD6D088AA5A8EC698133DFEF57AE7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5494067152C19B49E243B34C08A8C18 /* Foundation.framework */; };
+		9EC4390DDE43352A97376F9DDB687066 /* RMStoreKeychainPersistence.h in Headers */ = {isa = PBXBuildFile; fileRef = 9943B49043988868FF44B317D204B460 /* RMStoreKeychainPersistence.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA33BC89D15520EB603208CF6321F2E4 /* MRStopableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CA0EACB319251BD0F855CBDA6E93BEA /* MRStopableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB318652417A4312F746A4951D5BCEBA /* MRProgressOverlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = C65F92D42FA1AC262FF42B35684FFDB1 /* MRProgressOverlayView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		ACF2717B2D4F1B7EE01048E988CEF088 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1834BEED3807D6C12322242D8B9CC50 /* StoreKit.framework */; };
 		B51EBA5F3DFFD3EF919B7BAE27F41528 /* UIImage+MRImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 10D08E59917C07019F48888AA9CC525A /* UIImage+MRImageEffects.m */; };
+		C0308F2ABADE4B26049D2673626AD318 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E027BB06C30D1D99AF106A94B3C0CBF /* UIKit.framework */; };
 		C1FA832F7ACD94E41B1667AC23B7BA4D /* UIImage+MRImageEffects.h in Headers */ = {isa = PBXBuildFile; fileRef = 4998F842A9A4E74136CED0508FF40722 /* UIImage+MRImageEffects.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C5B431DC57FD0ACF1BD8EAE9FA5DE71F /* MRActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 993DDAEDC039486B4446AC34C1F101DF /* MRActivityIndicatorView.m */; };
+		C6976C16BB47427A8A3E5E739A7E4300 /* RMStore-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D80B747FDA3C4AE3CE40125CC4E9FE5 /* RMStore-dummy.m */; };
 		C7520E9B5BC8D8A96355E8D8B948CCAA /* MRProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 98241192CCDA33BCEC509C5A709FB34F /* MRProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CC112333CA963B2CE68A4C4462341324 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5494067152C19B49E243B34C08A8C18 /* Foundation.framework */; };
+		CA5DD448985912A456D903E517AA6D1F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ED37C4BF0CBB0C35610366F47903F66 /* CoreGraphics.framework */; };
+		CD4D513EBCFFC24E6B129395CE5D06DF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F94226AF85482EEA12C27CFC22E9C4 /* Foundation.framework */; };
 		CD96B10F03CFB2D0EF09745CEDAB5FCE /* MRNavigationBarProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF55F41B7E75A8169685E3A8ADB1BF3D /* MRNavigationBarProgressView.m */; };
 		D7D513720EAEDF6A38F4729CFB24FC3C /* MRStopButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 132AD5667E46D246FEAEA1A2B9F305BA /* MRStopButton.m */; };
+		E27AFD841F1F5407DBF38B34F2B263DC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39710C44FA1EC46F912B823F4C9AC203 /* QuartzCore.framework */; };
+		EA5B2653A2F0FCF085B038598B159CBD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F94226AF85482EEA12C27CFC22E9C4 /* Foundation.framework */; };
 		ED4BAEFEDB2480C87BE77492BADC3661 /* MRBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = DD182D6873A200CAD0FEC0CAD09D6089 /* MRBlurView.m */; };
-		EFC359F4FA0C948CB728C5FD684F18F7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EEE956CF4ED0A186414379B1B9927C1 /* UIKit.framework */; };
 		EFE60DF49FA1ABBDAEDD6D7C727766D6 /* MRProgress.h in Headers */ = {isa = PBXBuildFile; fileRef = E5E7CE1915BCAD5124F774CA0287E292 /* MRProgress.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F67FABA836D4DD26A87BD73B415D1CE9 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E241A99910B44847014CAA958C9B3717 /* Accelerate.framework */; };
-		FF73777863C59886002C709F77027BAA /* RMStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B419C1197EC2D9EAF73DF8733B1A0B2 /* RMStore.m */; };
+		F2D66F779361174EC26F2998D49E036A /* Pods-TheTama-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A54FF678130A1ABBB8FD0486EAF546 /* Pods-TheTama-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2788342893C5FBB48D234EADF31FD89C /* PBXContainerItemProxy */ = {
+		729967DBDD2665BBACD92E9C106ADAF2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8570A42CA7975311B4D2DDCB2303977B;
 			remoteInfo = MRProgress;
 		};
-		7AD1473E6B80369D60B1415BF390ECF3 /* PBXContainerItemProxy */ = {
+		C1287ACE04A1A3141D38BC4BC0D23B65 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = DB0C35E180968401A633EAED97EFBA91;
+			remoteGlobalIDString = CD0C2817FC63B7A8593444092B759D94;
 			remoteInfo = RMStore;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		06D98C9724CE28B5B85EBB18CCE0DE3D /* MRStopButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRStopButton.h; path = src/Components/MRStopButton.h; sourceTree = "<group>"; };
-		10834806BD7B412BC24F347361FA2C8E /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
+		0E027BB06C30D1D99AF106A94B3C0CBF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		10D08E59917C07019F48888AA9CC525A /* UIImage+MRImageEffects.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+MRImageEffects.m"; path = "src/Blur/UIImage+MRImageEffects.m"; sourceTree = "<group>"; };
+		1120511B4D20CA2D583F4D6B8C545B9B /* libMRProgress.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMRProgress.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		132AD5667E46D246FEAEA1A2B9F305BA /* MRStopButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MRStopButton.m; path = src/Components/MRStopButton.m; sourceTree = "<group>"; };
+		181C8461BA6563CD7C801AA82F209AE6 /* Pods-TheTama-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TheTama-acknowledgements.plist"; sourceTree = "<group>"; };
 		1B419C1197EC2D9EAF73DF8733B1A0B2 /* RMStore.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RMStore.m; path = RMStore/RMStore.m; sourceTree = "<group>"; };
 		1B52A1CF0D54D0F20BAB36C13C86DD78 /* RMStore.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RMStore.h; path = RMStore/RMStore.h; sourceTree = "<group>"; };
 		1D80B747FDA3C4AE3CE40125CC4E9FE5 /* RMStore-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RMStore-dummy.m"; sourceTree = "<group>"; };
-		272643F56613CA0D336AE3DBF19DC404 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
-		356EC7189CD6CB688DD745D5733977C3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		37DB56D75062CC75FCB0966E1C6E8A8E /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
+		39710C44FA1EC46F912B823F4C9AC203 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		476D65E7F333E214BE53035305679439 /* MRBlurView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRBlurView.h; path = src/Blur/MRBlurView.h; sourceTree = "<group>"; };
-		48F5A97EB08319B8EC1FEDE5CCE9B0F7 /* libRMStore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRMStore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4998F842A9A4E74136CED0508FF40722 /* UIImage+MRImageEffects.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+MRImageEffects.h"; path = "src/Blur/UIImage+MRImageEffects.h"; sourceTree = "<group>"; };
-		4E762F23EC34ED4A6FF3312D84E33A40 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
+		4EE1D8C91E4867293CD3458E28CFF14B /* libRMStore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRMStore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		590D3B87E4284C53486FC377852E6FBD /* MRProgressOverlayView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MRProgressOverlayView.m; path = src/Components/MRProgressOverlayView.m; sourceTree = "<group>"; };
+		5D7CCD008EDCE5951AC57108470A1C82 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
+		5ED37C4BF0CBB0C35610366F47903F66 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		60C56608B9769C4F6B34D614B55FA48E /* MRActivityIndicatorView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRActivityIndicatorView.h; path = src/Components/MRActivityIndicatorView.h; sourceTree = "<group>"; };
-		670A74BCFC8014967451E5A133078344 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		65A54FF678130A1ABBB8FD0486EAF546 /* Pods-TheTama-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TheTama-dummy.m"; sourceTree = "<group>"; };
 		68408654320F32195DA551103DC74B6B /* MRProgressHelper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRProgressHelper.h; path = src/Utils/MRProgressHelper.h; sourceTree = "<group>"; };
 		68FAA42C907F98FAFF590BE687D93F8C /* MRProgress-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MRProgress-dummy.m"; sourceTree = "<group>"; };
-		6911BECA35E7518D864239B7E898EEF3 /* Pods-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-frameworks.sh"; sourceTree = "<group>"; };
-		6925702E35D2AB2605C2CBC6D09E4D83 /* libMRProgress.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMRProgress.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6CA0EACB319251BD0F855CBDA6E93BEA /* MRStopableView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRStopableView.h; path = src/Components/MRStopableView.h; sourceTree = "<group>"; };
 		7344B72C2998719AA9C82A0C9905758A /* RMStore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RMStore.xcconfig; sourceTree = "<group>"; };
 		7614782023393416D4BC01428488A3F5 /* MRIconView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRIconView.h; path = src/Components/MRIconView.h; sourceTree = "<group>"; };
-		93689BF10CF3FBF31E3A32E55D7E609A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		870E9BDC0D396AA160F0AB67E82436A3 /* Pods-TheTama.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TheTama.debug.xcconfig"; sourceTree = "<group>"; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A76C4A9DC1D60B80AD2C78C9F00323 /* Pods-TheTama-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TheTama-frameworks.sh"; sourceTree = "<group>"; };
+		93F94226AF85482EEA12C27CFC22E9C4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		98241192CCDA33BCEC509C5A709FB34F /* MRProgressView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRProgressView.h; path = src/Components/MRProgressView.h; sourceTree = "<group>"; };
-		98C98CDFB3F20F2925F6CD1F141BB14F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
 		993DDAEDC039486B4446AC34C1F101DF /* MRActivityIndicatorView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MRActivityIndicatorView.m; path = src/Components/MRActivityIndicatorView.m; sourceTree = "<group>"; };
 		9943B49043988868FF44B317D204B460 /* RMStoreKeychainPersistence.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RMStoreKeychainPersistence.h; path = RMStore/Optional/RMStoreKeychainPersistence.h; sourceTree = "<group>"; };
-		9EEE956CF4ED0A186414379B1B9927C1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		9D45B1AB7D0EF3C0D1A42295EFF49865 /* Pods-TheTama-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TheTama-acknowledgements.markdown"; sourceTree = "<group>"; };
 		9F38CDF26ED6371C05FD95CCF064A93D /* RMStoreKeychainPersistence.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RMStoreKeychainPersistence.m; path = RMStore/Optional/RMStoreKeychainPersistence.m; sourceTree = "<group>"; };
 		A00D9B00DC6E3EC31F18F7B9095DCE54 /* MRNavigationBarProgressView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRNavigationBarProgressView.h; path = src/Components/MRNavigationBarProgressView.h; sourceTree = "<group>"; };
-		A1A36D34413696BE466E2CA0AFF194DA /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
-		AD0A1E00583F564B954835CAC66B4B5B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
-		B1834BEED3807D6C12322242D8B9CC50 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
 		B30B6FCFF0F3F448510036BD195477AE /* MRIconView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MRIconView.m; path = src/Components/MRIconView.m; sourceTree = "<group>"; };
 		B99562C713C2936B7953571D0D761355 /* MRProgress-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MRProgress-prefix.pch"; sourceTree = "<group>"; };
-		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		C3AECA2F89EB7CD092ECC6C7780A2977 /* RMStore-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RMStore-prefix.pch"; sourceTree = "<group>"; };
+		C627F2450A5F9279D6C5DF80089EA9C5 /* Pods-TheTama.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TheTama.release.xcconfig"; sourceTree = "<group>"; };
 		C65F92D42FA1AC262FF42B35684FFDB1 /* MRProgressOverlayView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRProgressOverlayView.h; path = src/Components/MRProgressOverlayView.h; sourceTree = "<group>"; };
 		C7367C326CA54C2647A18C3B18CEB5F8 /* MRProgress.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MRProgress.xcconfig; sourceTree = "<group>"; };
 		CF4EA50315A2CD0879F52B82EF799CAB /* MRProgressView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MRProgressView.m; path = src/Components/MRProgressView.m; sourceTree = "<group>"; };
+		D0916755F70DEFBB72EA8368CCA1A5AE /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		DD182D6873A200CAD0FEC0CAD09D6089 /* MRBlurView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MRBlurView.m; path = src/Blur/MRBlurView.m; sourceTree = "<group>"; };
-		E241A99910B44847014CAA958C9B3717 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
+		E1D1DAC569AF80F2FC99BDE8C480CEDA /* libPods-TheTama.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TheTama.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5E7CE1915BCAD5124F774CA0287E292 /* MRProgress.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRProgress.h; path = src/MRProgress.h; sourceTree = "<group>"; };
+		E69857A07C08B87D6ED918C7B7B881A3 /* Pods-TheTama-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TheTama-resources.sh"; sourceTree = "<group>"; };
 		EF4545F14FFEAB53DFF353F0120C4251 /* MRCircularProgressView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MRCircularProgressView.h; path = src/Components/MRCircularProgressView.h; sourceTree = "<group>"; };
 		EF55F41B7E75A8169685E3A8ADB1BF3D /* MRNavigationBarProgressView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MRNavigationBarProgressView.m; path = src/Components/MRNavigationBarProgressView.m; sourceTree = "<group>"; };
-		F5494067152C19B49E243B34C08A8C18 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		FCF6A26AC56E4185D3D074C4791807FB /* MRCircularProgressView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MRCircularProgressView.m; path = src/Components/MRCircularProgressView.m; sourceTree = "<group>"; };
+		FD7D7AD426A1B6EA0E2C82B86985E8EE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3BD398C6E07535D8A751515982BB7BB7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				428D19D4BEFBD467AB9B9E6D14CCB8CD /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7CC15EC8C2C1DC7648733A89D2F553EF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F67FABA836D4DD26A87BD73B415D1CE9 /* Accelerate.framework in Frameworks */,
-				8F69A9F6641864D194C65859D893811D /* CoreGraphics.framework in Frameworks */,
-				28AFB4304C9E59A767C8263988CCF908 /* Foundation.framework in Frameworks */,
-				05F954779EEE46E3B8376ABF86FB1546 /* QuartzCore.framework in Frameworks */,
-				EFC359F4FA0C948CB728C5FD684F18F7 /* UIKit.framework in Frameworks */,
+				6D7F9E50CDC2536F51EDA28331857512 /* Accelerate.framework in Frameworks */,
+				CA5DD448985912A456D903E517AA6D1F /* CoreGraphics.framework in Frameworks */,
+				CD4D513EBCFFC24E6B129395CE5D06DF /* Foundation.framework in Frameworks */,
+				E27AFD841F1F5407DBF38B34F2B263DC /* QuartzCore.framework in Frameworks */,
+				C0308F2ABADE4B26049D2673626AD318 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D6C49056638B2D0B00C16A4882251CB1 /* Frameworks */ = {
+		AEEC575E14D38DA6C684406555B3CCB0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A13DD6D088AA5A8EC698133DFEF57AE7 /* Foundation.framework in Frameworks */,
-				4770067E085E9EB15CB9C0C638630148 /* Security.framework in Frameworks */,
-				ACF2717B2D4F1B7EE01048E988CEF088 /* StoreKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F5B9FE04949CB38B361881B8E2D754A9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CC112333CA963B2CE68A4C4462341324 /* Foundation.framework in Frameworks */,
+				EA5B2653A2F0FCF085B038598B159CBD /* Foundation.framework in Frameworks */,
+				707EAC1BB885B7932B51FBE1A9D46A3B /* Security.framework in Frameworks */,
+				081800FEA1A82A2A1E6DAA9650B53250 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,14 +156,6 @@
 				B30B6FCFF0F3F448510036BD195477AE /* MRIconView.m */,
 			);
 			name = Icons;
-			sourceTree = "<group>";
-		};
-		037C0CA694176A3C0915F62C9D20B3E6 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				B3D1D13E0C6553800746CB8FD61CF946 /* Pods */,
-			);
-			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 		07BB0DD24A1731D5EEEA92B0F6F05499 /* Blur */ = {
@@ -188,6 +180,16 @@
 			path = "../Target Support Files/MRProgress";
 			sourceTree = "<group>";
 		};
+		18C65CE6D2BD44589FA0AC47FF501349 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1120511B4D20CA2D583F4D6B8C545B9B /* libMRProgress.a */,
+				E1D1DAC569AF80F2FC99BDE8C480CEDA /* libPods-TheTama.a */,
+				4EE1D8C91E4867293CD3458E28CFF14B /* libRMStore.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		1BFDF587B441444D039119B78E8B16DF /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +197,20 @@
 				1B419C1197EC2D9EAF73DF8733B1A0B2 /* RMStore.m */,
 			);
 			name = Core;
+			sourceTree = "<group>";
+		};
+		239E5CAA8032BE2466A76C9CF3E56D7A /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				D0916755F70DEFBB72EA8368CCA1A5AE /* Accelerate.framework */,
+				5ED37C4BF0CBB0C35610366F47903F66 /* CoreGraphics.framework */,
+				93F94226AF85482EEA12C27CFC22E9C4 /* Foundation.framework */,
+				39710C44FA1EC46F912B823F4C9AC203 /* QuartzCore.framework */,
+				FD7D7AD426A1B6EA0E2C82B86985E8EE /* Security.framework */,
+				5D7CCD008EDCE5951AC57108470A1C82 /* StoreKit.framework */,
+				0E027BB06C30D1D99AF106A94B3C0CBF /* UIKit.framework */,
+			);
+			name = iOS;
 			sourceTree = "<group>";
 		};
 		283B2B62533B0C1C01999BD0760844EB /* Stopable */ = {
@@ -257,11 +273,11 @@
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
-				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				F4CDA5FA9197A41E0081E84F932906EB /* Frameworks */,
 				3705A896F57E7777EA75379506DD651E /* Pods */,
-				EE19C3104B0A6DEBA5D58AFD7C783C5C /* Products */,
-				037C0CA694176A3C0915F62C9D20B3E6 /* Targets Support Files */,
+				18C65CE6D2BD44589FA0AC47FF501349 /* Products */,
+				F059E6C3BAF8961695E51EE549F49365 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -283,27 +299,27 @@
 			name = ActivityIndicator;
 			sourceTree = "<group>";
 		};
+		A4880731C183E407279021ECF9605615 /* Pods-TheTama */ = {
+			isa = PBXGroup;
+			children = (
+				9D45B1AB7D0EF3C0D1A42295EFF49865 /* Pods-TheTama-acknowledgements.markdown */,
+				181C8461BA6563CD7C801AA82F209AE6 /* Pods-TheTama-acknowledgements.plist */,
+				65A54FF678130A1ABBB8FD0486EAF546 /* Pods-TheTama-dummy.m */,
+				93A76C4A9DC1D60B80AD2C78C9F00323 /* Pods-TheTama-frameworks.sh */,
+				E69857A07C08B87D6ED918C7B7B881A3 /* Pods-TheTama-resources.sh */,
+				870E9BDC0D396AA160F0AB67E82436A3 /* Pods-TheTama.debug.xcconfig */,
+				C627F2450A5F9279D6C5DF80089EA9C5 /* Pods-TheTama.release.xcconfig */,
+			);
+			name = "Pods-TheTama";
+			path = "Target Support Files/Pods-TheTama";
+			sourceTree = "<group>";
+		};
 		B2AEB313479DCDEF79275F14A7F25BE5 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
 				68408654320F32195DA551103DC74B6B /* MRProgressHelper.h */,
 			);
 			name = Helper;
-			sourceTree = "<group>";
-		};
-		B3D1D13E0C6553800746CB8FD61CF946 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				37DB56D75062CC75FCB0966E1C6E8A8E /* Pods-acknowledgements.markdown */,
-				10834806BD7B412BC24F347361FA2C8E /* Pods-acknowledgements.plist */,
-				272643F56613CA0D336AE3DBF19DC404 /* Pods-dummy.m */,
-				6911BECA35E7518D864239B7E898EEF3 /* Pods-frameworks.sh */,
-				A1A36D34413696BE466E2CA0AFF194DA /* Pods-resources.sh */,
-				4E762F23EC34ED4A6FF3312D84E33A40 /* Pods.debug.xcconfig */,
-				98C98CDFB3F20F2925F6CD1F141BB14F /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			path = "Target Support Files/Pods";
 			sourceTree = "<group>";
 		};
 		BEA6C790DDD4239FD1D47D420C863870 /* ProgressBaseClass */ = {
@@ -333,28 +349,12 @@
 			path = MRProgress;
 			sourceTree = "<group>";
 		};
-		E2C8F951F5B9A866E63772BA471FAA53 /* iOS */ = {
+		F059E6C3BAF8961695E51EE549F49365 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				E241A99910B44847014CAA958C9B3717 /* Accelerate.framework */,
-				670A74BCFC8014967451E5A133078344 /* CoreGraphics.framework */,
-				F5494067152C19B49E243B34C08A8C18 /* Foundation.framework */,
-				356EC7189CD6CB688DD745D5733977C3 /* QuartzCore.framework */,
-				AD0A1E00583F564B954835CAC66B4B5B /* Security.framework */,
-				B1834BEED3807D6C12322242D8B9CC50 /* StoreKit.framework */,
-				9EEE956CF4ED0A186414379B1B9927C1 /* UIKit.framework */,
+				A4880731C183E407279021ECF9605615 /* Pods-TheTama */,
 			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		EE19C3104B0A6DEBA5D58AFD7C783C5C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				6925702E35D2AB2605C2CBC6D09E4D83 /* libMRProgress.a */,
-				93689BF10CF3FBF31E3A32E55D7E609A /* libPods.a */,
-				48F5A97EB08319B8EC1FEDE5CCE9B0F7 /* libRMStore.a */,
-			);
-			name = Products;
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 		F0920E15863BCD0420B334BF3221E669 /* RMStore */ = {
@@ -370,7 +370,7 @@
 		F4CDA5FA9197A41E0081E84F932906EB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E2C8F951F5B9A866E63772BA471FAA53 /* iOS */,
+				239E5CAA8032BE2466A76C9CF3E56D7A /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -378,12 +378,12 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		169FB4E2B9B8EF2461A124BEC6E6AFF1 /* Headers */ = {
+		1F825EAD8079DF29EC51578F525B80F8 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0D4C3B0976E69C7686D88319B92B4DAA /* RMStore.h in Headers */,
-				85EFE67A5704388337BF3A246C2BFDCF /* RMStoreKeychainPersistence.h in Headers */,
+				53CD9ED6D4469024EC853C0CF825DCD6 /* RMStore.h in Headers */,
+				9EC4390DDE43352A97376F9DDB687066 /* RMStoreKeychainPersistence.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +409,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		735459EAE76F0D657D271C679BEBF083 /* Pods-TheTama */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0B3973A8C286526C48E040737F4E7036 /* Build configuration list for PBXNativeTarget "Pods-TheTama" */;
+			buildPhases = (
+				05C75E15DB589E509C575E597364F8B4 /* Sources */,
+				3BD398C6E07535D8A751515982BB7BB7 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9410E4BFA0ED46D4FEE87C48C81D1E01 /* PBXTargetDependency */,
+				5EB5954C1D04199984B9632A42C8CF31 /* PBXTargetDependency */,
+			);
+			name = "Pods-TheTama";
+			productName = "Pods-TheTama";
+			productReference = E1D1DAC569AF80F2FC99BDE8C480CEDA /* libPods-TheTama.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		8570A42CA7975311B4D2DDCB2303977B /* MRProgress */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 42E6E6DBB35E9A61689A29C0D36C9EDB /* Build configuration list for PBXNativeTarget "MRProgress" */;
@@ -423,34 +441,16 @@
 			);
 			name = MRProgress;
 			productName = MRProgress;
-			productReference = 6925702E35D2AB2605C2CBC6D09E4D83 /* libMRProgress.a */;
+			productReference = 1120511B4D20CA2D583F4D6B8C545B9B /* libMRProgress.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		98D28AD221DC137B660EE0CA4D7FC80F /* Pods */ = {
+		CD0C2817FC63B7A8593444092B759D94 /* RMStore */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D23EBAA6BA4E0857E898280E4705EB5D /* Build configuration list for PBXNativeTarget "Pods" */;
+			buildConfigurationList = D5BBB9B47A147D3F1DC4B6FECCAE0148 /* Build configuration list for PBXNativeTarget "RMStore" */;
 			buildPhases = (
-				25FA5845BADC71C7C78E9DEA7AD8A77A /* Sources */,
-				F5B9FE04949CB38B361881B8E2D754A9 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3AA6EE7273257DC88C8824398B8BC044 /* PBXTargetDependency */,
-				C55437CFB0F3979D7A5DAAAA6FF3BA99 /* PBXTargetDependency */,
-			);
-			name = Pods;
-			productName = Pods;
-			productReference = 93689BF10CF3FBF31E3A32E55D7E609A /* libPods.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		DB0C35E180968401A633EAED97EFBA91 /* RMStore */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B3B0D6EDEC3CD2578B2CFF3354CB7A1C /* Build configuration list for PBXNativeTarget "RMStore" */;
-			buildPhases = (
-				B1E02A49F94AF798FFF908AB2F9AC3E5 /* Sources */,
-				D6C49056638B2D0B00C16A4882251CB1 /* Frameworks */,
-				169FB4E2B9B8EF2461A124BEC6E6AFF1 /* Headers */,
+				780F306C7D1701253D3ADC578D91BF55 /* Sources */,
+				AEEC575E14D38DA6C684406555B3CCB0 /* Frameworks */,
+				1F825EAD8079DF29EC51578F525B80F8 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -458,7 +458,7 @@
 			);
 			name = RMStore;
 			productName = RMStore;
-			productReference = 48F5A97EB08319B8EC1FEDE5CCE9B0F7 /* libRMStore.a */;
+			productReference = 4EE1D8C91E4867293CD3458E28CFF14B /* libRMStore.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -467,7 +467,7 @@
 		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0700;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
@@ -478,23 +478,23 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = EE19C3104B0A6DEBA5D58AFD7C783C5C /* Products */;
+			productRefGroup = 18C65CE6D2BD44589FA0AC47FF501349 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				8570A42CA7975311B4D2DDCB2303977B /* MRProgress */,
-				98D28AD221DC137B660EE0CA4D7FC80F /* Pods */,
-				DB0C35E180968401A633EAED97EFBA91 /* RMStore */,
+				735459EAE76F0D657D271C679BEBF083 /* Pods-TheTama */,
+				CD0C2817FC63B7A8593444092B759D94 /* RMStore */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		25FA5845BADC71C7C78E9DEA7AD8A77A /* Sources */ = {
+		05C75E15DB589E509C575E597364F8B4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A1C02B8E3D9A8950FE976D9975418BA /* Pods-dummy.m in Sources */,
+				F2D66F779361174EC26F2998D49E036A /* Pods-TheTama-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,69 +515,56 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B1E02A49F94AF798FFF908AB2F9AC3E5 /* Sources */ = {
+		780F306C7D1701253D3ADC578D91BF55 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A7DF2E2F8C29A2ECF7E952DCB58294D /* RMStore-dummy.m in Sources */,
-				FF73777863C59886002C709F77027BAA /* RMStore.m in Sources */,
-				1357F33E0C92B2DEE42CA952BCD8647F /* RMStoreKeychainPersistence.m in Sources */,
+				C6976C16BB47427A8A3E5E739A7E4300 /* RMStore-dummy.m in Sources */,
+				25E9624B09DBDFEE7710E1DF04D4512F /* RMStore.m in Sources */,
+				5419BEE7F53FC7943CA1E865AE9F31A1 /* RMStoreKeychainPersistence.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3AA6EE7273257DC88C8824398B8BC044 /* PBXTargetDependency */ = {
+		5EB5954C1D04199984B9632A42C8CF31 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RMStore;
+			target = CD0C2817FC63B7A8593444092B759D94 /* RMStore */;
+			targetProxy = C1287ACE04A1A3141D38BC4BC0D23B65 /* PBXContainerItemProxy */;
+		};
+		9410E4BFA0ED46D4FEE87C48C81D1E01 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = MRProgress;
 			target = 8570A42CA7975311B4D2DDCB2303977B /* MRProgress */;
-			targetProxy = 2788342893C5FBB48D234EADF31FD89C /* PBXContainerItemProxy */;
-		};
-		C55437CFB0F3979D7A5DAAAA6FF3BA99 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = RMStore;
-			target = DB0C35E180968401A633EAED97EFBA91 /* RMStore */;
-			targetProxy = 7AD1473E6B80369D60B1415BF390ECF3 /* PBXContainerItemProxy */;
+			targetProxy = 729967DBDD2665BBACD92E9C106ADAF2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		414208385834C141ABF2FF76AD0BD3CF /* Release */ = {
+		14E485FDB33C41A7FD959E8E45E59F22 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 98C98CDFB3F20F2925F6CD1F141BB14F /* Pods.release.xcconfig */;
+			baseConfigurationReference = C7367C326CA54C2647A18C3B18CEB5F8 /* MRProgress.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MACH_O_TYPE = staticlib;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MRProgress/MRProgress-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
-		8F392F3C0DFE053B2BCA3D3D3EF600FD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4E762F23EC34ED4A6FF3312D84E33A40 /* Pods.debug.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		A70CDAD61F90AC503C7D04CC22DA2923 /* Debug */ = {
+		386A975EC3DC213943910FAB3319C7F6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -595,10 +582,12 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
 					"DEBUG=1",
 					"$(inherited)",
 				);
@@ -609,38 +598,44 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				ONLY_ACTIVE_ARCH = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
 		};
-		A73B9FA16B5609DFFE3C09A594B2DA2F /* Release */ = {
+		40B05A43749D57BF5A2EDC0D5C2538BE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C7367C326CA54C2647A18C3B18CEB5F8 /* MRProgress.xcconfig */;
+			baseConfigurationReference = C627F2450A5F9279D6C5DF80089EA9C5 /* Pods-TheTama.release.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/MRProgress/MRProgress-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MACH_O_TYPE = staticlib;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
-		BED052107CE653F7C5D39C3F00B22913 /* Debug */ = {
+		5CE0EC5916622450DCD3E578F9A3FD45 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C7367C326CA54C2647A18C3B18CEB5F8 /* MRProgress.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/MRProgress/MRProgress-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -652,43 +647,7 @@
 			};
 			name = Debug;
 		};
-		CE69059FFB0DF13196F9DA3896CE9DCC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7344B72C2998719AA9C82A0C9905758A /* RMStore.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/RMStore/RMStore-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		F281D8B4D19892DA085DFDAB85E336E0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7344B72C2998719AA9C82A0C9905758A /* RMStore.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/RMStore/RMStore-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		FB45FFD90572718D82AB9092B750F0CA /* Release */ = {
+		6CFE177774633D83F95F7445983CD57B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -708,28 +667,103 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
+		8933EC16790F626A445F7BFD248E10E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7344B72C2998719AA9C82A0C9905758A /* RMStore.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/RMStore/RMStore-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		E4B6528CA01E46A0EE74A31C11BA0DCD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7344B72C2998719AA9C82A0C9905758A /* RMStore.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/RMStore/RMStore-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		FA1C4FB9944B372AFBD1C0C983999A93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 870E9BDC0D396AA160F0AB67E82436A3 /* Pods-TheTama.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0B3973A8C286526C48E040737F4E7036 /* Build configuration list for PBXNativeTarget "Pods-TheTama" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FA1C4FB9944B372AFBD1C0C983999A93 /* Debug */,
+				40B05A43749D57BF5A2EDC0D5C2538BE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A70CDAD61F90AC503C7D04CC22DA2923 /* Debug */,
-				FB45FFD90572718D82AB9092B750F0CA /* Release */,
+				386A975EC3DC213943910FAB3319C7F6 /* Debug */,
+				6CFE177774633D83F95F7445983CD57B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -737,26 +771,17 @@
 		42E6E6DBB35E9A61689A29C0D36C9EDB /* Build configuration list for PBXNativeTarget "MRProgress" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BED052107CE653F7C5D39C3F00B22913 /* Debug */,
-				A73B9FA16B5609DFFE3C09A594B2DA2F /* Release */,
+				5CE0EC5916622450DCD3E578F9A3FD45 /* Debug */,
+				14E485FDB33C41A7FD959E8E45E59F22 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B3B0D6EDEC3CD2578B2CFF3354CB7A1C /* Build configuration list for PBXNativeTarget "RMStore" */ = {
+		D5BBB9B47A147D3F1DC4B6FECCAE0148 /* Build configuration list for PBXNativeTarget "RMStore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CE69059FFB0DF13196F9DA3896CE9DCC /* Debug */,
-				F281D8B4D19892DA085DFDAB85E336E0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D23EBAA6BA4E0857E898280E4705EB5D /* Build configuration list for PBXNativeTarget "Pods" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8F392F3C0DFE053B2BCA3D3D3EF600FD /* Debug */,
-				414208385834C141ABF2FF76AD0BD3CF /* Release */,
+				E4B6528CA01E46A0EE74A31C11BA0DCD /* Debug */,
+				8933EC16790F626A445F7BFD248E10E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

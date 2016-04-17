@@ -12,7 +12,7 @@
 "Xqd-Ob-USw.text" = "一覧表の時刻部分をタッチすると、\n先頭行へジャンプできます。";
 
 /* Class = "UILabel"; text = "2. iPhoneの設定画面にて\n　　Wi-Fi選択してください。"; ObjectID = "dcD-0R-BYs"; */
-"dcD-0R-BYs.text" = "2. iPhoneの設定画面にて\n　　Wi-Fi選択してください。";
+"dcD-0R-BYs.text" = "2. 設定画面でTHETAのWi-Fiを選択してください。";
 
 /* Class = "UILabel"; text = "1. THETAの電源を入れて、\n　　Wi-Fiを有効にしてください。"; ObjectID = "n0d-OJ-9si"; */
 "n0d-OJ-9si.text" = "1. THETAの電源を入れて、\n　　Wi-Fiを有効にしてください。";

@@ -141,14 +141,14 @@
 {
 	LOG_FUNC
 	
+	TheTaManager* thetama = [TheTaManager sharedInstance];
 #if TARGET_IPHONE_SIMULATOR
-	_dataObject.volumeLevel = 33; // TEST Dummy.
-	//_dataObject.batteryLevel = 88; // TEST Dummy.
+	thetama.volumeLevel = 33; // TEST Dummy.
+	//thetama.batteryLevel = 88; // TEST Dummy.
 	[self viewRefresh];
 #else
 	[self viewRefresh];
 	
-	TheTaManager* thetama = [TheTaManager sharedInstance];
 	// コネクト・チェック
 	if (thetama.isConnected) {
 		switch (thetama.captureMode) {
@@ -334,7 +334,8 @@
 #endif
 	//[mTimerCheck invalidate];	//タイマー停止
 	
-	if (![TheTaManager sharedInstance].isConnected) {
+	TheTaManager* thetama = [TheTaManager sharedInstance];
+	if (!thetama.isConnected) {
 		dispatch_async_main(^{
 			[self progressOff];
 			[self.navigationController popToRootViewControllerAnimated:YES];
@@ -350,9 +351,10 @@
 - (IBAction)onThumbnailTouchUpIn:(id)sender
 {
 	// サムネイル画像を押したとき
-	if ([TheTaManager sharedInstance].dataObject.tamaCapture != nil) {
+	TheTaManager* thetama = [TheTaManager sharedInstance];
+	if (thetama.dataObject.tamaCapture != nil) {
 		// Goto Viewer View
-		[TheTaManager sharedInstance].dataObject.tamaViewer = [TheTaManager sharedInstance].dataObject.tamaCapture;
+		thetama.dataObject.tamaViewer = thetama.dataObject.tamaCapture;
 
 		ViewerViewController* vc = [[ViewerViewController alloc] init];
 		[self.navigationController pushViewController:vc animated:YES];

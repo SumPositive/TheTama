@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'B9D0FA1EE2287752329A723D'
+               BlueprintIdentifier = 'CD0C2817FC63B7A8593444092B759D94'
                BlueprintName = 'RMStore'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libRMStore.a'>

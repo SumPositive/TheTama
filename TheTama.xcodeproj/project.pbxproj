@@ -13,16 +13,15 @@
 		442401181AEFD2B100F3EA23 /* glkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 442401131AEFD2B100F3EA23 /* glkViewController.m */; };
 		442401191AEFD2B100F3EA23 /* GLRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 442401151AEFD2B100F3EA23 /* GLRenderView.m */; };
 		4424011A1AEFD2B100F3EA23 /* UVSphere.m in Sources */ = {isa = PBXBuildFile; fileRef = 442401171AEFD2B100F3EA23 /* UVSphere.m */; };
-		442C66551BC96794005367FF /* Azukid.m in Sources */ = {isa = PBXBuildFile; fileRef = 442C66541BC96794005367FF /* Azukid.m */; settings = {ASSET_TAGS = (); }; };
-		442C66571BCBE788005367FF /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 442C66561BCBE788005367FF /* Settings.bundle */; settings = {ASSET_TAGS = (); }; };
+		442C66551BC96794005367FF /* Azukid.m in Sources */ = {isa = PBXBuildFile; fileRef = 442C66541BC96794005367FF /* Azukid.m */; };
 		443F7A861BB7893200DC17A1 /* ViewerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443F7A851BB7893200DC17A1 /* ViewerViewController.xib */; };
 		444271411AFA0CFC00D6FB60 /* TheTaManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 444271401AFA0CFC00D6FB60 /* TheTaManager.m */; };
 		444368061BA864A00067660C /* ConnectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444368081BA864A00067660C /* ConnectViewController.xib */; };
 		444C7BA61BB81E8F002C00B8 /* TableCellTama.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444C7BA51BB81E8F002C00B8 /* TableCellTama.xib */; };
 		446083351BAF19A600BA134A /* ListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 446083341BAF19A600BA134A /* ListViewController.xib */; };
 		446D9DFF1AE561CA003F8924 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 446D9DFD1AE561CA003F8924 /* InfoViewController.m */; };
+		447B47581CBA84DF0079B5C7 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 447B47571CBA84DF0079B5C7 /* Settings.bundle */; };
 		447E80A11BC167C600903BC2 /* CaptureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 447E80A31BC167C600903BC2 /* CaptureViewController.xib */; };
-		44907B3E1ADCCE870053294A /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44907B3C1ADCCDF20053294A /* WatchKit.framework */; };
 		44A67B811AD39CF4002A826C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A67B801AD39CF4002A826C /* AppDelegate.swift */; };
 		44A67B8A1AD39CF4002A826C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44A67B891AD39CF4002A826C /* Images.xcassets */; };
 		44A67B8D1AD39CF5002A826C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A67B8B1AD39CF5002A826C /* LaunchScreen.xib */; };
@@ -71,7 +70,7 @@
 		44B4EA621AD3E26900DE5C7E /* CaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B4EA611AD3E26900DE5C7E /* CaptureViewController.m */; };
 		44B8B8B11AE3998E0008147C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B8B8B01AE3998E0008147C /* StoreKit.framework */; };
 		44CD6DF31AD81B760001F5B3 /* ConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CD6DF11AD81B760001F5B3 /* ConnectViewController.m */; };
-		C013159E2F6CA5269C077B97 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F72BE7B8DB0524CD2C36F399 /* libPods.a */; };
+		6EFA0A721B6CFC23B76902CB /* libPods-TheTama.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A15F43E802EBBBCAC86D588 /* libPods-TheTama.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,7 +95,6 @@
 		442401161AEFD2B100F3EA23 /* UVSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UVSphere.h; sourceTree = "<group>"; };
 		442401171AEFD2B100F3EA23 /* UVSphere.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UVSphere.m; sourceTree = "<group>"; };
 		442C66541BC96794005367FF /* Azukid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Azukid.m; sourceTree = "<group>"; };
-		442C66561BCBE788005367FF /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		443F7A851BB7893200DC17A1 /* ViewerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewerViewController.xib; sourceTree = "<group>"; };
 		4442713F1AFA0CFC00D6FB60 /* TheTaManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheTaManager.h; sourceTree = "<group>"; };
 		444271401AFA0CFC00D6FB60 /* TheTaManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheTaManager.m; sourceTree = "<group>"; };
@@ -107,6 +105,7 @@
 		4463DDDD1BBAD3C70031B78A /* TheTamaBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TheTamaBase.h; sourceTree = "<group>"; };
 		446D9DFD1AE561CA003F8924 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
 		446D9DFE1AE561CA003F8924 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
+		447B47571CBA84DF0079B5C7 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		447E80A21BC167C600903BC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/CaptureViewController.xib; sourceTree = "<group>"; };
 		447E80A71BC16AEE00903BC2 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/ConnectViewController.strings; sourceTree = "<group>"; };
 		447E80A81BC1727100903BC2 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/CaptureViewController.strings; sourceTree = "<group>"; };
@@ -205,9 +204,9 @@
 		44CD6DF21AD81B760001F5B3 /* ConnectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectViewController.h; sourceTree = "<group>"; };
 		44CD6E031AD916580001F5B3 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		44CD6E051AD94E440001F5B3 /* Azukid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Azukid.h; sourceTree = "<group>"; };
-		B9AD8F4C9E07E5512CAFF712 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		D281DCA70D60157B97683C9B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		F72BE7B8DB0524CD2C36F399 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7DC9684EA5D9C25F4876B9EE /* Pods-TheTama.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheTama.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TheTama/Pods-TheTama.debug.xcconfig"; sourceTree = "<group>"; };
+		9A15F43E802EBBBCAC86D588 /* libPods-TheTama.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TheTama.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC4FAF72026252DA8C51905F /* Pods-TheTama.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheTama.release.xcconfig"; path = "Pods/Target Support Files/Pods-TheTama/Pods-TheTama.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,7 +215,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				44170C711AE13B47006E1C4B /* iAd.framework in Frameworks */,
-				44907B3E1ADCCE870053294A /* WatchKit.framework in Frameworks */,
 				44A67C5B1AD3BD3F002A826C /* libiconv.dylib in Frameworks */,
 				44B8B8B11AE3998E0008147C /* StoreKit.framework in Frameworks */,
 				44A67C591AD3BD29002A826C /* UIKit.framework in Frameworks */,
@@ -226,7 +224,7 @@
 				44A67C511AD3BCE9002A826C /* Accelerate.framework in Frameworks */,
 				44A67C4F1AD3BCDE002A826C /* GLKit.framework in Frameworks */,
 				44A67C4D1AD3BCD5002A826C /* OpenGLES.framework in Frameworks */,
-				C013159E2F6CA5269C077B97 /* libPods.a in Frameworks */,
+				6EFA0A721B6CFC23B76902CB /* libPods-TheTama.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,15 +238,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1533ABB6AB8FEBD349877283 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				D281DCA70D60157B97683C9B /* Pods.debug.xcconfig */,
-				B9AD8F4C9E07E5512CAFF712 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		442401101AEFD2B100F3EA23 /* Ricoh */ = {
 			isa = PBXGroup;
 			children = (
@@ -286,8 +275,8 @@
 				44A67B7D1AD39CF4002A826C /* TheTama */,
 				44A67B951AD39CF5002A826C /* TheTamaTests */,
 				44A67B7C1AD39CF4002A826C /* Products */,
-				1533ABB6AB8FEBD349877283 /* Pods */,
 				6929937500D07EF05976D9BE /* Frameworks */,
+				4673BB11B9EF7F7D499DADBF /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -332,7 +321,7 @@
 		44A67B7E1AD39CF4002A826C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				442C66561BCBE788005367FF /* Settings.bundle */,
+				447B47571CBA84DF0079B5C7 /* Settings.bundle */,
 				44A67B7F1AD39CF4002A826C /* Info.plist */,
 				44A67B8B1AD39CF5002A826C /* LaunchScreen.xib */,
 				44170C811AE16A99006E1C4B /* Localizable.strings */,
@@ -475,6 +464,15 @@
 			name = libs;
 			sourceTree = "<group>";
 		};
+		4673BB11B9EF7F7D499DADBF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7DC9684EA5D9C25F4876B9EE /* Pods-TheTama.debug.xcconfig */,
+				FC4FAF72026252DA8C51905F /* Pods-TheTama.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		6929937500D07EF05976D9BE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -489,7 +487,7 @@
 				44A67C501AD3BCE9002A826C /* Accelerate.framework */,
 				44A67C4E1AD3BCDE002A826C /* GLKit.framework */,
 				44A67C4C1AD3BCD5002A826C /* OpenGLES.framework */,
-				F72BE7B8DB0524CD2C36F399 /* libPods.a */,
+				9A15F43E802EBBBCAC86D588 /* libPods-TheTama.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -501,12 +499,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 44A67B9C1AD39CF5002A826C /* Build configuration list for PBXNativeTarget "TheTama" */;
 			buildPhases = (
-				09E887D0953C4BEC936EECA3 /* Check Pods Manifest.lock */,
+				A5DA25184A22FCC62AB91176 /* 📦 Check Pods Manifest.lock */,
 				44A67B771AD39CF4002A826C /* Sources */,
 				44A67B781AD39CF4002A826C /* Frameworks */,
 				44A67B791AD39CF4002A826C /* Resources */,
-				15A2B762CADA9ED7642EBA6F /* Copy Pods Resources */,
-				A2D5F7CA9A53AD7C4223A839 /* Embed Pods Frameworks */,
+				B272FC25A4781C9EF9734105 /* 📦 Embed Pods Frameworks */,
+				2A2799CD4837DF5FD5E475B4 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -543,7 +541,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = Azukid;
 				TargetAttributes = {
 					44A67B7A1AD39CF4002A826C = {
@@ -591,7 +589,7 @@
 			files = (
 				447E80A11BC167C600903BC2 /* CaptureViewController.xib in Resources */,
 				444C7BA61BB81E8F002C00B8 /* TableCellTama.xib in Resources */,
-				442C66571BCBE788005367FF /* Settings.bundle in Resources */,
+				447B47581CBA84DF0079B5C7 /* Settings.bundle in Resources */,
 				444368061BA864A00067660C /* ConnectViewController.xib in Resources */,
 				4405505C1BB79E5700B8841A /* InfoViewController.xib in Resources */,
 				443F7A861BB7893200DC17A1 /* ViewerViewController.xib in Resources */,
@@ -612,14 +610,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		09E887D0953C4BEC936EECA3 /* Check Pods Manifest.lock */ = {
+		2A2799CD4837DF5FD5E475B4 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheTama/Pods-TheTama-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A5DA25184A22FCC62AB91176 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -627,34 +640,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		15A2B762CADA9ED7642EBA6F /* Copy Pods Resources */ = {
+		B272FC25A4781C9EF9734105 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A2D5F7CA9A53AD7C4223A839 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheTama/Pods-TheTama-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -787,6 +785,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -847,15 +846,16 @@
 		};
 		44A67B9D1AD39CF5002A826C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D281DCA70D60157B97683C9B /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 7DC9684EA5D9C25F4876B9EE /* Pods-TheTama.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = TheTama/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.azukid.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TheTama/TheTama-Bridging-Header.h";
@@ -867,17 +867,18 @@
 		};
 		44A67B9E1AD39CF5002A826C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B9AD8F4C9E07E5512CAFF712 /* Pods.release.xcconfig */;
+			baseConfigurationReference = FC4FAF72026252DA8C51905F /* Pods-TheTama.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = TheTama/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.azukid.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "afb0f307-607f-458b-9909-8a90086910a8";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TheTama/TheTama-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7s armv7";
@@ -889,16 +890,14 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = TheTamaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.azukid.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TheTamaTests/TheTamaTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -911,12 +910,10 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = TheTamaTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.azukid.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TheTamaTests/TheTamaTests-Bridging-Header.h";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheTama.app/TheTama";
