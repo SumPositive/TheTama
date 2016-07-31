@@ -282,7 +282,8 @@
 	TheTaManager* thetama = [TheTaManager sharedInstance];
 	
 	if (!thetama.isConnected || thetama.tamaViewer==nil) {
-		[self dismissViewControllerAnimated:YES completion:nil];
+		//[self dismissViewControllerAnimated:YES completion:nil];
+		[self.navigationController dismissViewControllerAnimated:YES completion:nil];
 		return;
 	}
 	

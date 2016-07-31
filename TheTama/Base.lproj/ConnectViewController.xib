@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -62,20 +62,14 @@
                         <action selector="onSettingTouchUpIn:" destination="-1" eventType="touchUpInside" id="E9v-iq-RwH"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In the list, if you touch the part of the time display, You can jump to the top line." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqd-Ob-USw">
-                    <rect key="frame" x="48" y="337" width="244" height="29"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. Please retry the connection." lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A3h-l2-eCQ">
-                    <rect key="frame" x="48" y="391" width="244" height="21"/>
+                    <rect key="frame" x="48" y="360" width="244" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="INk-IP-Ov6" userLabel="buRetry">
-                    <rect key="frame" x="83" y="412" width="155" height="30"/>
+                    <rect key="frame" x="83" y="381" width="155" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="tzX-aW-7TD"/>
                         <constraint firstAttribute="width" constant="155" id="yIC-6m-YH5"/>
@@ -88,9 +82,23 @@
                         <action selector="onRetryTouchUpIn:" destination="-1" eventType="touchUpInside" id="laz-jm-hqm"/>
                     </connections>
                 </button>
-                <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JDR-NL-D0U" userLabel="iAd">
-                    <rect key="frame" x="0.0" y="502" width="320" height="66"/>
+                <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="JDR-NL-D0U" userLabel="iAd">
+                    <rect key="frame" x="-80" y="502" width="480" height="66"/>
                 </adBannerView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3C3-GH-aTv" userLabel="buTest">
+                    <rect key="frame" x="83" y="461" width="155" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="155" id="JD7-0L-B0e"/>
+                        <constraint firstAttribute="height" constant="30" id="xIZ-ho-q2G"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="TEST">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="buTestTouchUpIn:" destination="-1" eventType="touchUpInside" id="K75-yd-Ub1"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -98,28 +106,27 @@
                 <constraint firstAttribute="centerX" secondItem="7gK-zE-Ng8" secondAttribute="centerX" id="9dY-kx-GRo"/>
                 <constraint firstItem="A3h-l2-eCQ" firstAttribute="leading" secondItem="UxC-TT-rgD" secondAttribute="leadingMargin" constant="40" id="DHZ-VX-aUT"/>
                 <constraint firstAttribute="trailingMargin" secondItem="dcD-0R-BYs" secondAttribute="trailing" constant="20" id="DV3-La-VNv"/>
-                <constraint firstItem="Xqd-Ob-USw" firstAttribute="leading" secondItem="UxC-TT-rgD" secondAttribute="leadingMargin" constant="40" id="JB0-qq-5Rp"/>
+                <constraint firstItem="3C3-GH-aTv" firstAttribute="top" secondItem="INk-IP-Ov6" secondAttribute="bottom" constant="50" id="IsS-6k-Q8W"/>
                 <constraint firstAttribute="centerX" secondItem="dcD-0R-BYs" secondAttribute="centerX" id="Kmc-np-Z2u"/>
                 <constraint firstAttribute="trailingMargin" secondItem="n0d-OJ-9si" secondAttribute="trailing" constant="20" id="KvE-Qb-8kS"/>
                 <constraint firstItem="jmz-n2-or4" firstAttribute="bottom" secondItem="7gK-zE-Ng8" secondAttribute="bottom" id="M9J-ZO-TAN"/>
                 <constraint firstAttribute="bottom" secondItem="JDR-NL-D0U" secondAttribute="bottom" id="Nrh-cM-Wso"/>
                 <constraint firstAttribute="trailingMargin" secondItem="A3h-l2-eCQ" secondAttribute="trailing" constant="20" id="PHD-2f-jNF"/>
                 <constraint firstAttribute="centerX" secondItem="n0d-OJ-9si" secondAttribute="centerX" id="POO-4u-ByT"/>
-                <constraint firstItem="A3h-l2-eCQ" firstAttribute="top" secondItem="Xqd-Ob-USw" secondAttribute="bottom" constant="25" id="S5n-Mf-akd"/>
+                <constraint firstItem="A3h-l2-eCQ" firstAttribute="top" secondItem="NYG-Ez-L8f" secondAttribute="bottom" constant="25" id="QoG-5Q-IO7"/>
                 <constraint firstItem="n0d-OJ-9si" firstAttribute="top" secondItem="7gK-zE-Ng8" secondAttribute="bottom" constant="30" id="SVo-yj-yxu"/>
                 <constraint firstItem="jmz-n2-or4" firstAttribute="top" secondItem="JDR-NL-D0U" secondAttribute="bottom" id="TmB-Co-IDU"/>
                 <constraint firstAttribute="centerX" secondItem="A3h-l2-eCQ" secondAttribute="centerX" id="TxS-5D-h5J"/>
-                <constraint firstAttribute="trailingMargin" secondItem="Xqd-Ob-USw" secondAttribute="trailing" constant="20" id="UDw-hk-96I"/>
                 <constraint firstItem="jmz-n2-or4" firstAttribute="leading" secondItem="7gK-zE-Ng8" secondAttribute="trailing" id="VZe-gl-wek"/>
                 <constraint firstAttribute="centerY" secondItem="dcD-0R-BYs" secondAttribute="centerY" id="dHO-7A-TtU"/>
                 <constraint firstItem="INk-IP-Ov6" firstAttribute="top" secondItem="A3h-l2-eCQ" secondAttribute="bottom" id="dQj-SW-2P1"/>
-                <constraint firstItem="Xqd-Ob-USw" firstAttribute="top" secondItem="NYG-Ez-L8f" secondAttribute="bottom" constant="2" id="gEs-n6-2UH"/>
                 <constraint firstAttribute="centerX" secondItem="JDR-NL-D0U" secondAttribute="centerX" id="gZt-p9-OFx"/>
                 <constraint firstItem="dcD-0R-BYs" firstAttribute="leading" secondItem="UxC-TT-rgD" secondAttribute="leadingMargin" constant="40" id="gdr-Fj-QGu"/>
                 <constraint firstItem="dcD-0R-BYs" firstAttribute="top" secondItem="n0d-OJ-9si" secondAttribute="bottom" constant="25" id="nwK-qA-Upa"/>
                 <constraint firstAttribute="centerX" secondItem="NYG-Ez-L8f" secondAttribute="centerX" id="rxJ-eT-TKa"/>
                 <constraint firstItem="n0d-OJ-9si" firstAttribute="leading" secondItem="UxC-TT-rgD" secondAttribute="leadingMargin" constant="40" id="v7e-D3-gnU"/>
                 <constraint firstAttribute="centerX" secondItem="INk-IP-Ov6" secondAttribute="centerX" id="wmy-lR-fMJ"/>
+                <constraint firstItem="3C3-GH-aTv" firstAttribute="centerX" secondItem="UxC-TT-rgD" secondAttribute="centerX" id="zkd-gX-mEw"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>

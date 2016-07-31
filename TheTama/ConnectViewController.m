@@ -8,7 +8,7 @@
 
 #import <iAd/iAd.h>
 #import "TheTamaBase.h"
-
+#import "TheTama-Swift.h"
 
 
 @interface ConnectViewController () <TheTaManagerDelegate>
@@ -118,7 +118,11 @@
 	LOG_FUNC
 	[Azukid banBarrage:sender];//連打対策
 	// 設定画面へのURLスキーム
-	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+	//[[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+	
+	// 設定＞Wi-Fiへ
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=WIFI"]];
+
 	
 	//iOS5以前//[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs://"]];
 }
@@ -128,6 +132,24 @@
 	LOG_FUNC
 	[Azukid banBarrage:sender];//連打対策
 	[[TheTaManager sharedInstance] disconnect:YES];  //YES= Disconnectの後、Connectする
+}
+
+- (IBAction)buTestTouchUpIn:(id)sender
+{
+	LOG_FUNC
+	[Azukid banBarrage:sender];//連打対策
+	// Goto Model Viewer View
+	//dispatch_async_main(^{
+		ThetaViewController* vc = [[ThetaViewController alloc] init];
+		[self.navigationController pushViewController:vc animated:YES];
+		
+		//[self presentViewController:vc animated:YES completion:nil];
+		
+//		// Goto Capture View
+//		CaptureViewController* vc = [[CaptureViewController alloc] init];
+//		[self.navigationController pushViewController:vc animated:YES];
+	//});
+
 }
 
 - (void)progressOnTitle:(NSString*)zTitle

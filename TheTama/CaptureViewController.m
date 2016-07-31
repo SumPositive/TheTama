@@ -10,7 +10,6 @@
 #import "TheTamaBase.h"
 
 
-
 @interface CaptureViewController () <TheTaManagerDelegate>
 {
 	__weak IBOutlet UISegmentedControl* _segShutter1;
@@ -240,6 +239,13 @@
 
 - (IBAction)volumeSliderChanged:(UISlider*)sender
 {
+	
+	if (sender.value < 0.0) {
+		sender.value = 0.0;
+	}
+	else if (100.0 < sender.value) {
+		sender.value = 100.0;
+	}
 	[TheTaManager sharedInstance].dataObject.volumeLevel = sender.value;
 	[self volumeShow];
 }
@@ -355,7 +361,7 @@
 
 - (IBAction)onThumbnailTouchUpIn:(id)sender
 {
-//	// サムネイル画像を押したとき
+	// サムネイル画像を押したとき
 //	TheTaManager* thetama = [TheTaManager sharedInstance];
 //	if (thetama.dataObject.tamaCapture != nil) {
 //		// Goto Viewer View
@@ -364,12 +370,16 @@
 //		ViewerViewController* vc = [[ViewerViewController alloc] init];
 //		[self.navigationController pushViewController:vc animated:YES];
 //	}
-	
-	//TODO: サムネイル画像を押したとき、カメラロールを表示する
-	
-	
-	
-	
+
+//	// List > を押したとき
+//	[TheTaManager sharedInstance].dataObject.listBottom = YES; // ListViewにて最終行を表示させる
+//	// Goto Model Viewer View
+//	ListViewController* vc = [[ListViewController alloc] init];
+//	[self.navigationController pushViewController:vc animated:YES];
+
+	// Goto Model Viewer View
+	ThetaViewController * vc = [[ThetaViewController alloc] init];
+	[self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)onListTouchUpIn:(id)sender
